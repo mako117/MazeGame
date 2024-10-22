@@ -7,7 +7,7 @@ class Wall extends Mapsite {
      */
     Wall() {
         _wallNr = _wallCnt++;
-        System.out.println("creating Wall #" + new Integer(_wallNr).toString());
+        System.out.println("creating Wall #" + _wallNr);
     }
 
     /**
