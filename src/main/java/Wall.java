@@ -13,8 +13,8 @@ class Wall extends Mapsite {
     /**
      * Enter a wall
      */
-    public void enter() {
-        System.out.println("You are trying to enter Wall #" + _wallNr);
+    public boolean enter() {
+        return false;
     }
 
     /**
