@@ -12,7 +12,11 @@ public class Door extends Mapsite {
             this.r1 = input1;
             this.r2 = input2;
         // }
-        setDoorNr(doorCnt);
+        try {
+            setDoorNr(doorCnt);
+        } catch (Exception e) {
+            // Q: what should we do here?
+        }
         doorCnt++;
     }
     public boolean enter() {

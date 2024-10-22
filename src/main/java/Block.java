@@ -1,15 +1,18 @@
 /**
  * A block is a cell on the board.
  */
-public class Block extends MapSite{
-    
-    Mapsite n;
-    Mapsite s;
-    Mapsite e;
-    Mapsite w;
+public abstract class Block extends Mapsite{
+    private Mapsite n;
+    private Mapsite s;
+    private Mapsite e;
+    private Mapsite w;
 
-    public Block(){
+    protected int x; 
+    protected int y;
 
+    public Block(int x1, int y1){
+        x = x1;
+        y = y1;
     }
 
     /**
@@ -17,18 +20,51 @@ public class Block extends MapSite{
      * @param d the direction.
      * @param site the map site to connect to this room's side.
      */
-    public void setSide(Direction d, MapSite site){
+    public void setSide(Direction d, Mapsite site){
         switch(d){
             case North:
-                northSide = site;
+                n = site;
             case South:
-                southSide = site;
+                s = site;
             case East:
-                eastSide = site;
+                e = site;
             case West:
-                westSide = site;
+                w = site;
         }
         
     }
-    
+
+    /**
+     * Returns the MapSite object on the Direction <code>d</code> side of this room.
+     * @param d  the direction
+     * @return the MapSite object to the corresponding side.
+     */
+    public Mapsite getSide(Direction d){
+        Mapsite result = null;
+        switch (d){
+            case North:
+                result = n;
+            case South:
+                result = s;
+            case East:
+                result = e;
+            case West:
+                result = w;
+        }
+        return result;
+    }
+
+    public int getXPosition(){
+        return x;
+    }
+    public int getYPosition(){
+        return y;
+    }
+
+    public void setXPosition(int x1){
+        x = x1;
+    }
+    public void setYPosition(int y1){
+        y = y1;
+    }
 }
