@@ -3,6 +3,5 @@
  * It is used by the Wall, Door, and Room classes.
  */
 public abstract class Mapsite {
-
     public abstract boolean enter();
 }
