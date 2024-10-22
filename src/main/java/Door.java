@@ -15,8 +15,8 @@ public class Door extends Mapsite {
         setDoorNr(doorCnt);
         doorCnt++;
     }
-    public void enter() {
-        // 
+    public boolean enter() {
+        return true; 
     }
 
     private void setDoorNr(int number) throws Exception {
