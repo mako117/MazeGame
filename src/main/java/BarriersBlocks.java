@@ -7,7 +7,6 @@ class BarriersBlock extends Block {
      * Creates a Room and assigns it a unique room number
      */
     BarriersBlock() {
-        super(-1, -1);
         _BarriersBlockNr = _BarriersBlockCnt++;
         System.out.println("Creating Room #" + _BarriersBlockNr);
 

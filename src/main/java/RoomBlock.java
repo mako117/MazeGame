@@ -19,24 +19,20 @@ class RoomBlock extends Block {
      * @param y_pos The y position of the block
      */
     RoomBlock( int x_pos, int y_pos) {
-        this.x = x_pos;
-        this.y = y_pos;
+        super(x_pos, y_pos);
         _roomBlockNr = _roomBlockCnt++;
         System.out.println("Creating Room #" + _roomBlockNr + " with x position " + x + " and y position " + y);
     }
 
     /**
-     * Return the Room block number as a string
+     * Return the Room number as a string
      * 
      * @return a String of the Room Number
      */
     public String toString() {
-        return "Room Block #" + new Integer(_roomBlockNr).toString();
+        return "Room #" + _roomBlockNr;
     }
 
     private int _roomBlockNr;
     private static int _roomBlockCnt = 1;
-    private int x;
-    private int y;
-
 }
