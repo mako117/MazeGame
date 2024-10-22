@@ -26,12 +26,12 @@ class RoomBlock extends Block {
     }
 
     /**
-     * Return the Room number as a string
+     * Return the Room block number as a string
      * 
      * @return a String of the Room Number
      */
     public String toString() {
-        return "Room #" + new Integer(_roomBlockNr).toString();
+        return "Room Block #" + new Integer(_roomBlockNr).toString();
     }
 
     private int _roomBlockNr;
