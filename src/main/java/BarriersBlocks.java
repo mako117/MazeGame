@@ -7,6 +7,7 @@ class BarriersBlock extends Block {
      * Creates a Room and assigns it a unique room number
      */
     BarriersBlock() {
+        super(-1, -1);
         _BarriersBlockNr = _BarriersBlockCnt++;
         System.out.println("Creating Room #" + _BarriersBlockNr);
 
@@ -19,8 +20,7 @@ class BarriersBlock extends Block {
      * @param y_pos The y position of the barrier
      */
     BarriersBlock(int x_pos, int y_pos) {
-        this.x = x_pos;
-        this.y = y_pos;
+        super(x_pos, y_pos);
         _BarriersBlockNr = _BarriersBlockCnt++;
         System.out.println("Creating Room #" + _BarriersBlockNr + " with x position " + x + " and y position " + y);
     }
@@ -31,12 +31,17 @@ class BarriersBlock extends Block {
      * @return a String of the Barrier Number
      */
     public String toString() {
-        return "Barrier #" + new Integer(_BarriersBlockNr).toString();
+        return "Barrier #" + _BarriersBlockNr;
+    }
+
+    /**
+     * Entering a barrier block is not possible.
+     * @return false
+     */
+    public boolean enter(){
+        return false;
     }
 
     private int _BarriersBlockNr;
     private static int _BarriersBlockCnt = 1;
-    private int x;
-    private int y;
-
 }
