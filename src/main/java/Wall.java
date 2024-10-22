@@ -23,7 +23,7 @@ class Wall extends Mapsite {
      * @return a wall number as a String
      */
     public String toString() {
-        return "Wall #" + new Integer(_wallNr).toString();
+        return "Wall #" + _wallNr;
     }
 
     private int _wallNr;
