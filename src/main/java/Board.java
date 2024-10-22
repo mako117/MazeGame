@@ -1,6 +1,7 @@
 public class Board {
     private RoomBlock startRoomBlock;
     private RoomBlock endRoomBlock;
+    private Block [][] array;
 
     public Board createBoard() {
 
@@ -10,5 +11,9 @@ public class Board {
     }
     public void setEnd(RoomBlock thisRoomBlock) {
         this.endRoomBlock = thisRoomBlock;
+    }
+
+    private Block getBlock(int x, int y) {
+        return array[x][y];
     }
 }
