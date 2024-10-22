@@ -10,6 +10,10 @@ public abstract class Block extends Mapsite{
     protected int x; 
     protected int y;
 
+    public Block(){
+        x = -1;
+        y = -1;
+    }
     public Block(int x1, int y1){
         x = x1;
         y = y1;
