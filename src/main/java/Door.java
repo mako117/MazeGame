@@ -1,11 +1,11 @@
 public class Door extends Mapsite {
     private static int INITIAL_COUNT = 0;
-    private RoomBlock r1;
-    private RoomBlock r2;
+    private Block r1;
+    private Block r2;
     private int doorNr;
     private static int doorCnt = INITIAL_COUNT;
 
-    public Door(RoomBlock input1, RoomBlock input2) /* throws Exception */ {
+    public Door(Block input1, Block input2) /* throws Exception */ {
         /* if(input1 == input2) {
             throw new Exception("r1 cannot == r2!\n");
         } else { */
