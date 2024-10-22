@@ -24,6 +24,16 @@ class RoomBlock extends Block {
         System.out.println("Creating Room #" + _roomBlockNr + " with x position " + x + " and y position " + y);
     }
 
+    @Override
+    /**
+     * Entering into a room block is always successful.
+     * 
+     * @return true
+     */
+    public boolean enter() {
+        return true;
+    }
+
     /**
      * Return the Room number as a string
      * 
