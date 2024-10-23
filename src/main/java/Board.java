@@ -68,7 +68,6 @@ public class Board {
     	array[2][2].setSide(Direction.South, d4);
     	array[2][2].setSide(Direction.West, d5);
     	array[2][2].setSide(Direction.East, new Wall());
-    	
     }
     public void setStart(RoomBlock thisRoomBlock) {
         this.startRoomBlock = thisRoomBlock;
