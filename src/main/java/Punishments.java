@@ -3,6 +3,12 @@ public class Punishments {
     private int y;
     private int score;
 
+    public Punishments(){
+        x = -1;
+        y = -1;
+        score = 0;
+    }
+
     public Punishments(int inputX, int inputY, int inputScore) {
         this.setX(inputX);
         this.setY(inputY);
