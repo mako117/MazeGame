@@ -18,15 +18,27 @@ public class Punishments {
         return this.score;
     }
 
-    private void setX(int inputX) {
+    protected void setX(int inputX) {
         this.x = inputX;
     }
-    private void setY(int inputY) {
+    protected void setY(int inputY) {
         this.y = inputY;
     }
-    private void setScore(int inputScore) {
+    protected void setScore(int inputScore) {
         if(inputScore < 0) {
             this.score = inputScore;
         }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
