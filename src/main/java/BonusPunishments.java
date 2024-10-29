@@ -2,14 +2,11 @@
  * The bonus punishment in the maze game.
  */
 public class BonusPunishments extends Punishments{
-    private int bonusNr;
-    private static int bonusCnt = 1;
     private int starttime;
     private int endtime;
 
     BonusPunishments(){
         super();
-        bonusNr = bonusCnt++;
         starttime = -1;
         endtime = -1;
     }
@@ -20,4 +17,11 @@ public class BonusPunishments extends Punishments{
         this.endtime = endT;
     }
 
+    public int getStartTime() {
+        return starttime;
+    }
+
+    public int  getEndTime(){
+        return endtime;
+    }
 }
