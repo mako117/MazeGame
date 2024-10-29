@@ -8,5 +8,25 @@
     <artifactId>CMPT276F24_group18</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx</artifactId>
+            <version>1.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-lwjgl3</artifactId>
+            <version>1.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-platform</artifactId>
+            <version>1.12.1</version>
+            <classifier>natives-desktop</classifier>
+        </dependency>
+    </dependencies>
+
+
 </project>
+
