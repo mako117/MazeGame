@@ -1,4 +1,6 @@
 package entities;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import directions.Direction;
 import board.*;
 
@@ -12,16 +14,18 @@ public class Character {
     private int score;
     private int speed;
     private int rewardsCollected;
+    private TextureRegion[] playerTexture;
 
     /**
      * Creates a entities.Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
      */
-    public Character() {
+    public Character(TextureRegion[] playerTexture) {
         setX(0);
         setY(0);
         setScore(0);
         setSpeed(1);
         setRewardsCollected(0);
+        this.playerTexture = playerTexture;
     }
     /**
      * Moves the entities.Character one cell north, east, south, or west if there is nothing in their way.
@@ -143,5 +147,10 @@ public class Character {
         if(newTally >= 0) {
             this.rewardsCollected = newTally;
         }
+    }
+
+
+    public void draw(Batch batch) {
+        batch.draw(playerTexture[0], x, y, 32, 32);
     }
 }
