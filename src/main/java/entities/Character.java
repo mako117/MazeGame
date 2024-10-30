@@ -32,30 +32,30 @@ public class Character {
      * @param input The keyboard input indicating which direction the player wants the character to go.
      * @param currentBlock The block which the character is occupying when this function is called.
      */
-    public void direction(char input, Block currentBlock) {
+    public void direction(char input, Board gameBoard) {
         //board.Block currentBlock = gameBoard.getBlock(x, y); // move to MazeGame
-        Mapsite toMoveTo = currentBlock;
+        Mapsite toMoveTo;
         switch(input) {
             case 'W':
-            toMoveTo = currentBlock.getSide(Direction.North);
+            toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
             if(toMoveTo.enter() == true) {
                 setY(getY() + 1);
                 // this.y += this.speed;
             }
             case 'S':
-            toMoveTo = currentBlock.getSide(Direction.South);
+            toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
             if(toMoveTo.enter() == true) {
                 setY(getY() - 1);
                 // this.y -= this.speed;
             }
             case 'A':
-            toMoveTo = currentBlock.getSide(Direction.West);
+            toMoveTo = gameBoard.getBlock(getX() - 1, getY());
             if(toMoveTo.enter() == true) {
                 setX(getX() - 1);
                 // this.x -= this.speed;
             }
             case 'D':
-            toMoveTo = currentBlock.getSide(Direction.East);
+            toMoveTo = gameBoard.getBlock(getX() + 1, getY());
             if(toMoveTo.enter() == true) {
                 setX(getX() + 1);
                 // this.x += this.speed;
