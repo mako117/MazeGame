@@ -1,3 +1,4 @@
+package rewards;
 
 public class Regular_Reward extends Reward {
 	private int regularNr;

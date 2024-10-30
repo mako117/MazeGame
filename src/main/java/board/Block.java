@@ -1,7 +1,10 @@
+package board;
+import directions.Direction;
+
 /**
  * A block is a cell on the board.
  */
-public abstract class Block extends Mapsite{
+public abstract class Block extends Mapsite {
     private Mapsite n;
     private Mapsite s;
     private Mapsite e;
@@ -20,7 +23,7 @@ public abstract class Block extends Mapsite{
     }
 
     /**
-     * Sets the side of this room to MapSite <code>site</code> in the Direction <code>d</code>.
+     * Sets the side of this room to MapSite <code>site</code> in the directions.Direction <code>d</code>.
      * @param d the direction.
      * @param site the map site to connect to this room's side.
      */
@@ -39,7 +42,7 @@ public abstract class Block extends Mapsite{
     }
 
     /**
-     * Returns the MapSite object on the Direction <code>d</code> side of this room.
+     * Returns the MapSite object on the directions.Direction <code>d</code> side of this room.
      * @param d  the direction
      * @return the MapSite object to the corresponding side.
      */

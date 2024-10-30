@@ -1,3 +1,5 @@
+package directions;
+
 /**
  * All possible direcions in the 2D game.
  */

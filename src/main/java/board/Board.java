@@ -1,3 +1,6 @@
+package board;
+import directions.Direction;
+
 public class Board {
     private RoomBlock startRoomBlock;
     private RoomBlock endRoomBlock;
@@ -9,7 +12,7 @@ public class Board {
     	array[0][1] = new RoomBlock(0,1);
     	array[0][2] = new RoomBlock(0,2);
     	array[1][0] = new RoomBlock(1,0);
-    	array[1][1] = new BarriersBlock(1,1);
+    	array[1][1] = new BarrierBlock(1,1);
     	array[1][2] = new RoomBlock(1,2);
     	array[2][0] = new RoomBlock(2,0);
     	array[2][1] = new RoomBlock(2,1);

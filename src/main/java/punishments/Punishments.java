@@ -1,3 +1,5 @@
+package punishments;
+
 public class Punishments {
     private int x;
     private int y;

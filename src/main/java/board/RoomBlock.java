@@ -1,5 +1,7 @@
+package board;
+
 /**
- * The RoomBlock class creates room blocks for the maze
+ * The board.RoomBlock class creates room blocks for the maze
  * Rooms have sides that can be Walls or Doors
  */
 class RoomBlock extends Block {

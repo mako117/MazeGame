@@ -1,3 +1,5 @@
+package board;
+
 public class Door extends Mapsite {
     private static int INITIAL_COUNT = 0;
     private Block r1;
@@ -27,7 +29,7 @@ public class Door extends Mapsite {
         if(number >= 0) {
             this.doorNr = number;
         } else {
-            throw new Exception("Door number must be 0 or greater!\n");
+            throw new Exception("board.Door number must be 0 or greater!\n");
         }
     }
 

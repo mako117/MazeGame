@@ -1,3 +1,5 @@
+package punishments;
+
 /**
  * The bonus punishment in the maze game.
  */

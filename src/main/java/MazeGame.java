@@ -7,8 +7,8 @@ import com.badlogic.gdx.audio.Sound;
 
 public class MazeGame implements ApplicationListener{
 //    public static void main(String args[]) {
-//        Character Rock = new Character();
-//        Board gameBoard = new Board();
+//        entities.Character Rock = new entities.Character();
+//        board.board gameBoard = new board.board();
 //        gameBoard.createBoard();
 //    }
 

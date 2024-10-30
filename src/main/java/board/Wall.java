@@ -1,5 +1,7 @@
+package board;
+
 /**
- * The Wall class is used to create a wall and its interactions
+ * The board.Wall class is used to create a wall and its interactions
  */
 class Wall extends Mapsite {
     /**
@@ -7,7 +9,7 @@ class Wall extends Mapsite {
      */
     Wall() {
         _wallNr = _wallCnt++;
-        System.out.println("creating Wall #" + _wallNr);
+        System.out.println("creating board.Wall #" + _wallNr);
     }
 
     /**
@@ -23,7 +25,7 @@ class Wall extends Mapsite {
      * @return a wall number as a String
      */
     public String toString() {
-        return "Wall #" + _wallNr;
+        return "board.Wall #" + _wallNr;
     }
 
     private int _wallNr;

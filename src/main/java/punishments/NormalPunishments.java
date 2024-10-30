@@ -1,3 +1,5 @@
+package punishments;
+
 /**
  * The standard punishment in the maze game.
  */

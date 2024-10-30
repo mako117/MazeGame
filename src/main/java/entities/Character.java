@@ -1,5 +1,10 @@
+package entities;
+import directions.Direction;
+import board.*;
+
+
 /**
- * The Character class creates a main character for the player to move around the maze
+ * The entities.Character class creates a main character for the player to move around the maze
  */
 public class Character {
     private int x;
@@ -9,7 +14,7 @@ public class Character {
     private int rewardsCollected;
 
     /**
-     * Creates a Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
+     * Creates a entities.Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
      */
     public Character() {
         setX(0);
@@ -19,12 +24,12 @@ public class Character {
         setRewardsCollected(0);
     }
     /**
-     * Moves the Character one cell north, east, south, or west if there is nothing in their way.
+     * Moves the entities.Character one cell north, east, south, or west if there is nothing in their way.
      * @param input The keyboard input indicating which direction the player wants the character to go.
      * @param currentBlock The block which the character is occupying when this function is called.
      */
     public void direction(char input, Block currentBlock) {
-        //Block currentBlock = gameBoard.getBlock(x, y); // move to MazeGame
+        //board.Block currentBlock = gameBoard.getBlock(x, y); // move to MazeGame
         Mapsite toMoveTo;
         switch(input) {
             case 'W':
@@ -54,42 +59,42 @@ public class Character {
         }
     }
     /**
-     * Updates the Character's score.
-     * @param change the change in the Character's score.
+     * Updates the entities.Character's score.
+     * @param change the change in the entities.Character's score.
      */
     public void scorechange(int change) {
         this.score += change;
     }
     /**
-     * Returns the x-coordinate of the Character's position as an integer.
+     * Returns the x-coordinate of the entities.Character's position as an integer.
      * @return  <x>
      */
     public int getX() {
         return this.x;
     }
     /**
-     * Returns the y-coordinate of the Character's position as an integer.
+     * Returns the y-coordinate of the entities.Character's position as an integer.
      * @return <y>
      */
     public int getY() {
         return this.y;
     }
     /**
-     * Returns the Character's <score> as an integer.
+     * Returns the entities.Character's <score> as an integer.
      * @return <score>
      */
     public int getScore() {
         return this.score;
     }
     /**
-     * Returns the Character's <speed> as an integer.
+     * Returns the entities.Character's <speed> as an integer.
      * @return <speed>
      */
     public int getSpeed() {
         return this.speed;
     }
     /**
-     * Returns the Character's number of <rewardsCollected> as an integer.
+     * Returns the entities.Character's number of <rewardsCollected> as an integer.
      * @return <rewardsCollected>
      */
     public int getRewardsCollected() {
@@ -97,7 +102,7 @@ public class Character {
     }
 
     /**
-     * Sets the x-coordinate of the Character's position as an integer.
+     * Sets the x-coordinate of the entities.Character's position as an integer.
      * @param xCoord Possible new value for <x>.
      */
     private void setX(int xCoord) {
@@ -106,7 +111,7 @@ public class Character {
         }
     }
     /**
-     * Sets the y-coordinate of the Character's position as an integer.
+     * Sets the y-coordinate of the entities.Character's position as an integer.
      * @param yCoord Possible new value for <y>.
      */
     private void setY(int yCoord) {
@@ -115,7 +120,7 @@ public class Character {
         }
     }
     /**
-     * Sets the Character's score as an integer.
+     * Sets the entities.Character's score as an integer.
      * @param newScore Possible new <score>.
      */
     private void setScore(int newScore) {
@@ -124,14 +129,14 @@ public class Character {
         }
     }
     /**
-     * Sets the Character's speed as an integer.
+     * Sets the entities.Character's speed as an integer.
      * @param newSpeed Possible new <speed>.
      */
     private void setSpeed(int newSpeed) {
         this.speed = newSpeed;
     }
     /**
-     * Sets the Character's number of <rewardsCollected> as an integer.
+     * Sets the entities.Character's number of <rewardsCollected> as an integer.
      * @param newTally Possible new number of <rewardsCollected>.
      */
     private void setRewardsCollected(int newTally) {

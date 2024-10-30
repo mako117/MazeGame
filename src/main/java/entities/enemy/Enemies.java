@@ -1,5 +1,10 @@
+package entities.enemy;
+import directions.Direction;
+import entities.Character;
+import board.*;
+
 /**
- * Enemies Class
+ * entities.Enemies Class
  */
 
 public class Enemies {
@@ -9,14 +14,14 @@ public class Enemies {
     private int y;
 
     /**
-     * Default Enemies Constructor
+     * Default entities.Enemies Constructor
      */
     public Enemies(){
         this.enemyNr = enemyCnt++;
     }
 
     /**
-     * Enemies Constructor with starting position
+     * entities.Enemies Constructor with starting position
      * 
      * @param initial_x Starting x position
      * @param initial_y Starting y position

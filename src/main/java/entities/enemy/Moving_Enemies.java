@@ -1,9 +1,13 @@
+package entities.enemy;
+import directions.Direction;
+import board.*;
+
 class Moving_Enemies extends Enemies {
     private Direction d; // can't think of a better name for it
     private int xMax;
     private int yMax;
     /**
-     * Moving Enemies Constructor
+     * Moving entities.Enemies Constructor
      */
     public Moving_Enemies(int init_x, int init_y, Direction d, int maxX, int maxY) {
         super(init_x,init_y);
@@ -14,7 +18,7 @@ class Moving_Enemies extends Enemies {
     /**
      * Controls the movement of the enemy
      */
-    @Override public void direction(Character aCharacter, Block currentBlock) {
+    public void direction(Character aCharacter, Block currentBlock) {
         Direction compass = getDirection();
         switch(compass) {
             case North:

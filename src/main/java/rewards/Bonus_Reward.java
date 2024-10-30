@@ -1,3 +1,4 @@
+package rewards;
 
 public class Bonus_Reward extends Reward {
 	private int bonusNr;

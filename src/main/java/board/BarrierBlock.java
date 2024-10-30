@@ -1,12 +1,14 @@
+package board;
+
 /**
  * The BarriersBlock class creates barrier blocks for the maze
  * Rooms have sides that can be Walls or Doors
  */
-class BarriersBlock extends Block {
+class BarrierBlock extends Block {
     /**
      * Creates a Room and assigns it a unique room number
      */
-    BarriersBlock() {
+    BarrierBlock() {
         _BarriersBlockNr = _BarriersBlockCnt++;
         System.out.println("Creating Room #" + _BarriersBlockNr);
 
@@ -18,7 +20,7 @@ class BarriersBlock extends Block {
      * @param x_pos The x position of the barrier
      * @param y_pos The y position of the barrier
      */
-    BarriersBlock(int x_pos, int y_pos) {
+    BarrierBlock(int x_pos, int y_pos) {
         super(x_pos, y_pos);
         _BarriersBlockNr = _BarriersBlockCnt++;
         System.out.println("Creating Room #" + _BarriersBlockNr + " with x position " + x + " and y position " + y);

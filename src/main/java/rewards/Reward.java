@@ -1,3 +1,4 @@
+package rewards;
 
 public class Reward {
 	private int x;
