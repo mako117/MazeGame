@@ -30,5 +30,5 @@ public abstract class Block {
     public void setYPosition(int y1){
         y = y1;
     }
-    abstract boolean enter();
+    public abstract boolean enter();
 }
