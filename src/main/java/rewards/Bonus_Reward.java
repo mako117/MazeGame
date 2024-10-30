@@ -6,7 +6,7 @@ public class Bonus_Reward extends Reward {
 	private int starttime;
 	private int endtime;
 	
-	Bonus_Reward(){
+	public Bonus_Reward(){
 		super(-1,-1,0);
 		starttime = -1;
 		endtime = -1;
@@ -14,22 +14,22 @@ public class Bonus_Reward extends Reward {
 		bonusCnt++;
 	}
 	
-	Bonus_Reward(int x, int y, int s, int start, int end){
+	public Bonus_Reward(int x, int y, int s, int start, int end){
 		super(x,y,s);
 		starttime = start;
 		endtime = end;
 	}
 	
-	void Settime(int start, int end) {
+	public void Settime(int start, int end) {
 		this.starttime = start;
 		this.endtime = end;
 	}
 	
-	int getStarttime() {
+	public int getStarttime() {
 		return starttime;
 	}
 	
-	int getEndtime() {
+	public int getEndtime() {
 		return endtime;
 	}
 	
