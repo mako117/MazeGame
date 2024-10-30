@@ -14,9 +14,9 @@ class Moving_Enemies extends Enemies {
     public Moving_Enemies(int init_x, int init_y, TextureRegion texture) {
         super(init_x,init_y, new TextureRegion(new Texture("temp_ptero.png")));
     }
-    public char find_player(Character aCharacter) {
-        int xDistance = getX() - aCharacter.getX();
-        int yDistance = getY() - aCharacter.getY();
+    public char find_player(Character aCharacter, Board gameBoard) {
+        int xDistance = this.getX() - aCharacter.getX();
+        int yDistance = this.getY() - aCharacter.getY();
         double moveXDistance;
         double moveYDistance;
 
@@ -32,6 +32,54 @@ class Moving_Enemies extends Enemies {
         }
 
         if(moveYDistance < moveXDistance) {
+            if(yDistance < 0) { // wants to move up
+                if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    return 'W';
+                } else if(xDistance < 0) { // can't move up, so wants to move right
+                    if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                        return 'D';
+                    } else if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) { // can't move right, so tries left
+                        return 'A';
+                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) { // tries down
+                        return 'S';
+                    }
+                } else { // can't move up, so wants to move left
+                    if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                        return 'A';
+                    } else if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) { // can't move left, so tries right
+                        return 'D';
+                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) { // tries down
+                        return 'S';
+                    }
+                }
+            }
+            else { // wants to move down
+                if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                    return 'S';
+                } else if(xDistance < 0) { // can't move down, so wants to move right
+                    if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                        return 'D';
+                    } else if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                        return 'A';
+                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                        return 'W';
+                    }
+                } else { // can't move down, so wants to move left
+                    if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                        return 'A';
+                    } else if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                        return 'D';
+                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                        return 'W';
+                    }
+                }
+            }
+        }
+
+
+
+/*
+        if(moveYDistance < moveXDistance) {
             if((yDistance < 0)) {
                 return 'W';
             } else {
@@ -43,7 +91,7 @@ class Moving_Enemies extends Enemies {
             } else {
                 return 'A';
             }
-        }
+        } */
         
     }
 
