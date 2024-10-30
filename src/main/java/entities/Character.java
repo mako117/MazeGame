@@ -118,6 +118,7 @@ public class Character {
      */
     private void setX(int xCoord) {
         if(xCoord >= 0) {
+            System.out.println("xCoord = " + xCoord);
             this.x = xCoord;
         }
     }
@@ -127,6 +128,7 @@ public class Character {
      */
     private void setY(int yCoord) {
         if(yCoord >= 0) {
+            System.out.println("yCoord = " + yCoord);
             this.y = yCoord;
         }
     }
@@ -165,6 +167,6 @@ public class Character {
     }
     
     public void draw(Batch batch) {
-        batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), x, y, 32, 32);
+        batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), 100*x, 100*y, 32, 32);
     }
 }
