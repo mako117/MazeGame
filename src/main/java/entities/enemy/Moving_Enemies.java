@@ -31,6 +31,15 @@ class Moving_Enemies extends Enemies {
             moveYDistance = Math.sqrt( ((yDistance-1)^2 + xDistance^2) );
         }
 
+        /*
+        If moving along the y-axis will get the enemy closer to the player than moving
+        along the x-axis will, the code
+            1. Tries moving towards the player along the y-axis
+            2. Tries moving towards the player along the x-axis
+            3. Tries moving away from the player along the x-axis
+            4. Moves away from the player along the y-axis
+        This code assumes it is impossible for the enemy to have been boxed in on all sides.
+        */
         if(moveYDistance < moveXDistance) {
             if(yDistance < 0) { // wants to move up
                 if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
@@ -75,7 +84,15 @@ class Moving_Enemies extends Enemies {
                 }
             }
         }
-        
+        /*
+        If moving along the x-axis will get the enemy closer to the player than moving
+        along the y-axis will, the code
+            1. Tries moving towards the player along the x-axis
+            2. Tries moving towards the player along the y-axis
+            3. Tries moving away from the player along the y-axis
+            4. Moves away from the player along the x-axis
+        This code assumes it is impossible for the enemy to have been boxed in on all sides.
+        */
         else {
             if(xDistance < 0) { // wants to move right
                 if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
