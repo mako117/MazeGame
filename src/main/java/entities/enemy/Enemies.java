@@ -20,32 +20,36 @@ import board.*;
         setY(initial_y);
         this.enemyNr = enemyCnt++;
     }
-    public void direction(char input, Block currentBlock) {
-        Mapsite toMoveTo;
+    public void direction(char input, Board gameBoard) {
+        Block toMoveTo;
         switch(input) {
             case 'W':
-            toMoveTo = currentBlock.getSide(Direction.North);
-            if(toMoveTo.enter() == true) {
-                setY(getY() + 1);
-                // this.y += this.speed;
+            if(gameBoard.getBlock(getX(), getY() + 1) != null) {
+                toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
+                if(toMoveTo.enter() == true) {
+                    setY(getY() + 1);
+                }
             }
             case 'S':
-            toMoveTo = currentBlock.getSide(Direction.South);
-            if(toMoveTo.enter() == true) {
-                setY(getY() - 1);
-                // this.y -= this.speed;
+            if(gameBoard.getBlock(getX(), getY() - 1) != null) {
+                toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
+                if(toMoveTo.enter() == true) {
+                    setY(getY() - 1);
+                }
             }
             case 'A':
-            toMoveTo = currentBlock.getSide(Direction.West);
-            if(toMoveTo.enter() == true) {
-                setX(getX() - 1);
-                // this.x -= this.speed;
+            if(gameBoard.getBlock(getX() - 1, getY()) != null) {
+                toMoveTo = gameBoard.getBlock(getX() - 1, getY());
+                if(toMoveTo.enter() == true) {
+                    setX(getX() - 1);
+                }
             }
             case 'D':
-            toMoveTo = currentBlock.getSide(Direction.East);
-            if(toMoveTo.enter() == true) {
-                setX(getX() + 1);
-                // this.x += this.speed;
+            if(gameBoard.getBlock(getX() + 1, getY()) != null) {
+                toMoveTo = gameBoard.getBlock(getX() + 1, getY());
+                if(toMoveTo.enter() == true) {
+                    setX(getX() + 1);
+                }
             }
         }
     }
