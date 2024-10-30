@@ -3,6 +3,9 @@ import directions.Direction;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 public class Board {
     private RoomBlock startRoomBlock;
     private RoomBlock endRoomBlock;
@@ -21,7 +24,7 @@ public class Board {
 		}
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
-				array.get(i).add(j, new RoomBlock());
+				array.get(i).add(j, new RoomBlock(i,j));
 			}
 		}
 		// TODO: add walls and "space" wall surrounding board
@@ -109,5 +112,21 @@ public class Board {
 
 		return array.get(x).get(y);
 //        return array[x][y];
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+    public int getHeight() {
+        return this.height;
+    }
+
+    public void draw(Batch batch) {
+        for(int i = 0; i < getWidth(); i++) {
+            for(int j = 0; j < getHeight(); j++) {
+                Block blockToDraw = getBlock(i, j);
+                blockToDraw.draw(batch);
+            }
+        }
     }
 }

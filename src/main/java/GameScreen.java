@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
 
     private SpriteBatch batch;
 
-    private Texture background;
+    // private TextureRegion blockTexture;
     private TextureRegion playerTexture;
 
     private Board gameboard;
@@ -74,6 +74,8 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         input();
         batch.begin();
+
+        gameboard.draw(batch);
 
         player.draw(batch);
 
