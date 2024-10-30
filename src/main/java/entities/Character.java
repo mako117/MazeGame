@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import board.Block;
 import board.Board;
+import punishments.Punishments;
+import rewards.Reward;
 
 
 /**
@@ -153,8 +155,15 @@ public class Character {
             this.rewardsCollected = newTally;
         }
     }
-
-
+    
+    public void add_score(int s) {
+    	this.score += s;
+    }
+    
+    public void minus_score(int s) {
+    	this.score -= s;
+    }
+    
     public void draw(Batch batch) {
         batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), x, y, 32, 32);
     }
