@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import directions.Direction;
 import entities.Character;
+import entities.enemy.Enemies;
+import entities.enemy.PatrollingEnemies;
 import org.lwjgl.system.windows.INPUT;
 
 public class GameScreen implements Screen {
@@ -25,6 +28,7 @@ public class GameScreen implements Screen {
 
     private Board gameboard;
     private Character player;
+    private Enemies enemy1;
 
     private final int BOARD_WIDTH = 40*10;
     private final int BOARD_HEIGHT = 60*10;
@@ -38,6 +42,9 @@ public class GameScreen implements Screen {
 
         playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
         player = new Character(playerTexture);
+
+        enemy1 = new PatrollingEnemies(0, 0, Direction.North, 10, 10, new TextureRegion() );
+
 
         gameboard = new Board();
     }
@@ -78,6 +85,8 @@ public class GameScreen implements Screen {
         gameboard.draw(batch);
 
         player.draw(batch);
+
+        enemy1.draw(batch);
 
         batch.end();
     }
