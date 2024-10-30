@@ -51,19 +51,19 @@ public class GameScreen implements Screen {
 
     private void input() {
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            player.direction('W', gameboard.getBlock(player.getX(), player.getY()));
+            player.direction('W', gameboard);
             System.out.println("UP");
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            player.direction('D', gameboard.getBlock(player.getX(), player.getY()));
+            player.direction('D', gameboard);
             System.out.println("RIGHT");
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            player.direction('A', gameboard.getBlock(player.getX(), player.getY()));
+            player.direction('A', gameboard);
             System.out.println("LEFT");
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            player.direction('S', gameboard.getBlock(player.getX(), player.getY()));
+            player.direction('S', gameboard);
             System.out.println("DOWN");
         }
     }
