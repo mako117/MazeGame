@@ -27,8 +27,8 @@ public class Board {
 		array = new ArrayList<ArrayList<Block>>(width);
 		for(int i = 0; i < width; i++){
 			array.add(new ArrayList<Block>(height));
-			array_reward.add(new ArrayList<Reward>(height));
-			array_punishment.add(new ArrayList<Punishments>(height));
+//			array_reward.add(new ArrayList<Reward>(height));
+//			array_punishment.add(new ArrayList<Punishments>(height));
 		}
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
@@ -36,16 +36,16 @@ public class Board {
 			}
 		}
 		
-		array_reward.get(2).add(2, new Regular_Reward(2,2,10));
-		array_reward.get(3).add(3, new Regular_Reward(3,3,10));
-		array_reward.get(4).add(4, new Regular_Reward(4,4,10));
-		array_reward.get(5).add(5, new Regular_Reward(5,5,10));
-		
-		array_punishment.get(2).add(3, new NormalPunishments(2,3,10));
-		array_punishment.get(3).add(4, new NormalPunishments(3,4,10));
-		array_punishment.get(4).add(5, new NormalPunishments(4,5,10));
-		array_punishment.get(5).add(6, new NormalPunishments(5,6,10));
-		
+//		array_reward.get(2).add(2, new Regular_Reward(2,2,10));
+//		array_reward.get(3).add(3, new Regular_Reward(3,3,10));
+//		array_reward.get(4).add(4, new Regular_Reward(4,4,10));
+//		array_reward.get(5).add(5, new Regular_Reward(5,5,10));
+//
+//		array_punishment.get(2).add(3, new NormalPunishments(2,3,10));
+//		array_punishment.get(3).add(4, new NormalPunishments(3,4,10));
+//		array_punishment.get(4).add(5, new NormalPunishments(4,5,10));
+//		array_punishment.get(5).add(6, new NormalPunishments(5,6,10));
+//
 		
 		
 		// TODO: add walls and "space" wall surrounding board
