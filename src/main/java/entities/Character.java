@@ -1,8 +1,9 @@
 package entities;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import directions.Direction;
-import board.*;
+
+import board.Block;
+import board.Board;
 
 
 /**
@@ -37,28 +38,32 @@ public class Character {
         Block toMoveTo;
         switch(input) {
             case 'W':
-            toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
-            if(toMoveTo.enter() == true) {
-                setY(getY() + 1);
-                // this.y += this.speed;
+            if(gameBoard.getBlock(getX(), getY() + 1) != null) {
+                toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
+                if(toMoveTo.enter() == true) {
+                    setY(getY() + 1);
+                }
             }
             case 'S':
-            toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
-            if(toMoveTo.enter() == true) {
-                setY(getY() - 1);
-                // this.y -= this.speed;
+            if(gameBoard.getBlock(getX(), getY() - 1) != null) {
+                toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
+                if(toMoveTo.enter() == true) {
+                    setY(getY() - 1);
+                }
             }
             case 'A':
-            toMoveTo = gameBoard.getBlock(getX() - 1, getY());
-            if(toMoveTo.enter() == true) {
-                setX(getX() - 1);
-                // this.x -= this.speed;
+            if(gameBoard.getBlock(getX() - 1, getY()) != null) {
+                toMoveTo = gameBoard.getBlock(getX() - 1, getY());
+                if(toMoveTo.enter() == true) {
+                    setX(getX() - 1);
+                }
             }
             case 'D':
-            toMoveTo = gameBoard.getBlock(getX() + 1, getY());
-            if(toMoveTo.enter() == true) {
-                setX(getX() + 1);
-                // this.x += this.speed;
+            if(gameBoard.getBlock(getX() + 1, getY()) != null) {
+                toMoveTo = gameBoard.getBlock(getX() + 1, getY());
+                if(toMoveTo.enter() == true) {
+                    setX(getX() + 1);
+                }
             }
         }
     }
