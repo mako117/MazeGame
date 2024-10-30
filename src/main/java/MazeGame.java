@@ -5,6 +5,14 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
+import entities.enemy.*;
+import board.*;
+import directions.Direction;
+import punishments.*;
+import rewards.*;
+import entities.Character;
+
+
 public class MazeGame implements ApplicationListener{
 //    public static void main(String args[]) {
 //        entities.Character Rock = new entities.Character();
