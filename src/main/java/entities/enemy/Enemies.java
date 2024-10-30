@@ -1,4 +1,6 @@
 package entities.enemy;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import directions.Direction;
 import board.*;
 
@@ -11,13 +13,15 @@ import board.*;
     private static int enemyCnt = 1;
     private int x;
     private int y;
+    private TextureRegion enemy_texture;
 
     public Enemies(){
         enemyNr = enemyCnt++;
     }
-    public Enemies(int initial_x, int initial_y) {
+    public Enemies(int initial_x, int initial_y, TextureRegion texture) {
         setX(initial_x);
         setY(initial_y);
+        this.enemy_texture = texture;
         this.enemyNr = enemyCnt++;
     }
     public void direction(char input, Board gameBoard) {
@@ -70,4 +74,8 @@ import board.*;
             this.y = yCoord;
         }
     }
+
+    public void draw(Batch batch) {
+        batch.draw(enemy_texture,x,y,32,32);
+            }
 }
