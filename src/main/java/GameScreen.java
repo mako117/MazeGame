@@ -127,4 +127,22 @@ public class GameScreen implements Screen {
     public void dispose() {
 
     }
+    
+    public void checkReward() {
+    	int playerX = player.getX();
+    	int playerY = player.getY();
+    	if(gameboard.reward_collect(playerX, playerY)) {
+    		player.add_score(gameboard.getReward(playerX, playerY).getPoint());
+    		// remove reward
+    	}
+    }
+    
+    public void checkPunishment() {
+    	int playerX = player.getX();
+    	int playerY = player.getY();
+    	if(gameboard.punishment_collect(playerX, playerY)) {
+    		player.minus_score(gameboard.getPunishment(playerX, playerY).getScore());
+    		// remove punishment
+    	}
+    }
 }
