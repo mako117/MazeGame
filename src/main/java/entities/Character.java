@@ -34,7 +34,7 @@ public class Character {
      */
     public void direction(char input, Board gameBoard) {
         //board.Block currentBlock = gameBoard.getBlock(x, y); // move to MazeGame
-        Mapsite toMoveTo;
+        Block toMoveTo;
         switch(input) {
             case 'W':
             toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
