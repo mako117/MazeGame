@@ -40,7 +40,7 @@ class Moving_Enemies extends Enemies {
                         return 'D';
                     } else if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) { // can't move right, so tries left
                         return 'A';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) { // tries down
+                    } else { // moves down
                         return 'S';
                     }
                 } else { // can't move up, so wants to move left
@@ -48,7 +48,7 @@ class Moving_Enemies extends Enemies {
                         return 'A';
                     } else if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) { // can't move left, so tries right
                         return 'D';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) { // tries down
+                    } else { // moves down
                         return 'S';
                     }
                 }
@@ -61,7 +61,7 @@ class Moving_Enemies extends Enemies {
                         return 'D';
                     } else if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
                         return 'A';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    } else {
                         return 'W';
                     }
                 } else { // can't move down, so wants to move left
@@ -69,30 +69,57 @@ class Moving_Enemies extends Enemies {
                         return 'A';
                     } else if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
                         return 'D';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    } else {
                         return 'W';
                     }
                 }
             }
         }
-
-
-
-/*
-        if(moveYDistance < moveXDistance) {
-            if((yDistance < 0)) {
-                return 'W';
-            } else {
-                return 'S';
-            }
-        } else {
-            if((xDistance < 0)) {
-                return 'D';
-            } else {
-                return 'A';
-            }
-        } */
         
+        else {
+            if(xDistance < 0) { // wants to move right
+                if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                    return 'D';
+                } else if(yDistance < 0) { // can't move right, so wants to move up
+                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                        return 'W';
+                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                        return 'S';
+                    } else {
+                        return 'A';
+                    }
+                } else { // can't move right, so wants to move down
+                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                        return 'S';
+                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                        return 'W';
+                    } else {
+                        return 'A';
+                    }
+                }
+            }
+            else { // wants to move left
+                if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                    return 'A';
+                } else if(yDistance < 0) { // can't move left, so wants to move up
+                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                        return 'W';
+                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                        return 'S';
+                    } else {
+                        return 'D';
+                    }
+                } else { // can't move left, so wants to move down
+                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                        return 'S';
+                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                        return 'W';
+                    } else {
+                        return 'D';
+                    }
+                }
+            }
+        }        
     }
 
 }
