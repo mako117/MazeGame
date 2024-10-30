@@ -7,7 +7,7 @@ public class NormalPunishments extends Punishments{
     private static int NpunishmentCnt = 0;
     private int NpunishmentNr;
 
-    NormalPunishments(int inputX, int inputY, int inputScore){
+    public NormalPunishments(int inputX, int inputY, int inputScore){
         super(inputX, inputY, inputScore);
         NpunishmentNr = NpunishmentCnt++;
     }
