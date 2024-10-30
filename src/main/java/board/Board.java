@@ -33,6 +33,8 @@ public class Board {
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
 				array.get(i).add(j, new RoomBlock(i,j));
+				array_reward.get(i).add(j,null);
+				array_punishment.get(i).add(j,null);
 			}
 		}
 		
@@ -134,6 +136,28 @@ public class Board {
 		return array.get(x).get(y);
 //        return array[x][y];
     }
+    
+    public Reward getReward(int x, int y) {
+    	return array_reward.get(x).get(y);
+    }
+    
+    public Punishments getPunishment(int x, int y) {
+    	return array_punishment.get(x).get(y);
+    }
+    
+    public boolean reward_collect(int x, int y) {
+    	if(getReward(x,y) == null) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    public boolean punishment_collect(int x, int y) {
+    	if(getPunishment(x,y) == null) {
+    		return false;
+    	}
+    	return true;
+    }
 
     public int getWidth() {
         return this.width;
@@ -141,7 +165,8 @@ public class Board {
     public int getHeight() {
         return this.height;
     }
-
+    
+    
     public void draw(Batch batch) {
         for(int i = 0; i < getWidth(); i++) {
             for(int j = 0; j < getHeight(); j++) {
