@@ -1,4 +1,6 @@
 package entities.enemy;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import directions.Direction;
 import board.*;
 
@@ -8,8 +10,8 @@ public class PatrollingEnemies extends Enemies {
     int xMax;
     int yMax;
 
-    public PatrollingEnemies(int init_x, int init_y, Direction d, int xMax, int yMax) {
-        super(init_x, init_y);
+    public PatrollingEnemies(int init_x, int init_y, Direction d, int xMax, int yMax, TextureRegion texture) {
+        super(init_x, init_y, new TextureRegion(new Texture("temp_ptero.png")));
         setMoveTowards(d);
         setXMax(xMax);
         setYMax(yMax);

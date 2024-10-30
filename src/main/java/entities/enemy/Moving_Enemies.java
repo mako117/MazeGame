@@ -1,4 +1,6 @@
 package entities.enemy;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import directions.Direction;
 import board.*;
 import entities.Character;
@@ -7,8 +9,10 @@ class Moving_Enemies extends Enemies {
     /**
      * Moving Enemies Constructor
      */
-    public Moving_Enemies(int init_x, int init_y) {
-        super(init_x,init_y);        
+
+
+    public Moving_Enemies(int init_x, int init_y, TextureRegion texture) {
+        super(init_x,init_y, new TextureRegion(new Texture("temp_ptero.png")));
     }
     public char find_player(Character aCharacter) {
         int xDistance = getX() - aCharacter.getX();
@@ -42,4 +46,5 @@ class Moving_Enemies extends Enemies {
         }
         
     }
+
 }
