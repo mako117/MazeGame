@@ -100,6 +100,13 @@ public class Board {
     }
 
     public Block getBlock(int x, int y) {
+        if(x < 0 || x >= width){
+            return null;
+        }
+        if(y < 0 || y >= height){
+            return null;
+        }
+
 		return array.get(x).get(y);
 //        return array[x][y];
     }
