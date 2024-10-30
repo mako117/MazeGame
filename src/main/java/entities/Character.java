@@ -14,12 +14,12 @@ public class Character {
     private int score;
     private int speed;
     private int rewardsCollected;
-    private TextureRegion[] playerTexture;
+    private TextureRegion playerTexture;
 
     /**
      * Creates a entities.Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
      */
-    public Character(TextureRegion[] playerTexture) {
+    public Character(TextureRegion playerTexture) {
         setX(0);
         setY(0);
         setScore(0);
@@ -34,7 +34,7 @@ public class Character {
      */
     public void direction(char input, Block currentBlock) {
         //board.Block currentBlock = gameBoard.getBlock(x, y); // move to MazeGame
-        Mapsite toMoveTo;
+        Mapsite toMoveTo = currentBlock;
         switch(input) {
             case 'W':
             toMoveTo = currentBlock.getSide(Direction.North);
@@ -151,6 +151,6 @@ public class Character {
 
 
     public void draw(Batch batch) {
-        batch.draw(playerTexture[0], x, y, 32, 32);
+        batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), x, y, 32, 32);
     }
 }

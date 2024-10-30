@@ -10,14 +10,18 @@ public class Board {
 	private int height = 10;
 	private int width = 15;
 
-    public void createBoard() {
+    public Board(){
+        createBoard();
+    }
+
+    private void createBoard() {
 		array = new ArrayList<ArrayList<Block>>(width);
 		for(int i = 0; i < width; i++){
 			array.add(new ArrayList<Block>(height));
 		}
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
-				array.get(i).set(j, new RoomBlock());
+				array.get(i).add(j, new RoomBlock());
 			}
 		}
 		// TODO: add walls and "space" wall surrounding board
