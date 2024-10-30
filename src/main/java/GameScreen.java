@@ -1,4 +1,7 @@
+import board.Board;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import entities.Character;
+import org.lwjgl.system.windows.INPUT;
 
 public class GameScreen implements Screen {
 
@@ -17,9 +21,9 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
 
     private Texture background;
-    private TextureRegion[] playerTexture;
+    private TextureRegion playerTexture;
 
-
+    private Board gameboard;
     private Character player;
 
     private final int BOARD_WIDTH = 40*10;
@@ -29,13 +33,13 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         viewport = new StretchViewport(BOARD_WIDTH, BOARD_HEIGHT, camera);
 
-        background = new Texture("Prototype_Character.png");
+//        background = new Texture();
         batch = new SpriteBatch();
 
+        playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
+        player = new Character(playerTexture);
 
-        playerTexture = new TextureRegion[2];
-
-        Character player = new Character(playerTexture);
+        gameboard = new Board();
     }
 
     /**
@@ -45,13 +49,33 @@ public class GameScreen implements Screen {
 
     }
 
+    private void input() {
+        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+            player.direction('W', gameboard.getBlock(player.getX(), player.getY()));
+            System.out.println("UP");
+        }
+        else if(Gdx.input.isKeyPressed(Input.Keys.D)){
+            player.direction('D', gameboard.getBlock(player.getX(), player.getY()));
+            System.out.println("RIGHT");
+        }
+        else if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            player.direction('A', gameboard.getBlock(player.getX(), player.getY()));
+            System.out.println("LEFT");
+        }
+        else if(Gdx.input.isKeyPressed(Input.Keys.S)){
+            player.direction('S', gameboard.getBlock(player.getX(), player.getY()));
+            System.out.println("DOWN");
+        }
+    }
+
     /**
      * @param delta
      */
     public void render(float delta) {
+        input();
         batch.begin();
 
-        batch.draw(background, 0, 0);
+        player.draw(batch);
 
         batch.end();
     }
