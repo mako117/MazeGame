@@ -6,6 +6,7 @@ import punishments.Punishments;
 import rewards.Bonus_Reward;
 import rewards.Regular_Reward;
 import rewards.Reward;
+import punishments.BonusPunishments;
 
 import java.util.ArrayList;
 
@@ -185,11 +186,19 @@ public class Board {
         array_regPunishment.remove(index);
         return score;
     }
-    public int bonPunishmentCollect(int x, int y) {
+    public int bonPunishmentCollect(int x, int y, float currentTime) {
         int index = isPunishmentHere(x, y, array_bonPunishment);
         if(index == -1){
             return 0;
         }
+
+        BonusPunishments aBonus = (BonusPunishments) array_bonPunishment.get(index);
+        int start = aBonus.getStartTime();
+        int end = aBonus.getEndTime();
+        if(currentTime < start || currentTime > end) {
+            return 0;
+        }
+
         int score = array_bonPunishment.get(index).getPoint();
         array_bonPunishment.remove(index);
         return score;
@@ -216,6 +225,14 @@ public class Board {
             int end = rewardToDraw.getEndtime();
             if(!(time < start || time > end)) {
                 rewardToDraw.draw(batch);   
+            }        
+        }
+        for(int i = 0; i < array_bonPunishment.size(); i++) {
+            BonusPunishments punishmentsToDraw = (BonusPunishments) array_bonPunishment.get(i);
+            int start = punishmentsToDraw.getStartTime();
+            int end = punishmentsToDraw.getEndTime();
+            if(!(time < start || time > end)) {
+                punishmentsToDraw.draw(batch);   
             }        
         }
     }

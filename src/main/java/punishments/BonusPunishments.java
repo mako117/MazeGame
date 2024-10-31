@@ -1,11 +1,15 @@
 package punishments;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 /**
  * The bonus punishment in the maze game.
  */
 public class BonusPunishments extends Punishments{
     private int starttime;
     private int endtime;
+    private TextureRegion bonusPunishmentsTexture;
 
     public BonusPunishments(){
         super();
@@ -25,5 +29,9 @@ public class BonusPunishments extends Punishments{
 
     public int  getEndTime(){
         return endtime;
+    }
+
+    public void draw(Batch batch) {
+        batch.draw(new TextureRegion(bonusPunishmentsTexture), 100*this.XPosition(), 100*this.YPosition(), 100, 100);
     }
 }
