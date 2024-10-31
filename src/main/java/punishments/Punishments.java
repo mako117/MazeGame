@@ -1,9 +1,13 @@
 package punishments;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 public class Punishments {
     private int x;
     private int y;
     private int score;
+    private TextureRegion PunishmentsTexture;
 
     public Punishments(){
         x = -1;
@@ -42,5 +46,8 @@ public class Punishments {
 
     public int getPoint() {
         return score;
+    }
+    public void draw(Batch batch) {
+        batch.draw(new TextureRegion(PunishmentsTexture), 100*this.XPosition(), 100*this.YPosition(), 100, 100);
     }
 }
