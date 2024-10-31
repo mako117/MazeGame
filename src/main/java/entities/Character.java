@@ -25,8 +25,8 @@ public class Character {
      * Creates a entities.Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
      */
     public Character(TextureRegion playerTexture) {
-        setX(0);
-        setY(0);
+        setX(1);
+        setY(1);
         setFacing(Direction.Down);
         setScore(0);
         setSpeed(1);
