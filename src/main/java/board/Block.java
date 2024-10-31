@@ -11,15 +11,16 @@ import directions.Direction;
 public abstract class Block {
     protected int x; 
     protected int y;
-    private TextureRegion blockTexture = new TextureRegion(new Texture("rock.png"));;
+    private TextureRegion blockTexture;
 
     public Block(){
         x = -1;
         y = -1;
     }
-    public Block(int x1, int y1){
+    public Block(int x1, int y1, TextureRegion blockTexture){
         x = x1;
         y = y1;
+        this.blockTexture = blockTexture;
     }
 
     public int getXPosition(){

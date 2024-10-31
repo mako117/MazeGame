@@ -1,5 +1,7 @@
 package board;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 /**
  * The board.Wall class is used to create a wall and its interactions
  */
@@ -13,8 +15,8 @@ class Wall extends Block {
         System.out.println("creating board.Wall #" + _wallNr);
     }
     
-    Wall(int x, int y){
-    	super(x,y);
+    Wall(int x, int y, TextureRegion textureRegion){
+    	super(x,y, textureRegion);
     }
 
     /**
