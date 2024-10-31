@@ -46,21 +46,22 @@ public class Board {
 			}
 		}
 
-        setStart(array.get(width/2).get(0));
-        setEnd(array.get(width/2).get(height-1));
-
         // TODO: add walls and "space" wall surrounding board
 
 
         // Create punishments and rewards on board
         array_regReward = new ArrayList<Reward>();
+        array_bonReward = new ArrayList<Reward>();
         array_regPunishment = new ArrayList<Punishments>();
+        array_bonPunishment = new ArrayList<Punishments>();
 
         // we will set the coordinates manually (see below example)
         // NOTE: make sure not to put the reward/punishment on a wall/another item
         array_regReward.add(new Regular_Reward(1, 3, 1));
         array_regPunishment.add(new NormalPunishments(5,5,1));
 
+        setStart(array.get(width/2).get(0));
+        setEnd(array.get(width/2).get(height-1));
 
     }
     public Block getStart() {
