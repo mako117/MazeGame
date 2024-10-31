@@ -11,7 +11,9 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import directions.Direction;
 import entities.Character;
-import entities.enemy.*;
+import entities.enemy.Moving_Enemies;
+import entities.enemy.PatrollingEnemies;
+import entities.enemy.Enemies;
 import org.lwjgl.opengl.GL20;
 
 import java.util.ArrayList;
