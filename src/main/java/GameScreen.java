@@ -44,6 +44,8 @@ public class GameScreen implements Screen {
     private int playerMovementOffset = 0;
     private int enemyMovementOffset;
 
+    private int score;
+
     GameScreen() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new StretchViewport(BOARD_WIDTH*TILE_SIZE, BOARD_HEIGHT*TILE_SIZE, camera);
@@ -229,15 +231,15 @@ public class GameScreen implements Screen {
     public void checkReward() {
         int playerX = player.getX();
         int playerY = player.getY();
-        int score = gameboard.rewardCollect(playerX, playerY);
-        player.scorechange(score);
+        int score = gameboard.regRewardCollect(playerX, playerY) + gameboard.bonRewardCollect(playerX, playerY);
+        this.add_score(score);
     }
 
     /**
      * Checks if the player's score is less than zero.
      */
     public void checkScore() {
-        if(player.getScore() < 0) {
+        if(this.score < 0) {
             playerLoses();
         }
     }
@@ -250,8 +252,8 @@ public class GameScreen implements Screen {
     public void checkPunishment() {
         int playerX = player.getX();
         int playerY = player.getY();
-        int score = gameboard.punishmentCollect(playerX, playerY);
-        player.minus_score(score);
+        int score = gameboard.regPunishmentCollect(playerX, playerY) + gameboard.bonPunishmentCollect(playerX, playerY);
+        this.minus_score(score);
     }
 
     // TODO: write code for if the player wins
@@ -302,5 +304,24 @@ public class GameScreen implements Screen {
 
     }
 
-
+    /**
+     * Updates the entities.Character's score.
+     * @param change the change in the entities.Character's score.
+     */
+    public void scorechange(int change) {
+        this.score += change;
+    }
+    /**
+     * Returns the entities.Character's <score> as an integer.
+     * @return <score>
+     */
+    public int getScore() {
+        return this.score;
+    }
+    public void add_score(int s) {
+    	this.score += s;
+    }
+    public void minus_score(int s) {
+    	this.score -= s;
+    }
 }

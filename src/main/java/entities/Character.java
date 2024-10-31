@@ -15,7 +15,6 @@ import rewards.Reward;
 public class Character {
     private int x;
     private int y;
-    private int score;
     private int speed;
     private int rewardsCollected;
     private TextureRegion playerTexture;
@@ -28,7 +27,6 @@ public class Character {
         setX(1);
         setY(1);
         setFacing(Direction.Down);
-        setScore(0);
         setSpeed(1);
         setRewardsCollected(0);
         this.playerTexture = playerTexture;
@@ -83,13 +81,7 @@ public class Character {
         }
         return false;
     }
-    /**
-     * Updates the entities.Character's score.
-     * @param change the change in the entities.Character's score.
-     */
-    public void scorechange(int change) {
-        this.score += change;
-    }
+    
     /**
      * Returns the x-coordinate of the entities.Character's position as an integer.
      * @return  <x>
@@ -103,13 +95,6 @@ public class Character {
      */
     public int getY() {
         return this.y;
-    }
-    /**
-     * Returns the entities.Character's <score> as an integer.
-     * @return <score>
-     */
-    public int getScore() {
-        return this.score;
     }
     /**
      * Returns the entities.Character's <speed> as an integer.
@@ -148,15 +133,6 @@ public class Character {
         }
     }
     /**
-     * Sets the entities.Character's score as an integer.
-     * @param newScore Possible new <score>.
-     */
-    private void setScore(int newScore) {
-        if(newScore >= 0) {
-            this.score = newScore;
-        }
-    }
-    /**
      * Sets the entities.Character's speed as an integer.
      * @param newSpeed Possible new <speed>.
      */
@@ -174,14 +150,6 @@ public class Character {
     }
     private void setFacing(Direction d) {
         this.facing = d;
-    }
-    
-    public void add_score(int s) {
-    	this.score += s;
-    }
-    
-    public void minus_score(int s) {
-    	this.score -= s;
     }
 
     /**

@@ -15,8 +15,10 @@ public class Board {
     private RoomBlock startRoomBlock;
     private RoomBlock endRoomBlock;
     private ArrayList<ArrayList<Block>> array;
-    private ArrayList<Reward> array_reward;
-    private ArrayList<Punishments> array_punishment;
+    private ArrayList<Reward> array_regReward;
+    private ArrayList<Reward> array_bonReward;
+    private ArrayList<Punishments> array_regPunishment;
+    private ArrayList<Punishments> array_bonPunishment;
 	private int height = 15;
 	private int width = 20;
 
@@ -48,13 +50,13 @@ public class Board {
 
 
         // Create punishments and rewards on board
-        array_reward = new ArrayList<Reward>();
-        array_punishment = new ArrayList<Punishments>();
+        array_regReward = new ArrayList<Reward>();
+        array_regPunishment = new ArrayList<Punishments>();
 
         // we will set the coordinates manually (see below example)
         // NOTE: make sure not to put the reward/punishment on a wall/another item
-        array_reward.add(new Regular_Reward(1, 3, 1));
-        array_punishment.add(new NormalPunishments(5,5,1));
+        array_regReward.add(new Regular_Reward(1, 3, 1));
+        array_regPunishment.add(new NormalPunishments(5,5,1));
 
 
     }
@@ -65,7 +67,7 @@ public class Board {
         return this.endRoomBlock;
     }
     public int getTotalRegRewardCnt() {
-        return this.array_reward.size(); // Q: do this array only have the regular rewards?
+        return this.array_regReward.size();
     }
     public void setStart(RoomBlock thisRoomBlock) {
         this.startRoomBlock = thisRoomBlock;
@@ -99,7 +101,7 @@ public class Board {
      * @param y the y coordinate
      * @return the index in the reward array
      */
-    private int isRewardHere(int x, int y) {
+    private int isRewardHere(int x, int y, ArrayList<Reward> array_reward) {
     	for(int i = 0; i < array_reward.size(); i++){
             if (x == array_reward.get(i).Xposition() && y == array_reward.get(i).Yposition()){
                 return i;
@@ -115,9 +117,9 @@ public class Board {
      * @param y the y coordinate
      * @return the index in the punishment array
      */
-    private int isPunishmentHere(int x, int y) {
-        for(int i = 0; i < array_punishment.size(); i++){
-            if (x == array_punishment.get(i).XPosition() && y == array_punishment.get(i).YPosition()){
+    private int isPunishmentHere(int x, int y, ArrayList<Punishments> array_punishments) {
+        for(int i = 0; i < array_punishments.size(); i++){
+            if (x == array_punishments.get(i).XPosition() && y == array_punishments.get(i).YPosition()){
                 return i;
             }
         }
@@ -133,13 +135,22 @@ public class Board {
      * @param y the y coordinate
      * @return the score
      */
-    public int rewardCollect(int x, int y) {
-    	int index = isRewardHere(x, y);
-        if(index == -1){
+    public int regRewardCollect(int x, int y) {
+    	int index = isRewardHere(x, y, array_regReward);
+        if(index == -1) {
             return 0;
         }
-        int score = array_reward.get(index).getPoint();
-        array_reward.remove(index);
+        int score = array_regReward.get(index).getPoint();
+        array_regReward.remove(index);
+        return score;
+    }
+    public int bonRewardCollect(int x, int y) {
+    	int index = isRewardHere(x, y, array_bonReward);
+        if(index == -1) {
+            return 0;
+        }
+        int score = array_bonReward.get(index).getPoint();
+        array_bonReward.remove(index);
         return score;
     }
 
@@ -152,13 +163,22 @@ public class Board {
      * @param y the y coordinate
      * @return the points of the punishments
      */
-    public int punishmentCollect(int x, int y) {
-        int index = isPunishmentHere(x, y);
+    public int regPunishmentCollect(int x, int y) {
+        int index = isPunishmentHere(x, y, array_regPunishment);
         if(index == -1){
             return 0;
         }
-        int score = array_punishment.get(index).getPoint();
-        array_punishment.remove(index);
+        int score = array_regPunishment.get(index).getPoint();
+        array_regPunishment.remove(index);
+        return score;
+    }
+    public int bonPunishmentCollect(int x, int y) {
+        int index = isPunishmentHere(x, y, array_bonPunishment);
+        if(index == -1){
+            return 0;
+        }
+        int score = array_bonPunishment.get(index).getPoint();
+        array_bonPunishment.remove(index);
         return score;
     }
 
