@@ -2,6 +2,7 @@ package entities;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import directions.Direction;
 import board.Block;
 import board.Board;
 import punishments.Punishments;
@@ -18,6 +19,7 @@ public class Character {
     private int speed;
     private int rewardsCollected;
     private TextureRegion playerTexture;
+    private Direction facing;
 
     /**
      * Creates a entities.Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
@@ -41,6 +43,7 @@ public class Character {
         System.out.println(x + " " + y);
         switch(input){
             case 'W':
+                this.setFacing(Direction.North);
                 toMoveTo = gameBoard.getBlock(x, y+1);
                 if(toMoveTo != null && toMoveTo.enter()){
                     //y++;
@@ -48,6 +51,7 @@ public class Character {
                 }
                 break;
             case 'S':
+                this.setFacing(Direction.South);
                 toMoveTo = gameBoard.getBlock(x, y-1);
                 if(toMoveTo != null && toMoveTo.enter()){
                     // y--;
@@ -55,6 +59,7 @@ public class Character {
                 }
                 break;
             case 'A':
+                this.setFacing(Direction.West);
                 toMoveTo = gameBoard.getBlock(x-1, y);
                 if(toMoveTo != null && toMoveTo.enter()){
                     // x--;
@@ -62,6 +67,7 @@ public class Character {
                 }
                 break;
             case 'D':
+                this.setFacing(Direction.East);
                 toMoveTo = gameBoard.getBlock(x+1, y);
                 if(toMoveTo != null && toMoveTo.enter()){
                     // x++;
@@ -113,6 +119,9 @@ public class Character {
     public int getRewardsCollected() {
         return this.rewardsCollected;
     }
+    public Direction getFacing() {
+        return this.facing;
+    }
 
     /**
      * Sets the x-coordinate of the entities.Character's position as an integer.
@@ -156,6 +165,9 @@ public class Character {
         if(newTally >= 0) {
             this.rewardsCollected = newTally;
         }
+    }
+    private void setFacing(Direction d) {
+        this.facing = d;
     }
     
     public void add_score(int s) {
