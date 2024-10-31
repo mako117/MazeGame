@@ -14,6 +14,7 @@ import board.*;
     private int x;
     private int y;
     private TextureRegion enemy_texture;
+    private Direction facing;
 
     public Enemies(){
         enemyNr = enemyCnt++;
@@ -28,6 +29,7 @@ import board.*;
         Block toMoveTo;
         switch(input) {
             case 'W':
+                this.setFacing(Direction.North);
                 if(gameBoard.getBlock(getX(), getY() + 1) != null) {
                     toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
                     if(toMoveTo.enter() == true) {
@@ -36,6 +38,7 @@ import board.*;
                 }
                 break;
             case 'S':
+                this.setFacing(Direction.South);
                 if(gameBoard.getBlock(getX(), getY() - 1) != null) {
                     toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
                     if(toMoveTo.enter() == true) {
@@ -44,6 +47,7 @@ import board.*;
                 }
                 break;
             case 'A':
+                this.setFacing(Direction.West);
                 if(gameBoard.getBlock(getX() - 1, getY()) != null) {
                     toMoveTo = gameBoard.getBlock(getX() - 1, getY());
                     if(toMoveTo.enter() == true) {
@@ -52,6 +56,7 @@ import board.*;
                 }
                 break;
             case 'D':
+                this.setFacing(Direction.East);
                 if(gameBoard.getBlock(getX() + 1, getY()) != null) {
                     toMoveTo = gameBoard.getBlock(getX() + 1, getY());
                     if(toMoveTo.enter() == true) {
@@ -67,6 +72,9 @@ import board.*;
     public int getY() {
         return this.y;
     }
+    public Direction getFacing() {
+        return this.facing;
+    }
 
     protected void setX(int xCoord) {
         if(xCoord >= 0) {
@@ -77,6 +85,9 @@ import board.*;
         if(yCoord >= 0) {
             this.y = yCoord;
         }
+    }
+    protected void setFacing(Direction d) {
+        this.facing = d;
     }
 
     public void draw(Batch batch) {

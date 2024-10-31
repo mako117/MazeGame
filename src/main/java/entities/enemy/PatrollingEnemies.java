@@ -5,7 +5,6 @@ import directions.Direction;
 import board.*;
 
 public class PatrollingEnemies extends Enemies {
-    private Direction facing;
     private char moveTo;
     int xMax;
     int yMax;
@@ -20,9 +19,6 @@ public class PatrollingEnemies extends Enemies {
         // not going to use char input, but want to prevent anybody from being able to move PatrollingEnemies in a different way
         this.create_path();
         super.direction(this.getMoveTo(), gameBoard);      
-    }
-    public Direction getFacing() {
-        return this.facing;
     }
     public char getMoveTo() {
         return this.moveTo;
@@ -39,6 +35,7 @@ public class PatrollingEnemies extends Enemies {
             case North:
                 if(getY() == getYMax()) {
                     setMoveTo('S');
+                    setFacing(Direction.South);
                 } else {
                     setMoveTo('W');
                 }
@@ -46,6 +43,7 @@ public class PatrollingEnemies extends Enemies {
             case East:
                 if(getX() == 0) {
                     setMoveTo('D');
+                    setFacing(Direction.West);
                 } else {
                     setMoveTo('A');
                 }
@@ -53,6 +51,7 @@ public class PatrollingEnemies extends Enemies {
             case South:
                 if(getY() == 0) {
                     setMoveTo('W');
+                    setFacing(Direction.North);
                 } else {
                     setMoveTo('S');
                 }
@@ -60,14 +59,12 @@ public class PatrollingEnemies extends Enemies {
             case West:
                 if(getX() == getXMax()) {
                     setMoveTo('A');
+                    setFacing(Direction.East);
                 } else {
                     setMoveTo('D');
                 }
                 break;
         }
-    }
-    private void setFacing(Direction d) {
-        this.facing = d;
     }
     private void setXMax(int maxX) {
         if(maxX > 0) {
