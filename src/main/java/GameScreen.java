@@ -73,36 +73,36 @@ public class GameScreen implements Screen {
 
         if(inputDisplacement == 0){
             if(Gdx.input.isKeyPressed(Input.Keys.W)){
-                player.direction('W', gameboard);
+                if(player.direction('W', gameboard)){
+                    inputDisplacement = INPUT_TIMEOUT;
+                    playerMovementOffset = -TILE_SIZE;
+                    playerMovingXDirection = false;
+                }
                 System.out.println("UP");
-
-                inputDisplacement = INPUT_TIMEOUT;
-                playerMovementOffset = -TILE_SIZE;
-                playerMovingXDirection = false;
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.D)){
-                player.direction('D', gameboard);
+                if(player.direction('D', gameboard)){
+                    inputDisplacement = INPUT_TIMEOUT;
+                    playerMovementOffset = -TILE_SIZE;
+                    playerMovingXDirection = true;
+                }
                 System.out.println("RIGHT");
-
-                inputDisplacement = INPUT_TIMEOUT;
-                playerMovementOffset = -TILE_SIZE;
-                playerMovingXDirection = true;
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.A)){
-                player.direction('A', gameboard);
+                if(player.direction('A', gameboard)){
+                    inputDisplacement = INPUT_TIMEOUT;
+                    playerMovementOffset = TILE_SIZE;
+                    playerMovingXDirection = true;
+                }
                 System.out.println("LEFT");
-
-                inputDisplacement = INPUT_TIMEOUT;
-                playerMovementOffset = TILE_SIZE;
-                playerMovingXDirection = true;
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.S)){
-                player.direction('S', gameboard);
+                if(player.direction('S', gameboard)){
+                    inputDisplacement = INPUT_TIMEOUT;
+                    playerMovementOffset = TILE_SIZE;
+                    playerMovingXDirection = false;
+                }
                 System.out.println("DOWN");
-
-                inputDisplacement = INPUT_TIMEOUT;
-                playerMovementOffset = TILE_SIZE;
-                playerMovingXDirection = false;
             }
         } else {
             inputDisplacement--;
