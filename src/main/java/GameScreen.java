@@ -176,7 +176,8 @@ public class GameScreen implements Screen {
 
         moveEnemies();
         checkPlayerCollision();
-
+        checkIfExitingMaze();
+        checkScore();
         checkReward();
         checkPunishment();
     }
@@ -196,7 +197,7 @@ public class GameScreen implements Screen {
         }
     }
 
-    // TODO: check if player coordinates are the same with any enemies and act accordingly
+    // check if player coordinates are the same with any enemies and act accordingly
     private void checkPlayerCollision(){
         int playerX = player.getX();
         int playerY = player.getY();
@@ -205,9 +206,18 @@ public class GameScreen implements Screen {
             int anEnemyX = anEnemy.getX();
             int anEnemyY = anEnemy.getY();
             if(playerX == anEnemyX && playerY == anEnemyY) {
-                playerLost();
+                playerLoses();
                 break;
             }
+        }
+    }
+
+    private void checkIfExitingMaze() {
+        int playerX = player.getX();
+        int playerY = player.getY();
+        int playerRewardCnt = player.getRewardsCollected();
+        if((gameboard.getEnd().getXPosition() == playerX) && (gameboard.getEnd().getYPosition() == playerY) && (playerRewardCnt == gameboard.getTotalRegRewardCnt())) {
+            playerWins();
         }
     }
 
@@ -224,6 +234,15 @@ public class GameScreen implements Screen {
     }
 
     /**
+     * Checks if the player's score is less than zero.
+     */
+    public void checkScore() {
+        if(player.getScore() < 0) {
+            playerLoses();
+        }
+    }
+
+    /**
      * Check if the player reached a punishment. <br>
      * If there is a punishment, the punishment will be given to the player. <br>
      * The punishment is removed after.<br>
@@ -235,17 +254,13 @@ public class GameScreen implements Screen {
         player.minus_score(score);
     }
 
-    /**
-     * 
-     */
-    private void playerWon() {
+    // TODO: write code for if the player wins
+    private void playerWins() {
 
     }
 
-    /**
-     * 
-     */
-    private void playerLost() {
+    // TODO: write code for if player loses
+    private void playerLoses() {
 
     }
 
