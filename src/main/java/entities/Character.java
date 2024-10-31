@@ -33,41 +33,39 @@ public class Character {
     /**
      * Moves the entities.Character one cell north, east, south, or west if there is nothing in their way.
      * @param input The keyboard input indicating which direction the player wants the character to go.
-     * @param currentBlock The block which the character is occupying when this function is called.
+     * @param gameBoard A reference to the game board.
      */
     public void direction(char input, Board gameBoard) {
         //board.Block currentBlock = gameBoard.getBlock(x, y); // move to MazeGame
         Block toMoveTo;
-        switch(input) {
+        System.out.println(x + " " + y);
+        switch(input){
             case 'W':
-            if(gameBoard.getBlock(getX(), getY() + 1) != null) {
-                toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
-                if(toMoveTo.enter() == true) {
-                    setY(getY() + 1);
+                toMoveTo = gameBoard.getBlock(x, y+1);
+                if(toMoveTo != null && toMoveTo.enter()){
+                    y++;
                 }
-            }
+                break;
             case 'S':
-            if(gameBoard.getBlock(getX(), getY() - 1) != null) {
-                toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
-                if(toMoveTo.enter() == true) {
-                    setY(getY() - 1);
+                toMoveTo = gameBoard.getBlock(x, y-1);
+                if(toMoveTo != null && toMoveTo.enter()){
+                    y--;
                 }
-            }
+                break;
             case 'A':
-            if(gameBoard.getBlock(getX() - 1, getY()) != null) {
-                toMoveTo = gameBoard.getBlock(getX() - 1, getY());
-                if(toMoveTo.enter() == true) {
-                    setX(getX() - 1);
+                toMoveTo = gameBoard.getBlock(x-1, y);
+                if(toMoveTo != null && toMoveTo.enter()){
+                    x--;
                 }
-            }
+                break;
             case 'D':
-            if(gameBoard.getBlock(getX() + 1, getY()) != null) {
-                toMoveTo = gameBoard.getBlock(getX() + 1, getY());
-                if(toMoveTo.enter() == true) {
-                    setX(getX() + 1);
+                toMoveTo = gameBoard.getBlock(x+1, y);
+                if(toMoveTo != null && toMoveTo.enter()){
+                    x++;
                 }
-            }
+                break;
         }
+
     }
     /**
      * Updates the entities.Character's score.
@@ -166,7 +164,7 @@ public class Character {
     	this.score -= s;
     }
     
-    public void draw(Batch batch) {
-        batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), 100*x, 100*y, 32, 32);
+    public void draw(Batch batch, int tileSize) {
+        batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x, tileSize*y, tileSize, tileSize);
     }
 }
