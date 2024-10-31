@@ -40,7 +40,7 @@ public class Punishments {
         return y;
     }
 
-    public int getScore() {
+    public int getPoint() {
         return score;
     }
 }
