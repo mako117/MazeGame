@@ -37,8 +37,9 @@ public class Character {
      * Moves the entities.Character one cell north, east, south, or west if there is nothing in their way.
      * @param input The keyboard input indicating which direction the player wants the character to go.
      * @param gameBoard A reference to the game board.
+     * @return Whether the movement was successful.
      */
-    public void direction(char input, Board gameBoard) {
+    public boolean direction(char input, Board gameBoard) {
         //board.Block currentBlock = gameBoard.getBlock(x, y); // move to MazeGame
         Block toMoveTo;
         System.out.println(x + " " + y);
@@ -49,6 +50,7 @@ public class Character {
                 if(toMoveTo != null && toMoveTo.enter()){
                     //y++;
                     this.setY(getY() + 1);
+                    return true;
                 }
                 break;
             case 'S':
@@ -57,6 +59,7 @@ public class Character {
                 if(toMoveTo != null && toMoveTo.enter()){
                     // y--;
                     this.setY(getY() - 1);
+                    return true;
                 }
                 break;
             case 'A':
@@ -65,6 +68,7 @@ public class Character {
                 if(toMoveTo != null && toMoveTo.enter()){
                     // x--;
                     this.setX(getX() - 1);
+                    return true;
                 }
                 break;
             case 'D':
@@ -73,10 +77,11 @@ public class Character {
                 if(toMoveTo != null && toMoveTo.enter()){
                     // x++;
                     this.setX(getX() + 1);
+                    return true;
                 }
                 break;
         }
-
+        return false;
     }
     /**
      * Updates the entities.Character's score.
