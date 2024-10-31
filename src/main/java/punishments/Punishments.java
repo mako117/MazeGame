@@ -32,11 +32,11 @@ public class Punishments {
         }
     }
 
-    public int getX() {
+    public int XPosition() {
         return x;
     }
 
-    public int getY() {
+    public int YPosition() {
         return y;
     }
 
