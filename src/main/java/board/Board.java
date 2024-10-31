@@ -1,4 +1,5 @@
 package board;
+import com.badlogic.gdx.graphics.Texture;
 import directions.Direction;
 import punishments.NormalPunishments;
 import punishments.Punishments;
@@ -16,8 +17,8 @@ public class Board {
     private ArrayList<ArrayList<Block>> array;
     private ArrayList<Reward> array_reward;
     private ArrayList<Punishments> array_punishment;
-	private int height = 10;
-	private int width = 15;
+	private int height = 15;
+	private int width = 20;
 
     public Board(){
         createBoard();
@@ -33,7 +34,13 @@ public class Board {
 		}
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
-				array.get(i).add(j, new RoomBlock(i,j));
+                if(i == 0 || j == 0  || i == width-1 || j == height-1){
+                    array.get(i).add(j, new BarrierBlock(i,j, new TextureRegion(new Texture("terrain_bottom_left.png"))));
+                }
+                else{
+                    array.get(i).add(j, new RoomBlock(i,j, new TextureRegion(new Texture("terrain_fill_center_center.png"))));
+                }
+
 			}
 		}
 

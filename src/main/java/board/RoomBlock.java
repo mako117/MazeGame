@@ -1,5 +1,7 @@
 package board;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 /**
  * The board.RoomBlock class creates room blocks for the maze
  * Rooms have sides that can be Walls or Doors
@@ -20,8 +22,8 @@ class RoomBlock extends Block {
      * @param x_pos The x position of the block
      * @param y_pos The y position of the block
      */
-    RoomBlock( int x_pos, int y_pos) {
-        super(x_pos, y_pos);
+    RoomBlock( int x_pos, int y_pos, TextureRegion texture) {
+        super(x_pos, y_pos, texture);
         _roomBlockNr = _roomBlockCnt++;
         System.out.println("Creating Room #" + _roomBlockNr + " with x position " + x + " and y position " + y);
     }

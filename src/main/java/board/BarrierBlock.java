@@ -1,5 +1,7 @@
 package board;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 /**
  * The BarriersBlock class creates barrier blocks for the maze
  * Rooms have sides that can be Walls or Doors
@@ -20,8 +22,8 @@ class BarrierBlock extends Block {
      * @param x_pos The x position of the barrier
      * @param y_pos The y position of the barrier
      */
-    BarrierBlock(int x_pos, int y_pos) {
-        super(x_pos, y_pos);
+    BarrierBlock(int x_pos, int y_pos, TextureRegion  textureRegion) {
+        super(x_pos, y_pos, textureRegion);
         _BarriersBlockNr = _BarriersBlockCnt++;
         System.out.println("Creating Room #" + _BarriersBlockNr + " with x position " + x + " and y position " + y);
     }
