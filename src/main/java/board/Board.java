@@ -14,8 +14,8 @@ public class Board {
     private RoomBlock startRoomBlock;
     private RoomBlock endRoomBlock;
     private ArrayList<ArrayList<Block>> array;
-    private ArrayList<ArrayList<Reward>> array_reward;
-    private ArrayList<ArrayList<Punishments>> array_punishment;
+    private ArrayList<Reward> array_reward;
+    private ArrayList<Punishments> array_punishment;
 	private int height = 10;
 	private int width = 15;
 
@@ -24,99 +24,32 @@ public class Board {
     }
 
     private void createBoard() {
+
+        // Create board and fill with room blocks (free tiles)
 		array = new ArrayList<ArrayList<Block>>(width);
 		for(int i = 0; i < width; i++){
 			array.add(new ArrayList<Block>(height));
-//			array_reward.add(new ArrayList<Reward>(height));
-//			array_punishment.add(new ArrayList<Punishments>(height));
+
 		}
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
 				array.get(i).add(j, new RoomBlock(i,j));
-				array_reward.get(i).add(j,null);
-				array_punishment.get(i).add(j,null);
 			}
 		}
-		
-//		array_reward.get(2).add(2, new Regular_Reward(2,2,10));
-//		array_reward.get(3).add(3, new Regular_Reward(3,3,10));
-//		array_reward.get(4).add(4, new Regular_Reward(4,4,10));
-//		array_reward.get(5).add(5, new Regular_Reward(5,5,10));
-//
-//		array_punishment.get(2).add(3, new NormalPunishments(2,3,10));
-//		array_punishment.get(3).add(4, new NormalPunishments(3,4,10));
-//		array_punishment.get(4).add(5, new NormalPunishments(4,5,10));
-//		array_punishment.get(5).add(6, new NormalPunishments(5,6,10));
-//
-		
-		
-		// TODO: add walls and "space" wall surrounding board
+
+        // TODO: add walls and "space" wall surrounding board
 
 
-//    	array = new Block[3][3];
-//    	array[0][0] = new RoomBlock(0,0);
-//    	array[0][1] = new RoomBlock(0,1);
-//    	array[0][2] = new RoomBlock(0,2);
-//    	array[1][0] = new RoomBlock(1,0);
-//    	array[1][1] = new BarrierBlock(1,1);
-//    	array[1][2] = new RoomBlock(1,2);
-//    	array[2][0] = new RoomBlock(2,0);
-//    	array[2][1] = new RoomBlock(2,1);
-//    	array[2][1] = new RoomBlock(2,2);
-//
-//    	Door d1 = new Door(array[0][0],array[0][1]);
-//    	Door d2 = new Door(array[0][1],array[0][2]);
-//    	Door d3 = new Door(array[0][2],array[1][2]);
-//    	Door d4 = new Door(array[1][2],array[2][2]);
-//    	Door d5 = new Door(array[2][2],array[2][1]);
-//    	Door d6 = new Door(array[2][1],array[2][0]);
-//    	Door d7 = new Door(array[2][0],array[1][0]);
-//    	Door d8 = new Door(array[1][0],array[0][0]);
-//
-//    	array[0][0].setSide(Direction.North, d8);
-//    	array[0][0].setSide(Direction.South, new Wall());
-//    	array[0][0].setSide(Direction.West, new Wall());
-//    	array[0][0].setSide(Direction.East, d1);
-//
-//    	array[0][1].setSide(Direction.North, new Wall());
-//    	array[0][1].setSide(Direction.South, new Wall());
-//    	array[0][1].setSide(Direction.West, d1);
-//    	array[0][1].setSide(Direction.East, d2);
-//
-//    	array[0][2].setSide(Direction.North, d3);
-//    	array[0][2].setSide(Direction.South, new Wall());
-//    	array[0][2].setSide(Direction.West, d2);
-//    	array[0][2].setSide(Direction.East, new Wall());
-//
-//    	array[1][0].setSide(Direction.North, d7);
-//    	array[1][0].setSide(Direction.South, d8);
-//    	array[1][0].setSide(Direction.West, new Wall());
-//    	array[1][0].setSide(Direction.East, new Wall());
-//
-//    	array[1][1].setSide(Direction.North, new Wall());
-//    	array[1][1].setSide(Direction.South, new Wall());
-//    	array[1][1].setSide(Direction.West, new Wall());
-//    	array[1][1].setSide(Direction.East, new Wall());
-//
-//    	array[1][2].setSide(Direction.North, d4);
-//    	array[1][2].setSide(Direction.South, d3);
-//    	array[1][2].setSide(Direction.West, new Wall());
-//    	array[1][2].setSide(Direction.East, new Wall());
-//
-//    	array[2][0].setSide(Direction.North, new Wall());
-//    	array[2][0].setSide(Direction.South, d7);
-//    	array[2][0].setSide(Direction.West, new Wall());
-//    	array[2][0].setSide(Direction.East, d6);
-//
-//    	array[2][1].setSide(Direction.North, new Wall());
-//    	array[2][1].setSide(Direction.South, new Wall());
-//    	array[2][1].setSide(Direction.West, d6);
-//    	array[2][1].setSide(Direction.East, d5);
-//
-//    	array[2][2].setSide(Direction.North, new Wall());
-//    	array[2][2].setSide(Direction.South, d4);
-//    	array[2][2].setSide(Direction.West, d5);
-//    	array[2][2].setSide(Direction.East, new Wall());
+        // Create punishments and rewards on board
+        array_reward = new ArrayList<Reward>();
+        array_punishment = new ArrayList<Punishments>();
+
+        // we will set the coordinates manually (see below example)
+        // NOTE: make sure not to put the reward/punishment on a wall/another item
+        array_reward.add(new Regular_Reward(1, 3, 1));
+        array_punishment.add(new NormalPunishments(5,5,1));
+
+
     }
     public void setStart(RoomBlock thisRoomBlock) {
         this.startRoomBlock = thisRoomBlock;
@@ -125,6 +58,13 @@ public class Board {
         this.endRoomBlock = thisRoomBlock;
     }
 
+    /**
+     * Return the block that is at the coordinates <br>
+     * Invalid coordinates will return null. <br>
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @return the block or null
+     */
     public Block getBlock(int x, int y) {
         if(x < 0 || x >= width){
             return null;
@@ -134,29 +74,76 @@ public class Board {
         }
 
 		return array.get(x).get(y);
-//        return array[x][y];
     }
-    
-    public Reward getReward(int x, int y) {
-    	return array_reward.get(x).get(y);
+
+    /**
+     * Check if the given coordinates has a reward
+     * Return the index that the reward is in, in the reward_array, otherwise -1.
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @return the index in the reward array
+     */
+    private int isRewardHere(int x, int y) {
+    	for(int i = 0; i < array_reward.size(); i++){
+            if (x == array_reward.get(i).Xposition() && y == array_reward.get(i).Yposition()){
+                return i;
+            }
+        }
+        return -1;
     }
-    
-    public Punishments getPunishment(int x, int y) {
-    	return array_punishment.get(x).get(y);
+
+    /**
+     * Check if the given coordinates have a punishment
+     * Return the index the punishment is in, in the punishment array, otherwise -1.
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @return the index in the punishment array
+     */
+    private int isPunishmentHere(int x, int y) {
+        for(int i = 0; i < array_punishment.size(); i++){
+            if (x == array_punishment.get(i).XPosition() && y == array_punishment.get(i).YPosition()){
+                return i;
+            }
+        }
+        return -1;
     }
-    
-    public boolean reward_collect(int x, int y) {
-    	if(getReward(x,y) == null) {
-    		return false;
-    	}
-    	return true;
+
+    /**
+     * Collect the reward if there is a reward at the given coordinates. <br>
+     * The reward will be removed from the rewards array.<br>
+     * Return the score of the corresponding reward.<br>
+     * If there is no reward, the score returned will be zero. <br>
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @return the score
+     */
+    public int rewardCollect(int x, int y) {
+    	int index = isRewardHere(x, y);
+        if(index == -1){
+            return 0;
+        }
+        int score = array_reward.get(index).getPoint();
+        array_reward.remove(index);
+        return score;
     }
-    
-    public boolean punishment_collect(int x, int y) {
-    	if(getPunishment(x,y) == null) {
-    		return false;
-    	}
-    	return true;
+
+    /**
+     * Deal the punishment if there is a punishment at the given coordinates. <br>
+     * The punishment will be removed from the punishments array. <br>
+     * Return the points from the punishments. <br>
+     * If there is no punishment, the points returned will be zero. <br>
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @return the points of the punishments
+     */
+    public int punishmentCollect(int x, int y) {
+        int index = isPunishmentHere(x, y);
+        if(index == -1){
+            return 0;
+        }
+        int score = array_punishment.get(index).getPoint();
+        array_punishment.remove(index);
+        return score;
     }
 
     public int getWidth() {
