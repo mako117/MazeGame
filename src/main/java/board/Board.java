@@ -12,8 +12,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Board {
-    private RoomBlock startRoomBlock;
-    private RoomBlock endRoomBlock;
+    private Block startRoomBlock;
+    private Block endRoomBlock;
     private ArrayList<ArrayList<Block>> array;
     private ArrayList<Reward> array_regReward;
     private ArrayList<Reward> array_bonReward;
@@ -46,6 +46,9 @@ public class Board {
 			}
 		}
 
+        setStart(array.get(width/2).get(0));
+        setEnd(array.get(width/2).get(height-1));
+
         // TODO: add walls and "space" wall surrounding board
 
 
@@ -69,10 +72,10 @@ public class Board {
     public int getTotalRegRewardCnt() {
         return this.array_regReward.size();
     }
-    public void setStart(RoomBlock thisRoomBlock) {
+    public void setStart(Block thisRoomBlock) {
         this.startRoomBlock = thisRoomBlock;
     }
-    public void setEnd(RoomBlock thisRoomBlock) {
+    public void setEnd(Block thisRoomBlock) {
         this.endRoomBlock = thisRoomBlock;
     }
 
