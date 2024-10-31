@@ -62,8 +62,8 @@ public class GameScreen implements Screen {
         player = new Character(playerTexture);
 
         enemies = new ArrayList<Enemies>();
-        enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 10, 10, new TextureRegion(new Texture("temp_ptero.png"))));
-
+        enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 1, 10, 1, 10, new TextureRegion(new Texture("temp_ptero.png"))));
+        enemies.add(new Moving_Enemies(1, 10, new TextureRegion(new Texture("rock.png"))));
 
         gameboard = new Board();
     }
@@ -123,7 +123,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         logic();
         time+= Gdx.graphics.getDeltaTime();
-        System.out.println(time);
+        // System.out.println(time);
         // update camera position
         if(playerMovingXDirection){
             camera.position.x = (player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
@@ -198,6 +198,7 @@ public class GameScreen implements Screen {
             boolean isMovingEnemy = (enemies.get(i)) instanceof Moving_Enemies; // Q: are objects in list of type Enemy or do they retain their subclass?
             if(isMovingEnemy == true) {
                 Moving_Enemies anEnemy = (Moving_Enemies) enemies.get(i);
+                System.out.println((anEnemy.find_player(player, gameboard)));
                 anEnemy.direction((anEnemy.find_player(player, gameboard)), gameboard);
             } else {
                 PatrollingEnemies anEnemy = (PatrollingEnemies) enemies.get(i);
