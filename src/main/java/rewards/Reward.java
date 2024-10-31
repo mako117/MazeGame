@@ -1,9 +1,13 @@
 package rewards;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 public class Reward {
 	private int x;
 	private int y;
 	private int score;
+	private TextureRegion RewardTexture;
 	
 	public Reward(int x, int y, int s){
 		this.x = x;
@@ -31,4 +35,8 @@ public class Reward {
 	public int getPoint() {
 		return score;
 	}
+	
+	public void draw(Batch batch) {
+        batch.draw(new TextureRegion(RewardTexture), 100*this.Xposition(), 100*this.Yposition(), 100, 100);
+    }
 }

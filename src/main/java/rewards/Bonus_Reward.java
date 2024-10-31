@@ -8,7 +8,6 @@ public class Bonus_Reward extends Reward {
 	private static int bonusCnt = 1;
 	private int starttime;
 	private int endtime;
-	private TextureRegion bonusRewardTexture;
 	
 	public Bonus_Reward(){
 		super(-1,-1,0);
@@ -37,8 +36,6 @@ public class Bonus_Reward extends Reward {
 		return endtime;
 	}
 	
-	public void draw(Batch batch) {
-        batch.draw(new TextureRegion(bonusRewardTexture), 100*this.Xposition(), 100*this.Yposition(), 100, 100);
-    }
+
 	
 }
