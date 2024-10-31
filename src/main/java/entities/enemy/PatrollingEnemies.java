@@ -5,22 +5,27 @@ import directions.Direction;
 import board.*;
 
 public class PatrollingEnemies extends Enemies {
-    private Direction moveTowards;
+    private Direction facing;
     private char moveTo;
     int xMax;
     int yMax;
 
     public PatrollingEnemies(int init_x, int init_y, Direction d, int xMax, int yMax, TextureRegion texture) {
         super(init_x, init_y, new TextureRegion(new Texture("temp_ptero.png")));
-        setMoveTowards(d);
+        setFacing(d);
         setXMax(xMax);
         setYMax(yMax);
     }
-    public void direction(Block currentBlock) {
-
+    public @Override void direction(char input, Board gameBoard) {
+        // not going to use char input, but want to prevent anybody from being able to move PatrollingEnemies in a different way
+        this.create_path();
+        super.direction(this.getMoveTo(), gameBoard);      
     }
-    public Direction getMoveTowards() {
-        return moveTowards;
+    public Direction getFacing() {
+        return this.facing;
+    }
+    public char getMoveTo() {
+        return this.moveTo;
     }
     public int getXMax() {
         return this.xMax;
@@ -30,7 +35,7 @@ public class PatrollingEnemies extends Enemies {
     }
 
     private void create_path() {
-        switch(getMoveTowards()) {
+        switch(this.getFacing()) {
             case North:
                 if(getY() == getYMax()) {
                     setMoveTo('S');
@@ -61,8 +66,8 @@ public class PatrollingEnemies extends Enemies {
                 break;
         }
     }
-    private void setMoveTowards(Direction d) {
-        this.moveTowards = d;
+    private void setFacing(Direction d) {
+        this.facing = d;
     }
     private void setXMax(int maxX) {
         if(maxX > 0) {
