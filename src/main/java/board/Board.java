@@ -225,7 +225,11 @@ public class Board {
             int end = rewardToDraw.getEndtime();
             if(!(time < start || time > end)) {
                 rewardToDraw.draw(batch);   
-            }        
+            } 
+        }
+        for(int i = 0; i < array_bonReward.size(); i++) {
+            Regular_Reward rewardToDraw = (Regular_Reward) array_regReward.get(i);
+            rewardToDraw.draw(batch);    
         }
         for(int i = 0; i < array_bonPunishment.size(); i++) {
             BonusPunishments punishmentsToDraw = (BonusPunishments) array_bonPunishment.get(i);
@@ -234,6 +238,10 @@ public class Board {
             if(!(time < start || time > end)) {
                 punishmentsToDraw.draw(batch);   
             }        
+        }
+        for(int i = 0; i < array_bonPunishment.size(); i++) {
+            NormalPunishments punishmentsToDraw = (NormalPunishments) array_regPunishment.get(i);
+            punishmentsToDraw.draw(batch);   
         }
     }
 }
