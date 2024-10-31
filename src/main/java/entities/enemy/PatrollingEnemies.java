@@ -32,29 +32,33 @@ public class PatrollingEnemies extends Enemies {
     private void create_path() {
         switch(getMoveTowards()) {
             case North:
-            if(getY() == getYMax()) {
-                setMoveTo('S');
-            } else {
-                setMoveTo('W');
-            }
+                if(getY() == getYMax()) {
+                    setMoveTo('S');
+                } else {
+                    setMoveTo('W');
+                }
+                break;
             case East:
-            if(getX() == 0) {
-                setMoveTo('D');
-            } else {
-                setMoveTo('A');
-            }
+                if(getX() == 0) {
+                    setMoveTo('D');
+                } else {
+                    setMoveTo('A');
+                }
+                break;
             case South:
-            if(getY() == 0) {
-                setMoveTo('W');
-            } else {
-                setMoveTo('S');
-            }
+                if(getY() == 0) {
+                    setMoveTo('W');
+                } else {
+                    setMoveTo('S');
+                }
+                break;
             case West:
-            if(getX() == getXMax()) {
-                setMoveTo('A');
-            } else {
-                setMoveTo('D');
-            }
+                if(getX() == getXMax()) {
+                    setMoveTo('A');
+                } else {
+                    setMoveTo('D');
+                }
+                break;
         }
     }
     private void setMoveTowards(Direction d) {
