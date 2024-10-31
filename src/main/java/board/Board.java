@@ -58,6 +58,15 @@ public class Board {
 
 
     }
+    public Block getStart() {
+        return this.startRoomBlock;
+    }
+    public Block getEnd() {
+        return this.endRoomBlock;
+    }
+    public int getTotalRegRewardCnt() {
+        return this.array_reward.size(); // Q: do this array only have the regular rewards?
+    }
     public void setStart(RoomBlock thisRoomBlock) {
         this.startRoomBlock = thisRoomBlock;
     }
