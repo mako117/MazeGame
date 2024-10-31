@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.SortedIntList.Iterator;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import directions.Direction;
@@ -54,7 +55,7 @@ public class GameScreen implements Screen {
         player = new Character(playerTexture);
 
         enemies = new ArrayList<Enemies>();
-        enemies.add(new PatrollingEnemies(0, 0, Direction.North, 10, 10, new TextureRegion()));
+        enemies.add(new PatrollingEnemies(0, 0, Direction.Up, 10, 10, new TextureRegion()));
 
 
         gameboard = new Board();
@@ -150,7 +151,17 @@ public class GameScreen implements Screen {
 
     // TODO: check if player coordinates are the same with any enemies and act accordingly
     private void checkPlayerCollision(){
-
+        int playerX = player.getX();
+        int playerY = player.getY();
+        for(int i = 0; i < enemies.size(); i++) {
+            Enemies anEnemy = enemies.get(i);
+            int anEnemyX = anEnemy.getX();
+            int anEnemyY = anEnemy.getY();
+            if(playerX == anEnemyX && playerY == anEnemyY) {
+                playerLost();
+                break;
+            }
+        }
     }
 
     /**
@@ -175,6 +186,20 @@ public class GameScreen implements Screen {
         int playerY = player.getY();
         int score = gameboard.punishmentCollect(playerX, playerY);
         player.minus_score(score);
+    }
+
+    /**
+     * 
+     */
+    private void playerWon() {
+
+    }
+
+    /**
+     * 
+     */
+    private void playerLost() {
+
     }
 
 
