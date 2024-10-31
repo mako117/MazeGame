@@ -1,94 +1,38 @@
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
+import board.Board;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-
-import entities.enemy.*;
-import board.*;
-import directions.Direction;
-import punishments.*;
-import rewards.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.ScreenUtils;
 import entities.Character;
 
 
-public class MazeGame implements ApplicationListener{
-//    public static void main(String args[]) {
-//        entities.Character Rock = new entities.Character();
-//        board.board gameBoard = new board.board();
-//        gameBoard.createBoard();
-//    }
+public class MazeGame extends Game {
+    GameScreen gameScreen;
 
-    /**
-     * Instantiate game objects
-     */
-    public void create() {
-
+    public void create(){
+        gameScreen = new GameScreen();
+        setScreen(gameScreen);
     }
 
-    /**
-     * Resize window (follow character view/camera)
-     * @param i
-     * @param i1
-     */
-    public void resize(int i, int i1) {
-
-    }
-
-    /**
-     * Draw the game on the window
-     */
+    @Override
     public void render() {
-
+        super.render();
     }
 
-    /**
-     * Take user input
-     */
-    private void input() {
-
+    @Override
+    public void resize(int width, int height) {
+        gameScreen.resize(width, height);
     }
 
-
-    /**
-     * Apply game logic
-     */
-    private void logic() {
-
-    }
-
-    /**
-     * Draw to window
-     */
-    private void draw(){
-
-    }
-
-
-
-
-    // <-- NOTE: all the methods below need to be overridden from ApplicationListener -->
-
-    /**
-     *
-     */
-    public void pause() {
-
-    }
-
-    /**
-     *
-     */
-    public void resume() {
-
-    }
-
-    /**
-     *
-     */
+    @Override
     public void dispose() {
-
+        super.dispose();
+        gameScreen.dispose();
     }
-
 }
