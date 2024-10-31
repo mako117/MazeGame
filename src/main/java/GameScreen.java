@@ -50,7 +50,7 @@ public class GameScreen implements Screen {
         playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
         player = new Character(playerTexture);
 
-        enemy1 = new PatrollingEnemies(0, 0, Direction.North, 10, 10, new TextureRegion() );
+        enemy1 = new PatrollingEnemies(0, 0, Direction.Up, 10, 10, new TextureRegion() );
 
 
         gameboard = new Board();

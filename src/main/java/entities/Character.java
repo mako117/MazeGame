@@ -27,6 +27,7 @@ public class Character {
     public Character(TextureRegion playerTexture) {
         setX(0);
         setY(0);
+        setFacing(Direction.Down);
         setScore(0);
         setSpeed(1);
         setRewardsCollected(0);
@@ -43,7 +44,7 @@ public class Character {
         System.out.println(x + " " + y);
         switch(input){
             case 'W':
-                this.setFacing(Direction.North);
+                this.setFacing(Direction.Up);
                 toMoveTo = gameBoard.getBlock(x, y+1);
                 if(toMoveTo != null && toMoveTo.enter()){
                     //y++;
@@ -51,7 +52,7 @@ public class Character {
                 }
                 break;
             case 'S':
-                this.setFacing(Direction.South);
+                this.setFacing(Direction.Down);
                 toMoveTo = gameBoard.getBlock(x, y-1);
                 if(toMoveTo != null && toMoveTo.enter()){
                     // y--;
@@ -59,7 +60,7 @@ public class Character {
                 }
                 break;
             case 'A':
-                this.setFacing(Direction.West);
+                this.setFacing(Direction.Left);
                 toMoveTo = gameBoard.getBlock(x-1, y);
                 if(toMoveTo != null && toMoveTo.enter()){
                     // x--;
@@ -67,7 +68,7 @@ public class Character {
                 }
                 break;
             case 'D':
-                this.setFacing(Direction.East);
+                this.setFacing(Direction.Right);
                 toMoveTo = gameBoard.getBlock(x+1, y);
                 if(toMoveTo != null && toMoveTo.enter()){
                     // x++;

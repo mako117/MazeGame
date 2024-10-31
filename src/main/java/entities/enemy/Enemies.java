@@ -22,6 +22,7 @@ import board.*;
     public Enemies(int initial_x, int initial_y, TextureRegion texture) {
         setX(initial_x);
         setY(initial_y);
+        setFacing(Direction.Down);
         this.enemy_texture = texture;
         this.enemyNr = enemyCnt++;
     }
@@ -29,7 +30,7 @@ import board.*;
         Block toMoveTo;
         switch(input) {
             case 'W':
-                this.setFacing(Direction.North);
+                this.setFacing(Direction.Up);
                 if(gameBoard.getBlock(getX(), getY() + 1) != null) {
                     toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
                     if(toMoveTo.enter() == true) {
@@ -38,7 +39,7 @@ import board.*;
                 }
                 break;
             case 'S':
-                this.setFacing(Direction.South);
+                this.setFacing(Direction.Down);
                 if(gameBoard.getBlock(getX(), getY() - 1) != null) {
                     toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
                     if(toMoveTo.enter() == true) {
@@ -47,7 +48,7 @@ import board.*;
                 }
                 break;
             case 'A':
-                this.setFacing(Direction.West);
+                this.setFacing(Direction.Left);
                 if(gameBoard.getBlock(getX() - 1, getY()) != null) {
                     toMoveTo = gameBoard.getBlock(getX() - 1, getY());
                     if(toMoveTo.enter() == true) {
@@ -56,7 +57,7 @@ import board.*;
                 }
                 break;
             case 'D':
-                this.setFacing(Direction.East);
+                this.setFacing(Direction.Right);
                 if(gameBoard.getBlock(getX() + 1, getY()) != null) {
                     toMoveTo = gameBoard.getBlock(getX() + 1, getY());
                     if(toMoveTo.enter() == true) {
