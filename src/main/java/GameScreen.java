@@ -62,7 +62,7 @@ public class GameScreen implements Screen {
         player = new Character(playerTexture);
 
         enemies = new ArrayList<Enemies>();
-        enemies.add(new PatrollingEnemies(1, 1, Direction.Up, 10, 10, new TextureRegion(new Texture("temp_ptero.png"))));
+        enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 10, 10, new TextureRegion(new Texture("temp_ptero.png"))));
 
 
         gameboard = new Board();
@@ -139,7 +139,7 @@ public class GameScreen implements Screen {
 
         batch.begin();
 
-        gameboard.draw(batch, time);
+        gameboard.draw(batch, time, TILE_SIZE);
         renderPlayer();
         renderEnemies();
 
@@ -172,7 +172,7 @@ public class GameScreen implements Screen {
     // it will only draw the enemies in the array list
     private void renderEnemies(){
         for (int i = 0; i < enemies.size(); i++){
-            enemies.get(i).draw(batch);
+            enemies.get(i).draw(batch, TILE_SIZE);
         }
     }
 

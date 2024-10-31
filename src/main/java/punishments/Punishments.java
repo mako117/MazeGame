@@ -47,7 +47,7 @@ public class Punishments {
     public int getPoint() {
         return score;
     }
-    public void draw(Batch batch) {
-        batch.draw(new TextureRegion(PunishmentsTexture), 100*this.XPosition(), 100*this.YPosition(), 100, 100);
+    public void draw(Batch batch, int tilesize) {
+        batch.draw(new TextureRegion(PunishmentsTexture), tilesize*this.XPosition(), tilesize*this.YPosition(), tilesize, tilesize);
     }
 }

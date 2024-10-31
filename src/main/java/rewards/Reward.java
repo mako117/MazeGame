@@ -36,7 +36,7 @@ public class Reward {
 		return score;
 	}
 	
-	public void draw(Batch batch) {
-        batch.draw(new TextureRegion(RewardTexture), 100*this.Xposition(), 100*this.Yposition(), 100, 100);
+	public void draw(Batch batch, int tilesize) {
+        batch.draw(new TextureRegion(RewardTexture), tilesize*this.Xposition(),  tilesize*this.Yposition(), tilesize, tilesize);
     }
 }

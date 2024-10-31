@@ -212,7 +212,7 @@ public class Board {
     }
     
     
-    public void draw(Batch batch, float time) {
+    public void draw(Batch batch, float time, int tilesize) {
         for(int i = 0; i < getWidth(); i++) {
             for(int j = 0; j < getHeight(); j++) {
                 Block blockToDraw = getBlock(i, j);
@@ -224,24 +224,24 @@ public class Board {
             int start = rewardToDraw.getStarttime();
             int end = rewardToDraw.getEndtime();
             if(!(time < start || time > end)) {
-                rewardToDraw.draw(batch);   
+                rewardToDraw.draw(batch, tilesize);
             } 
         }
         for(int i = 0; i < array_bonReward.size(); i++) {
             Regular_Reward rewardToDraw = (Regular_Reward) array_regReward.get(i);
-            rewardToDraw.draw(batch);    
+            rewardToDraw.draw(batch, tilesize);
         }
         for(int i = 0; i < array_bonPunishment.size(); i++) {
             BonusPunishments punishmentsToDraw = (BonusPunishments) array_bonPunishment.get(i);
             int start = punishmentsToDraw.getStartTime();
             int end = punishmentsToDraw.getEndTime();
             if(!(time < start || time > end)) {
-                punishmentsToDraw.draw(batch);   
+                punishmentsToDraw.draw(batch, tilesize);
             }        
         }
         for(int i = 0; i < array_bonPunishment.size(); i++) {
             NormalPunishments punishmentsToDraw = (NormalPunishments) array_regPunishment.get(i);
-            punishmentsToDraw.draw(batch);   
+            punishmentsToDraw.draw(batch, tilesize);
         }
     }
 }

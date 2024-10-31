@@ -91,7 +91,7 @@ import board.*;
         this.facing = d;
     }
 
-    public void draw(Batch batch) {
-        batch.draw(enemy_texture,x,y,32,32);
+    public void draw(Batch batch, int tilesize) {
+        batch.draw(enemy_texture,x*tilesize,y*tilesize,tilesize,tilesize);
             }
 }
