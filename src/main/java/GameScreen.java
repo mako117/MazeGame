@@ -257,7 +257,7 @@ public class GameScreen implements Screen {
     public void checkPunishment() {
         int playerX = player.getX();
         int playerY = player.getY();
-        int score = gameboard.regPunishmentCollect(playerX, playerY) + gameboard.bonPunishmentCollect(playerX, playerY);
+        int score = gameboard.regPunishmentCollect(playerX, playerY) + gameboard.bonPunishmentCollect(playerX, playerY, time);
         this.minus_score(score);
     }
 
