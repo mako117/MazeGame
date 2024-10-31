@@ -139,7 +139,7 @@ public class GameScreen implements Screen {
 
         batch.begin();
 
-        gameboard.draw(batch);
+        gameboard.draw(batch, time);
         renderPlayer();
         renderEnemies();
 
@@ -236,7 +236,7 @@ public class GameScreen implements Screen {
     public void checkReward() {
         int playerX = player.getX();
         int playerY = player.getY();
-        int score = gameboard.regRewardCollect(playerX, playerY) + gameboard.bonRewardCollect(playerX, playerY);
+        int score = gameboard.regRewardCollect(playerX, playerY) + gameboard.bonRewardCollect(playerX, playerY,time);
         this.add_score(score);
     }
 

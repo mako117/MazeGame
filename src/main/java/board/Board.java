@@ -3,6 +3,7 @@ import com.badlogic.gdx.graphics.Texture;
 import directions.Direction;
 import punishments.NormalPunishments;
 import punishments.Punishments;
+import rewards.Bonus_Reward;
 import rewards.Regular_Reward;
 import rewards.Reward;
 
@@ -148,11 +149,19 @@ public class Board {
         array_regReward.remove(index);
         return score;
     }
-    public int bonRewardCollect(int x, int y) {
+    public int bonRewardCollect(int x, int y, float currentTime) {
     	int index = isRewardHere(x, y, array_bonReward);
         if(index == -1) {
             return 0;
         }
+
+        Bonus_Reward aBonus = (Bonus_Reward) array_bonReward.get(index);
+        int start = aBonus.getStarttime();
+        int end = aBonus.getEndtime();
+        if(currentTime < start || currentTime > end) {
+            return 0;
+        }
+
         int score = array_bonReward.get(index).getPoint();
         array_bonReward.remove(index);
         return score;
@@ -194,12 +203,20 @@ public class Board {
     }
     
     
-    public void draw(Batch batch) {
+    public void draw(Batch batch, float time) {
         for(int i = 0; i < getWidth(); i++) {
             for(int j = 0; j < getHeight(); j++) {
                 Block blockToDraw = getBlock(i, j);
                 blockToDraw.draw(batch);
             }
+        }
+        for(int i = 0; i < array_bonReward.size(); i++) {
+            Bonus_Reward rewardToDraw = (Bonus_Reward) array_bonReward.get(i);
+            int start = rewardToDraw.getStarttime();
+            int end = rewardToDraw.getEndtime();
+            if(!(time < start || time > end)) {
+                rewardToDraw.draw(batch);   
+            }        
         }
     }
 }
