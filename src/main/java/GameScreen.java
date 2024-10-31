@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import directions.Direction;
 import entities.Character;
-import entities.enemy.Enemies;
-import entities.enemy.PatrollingEnemies;
+import entities.enemy.*;
+import org.lwjgl.opengl.GL20;
 import org.lwjgl.system.windows.INPUT;
 
 
@@ -40,8 +40,9 @@ public class GameScreen implements Screen {
     private int inputDisplacement = 0;
 
     GameScreen() {
-        camera = new OrthographicCamera();
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new StretchViewport(BOARD_WIDTH*TILE_SIZE, BOARD_HEIGHT*TILE_SIZE, camera);
+        camera.update();
 
 //        background = new Texture();
         batch = new SpriteBatch();
@@ -97,6 +98,15 @@ public class GameScreen implements Screen {
      */
     public void render(float delta) {
         input();
+
+        // update camera position
+        camera.position.x = player.getX()*TILE_SIZE + TILE_SIZE/2;
+        camera.position.y = player.getY()*TILE_SIZE + TILE_SIZE/2;
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
+
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         batch.begin();
 
         gameboard.draw(batch);

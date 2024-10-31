@@ -9,7 +9,7 @@ public class Launcher {
         config.useVsync(true);
         config.setTitle("PLACEHOLDER");
 
-        config.setWindowedMode(600,400);
+        config.setWindowedMode(1280,720);
 
         new Lwjgl3Application(new MazeGame(), config);
     }
