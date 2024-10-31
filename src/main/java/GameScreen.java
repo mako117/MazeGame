@@ -182,9 +182,18 @@ public class GameScreen implements Screen {
     }
 
 
-    // TODO: add movement methods of the enemies in the list
+    // add movement methods of the enemies in the list
     private void moveEnemies(){
-
+        for(int i = 0; i < enemies.size(); i++) {
+            boolean isMovingEnemy = (enemies.get(i)) instanceof Moving_Enemies; // Q: are objects in list of type Enemy or do they retain their subclass?
+            if(isMovingEnemy == true) {
+                Moving_Enemies anEnemy = (Moving_Enemies) enemies.get(i);
+                anEnemy.direction((anEnemy.find_player(player, gameboard)), gameboard);
+            } else {
+                PatrollingEnemies anEnemy = (PatrollingEnemies) enemies.get(i);
+                anEnemy.direction('I', gameboard); // char input doesn't matter
+            }
+        }
     }
 
     // TODO: check if player coordinates are the same with any enemies and act accordingly

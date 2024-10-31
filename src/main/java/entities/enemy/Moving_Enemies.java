@@ -5,7 +5,7 @@ import directions.Direction;
 import board.*;
 import entities.Character;
 
-class Moving_Enemies extends Enemies {
+public class Moving_Enemies extends Enemies {
     /**
      * Moving Enemies Constructor
      */
