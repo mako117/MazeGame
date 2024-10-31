@@ -8,11 +8,15 @@ public class PatrollingEnemies extends Enemies {
     private char moveTo;
     int xMax;
     int yMax;
+    int xMin;
+    int yMin;
 
-    public PatrollingEnemies(int init_x, int init_y, Direction d, int xMax, int yMax, TextureRegion texture) {
+    public PatrollingEnemies(int init_x, int init_y, Direction d, int xMin, int xMax, int yMin, int yMax, TextureRegion texture) {
         super(init_x, init_y, new TextureRegion(new Texture("temp_ptero.png")));
         setFacing(d);
+        setXMin(xMin);
         setXMax(xMax);
+        setYMin(yMin);
         setYMax(yMax);
     }
     public @Override void direction(char input, Board gameBoard) {
@@ -23,8 +27,14 @@ public class PatrollingEnemies extends Enemies {
     public char getMoveTo() {
         return this.moveTo;
     }
+    public int getXMin() {
+        return this.xMin;
+    }
     public int getXMax() {
         return this.xMax;
+    }
+    public int getYMin() {
+        return this.yMin;
     }
     public int getYMax() {
         return this.yMax;
@@ -41,7 +51,7 @@ public class PatrollingEnemies extends Enemies {
                 }
                 break;
             case Right:
-                if(getX() == 0) {
+                if(getX() == getXMin()) {
                     setMoveTo('D');
                     setFacing(Direction.Left);
                 } else {
@@ -49,7 +59,7 @@ public class PatrollingEnemies extends Enemies {
                 }
                 break;
             case Down:
-                if(getY() == 0) {
+                if(getY() == getYMin()) {
                     setMoveTo('W');
                     setFacing(Direction.Up);
                 } else {
@@ -66,10 +76,20 @@ public class PatrollingEnemies extends Enemies {
                 break;
         }
     }
+    private void setXMin(int minX) {
+        if(minX > 0) {
+            this.xMin = minX;
+        } 
+    }
     private void setXMax(int maxX) {
         if(maxX > 0) {
             this.xMax = maxX;
         }
+    }
+    private void setYMin(int minY) {
+        if(minY > 0) {
+            this.yMin = minY;
+        } 
     }
     private void setYMax(int maxY) {
         if(maxY > 0) {
