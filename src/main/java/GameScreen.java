@@ -16,6 +16,7 @@ import entities.enemy.Enemies;
 import entities.enemy.PatrollingEnemies;
 import org.lwjgl.system.windows.INPUT;
 
+
 public class GameScreen implements Screen {
 
     private Camera camera;
@@ -30,12 +31,17 @@ public class GameScreen implements Screen {
     private Character player;
     private Enemies enemy1;
 
-    private final int BOARD_WIDTH = 40*10;
-    private final int BOARD_HEIGHT = 60*10;
+    private final int BOARD_WIDTH = 20;
+    private final int BOARD_HEIGHT = 30;
+    private final int TILE_SIZE = 100; // size of tile
+
+
+    private final int INPUT_TIMEOUT = 20;
+    private int inputDisplacement = 0;
 
     GameScreen() {
         camera = new OrthographicCamera();
-        viewport = new StretchViewport(BOARD_WIDTH, BOARD_HEIGHT, camera);
+        viewport = new StretchViewport(BOARD_WIDTH*TILE_SIZE, BOARD_HEIGHT*TILE_SIZE, camera);
 
 //        background = new Texture();
         batch = new SpriteBatch();
@@ -57,22 +63,33 @@ public class GameScreen implements Screen {
     }
 
     private void input() {
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            player.direction('W', gameboard);
-            System.out.println("UP");
+
+        if(inputDisplacement == 0){
+            if(Gdx.input.isKeyPressed(Input.Keys.W)){
+                player.direction('W', gameboard);
+                System.out.println("UP");
+                inputDisplacement = INPUT_TIMEOUT;
+            }
+            else if(Gdx.input.isKeyPressed(Input.Keys.D)){
+                player.direction('D', gameboard);
+                System.out.println("RIGHT");
+                inputDisplacement = INPUT_TIMEOUT;
+            }
+            else if(Gdx.input.isKeyPressed(Input.Keys.A)){
+                player.direction('A', gameboard);
+                System.out.println("LEFT");
+                inputDisplacement = INPUT_TIMEOUT;
+            }
+            else if(Gdx.input.isKeyPressed(Input.Keys.S)){
+                player.direction('S', gameboard);
+                System.out.println("DOWN");
+                inputDisplacement = INPUT_TIMEOUT;
+            }
+        } else {
+            inputDisplacement--;
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            player.direction('D', gameboard);
-            System.out.println("RIGHT");
-        }
-        else if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            player.direction('A', gameboard);
-            System.out.println("LEFT");
-        }
-        else if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            player.direction('S', gameboard);
-            System.out.println("DOWN");
-        }
+
+
     }
 
     /**
@@ -84,13 +101,17 @@ public class GameScreen implements Screen {
 
         gameboard.draw(batch);
 
-        player.draw(batch);
+        player.draw(batch, TILE_SIZE);
 
         enemy1.draw(batch);
 
         batch.end();
     }
 
+    private void logic()
+    {
+
+    }
     /**
      * @param width
      * @param height
@@ -131,18 +152,14 @@ public class GameScreen implements Screen {
     public void checkReward() {
     	int playerX = player.getX();
     	int playerY = player.getY();
-    	if(gameboard.reward_collect(playerX, playerY)) {
-    		player.add_score(gameboard.getReward(playerX, playerY).getPoint());
-    		// remove reward
-    	}
+        int score = gameboard.rewardCollect(playerX, playerY);
+        player.scorechange(score);
     }
     
     public void checkPunishment() {
     	int playerX = player.getX();
     	int playerY = player.getY();
-    	if(gameboard.punishment_collect(playerX, playerY)) {
-    		player.minus_score(gameboard.getPunishment(playerX, playerY).getScore());
-    		// remove punishment
-    	}
+        int score = gameboard.punishmentCollect(playerX, playerY);
+        player.minus_score(score);
     }
 }
