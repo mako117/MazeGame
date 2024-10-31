@@ -46,7 +46,9 @@ public class GameScreen implements Screen {
     private int playerMovementOffset = 0;
     private int enemyMovementOffset;
 
-    private int score;
+    private int score = 0;
+    
+    private float time = 0;
 
     GameScreen() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -120,7 +122,8 @@ public class GameScreen implements Screen {
      */
     public void render(float delta) {
         logic();
-
+        time+= Gdx.graphics.getDeltaTime();
+        System.out.println(time);
         // update camera position
         if(playerMovingXDirection){
             camera.position.x = (player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
