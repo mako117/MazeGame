@@ -1,5 +1,4 @@
 import board.Board;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -8,15 +7,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.SortedIntList.Iterator;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import directions.Direction;
 import entities.Character;
 import entities.enemy.*;
 import org.lwjgl.opengl.GL20;
-import org.lwjgl.system.windows.INPUT;
 
 import java.util.ArrayList;
 
@@ -39,9 +35,14 @@ public class GameScreen implements Screen {
     private final int BOARD_HEIGHT = 30;
     private final int TILE_SIZE = 100; // size of tile
 
-
-    private final int INPUT_TIMEOUT = 20;
+    // Slow speed of input reading
+    private final int INPUT_TIMEOUT = 50;
     private int inputDisplacement = 0;
+
+    // For smooth movement
+    private boolean playerMovingXDirection = false;
+    private int playerMovementOffset = 0;
+    private int enemyMovementOffset;
 
     GameScreen() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -74,22 +75,34 @@ public class GameScreen implements Screen {
             if(Gdx.input.isKeyPressed(Input.Keys.W)){
                 player.direction('W', gameboard);
                 System.out.println("UP");
+
                 inputDisplacement = INPUT_TIMEOUT;
+                playerMovementOffset = -TILE_SIZE;
+                playerMovingXDirection = false;
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.D)){
                 player.direction('D', gameboard);
                 System.out.println("RIGHT");
+
                 inputDisplacement = INPUT_TIMEOUT;
+                playerMovementOffset = -TILE_SIZE;
+                playerMovingXDirection = true;
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.A)){
                 player.direction('A', gameboard);
                 System.out.println("LEFT");
+
                 inputDisplacement = INPUT_TIMEOUT;
+                playerMovementOffset = TILE_SIZE;
+                playerMovingXDirection = true;
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.S)){
                 player.direction('S', gameboard);
                 System.out.println("DOWN");
+
                 inputDisplacement = INPUT_TIMEOUT;
+                playerMovementOffset = TILE_SIZE;
+                playerMovingXDirection = false;
             }
         } else {
             inputDisplacement--;
@@ -105,8 +118,13 @@ public class GameScreen implements Screen {
         logic();
 
         // update camera position
-        camera.position.x = player.getX()*TILE_SIZE + TILE_SIZE/2;
-        camera.position.y = player.getY()*TILE_SIZE + TILE_SIZE/2;
+        if(playerMovingXDirection){
+            camera.position.x = (player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
+            camera.position.y = (player.getY()*TILE_SIZE) + TILE_SIZE/2;
+        } else {
+            camera.position.x = (player.getX()*TILE_SIZE) + TILE_SIZE/2;
+            camera.position.y = (player.getY()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
+        }
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
@@ -115,13 +133,39 @@ public class GameScreen implements Screen {
         batch.begin();
 
         gameboard.draw(batch);
-        player.draw(batch, TILE_SIZE);
-
+        renderPlayer();
+        renderEnemies();
 
 
         batch.end();
     }
 
+    /**
+     * Draw the player to the game screen
+     */
+    private void renderPlayer() {
+//        System.out.println(playerMovementOffset);
+        player.draw(batch,TILE_SIZE, playerMovementOffset);
+
+        if( Math.abs(playerMovementOffset) - TILE_SIZE/INPUT_TIMEOUT < 0){
+            playerMovementOffset = 0;
+        }
+        else if(playerMovementOffset > 0){
+            playerMovementOffset -= TILE_SIZE/INPUT_TIMEOUT;
+        }
+        else if(playerMovementOffset < 0){
+            playerMovementOffset += TILE_SIZE/INPUT_TIMEOUT;
+
+        }
+
+    }
+
+
+    // TODO: Complete this function
+    // it will only draw the enemies in the array list
+    private void renderEnemies(){
+
+    }
 
     /**
      * This function will handle the game logic
@@ -137,12 +181,6 @@ public class GameScreen implements Screen {
         checkPunishment();
     }
 
-
-    // TODO: Complete this function
-    // it will only draw the enemies in the array list
-    private void renderEnemies(){
-
-    }
 
     // TODO: add movement methods of the enemies in the list
     private void moveEnemies(){

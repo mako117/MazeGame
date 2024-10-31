@@ -178,8 +178,38 @@ public class Character {
     public void minus_score(int s) {
     	this.score -= s;
     }
-    
-    public void draw(Batch batch, int tileSize) {
-        batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x, tileSize*y, tileSize, tileSize);
+
+    /**
+     *
+     * Draw the player.
+     * @param batch
+     * @param tileSize
+     * @param offset
+     */
+    public void draw(Batch batch, int tileSize, int offset) {
+
+        // this will allow for smooth transition between tiles
+        // TODO: replace the playerTexture with walking sprite when offset != 0
+        if(offset != 0){
+            switch(facing){
+                case Up:
+                    batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x, tileSize*y+offset, tileSize, tileSize);
+                    break;
+                case Down:
+                    batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x, tileSize*y+offset, tileSize, tileSize);
+                    break;
+                case Left:
+                    batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x+offset, tileSize*y, tileSize, tileSize);
+                    break;
+                case Right:
+                    batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x+offset, tileSize*y, tileSize, tileSize);
+                    break;
+            }
+        }
+        else {
+            // player is standing still
+            batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x, tileSize*y, tileSize, tileSize);
+        }
+
     }
 }
