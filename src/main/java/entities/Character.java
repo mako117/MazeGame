@@ -43,25 +43,29 @@ public class Character {
             case 'W':
                 toMoveTo = gameBoard.getBlock(x, y+1);
                 if(toMoveTo != null && toMoveTo.enter()){
-                    y++;
+                    //y++;
+                    this.setY(getY() + 1);
                 }
                 break;
             case 'S':
                 toMoveTo = gameBoard.getBlock(x, y-1);
                 if(toMoveTo != null && toMoveTo.enter()){
-                    y--;
+                    // y--;
+                    this.setY(getY() - 1);
                 }
                 break;
             case 'A':
                 toMoveTo = gameBoard.getBlock(x-1, y);
                 if(toMoveTo != null && toMoveTo.enter()){
-                    x--;
+                    // x--;
+                    this.setX(getX() - 1);
                 }
                 break;
             case 'D':
                 toMoveTo = gameBoard.getBlock(x+1, y);
                 if(toMoveTo != null && toMoveTo.enter()){
-                    x++;
+                    // x++;
+                    this.setX(getX() + 1);
                 }
                 break;
         }
@@ -116,7 +120,6 @@ public class Character {
      */
     private void setX(int xCoord) {
         if(xCoord >= 0) {
-            System.out.println("xCoord = " + xCoord);
             this.x = xCoord;
         }
     }
@@ -126,7 +129,6 @@ public class Character {
      */
     private void setY(int yCoord) {
         if(yCoord >= 0) {
-            System.out.println("yCoord = " + yCoord);
             this.y = yCoord;
         }
     }

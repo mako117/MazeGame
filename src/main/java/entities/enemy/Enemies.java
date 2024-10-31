@@ -28,33 +28,37 @@ import board.*;
         Block toMoveTo;
         switch(input) {
             case 'W':
-            if(gameBoard.getBlock(getX(), getY() + 1) != null) {
-                toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
-                if(toMoveTo.enter() == true) {
-                    setY(getY() + 1);
+                if(gameBoard.getBlock(getX(), getY() + 1) != null) {
+                    toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
+                    if(toMoveTo.enter() == true) {
+                        this.setY(this.getY() + 1);
+                    }
                 }
-            }
+                break;
             case 'S':
-            if(gameBoard.getBlock(getX(), getY() - 1) != null) {
-                toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
-                if(toMoveTo.enter() == true) {
-                    setY(getY() - 1);
+                if(gameBoard.getBlock(getX(), getY() - 1) != null) {
+                    toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
+                    if(toMoveTo.enter() == true) {
+                        this.setY(this.getY() - 1);
+                    }
                 }
-            }
+                break;
             case 'A':
-            if(gameBoard.getBlock(getX() - 1, getY()) != null) {
-                toMoveTo = gameBoard.getBlock(getX() - 1, getY());
-                if(toMoveTo.enter() == true) {
-                    setX(getX() - 1);
+                if(gameBoard.getBlock(getX() - 1, getY()) != null) {
+                    toMoveTo = gameBoard.getBlock(getX() - 1, getY());
+                    if(toMoveTo.enter() == true) {
+                        this.setX(this.getX() - 1);
+                    }
                 }
-            }
+                break;
             case 'D':
-            if(gameBoard.getBlock(getX() + 1, getY()) != null) {
-                toMoveTo = gameBoard.getBlock(getX() + 1, getY());
-                if(toMoveTo.enter() == true) {
-                    setX(getX() + 1);
+                if(gameBoard.getBlock(getX() + 1, getY()) != null) {
+                    toMoveTo = gameBoard.getBlock(getX() + 1, getY());
+                    if(toMoveTo.enter() == true) {
+                        this.setX(this.getX() + 1);
+                    }
                 }
-            }
+                break;
         }
     }
     public int getX() {
