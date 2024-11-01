@@ -17,7 +17,7 @@ public class MazeGame extends Game {
 
     public void create(){
         gameScreen = new GameScreen();
-        setScreen(gameScreen);
+        setScreen(new MainMenuScreen(this));
     }
 
     @Override
