@@ -50,6 +50,8 @@ public class GameScreen implements Screen {
     
     private float time = 0;
 
+    private boolean paused;
+
     GameScreen() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new StretchViewport(BOARD_WIDTH*TILE_SIZE, BOARD_HEIGHT*TILE_SIZE, camera);
@@ -62,7 +64,7 @@ public class GameScreen implements Screen {
         player = new Character(playerTexture);
 
         enemies = new ArrayList<Enemies>();
-        enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 10, 10, new TextureRegion(new Texture("temp_ptero.png"))));
+        enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 1, 10, 1, 10, new TextureRegion(new Texture("temp_ptero.png"))));
 
 
         gameboard = new Board();
@@ -78,6 +80,10 @@ public class GameScreen implements Screen {
     private void input() {
 
         if(inputDisplacement == 0){
+            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+                System.out.println("PAUSED");
+                paused = true;
+            }
             if(Gdx.input.isKeyPressed(Input.Keys.W)){
                 if(player.direction('W', gameboard)){
                     inputDisplacement = INPUT_TIMEOUT;
@@ -121,8 +127,16 @@ public class GameScreen implements Screen {
      * @param delta
      */
     public void render(float delta) {
-        logic();
+        if (paused){
+            if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+                System.out.println("UNPAUSED");
+                paused = false;
+            }
+        } else
+
+            logic();
         time+= Gdx.graphics.getDeltaTime();
+
         System.out.println(time);
         // update camera position
         if(playerMovingXDirection){
