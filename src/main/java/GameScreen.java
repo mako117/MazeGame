@@ -29,6 +29,9 @@ public class GameScreen implements Screen {
     // private TextureRegion blockTexture;
     private TextureRegion playerTexture;
 
+    //private TextureRegion pauseTexture
+    private TextureRegion pauseTexture;
+
     private Board gameboard;
     private Character player;
     private ArrayList<Enemies> enemies;
@@ -66,8 +69,14 @@ public class GameScreen implements Screen {
         enemies = new ArrayList<Enemies>();
         enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 1, 10, 1, 10, new TextureRegion(new Texture("temp_ptero.png"))));
 
-
         gameboard = new Board();
+
+        pauseTexture = new TextureRegion(new Texture("temp_pause.jpg"));
+        System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
+        System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
+
+
+
     }
 
     /**
@@ -78,12 +87,16 @@ public class GameScreen implements Screen {
     }
 
     private void input() {
-
         if(inputDisplacement == 0){
-            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
                 System.out.println("PAUSED");
                 paused = true;
-            }
+
+            } else
+
+
+
             if(Gdx.input.isKeyPressed(Input.Keys.W)){
                 if(player.direction('W', gameboard)){
                     inputDisplacement = INPUT_TIMEOUT;
@@ -127,14 +140,18 @@ public class GameScreen implements Screen {
      * @param delta
      */
     public void render(float delta) {
-        if (paused){
-            if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-                System.out.println("UNPAUSED");
-                paused = false;
-            }
-        } else
 
-            logic();
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if(paused){
+            batch.begin();
+            batch.draw(pauseTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            batch.end();
+            pause();
+            return;
+        }
+
+        logic();
         time+= Gdx.graphics.getDeltaTime();
 
         System.out.println(time);
@@ -149,7 +166,6 @@ public class GameScreen implements Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
 
@@ -302,6 +318,10 @@ public class GameScreen implements Screen {
      */
     public void pause() {
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            System.out.println("UNPAUSED");
+            paused = false;
+        }
     }
 
     /**
