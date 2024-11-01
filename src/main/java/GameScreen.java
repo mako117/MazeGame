@@ -68,6 +68,7 @@ public class GameScreen implements Screen {
 
         enemies = new ArrayList<Enemies>();
         enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 1, 10, 1, 10, new TextureRegion(new Texture("temp_ptero.png"))));
+        enemies.add(new Moving_Enemies(1, 10, new TextureRegion(new Texture("rock.png"))));
 
         gameboard = new Board();
 
@@ -87,6 +88,7 @@ public class GameScreen implements Screen {
     }
 
     private void input() {
+
         if(inputDisplacement == 0){
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
@@ -156,8 +158,7 @@ public class GameScreen implements Screen {
 
         logic();
         time+= Gdx.graphics.getDeltaTime();
-
-        System.out.println(time);
+        // System.out.println(time);
         // update camera position
         if(playerMovingXDirection){
             camera.position.x = (player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
@@ -169,6 +170,7 @@ public class GameScreen implements Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
 
