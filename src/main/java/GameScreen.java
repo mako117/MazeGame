@@ -144,8 +144,11 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if(paused){
+            float centerX = (camera.position.x - (Gdx.graphics.getWidth())/2);
+            float centerY = (camera.position.y - (Gdx.graphics.getHeight())/2);
+
             batch.begin();
-            batch.draw(pauseTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             batch.end();
             pause();
             return;
