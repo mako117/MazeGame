@@ -64,6 +64,7 @@ public class GameScreen implements Screen {
     private Skin skin;
 	private Button pauseButton;
 	private Button resumeButton;
+    private Button exitButton;
 	private Stage stage1;
 	private int change_x = 0;
 	private int change_y = 0;
@@ -120,6 +121,18 @@ public class GameScreen implements Screen {
         resumeX = (Gdx.graphics.getWidth() - (int)resumeButton.getWidth()) / 2;
         resumeY = (Gdx.graphics.getHeight() - (int)resumeButton.getHeight()) / 2;
 		stage1.addActor(resumeButton);
+        exitButton = new TextButton("Exit", skin, "small");
+
+        exitButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new MainMenuScreen(game));
+                dispose();
+            }
+        });
+
+        stage1.addActor((exitButton));
+
+
     }
 
     /**
@@ -194,11 +207,17 @@ public class GameScreen implements Screen {
             batch.end();
             resumeButton.setSize(Gdx.graphics.getWidth() / 6 * 2, Gdx.graphics.getHeight() / 6);
             resumeButton.setPosition(centerX + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, centerY + (Gdx.graphics.getHeight() - resumeButton.getHeight())/2);
+
+            exitButton.setSize(Gdx.graphics.getWidth() / 6 * 2, Gdx.graphics.getHeight() / 6);
+            exitButton.setPosition(centerX + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,centerY + Gdx.graphics.getHeight()/5);
             stage1.act();
             stage1.draw();
+
             pause();
             return;
         }
+
+
 
         time+= Gdx.graphics.getDeltaTime();
 
