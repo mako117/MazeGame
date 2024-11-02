@@ -1,17 +1,22 @@
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainMenuScreen implements Screen {
 	final MazeGame game;
+	
 	private SpriteBatch batch;
 	private BitmapFont font;
-	private FitViewport viewport;
-	
+	private Viewport viewport;
+	private Camera camera;
 
 	public MainMenuScreen(final MazeGame game) {
 		this.game = game;
@@ -20,10 +25,12 @@ public class MainMenuScreen implements Screen {
 	public void render(float delta) {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		viewport = new FitViewport(8,5);
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport = new StretchViewport(2000, 3000, camera);
+        camera.update();
 		
-		font.setUseIntegerPositions(false);
-		font.getData().setScale(viewport.getWorldHeight()/Gdx.graphics.getHeight());
+		//font.setUseIntegerPositions(false);
+		//font.getData().setScale(viewport.getWorldHeight()/Gdx.graphics.getHeight());
 		
 		//System.out.println("111 " + viewport.getWorldHeight() + " 2222 " + Gdx.graphics.getHeight());
 		ScreenUtils.clear(Color.BLACK);
@@ -33,8 +40,10 @@ public class MainMenuScreen implements Screen {
 
 		batch.begin();
 		//draw text. Remember that x and y are in meters
-		font.draw(batch, "Welcome to Drop!!! ", -0.5f,0);
-		font.draw(batch, "Tap anywhere to begin!", -0.5f,-0.5f);
+		font.draw(batch, "Hello", camera.position.x, camera.position.y);
+		font.draw(batch, "Hello", camera.position.x, camera.position.y + 10);
+		//font.draw(batch, "Welcome to Drop!!! ", -0.5f,0);
+		//font.draw(batch, "Tap anywhere to begin!", -0.5f,-0.5f);
 		batch.end();
 
 		if (Gdx.input.isTouched()) {
