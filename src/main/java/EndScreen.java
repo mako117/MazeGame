@@ -51,8 +51,6 @@ public class EndScreen implements Screen{
 		
 		stage1 = new Stage(new ScreenViewport());
 		stage2 = new Stage(new ScreenViewport());
-		Gdx.input.setInputProcessor(stage1);
-		Gdx.input.setInputProcessor(stage2);
 		
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 		
@@ -158,10 +156,12 @@ public class EndScreen implements Screen{
 		batch.end();
 		
 		if(condition) {
+			Gdx.input.setInputProcessor(stage1);
 			stage1.act();
 			stage1.draw();
 		}
 		else {
+			Gdx.input.setInputProcessor(stage2);
 			stage2.act();
 			stage2.draw();
 		}
