@@ -8,8 +8,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import directions.Direction;
 import entities.Character;
@@ -17,7 +24,6 @@ import entities.enemy.Moving_Enemies;
 import entities.enemy.PatrollingEnemies;
 import entities.enemy.Enemies;
 import org.lwjgl.opengl.GL20;
-
 import java.util.ArrayList;
 
 
@@ -29,19 +35,15 @@ public class GameScreen implements Screen {
 
     private SpriteBatch batch;
     private BitmapFont font;
-
     private Texture backgroundTexture;
-
     // private TextureRegion blockTexture;
     private TextureRegion playerTexture;
-
     //private TextureRegion pauseTexture
     private TextureRegion pauseTexture;
 
     private Board gameboard;
     private Character player;
     private ArrayList<Enemies> enemies;
-
     private final int BOARD_WIDTH = 15;
     private final int BOARD_HEIGHT = 20;
     private final int TILE_SIZE = 50; // size of tile
@@ -52,19 +54,27 @@ public class GameScreen implements Screen {
     private float enemyMovementOffset = 0;
 
     private int score = 0;
-    
     private float time = 0;
 
     private final float TICKSPEED = 0.4f;
     private float tickCount = TICKSPEED;
-
     // Slow speed of input reading
     private float INPUT_TIMEOUT = TICKSPEED;
 
-    private boolean paused;
+    private Skin skin;
+	private Button pauseButton;
+	private Button resumeButton;
+	private Stage stage1;
+	private int change_x = 0;
+	private int change_y = 0;
+	private int middle_x = Gdx.graphics.getWidth() / 2;
+	private int middle_y = Gdx.graphics.getHeight() / 2;
+    private int left_x = 0;
+    private int top_y = Gdx.graphics.getHeight();
 
-    private TextureRegion resumeButton;
-    private float resumeX, resumeY, resumeWidth, resumeHeight;
+    private boolean paused;
+    // private TextureRegion resumeButton;
+    // private float resumeX, resumeY, resumeWidth, resumeHeight;
 
     GameScreen(MazeGame game) {
     	this.game = game;
@@ -92,12 +102,28 @@ public class GameScreen implements Screen {
         pauseTexture = new TextureRegion(new Texture("temp_pause.jpg"));
         System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
         System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
-        resumeButton = new TextureRegion(new Texture("temp_resume_button.png"));
-        resumeWidth = resumeButton.getRegionWidth();
-        resumeHeight = resumeButton.getRegionHeight();
-        resumeX = (Gdx.graphics.getWidth() - resumeWidth) / 2;
-        resumeY = (Gdx.graphics.getHeight() - resumeHeight) / 2;
+        // resumeButton = new TextureRegion(new Texture("temp_resume_button.png"));
+        // resumeWidth = resumeButton.getRegionWidth();
+        // resumeHeight = resumeButton.getRegionHeight();
+        // resumeX = (Gdx.graphics.getWidth() - resumeWidth) / 2;
+        // resumeY = (Gdx.graphics.getHeight() - resumeHeight) / 2;
 
+        stage1 = new Stage(viewport);
+		Gdx.input.setInputProcessor(stage1);
+		change_x = -120;
+		change_y = -100;
+		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+		resumeButton = new TextButton("resume", skin, "small");
+		resumeButton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
+		resumeButton.setPosition(middle_x + change_x, middle_y + change_y);
+		// listener for touch button
+		resumeButton.addListener(new ChangeListener() {
+					public void changed(ChangeEvent event, Actor actor) {
+						paused = false;
+					}
+			
+		});
+		stage1.addActor(resumeButton);
     }
 
     /**
@@ -169,8 +195,10 @@ public class GameScreen implements Screen {
 
             batch.begin();
             batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            batch.draw(resumeButton, centerX,centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            // batch.draw(resumeButton, centerX,centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             batch.end();
+            stage1.act();
+            stage1.draw();
             pause();
             return;
         }
@@ -370,17 +398,17 @@ public class GameScreen implements Screen {
             System.out.println("UNPAUSED");
             paused = false;
         }
-        if(Gdx.input.isTouched()){
-            float touchX = Gdx.input.getX();
-            float touchY = Gdx.input.getY();
+        // if(Gdx.input.isTouched()){
+        //     float touchX = Gdx.input.getX();
+        //     float touchY = Gdx.input.getY();
 
-            if(touchX > resumeX && touchX < resumeX + resumeWidth && touchY > resumeY && touchY < resumeY + resumeHeight){
-                System.out.println("UNPAUSED");
-                paused = false;
-            }
+        //     if(touchX > resumeX && touchX < resumeX + resumeWidth && touchY > resumeY && touchY < resumeY + resumeHeight){
+        //         System.out.println("UNPAUSED");
+        //         paused = false;
+        //     }
 
 
-        }
+        // }
     }
 
     /**
