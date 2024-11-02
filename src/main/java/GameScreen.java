@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -26,6 +27,7 @@ public class GameScreen implements Screen {
     private Viewport viewport;
 
     private SpriteBatch batch;
+    private BitmapFont font;
 
     // private TextureRegion blockTexture;
     private TextureRegion playerTexture;
@@ -67,6 +69,7 @@ public class GameScreen implements Screen {
 
 //        background = new Texture();
         batch = new SpriteBatch();
+        font = new BitmapFont();
 
         playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
         player = new Character(playerTexture);
@@ -190,8 +193,8 @@ public class GameScreen implements Screen {
         gameboard.draw(batch, time, TILE_SIZE);
         renderPlayer(delta);
         renderEnemies();
-
-
+        font.draw(batch, String.format("%.1f\n%d", time, score), camera.position.x, camera.position.y+Gdx.graphics.getHeight()/2);
+        
         batch.end();
     }
 
