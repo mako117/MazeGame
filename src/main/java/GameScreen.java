@@ -329,7 +329,6 @@ public class GameScreen implements Screen {
     // TODO: write code for if the player wins
     private void playerEnd(boolean condition) {
     	game.setScreen(new EndScreen(game,score,time,condition));
-    	dispose();
     }
 
     // TODO: write code for if player loses
