@@ -39,7 +39,7 @@ public class EndScreen implements Screen{
 	private int middle_y = Gdx.graphics.getHeight() / 2;
 	
 	
-	public EndScreen(MazeGame game, int score, float time, boolean condition) {
+	public EndScreen(final MazeGame game, int score, float time, boolean condition) {
 		this.game = game;
 		this.score = score;
 		this.time = time;
@@ -65,7 +65,7 @@ public class EndScreen implements Screen{
 		playagainbutton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
 						game.setScreen(new GameScreen(game));
-						dispose();
+//						dispose();
 					}
 			
 		});
@@ -79,7 +79,6 @@ public class EndScreen implements Screen{
 		tryagainbutton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
 						game.setScreen(new GameScreen(game));
-						dispose();
 					}
 			
 		});
@@ -96,7 +95,6 @@ public class EndScreen implements Screen{
 		winexitbutton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
 						game.setScreen(new MainMenuScreen(game));
-						dispose();
 					}
 			
 		});
@@ -110,7 +108,6 @@ public class EndScreen implements Screen{
 		lossexitbutton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
 						game.setScreen(new MainMenuScreen(game));
-						dispose();
 					}
 			
 		});
