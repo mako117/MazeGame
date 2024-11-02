@@ -43,10 +43,6 @@ public class GameScreen implements Screen {
     private final int BOARD_HEIGHT = 30;
     private final int TILE_SIZE = 100; // size of tile
 
-    // Slow speed of input reading
-    private final int INPUT_TIMEOUT = 50;
-    private int inputDisplacement = 0;
-
     // For smooth movement
     private boolean playerMovingXDirection = false;
     private int playerMovementOffset = 0;
@@ -58,6 +54,9 @@ public class GameScreen implements Screen {
 
     private final float TICKSPEED = 0.6f;
     private float tickCount = TICKSPEED;
+
+    // Slow speed of input reading
+    private float INPUT_TIMEOUT = TICKSPEED;
 
     private boolean paused;
 
@@ -103,7 +102,7 @@ public class GameScreen implements Screen {
 
     private void input() {
 
-        if(inputDisplacement == 0){
+        if(INPUT_TIMEOUT <= 0){
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
                 System.out.println("PAUSED");
@@ -115,38 +114,36 @@ public class GameScreen implements Screen {
 
             if(Gdx.input.isKeyPressed(Input.Keys.W)){
                 if(player.direction('W', gameboard)){
-                    inputDisplacement = INPUT_TIMEOUT;
                     playerMovementOffset = -TILE_SIZE;
                     playerMovingXDirection = false;
+                    INPUT_TIMEOUT = TICKSPEED;
                 }
                 System.out.println("UP");
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.D)){
                 if(player.direction('D', gameboard)){
-                    inputDisplacement = INPUT_TIMEOUT;
                     playerMovementOffset = -TILE_SIZE;
                     playerMovingXDirection = true;
+                    INPUT_TIMEOUT = TICKSPEED;
                 }
                 System.out.println("RIGHT");
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.A)){
                 if(player.direction('A', gameboard)){
-                    inputDisplacement = INPUT_TIMEOUT;
                     playerMovementOffset = TILE_SIZE;
                     playerMovingXDirection = true;
+                    INPUT_TIMEOUT = TICKSPEED;
                 }
                 System.out.println("LEFT");
             }
             else if(Gdx.input.isKeyPressed(Input.Keys.S)){
                 if(player.direction('S', gameboard)){
-                    inputDisplacement = INPUT_TIMEOUT;
                     playerMovementOffset = TILE_SIZE;
                     playerMovingXDirection = false;
+                    INPUT_TIMEOUT = TICKSPEED;
                 }
                 System.out.println("DOWN");
             }
-        } else {
-            inputDisplacement--;
         }
 
 
@@ -177,10 +174,11 @@ public class GameScreen implements Screen {
         if(tickCount < 0){
             tickCount = TICKSPEED;
             moveEnemies();
-
         }
         logic();
+
         input();
+        INPUT_TIMEOUT -= delta;
 
         // System.out.println(time);
         // update camera position
@@ -233,18 +231,13 @@ public class GameScreen implements Screen {
         for (int i = 0; i < enemies.size(); i++){
             enemies.get(i).draw(batch, TILE_SIZE, enemyMovementOffset);
 
-            if( Math.abs(enemyMovementOffset) - TILE_SIZE/TICKSPEED*delta < 0){
+            if(enemyMovementOffset <= 0){
                 enemyMovementOffset = 0;
             }
-            else if(enemyMovementOffset > 0){
-                enemyMovementOffset -= TILE_SIZE/TICKSPEED*delta;
-            }
-            else if(enemyMovementOffset < 0){
-                enemyMovementOffset += TILE_SIZE/TICKSPEED*delta;
-
+            else{
+                enemyMovementOffset -= TILE_SIZE / TICKSPEED * delta;
             }
         }
-        enemyMovementOffset-= delta;
     }
 
     /**
