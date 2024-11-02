@@ -66,6 +66,7 @@ public class GameScreen implements Screen {
 	private Button resumeButton;
     private Button exitButton;
 	private Stage stage1;
+    private Stage stage0;
 	private int change_x = 0;
 	private int change_y = 0;
 	private int middle_x = Gdx.graphics.getWidth() / 2;
@@ -105,11 +106,21 @@ public class GameScreen implements Screen {
         System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
         System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
 
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        stage0 = new Stage(viewport);
+        pauseButton = new TextButton("PAUSE" , skin, "small");
+        pauseButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                paused = true;
+            }
+        });
+        stage0.addActor(pauseButton);
+
         stage1 = new Stage(viewport);
 		Gdx.input.setInputProcessor(stage1);
 		change_x = -780;
 		change_y = -400;
-		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+
 		resumeButton = new TextButton("Resume", skin, "small");
 		// listener for touch button
 		resumeButton.addListener(new ChangeListener() {
@@ -198,10 +209,10 @@ public class GameScreen implements Screen {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        float centerX = (camera.position.x - (Gdx.graphics.getWidth())/2);
+        float centerY = (camera.position.y - (Gdx.graphics.getHeight())/2);
         if(paused){
-            float centerX = (camera.position.x - (Gdx.graphics.getWidth())/2);
-            float centerY = (camera.position.y - (Gdx.graphics.getHeight())/2);
-
+            Gdx.input.setInputProcessor(stage1);
             batch.begin();
             batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             batch.end();
@@ -216,6 +227,7 @@ public class GameScreen implements Screen {
             pause();
             return;
         }
+
 
 
 
@@ -255,6 +267,13 @@ public class GameScreen implements Screen {
         renderText();
 
         batch.end();
+
+        pauseButton.setSize(Gdx.graphics.getWidth() /10,Gdx.graphics.getHeight()/10);
+        pauseButton.setPosition(centerX + Gdx.graphics.getWidth() - pauseButton.getWidth(),centerY + Gdx.graphics.getHeight() - pauseButton.getHeight());
+        Gdx.input.setInputProcessor(stage0);
+        stage0.act();
+        stage0.draw();
+
     }
 
     private void renderText(){
