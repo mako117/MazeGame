@@ -29,6 +29,8 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private BitmapFont font;
 
+    private Texture backgroundTexture;
+
     // private TextureRegion blockTexture;
     private TextureRegion playerTexture;
 
@@ -71,7 +73,10 @@ public class GameScreen implements Screen {
 
 //        background = new Texture();
         batch = new SpriteBatch();
-        font = new BitmapFont();
+
+        font = new BitmapFont(Gdx.files.internal("comic_sans.fnt"));
+
+        backgroundTexture = new Texture("Space Background.png");
 
         playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
         player = new Character(playerTexture);
@@ -196,12 +201,21 @@ public class GameScreen implements Screen {
 
         batch.begin();
 
+        batch.draw(backgroundTexture, camera.position.x-viewport.getScreenWidth()/2,camera.position.y-viewport.getScreenHeight()/2);
         gameboard.draw(batch, time, TILE_SIZE);
         renderPlayer(delta);
         renderEnemies(delta);
-        font.draw(batch, String.format("%.1f\n%d", time, score), camera.position.x, camera.position.y+Gdx.graphics.getHeight()/2);
+        renderText();
 
         batch.end();
+    }
+
+    private void renderText(){
+//        String timeText = String.format("%.1f",time);
+        font.draw(batch,String.format("%s%.1f","Time: ", time) , camera.position.x-viewport.getScreenWidth()/2+10, camera.position.y+viewport.getScreenHeight()/2-font.getLineHeight());
+        font.draw(batch, String.format("%s%d","Score: ", score),camera.position.x-viewport.getScreenWidth()/2+10, camera.position.y+viewport.getScreenHeight()/2);
+//        String scoreText = String.format("%d",score);
+//        font.draw(batch, scoreText, camera.position.x, camera.position.y);
     }
 
     /**
