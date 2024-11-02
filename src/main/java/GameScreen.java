@@ -72,9 +72,10 @@ public class GameScreen implements Screen {
     private int left_x = 0;
     private int top_y = Gdx.graphics.getHeight();
 
+    private int resumeX;
+    private int resumeY;
+
     private boolean paused;
-    // private TextureRegion resumeButton;
-    // private float resumeX, resumeY, resumeWidth, resumeHeight;
 
     GameScreen(MazeGame game) {
     	this.game = game;
@@ -102,20 +103,13 @@ public class GameScreen implements Screen {
         pauseTexture = new TextureRegion(new Texture("temp_pause.jpg"));
         System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
         System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
-        // resumeButton = new TextureRegion(new Texture("temp_resume_button.png"));
-        // resumeWidth = resumeButton.getRegionWidth();
-        // resumeHeight = resumeButton.getRegionHeight();
-        // resumeX = (Gdx.graphics.getWidth() - resumeWidth) / 2;
-        // resumeY = (Gdx.graphics.getHeight() - resumeHeight) / 2;
 
         stage1 = new Stage(viewport);
 		Gdx.input.setInputProcessor(stage1);
-		change_x = -120;
-		change_y = -100;
+		change_x = -780;
+		change_y = -400;
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-		resumeButton = new TextButton("resume", skin, "small");
-		resumeButton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
-		resumeButton.setPosition(middle_x + change_x, middle_y + change_y);
+		resumeButton = new TextButton("Resume", skin, "small");
 		// listener for touch button
 		resumeButton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
@@ -123,6 +117,8 @@ public class GameScreen implements Screen {
 					}
 			
 		});
+        resumeX = (Gdx.graphics.getWidth() - (int)resumeButton.getWidth()) / 2;
+        resumeY = (Gdx.graphics.getHeight() - (int)resumeButton.getHeight()) / 2;
 		stage1.addActor(resumeButton);
     }
 
@@ -195,8 +191,9 @@ public class GameScreen implements Screen {
 
             batch.begin();
             batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            // batch.draw(resumeButton, centerX,centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             batch.end();
+            resumeButton.setSize(Gdx.graphics.getWidth() / 6 * 2, Gdx.graphics.getHeight() / 6);
+            resumeButton.setPosition(centerX + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, centerY + (Gdx.graphics.getHeight() - resumeButton.getHeight())/2);
             stage1.act();
             stage1.draw();
             pause();
@@ -393,22 +390,10 @@ public class GameScreen implements Screen {
      *
      */
     public void pause() {
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             System.out.println("UNPAUSED");
             paused = false;
         }
-        // if(Gdx.input.isTouched()){
-        //     float touchX = Gdx.input.getX();
-        //     float touchY = Gdx.input.getY();
-
-        //     if(touchX > resumeX && touchX < resumeX + resumeWidth && touchY > resumeY && touchY < resumeY + resumeHeight){
-        //         System.out.println("UNPAUSED");
-        //         paused = false;
-        //     }
-
-
-        // }
     }
 
     /**

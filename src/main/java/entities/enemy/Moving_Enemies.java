@@ -36,7 +36,7 @@ public class Moving_Enemies extends Enemies {
             moveYDistance = POSITIVE_INFINITY;
         }
 
-        System.out.println("moveXDistance = " + moveXDistance + ", moveYDistance = " + moveYDistance + "\nxDistance = " + xDistance + ", yDistance = " + yDistance);
+        // System.out.println("moveXDistance = " + moveXDistance + ", moveYDistance = " + moveYDistance + "\nxDistance = " + xDistance + ", yDistance = " + yDistance);
 
 
         /*
@@ -76,7 +76,6 @@ public class Moving_Enemies extends Enemies {
             }
             else if (yDistance > 0) { // wants to move down
                 if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
-                    System.out.println("enter == true for down");
                     return 'S';
                 } else if(xDistance < 0) { // can't move down, so wants to move right
                     if(gameBoard.getBlock(this.getX() + 1, this.getY()).enter() == true) {
