@@ -50,7 +50,7 @@ public class GameScreen implements Screen {
     // For smooth movement
     private boolean playerMovingXDirection = false;
     private int playerMovementOffset = 0;
-    private int enemyMovementOffset;
+    private int enemyMovementOffset = 0;
 
     private int score = 0;
     
@@ -199,7 +199,7 @@ public class GameScreen implements Screen {
 
         gameboard.draw(batch, time, TILE_SIZE);
         renderPlayer(delta);
-        renderEnemies();
+        renderEnemies(delta);
         font.draw(batch, String.format("%.1f\n%d", time, score), camera.position.x, camera.position.y+Gdx.graphics.getHeight()/2);
 
         batch.end();
@@ -228,10 +228,22 @@ public class GameScreen implements Screen {
 
     // TODO: Complete this function
     // it will only draw the enemies in the array list
-    private void renderEnemies(){
+    private void renderEnemies(float delta){
         for (int i = 0; i < enemies.size(); i++){
-            enemies.get(i).draw(batch, TILE_SIZE);
+            enemies.get(i).draw(batch, TILE_SIZE, enemyMovementOffset);
+
+            if( Math.abs(enemyMovementOffset) - TILE_SIZE/TICKSPEED*delta < 0){
+                enemyMovementOffset = 0;
+            }
+            else if(enemyMovementOffset > 0){
+                enemyMovementOffset -= TILE_SIZE/TICKSPEED*delta;
+            }
+            else if(enemyMovementOffset < 0){
+                enemyMovementOffset += TILE_SIZE/TICKSPEED*delta;
+
+            }
         }
+        enemyMovementOffset-= delta;
     }
 
     /**
@@ -262,6 +274,7 @@ public class GameScreen implements Screen {
                 anEnemy.direction('I', gameboard); // char input doesn't matter
             }
         }
+        enemyMovementOffset = TILE_SIZE;
     }
 
     // check if player coordinates are the same with any enemies and act accordingly
