@@ -3,6 +3,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -14,21 +15,23 @@ public class MainMenuScreen implements Screen {
 	final MazeGame game;
 	private SpriteBatch batch;
 	private BitmapFont font;
+	
+	private Texture backgroundTexture;
 
 	public MainMenuScreen(final MazeGame game) {
 		this.game = game;
+		backgroundTexture = new Texture("Space Background.png");
+		batch = new SpriteBatch();
+		font = new BitmapFont();
 	}
 	
 	public void render(float delta) {
-		batch = new SpriteBatch();
-		font = new BitmapFont();
 		
 		ScreenUtils.clear(Color.BLACK);
-		
-		
 
 		batch.begin();
 		//draw text. Remember that x and y are in meters
+		batch.draw(backgroundTexture, 0, 0);
 		font.getData().setScale(2, 2);
 		font.draw(batch, "Game", Gdx.graphics.getWidth() / 2 - 20, Gdx.graphics.getHeight() / 2 + 40);
 		font.getData().setScale(3, 3);
