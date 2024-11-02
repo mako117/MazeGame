@@ -19,17 +19,25 @@ public class Moving_Enemies extends Enemies {
         int yDistance = this.getY() - aCharacter.getY();
         double moveXDistance;
         double moveYDistance;
+        double POSITIVE_INFINITY = 1.0 / 0.0;
 
         if(xDistance < 0) {
             moveXDistance = Math.sqrt( ((xDistance+1)^2 + yDistance^2) );
-        } else {
+        } else if (xDistance > 0) {
             moveXDistance = Math.sqrt( ((xDistance-1)^2 + yDistance^2) );
+        } else {
+            moveXDistance = POSITIVE_INFINITY;
         }
         if(yDistance < 0) {
             moveYDistance = Math.sqrt( ((yDistance+1)^2 + xDistance^2) );
-        } else {
+        } else if (yDistance > 0) {
             moveYDistance = Math.sqrt( ((yDistance-1)^2 + xDistance^2) );
+        } else {
+            moveYDistance = POSITIVE_INFINITY;
         }
+
+        System.out.println("moveXDistance = " + moveXDistance + ", moveYDistance = " + moveYDistance + "\nxDistance = " + xDistance + ", yDistance = " + yDistance);
+
 
         /*
         If moving along the y-axis will get the enemy closer to the player than moving
@@ -44,20 +52,20 @@ public class Moving_Enemies extends Enemies {
         */
         if(moveYDistance < moveXDistance) {
             if(yDistance < 0) { // wants to move up
-                if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
                     return 'W';
                 } else if(xDistance < 0) { // can't move up, so wants to move right
-                    if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                    if(gameBoard.getBlock(this.getX() + 1, this.getY()).enter() == true) {
                         return 'D';
-                    } else if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) { // can't move right, so tries left
+                    } else if(gameBoard.getBlock(this.getX() - 1, this.getY()).enter() == true) { // can't move right, so tries left
                         return 'A';
                     } else { // moves down
                         return 'S';
                     }
                 } else if(xDistance > 0) { // can't move up, so wants to move left
-                    if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                    if(gameBoard.getBlock(this.getX() - 1, this.getY()).enter() == true) {
                         return 'A';
-                    } else if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) { // can't move left, so tries right
+                    } else if(gameBoard.getBlock(this.getX() + 1, this.getY()).enter() == true) { // can't move left, so tries right
                         return 'D';
                     } else { // moves down
                         return 'S';
@@ -67,20 +75,21 @@ public class Moving_Enemies extends Enemies {
                 }
             }
             else if (yDistance > 0) { // wants to move down
-                if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
+                    System.out.println("enter == true for down");
                     return 'S';
                 } else if(xDistance < 0) { // can't move down, so wants to move right
-                    if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                    if(gameBoard.getBlock(this.getX() + 1, this.getY()).enter() == true) {
                         return 'D';
-                    } else if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX() - 1, this.getY()).enter() == true) {
                         return 'A';
                     } else {
                         return 'W';
                     }
                 } else if(xDistance > 0) { // can't move down, so wants to move left
-                    if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                    if(gameBoard.getBlock(this.getX() - 1, this.getY()).enter() == true) {
                         return 'A';
-                    } else if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX() + 1, this.getY()).enter() == true) {
                         return 'D';
                     } else {
                         return 'W';
@@ -90,17 +99,17 @@ public class Moving_Enemies extends Enemies {
                 }
             } else { // does not want to move on y-axis
                 if(xDistance < 0) {
-                    if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                    if(gameBoard.getBlock(this.getX() + 1, this.getY()).enter() == true) {
                         return 'D';
-                    } else if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX() - 1, this.getY()).enter() == true) {
                         return 'A';
                     } else {
                         return 'I';
                     }
                 } else if (xDistance > 0) {
-                    if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                    if(gameBoard.getBlock(this.getX() - 1, this.getY()).enter() == true) {
                         return 'A';
-                    } else if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX() + 1, this.getY()).enter() == true) {
                         return 'D';
                     } else {
                         return 'I';
@@ -123,20 +132,20 @@ public class Moving_Enemies extends Enemies {
         */
         else {
             if(xDistance < 0) { // wants to move right
-                if(gameBoard.getBlock(aCharacter.getX() + 1, aCharacter.getY()).enter() == true) {
+                if(gameBoard.getBlock(this.getX() + 1, this.getY()).enter() == true) {
                     return 'D';
                 } else if(yDistance < 0) { // can't move right, so wants to move up
-                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
                         return 'W';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
                         return 'S';
                     } else {
                         return 'A';
                     }
                 } else if(yDistance > 0) { // can't move right, so wants to move down
-                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                    if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
                         return 'S';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
                         return 'W';
                     } else {
                         return 'A';
@@ -146,20 +155,20 @@ public class Moving_Enemies extends Enemies {
                 }
             }
             else if (xDistance > 0) { // wants to move left
-                if(gameBoard.getBlock(aCharacter.getX() - 1, aCharacter.getY()).enter() == true) {
+                if(gameBoard.getBlock(this.getX() - 1, this.getY()).enter() == true) {
                     return 'A';
                 } else if(yDistance < 0) { // can't move left, so wants to move up
-                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
                         return 'W';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
                         return 'S';
                     } else {
                         return 'D';
                     }
                 } else if (yDistance > 0) { // can't move left, so wants to move down
-                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                    if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
                         return 'S';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
                         return 'W';
                     } else {
                         return 'D';
@@ -169,17 +178,17 @@ public class Moving_Enemies extends Enemies {
                 }
             } else { // does not want to move on x-axis
                 if(yDistance < 0) {
-                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
                         return 'W';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
                         return 'S';
                     } else {
                         return 'I';
                     }
                 } else if (yDistance > 0) {
-                    if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() - 1).enter() == true) {
+                    if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
                         return 'S';
-                    } else if(gameBoard.getBlock(aCharacter.getX(), aCharacter.getY() + 1).enter() == true) {
+                    } else if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
                         return 'W';
                     } else {
                         return 'I';
