@@ -176,9 +176,10 @@ public class GameScreen implements Screen {
         tickCount -= delta;
         if(tickCount < 0){
             tickCount = TICKSPEED;
-            logic();
-        }
+            moveEnemies();
 
+        }
+        logic();
         input();
 
         // System.out.println(time);
@@ -252,8 +253,6 @@ public class GameScreen implements Screen {
      */
     private void logic() {
 
-
-        moveEnemies();
         checkPlayerCollision();
         checkIfExitingMaze();
         checkScore();
