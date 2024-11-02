@@ -24,6 +24,7 @@ public class MainMenuScreen implements Screen {
 		
 		font.setUseIntegerPositions(false);
 		font.getData().setScale(viewport.getWorldHeight()/Gdx.graphics.getHeight());
+		
 		//System.out.println("111 " + viewport.getWorldHeight() + " 2222 " + Gdx.graphics.getHeight());
 		ScreenUtils.clear(Color.BLACK);
 		
@@ -37,7 +38,7 @@ public class MainMenuScreen implements Screen {
 		batch.end();
 
 		if (Gdx.input.isTouched()) {
-			game.setScreen(new GameScreen());
+			game.setScreen(new GameScreen(game));
 			dispose();
 		}
 	}
@@ -75,6 +76,8 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		batch.dispose();
+		font.dispose();
 		
 	}
 }
