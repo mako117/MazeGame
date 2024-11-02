@@ -194,7 +194,7 @@ public class GameScreen implements Screen {
         renderPlayer(delta);
         renderEnemies();
         font.draw(batch, String.format("%.1f\n%d", time, score), camera.position.x, camera.position.y+Gdx.graphics.getHeight()/2);
-        
+
         batch.end();
     }
 
@@ -363,7 +363,8 @@ public class GameScreen implements Screen {
      *
      */
     public void dispose() {
-
+        batch.dispose();
+        font.dispose();
     }
 
     /**
