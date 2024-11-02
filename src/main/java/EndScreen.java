@@ -12,17 +12,19 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class EndScreen implements Screen{
 	
-	int score = 0;
-	float time = 0;
-	MazeGame game;
+	private int score;
+	private float time;
+	private boolean condition;
+	private MazeGame game;
 	
 	private SpriteBatch batch;
 	private BitmapFont font;
 	
-	public EndScreen(MazeGame game, int score, float time) {
+	public EndScreen(MazeGame game, int score, float time, boolean condition) {
 		this.game = game;
 		this.score = score;
 		this.time = time;
+		this.condition = condition;
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class EndScreen implements Screen{
 		
 		ScreenUtils.clear(Color.BLACK);
 		
-		if(score > 0) {
+		if(condition) {
 			batch.begin();
 			font.getData().setScale(3, 3);
 			font.draw(batch, "You Win", Gdx.graphics.getWidth() / 2 - 10, Gdx.graphics.getHeight() / 2 + 40);
