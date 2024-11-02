@@ -455,6 +455,8 @@ public class GameScreen implements Screen {
         batch.dispose();
         font.dispose();
         backgroundTexture.dispose();
+        stage1.dispose();
+        stage0.dispose();
     }
 
     /**
