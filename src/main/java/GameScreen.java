@@ -53,6 +53,9 @@ public class GameScreen implements Screen {
     
     private float time = 0;
 
+    private final float TICKSPEED = 0.6f;
+    private float tickCount = TICKSPEED;
+
     private boolean paused;
 
     GameScreen() {
@@ -156,8 +159,16 @@ public class GameScreen implements Screen {
             return;
         }
 
-        logic();
         time+= Gdx.graphics.getDeltaTime();
+
+        tickCount -= delta;
+        if(tickCount < 0){
+            tickCount = TICKSPEED;
+            logic();
+        }
+
+        input();
+
         // System.out.println(time);
         // update camera position
         if(playerMovingXDirection){
@@ -175,7 +186,7 @@ public class GameScreen implements Screen {
         batch.begin();
 
         gameboard.draw(batch, time, TILE_SIZE);
-        renderPlayer();
+        renderPlayer(delta);
         renderEnemies();
 
 
@@ -185,18 +196,18 @@ public class GameScreen implements Screen {
     /**
      * Draw the player to the game screen
      */
-    private void renderPlayer() {
+    private void renderPlayer(float delta) {
 //        System.out.println(playerMovementOffset);
         player.draw(batch,TILE_SIZE, playerMovementOffset);
 
-        if( Math.abs(playerMovementOffset) - TILE_SIZE/INPUT_TIMEOUT < 0){
+        if( Math.abs(playerMovementOffset) - TILE_SIZE/TICKSPEED*delta < 0){
             playerMovementOffset = 0;
         }
         else if(playerMovementOffset > 0){
-            playerMovementOffset -= TILE_SIZE/INPUT_TIMEOUT;
+            playerMovementOffset -= TILE_SIZE/TICKSPEED*delta;
         }
         else if(playerMovementOffset < 0){
-            playerMovementOffset += TILE_SIZE/INPUT_TIMEOUT;
+            playerMovementOffset += TILE_SIZE/TICKSPEED*delta;
 
         }
 
@@ -216,7 +227,7 @@ public class GameScreen implements Screen {
      * This includes collision, moving enemies, checking/applying rewards/punishments
      */
     private void logic() {
-        input();
+
 
         moveEnemies();
         checkPlayerCollision();
