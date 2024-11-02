@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import directions.Direction;
@@ -41,9 +42,9 @@ public class GameScreen implements Screen {
     private Character player;
     private ArrayList<Enemies> enemies;
 
-    private final int BOARD_WIDTH = 20;
-    private final int BOARD_HEIGHT = 30;
-    private final int TILE_SIZE = 100; // size of tile
+    private final int BOARD_WIDTH = 15;
+    private final int BOARD_HEIGHT = 20;
+    private final int TILE_SIZE = 50; // size of tile
 
     // For smooth movement
     private boolean playerMovingXDirection = false;
@@ -54,7 +55,7 @@ public class GameScreen implements Screen {
     
     private float time = 0;
 
-    private final float TICKSPEED = 0.6f;
+    private final float TICKSPEED = 0.3f;
     private float tickCount = TICKSPEED;
 
     // Slow speed of input reading
@@ -68,7 +69,7 @@ public class GameScreen implements Screen {
     GameScreen(MazeGame game) {
     	this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        viewport = new FillViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), camera);
+        viewport = new ExtendViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         camera.update();
 
 //        background = new Texture();
@@ -225,32 +226,30 @@ public class GameScreen implements Screen {
 //        System.out.println(playerMovementOffset);
         player.draw(batch,TILE_SIZE, playerMovementOffset);
 
-        if( Math.abs(playerMovementOffset) - TILE_SIZE/TICKSPEED*delta < 0){
+        if( Math.abs(playerMovementOffset) - TILE_SIZE*delta < 0){
             playerMovementOffset = 0;
         }
         else if(playerMovementOffset > 0){
-            playerMovementOffset -= TILE_SIZE/TICKSPEED*delta;
+            playerMovementOffset -= TILE_SIZE*delta;
         }
         else if(playerMovementOffset < 0){
-            playerMovementOffset += TILE_SIZE/TICKSPEED*delta;
+            playerMovementOffset += TILE_SIZE*delta;
 
         }
 
     }
 
 
-    // TODO: Complete this function
     // it will only draw the enemies in the array list
     private void renderEnemies(float delta){
         for (int i = 0; i < enemies.size(); i++){
             enemies.get(i).draw(batch, TILE_SIZE, enemyMovementOffset);
-
-            if(enemyMovementOffset <= 0){
-                enemyMovementOffset = 0;
-            }
-            else{
-                enemyMovementOffset -= TILE_SIZE / TICKSPEED * delta;
-            }
+        }
+        if(enemyMovementOffset - TILE_SIZE * delta < 0){
+            enemyMovementOffset = 0;
+        }
+        else{
+            enemyMovementOffset -= TILE_SIZE * delta;
         }
     }
 
