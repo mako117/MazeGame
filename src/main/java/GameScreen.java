@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import directions.Direction;
 import entities.Character;
@@ -65,8 +65,8 @@ public class GameScreen implements Screen {
 
     GameScreen(MazeGame game) {
     	this.game = game;
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        viewport = new StretchViewport(BOARD_WIDTH*TILE_SIZE, BOARD_HEIGHT*TILE_SIZE, camera);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        viewport = new FillViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), camera);
         camera.update();
 
 //        background = new Texture();
@@ -342,7 +342,7 @@ public class GameScreen implements Screen {
      * @param height
      */
     public void resize(int width, int height) {
-//        viewport.update(width, height,true);
+        viewport.update(width, height, true);
 //        batch.setProjectionMatrix(camera.combined);
     }
 
