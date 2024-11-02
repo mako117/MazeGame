@@ -30,6 +30,7 @@ public class Character {
         setSpeed(1);
         setRewardsCollected(0);
         this.playerTexture = playerTexture;
+       this.playerTexture.setRegion(0 ,0, 32, 32);
     }
     /**
      * Moves the entities.Character one cell north, east, south, or west if there is nothing in their way.
@@ -166,22 +167,22 @@ public class Character {
         if(offset != 0){
             switch(facing){
                 case Up:
-                    batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x, tileSize*y+offset, tileSize, tileSize);
+                    batch.draw(playerTexture, tileSize*x, tileSize*y+offset, tileSize, tileSize);
                     break;
                 case Down:
-                    batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x, tileSize*y+offset, tileSize, tileSize);
+                    batch.draw(playerTexture, tileSize*x, tileSize*y+offset, tileSize, tileSize);
                     break;
                 case Left:
-                    batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x+offset, tileSize*y, tileSize, tileSize);
+                    batch.draw(playerTexture, tileSize*x+offset, tileSize*y, tileSize, tileSize);
                     break;
                 case Right:
-                    batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x+offset, tileSize*y, tileSize, tileSize);
+                    batch.draw(playerTexture, tileSize*x+offset, tileSize*y, tileSize, tileSize);
                     break;
             }
         }
         else {
             // player is standing still
-            batch.draw(new TextureRegion(playerTexture,0 ,0, 32, 32), tileSize*x, tileSize*y, tileSize, tileSize);
+            batch.draw(playerTexture, tileSize*x, tileSize*y, tileSize, tileSize);
         }
 
     }

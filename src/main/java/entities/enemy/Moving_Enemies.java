@@ -12,7 +12,7 @@ public class Moving_Enemies extends Enemies {
 
 
     public Moving_Enemies(int init_x, int init_y, TextureRegion texture) {
-        super(init_x,init_y, new TextureRegion(new Texture("temp_ptero.png")));
+        super(init_x,init_y, new TextureRegion(new Texture("DinoSprite.png"),4,1, 17,17));
     }
     public char find_player(Character aCharacter, Board gameBoard) {
         int xDistance = this.getX() - aCharacter.getX();

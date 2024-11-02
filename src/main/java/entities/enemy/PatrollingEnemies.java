@@ -12,7 +12,7 @@ public class PatrollingEnemies extends Enemies {
     int yMin;
 
     public PatrollingEnemies(int init_x, int init_y, Direction d, int xMin, int xMax, int yMin, int yMax, TextureRegion texture) {
-        super(init_x, init_y, new TextureRegion(new Texture("temp_ptero.png")));
+        super(init_x, init_y, new TextureRegion(new Texture("ptero.png"),0,0, 31,16));
         setFacing(d);
         setXMin(xMin);
         setXMax(xMax);

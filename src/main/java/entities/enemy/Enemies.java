@@ -95,20 +95,20 @@ import board.*;
         if (offset != 0) {
             switch (facing) {
                 case Up:
-                    batch.draw(new TextureRegion(enemy_texture, 0, 0, 32, 32), tileSize * x, tileSize * y - offset, tileSize, tileSize);
+                    batch.draw(enemy_texture, tileSize * x, tileSize * y - offset, tileSize, tileSize);
                     break;
                 case Down:
-                    batch.draw(new TextureRegion(enemy_texture, 0, 0, 32, 32), tileSize * x, tileSize * y + offset, tileSize, tileSize);
+                    batch.draw(enemy_texture, tileSize * x, tileSize * y + offset, tileSize, tileSize);
                     break;
                 case Left:
-                    batch.draw(new TextureRegion(enemy_texture, 0, 0, 32, 32), tileSize * x + offset, tileSize * y, tileSize, tileSize);
+                    batch.draw(enemy_texture, tileSize * x + offset, tileSize * y, tileSize, tileSize);
                     break;
                 case Right:
-                    batch.draw(new TextureRegion(enemy_texture, 0, 0, 32, 32), tileSize * x -offset, tileSize * y, tileSize, tileSize);
+                    batch.draw(enemy_texture, tileSize * x - offset, tileSize * y, tileSize, tileSize);
                     break;
             }
         } else {
-            batch.draw(new TextureRegion(enemy_texture, 0, 0, 32, 32), tileSize * x, tileSize * y, tileSize, tileSize);
+            batch.draw(enemy_texture, tileSize * x, tileSize * y, tileSize, tileSize);
         }
     }
 }
