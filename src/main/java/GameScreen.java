@@ -58,6 +58,9 @@ public class GameScreen implements Screen {
 
     private boolean paused;
 
+    private TextureRegion resumeButton;
+    private float resumeX, resumeY, resumeWidth, resumeHeight;
+
     GameScreen() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new StretchViewport(BOARD_WIDTH*TILE_SIZE, BOARD_HEIGHT*TILE_SIZE, camera);
@@ -78,8 +81,11 @@ public class GameScreen implements Screen {
         pauseTexture = new TextureRegion(new Texture("temp_pause.jpg"));
         System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
         System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
-
-
+        resumeButton = new TextureRegion(new Texture("temp_resume_button.png"));
+        resumeWidth = resumeButton.getRegionWidth();
+        resumeHeight = resumeButton.getRegionHeight();
+        resumeX = (Gdx.graphics.getWidth() - resumeWidth) / 2;
+        resumeY = (Gdx.graphics.getHeight() - resumeHeight) / 2;
 
     }
 
@@ -154,6 +160,7 @@ public class GameScreen implements Screen {
 
             batch.begin();
             batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            batch.draw(resumeButton, centerX,centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             batch.end();
             pause();
             return;
@@ -337,6 +344,17 @@ public class GameScreen implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             System.out.println("UNPAUSED");
             paused = false;
+        }
+        if(Gdx.input.isTouched()){
+            float touchX = Gdx.input.getX();
+            float touchY = Gdx.input.getY();
+
+            if(touchX > resumeX && touchX < resumeX + resumeWidth && touchY > resumeY && touchY < resumeY + resumeHeight){
+                System.out.println("UNPAUSED");
+                paused = false;
+            }
+
+
         }
     }
 
