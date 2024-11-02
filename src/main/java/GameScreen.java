@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -20,11 +21,13 @@ import java.util.ArrayList;
 
 
 public class GameScreen implements Screen {
+	final MazeGame game;
 
     private Camera camera;
     private Viewport viewport;
 
     private SpriteBatch batch;
+    private BitmapFont font;
 
     // private TextureRegion blockTexture;
     private TextureRegion playerTexture;
@@ -61,13 +64,15 @@ public class GameScreen implements Screen {
     private TextureRegion resumeButton;
     private float resumeX, resumeY, resumeWidth, resumeHeight;
 
-    GameScreen() {
+    GameScreen(MazeGame game) {
+    	this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new StretchViewport(BOARD_WIDTH*TILE_SIZE, BOARD_HEIGHT*TILE_SIZE, camera);
         camera.update();
 
 //        background = new Texture();
         batch = new SpriteBatch();
+        font = new BitmapFont();
 
         playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
         player = new Character(playerTexture);
@@ -195,7 +200,7 @@ public class GameScreen implements Screen {
         gameboard.draw(batch, time, TILE_SIZE);
         renderPlayer(delta);
         renderEnemies();
-
+        font.draw(batch, String.format("%.1f\n%d", time, score), camera.position.x, camera.position.y+Gdx.graphics.getHeight()/2);
 
         batch.end();
     }
@@ -268,7 +273,7 @@ public class GameScreen implements Screen {
             int anEnemyX = anEnemy.getX();
             int anEnemyY = anEnemy.getY();
             if(playerX == anEnemyX && playerY == anEnemyY) {
-                playerLoses();
+                playerWins();
                 break;
             }
         }
@@ -300,7 +305,7 @@ public class GameScreen implements Screen {
      */
     public void checkScore() {
         if(this.score < 0) {
-            playerLoses();
+            playerWins();
         }
     }
 
@@ -318,7 +323,7 @@ public class GameScreen implements Screen {
 
     // TODO: write code for if the player wins
     private void playerWins() {
-
+    	game.setScreen(new EndScreen(game,score,time));
     }
 
     // TODO: write code for if player loses
@@ -376,7 +381,8 @@ public class GameScreen implements Screen {
      *
      */
     public void dispose() {
-
+        batch.dispose();
+        font.dispose();
     }
 
     /**

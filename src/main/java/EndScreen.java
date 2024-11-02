@@ -6,18 +6,31 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class MainMenuScreen implements Screen {
-	final MazeGame game;
+public class EndScreen implements Screen{
+	
+	int score = 0;
+	float time = 0;
+	MazeGame game;
+	
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private FitViewport viewport;
 	
-
-	public MainMenuScreen(final MazeGame game) {
+	public EndScreen(MazeGame game, int score, float time) {
 		this.game = game;
+		this.score = score;
+		this.time = time;
 	}
-	
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void render(float delta) {
+		// TODO Auto-generated method stub
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		viewport = new FitViewport(8,5);
@@ -33,19 +46,28 @@ public class MainMenuScreen implements Screen {
 
 		batch.begin();
 		//draw text. Remember that x and y are in meters
-		font.draw(batch, "Welcome to Drop!!! ", -0.5f,0);
-		font.draw(batch, "Tap anywhere to begin!", -0.5f,-0.5f);
-		batch.end();
-
-		if (Gdx.input.isTouched()) {
-			game.setScreen(new GameScreen(game));
-			dispose();
+		
+		
+		
+		if(score > 0) {
+			font.draw(batch, "Game Win, End Screen ", -0.5f,0);
+			font.draw(batch, "Tap anywhere to try again begin!", -0.5f,-0.5f);
+			batch.end();
+			if (Gdx.input.isTouched()) {
+				game.setScreen(new GameScreen(game));
+				dispose();
+			}
 		}
-	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
+		else {
+			font.draw(batch, "Game Loss, End Screen ", -0.5f,0);
+			font.draw(batch, "Tap anywhere to try again begin!", -0.5f,-0.5f);
+			batch.end();
+			if (Gdx.input.isTouched()) {
+				game.setScreen(new GameScreen(game));
+				dispose();
+			}
+		}
+		
 		
 	}
 
@@ -76,8 +98,7 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		batch.dispose();
-		font.dispose();
 		
 	}
+
 }
