@@ -13,10 +13,10 @@ import entities.Character;
 
 
 public class MazeGame extends Game {
-    GameScreen gameScreen;
+    //GameScreen gameScreen;
 
     public void create(){
-        gameScreen = new GameScreen(this);
+        //gameScreen = new GameScreen(this);
         setScreen(new MainMenuScreen(this));
     }
 
@@ -27,12 +27,12 @@ public class MazeGame extends Game {
 
     @Override
     public void resize(int width, int height) {
-        gameScreen.resize(width, height);
+        //gameScreen.resize(width, height);
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        gameScreen.dispose();
+        //gameScreen.dispose();
     }
 }
