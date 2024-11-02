@@ -48,14 +48,14 @@ public class GameScreen implements Screen {
 
     // For smooth movement
     private boolean playerMovingXDirection = false;
-    private int playerMovementOffset = 0;
-    private int enemyMovementOffset = 0;
+    private float playerMovementOffset = 0;
+    private float enemyMovementOffset = 0;
 
     private int score = 0;
     
     private float time = 0;
 
-    private final float TICKSPEED = 0.3f;
+    private final float TICKSPEED = 0.4f;
     private float tickCount = TICKSPEED;
 
     // Slow speed of input reading
@@ -69,7 +69,8 @@ public class GameScreen implements Screen {
     GameScreen(MazeGame game) {
     	this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        viewport = new ExtendViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+        viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+//        viewport = new ExtendViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         camera.update();
 
 //        background = new Texture();
@@ -202,7 +203,8 @@ public class GameScreen implements Screen {
 
         batch.begin();
 
-        batch.draw(backgroundTexture, camera.position.x-viewport.getScreenWidth()/2,camera.position.y-viewport.getScreenHeight()/2);
+        batch.draw(backgroundTexture, camera.position.x-viewport.getScreenWidth()/2,camera.position.y-viewport.getScreenHeight()/2,
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         gameboard.draw(batch, time, TILE_SIZE);
         renderPlayer(delta);
         renderEnemies(delta);
@@ -226,14 +228,14 @@ public class GameScreen implements Screen {
 //        System.out.println(playerMovementOffset);
         player.draw(batch,TILE_SIZE, playerMovementOffset);
 
-        if( Math.abs(playerMovementOffset) - TILE_SIZE*delta < 0){
+        if( Math.abs(playerMovementOffset) - TILE_SIZE/TICKSPEED*delta < 0){
             playerMovementOffset = 0;
         }
         else if(playerMovementOffset > 0){
-            playerMovementOffset -= TILE_SIZE*delta;
+            playerMovementOffset -= TILE_SIZE/TICKSPEED*delta;
         }
         else if(playerMovementOffset < 0){
-            playerMovementOffset += TILE_SIZE*delta;
+            playerMovementOffset += TILE_SIZE/TICKSPEED*delta;
 
         }
 
@@ -245,11 +247,11 @@ public class GameScreen implements Screen {
         for (int i = 0; i < enemies.size(); i++){
             enemies.get(i).draw(batch, TILE_SIZE, enemyMovementOffset);
         }
-        if(enemyMovementOffset - TILE_SIZE * delta < 0){
+        if(enemyMovementOffset < 0){
             enemyMovementOffset = 0;
         }
         else{
-            enemyMovementOffset -= TILE_SIZE * delta;
+            enemyMovementOffset -= TILE_SIZE/TICKSPEED*delta;
         }
     }
 

@@ -160,7 +160,7 @@ public class Character {
      * @param tileSize
      * @param offset
      */
-    public void draw(Batch batch, int tileSize, int offset) {
+    public void draw(Batch batch, int tileSize, float offset) {
 
         // this will allow for smooth transition between tiles
         // TODO: replace the playerTexture with walking sprite when offset != 0

@@ -91,7 +91,7 @@ import board.*;
         this.facing = d;
     }
 
-    public void draw(Batch batch, int tileSize, int offset) {
+    public void draw(Batch batch, int tileSize, float offset) {
         if (offset != 0) {
             switch (facing) {
                 case Up:
