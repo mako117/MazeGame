@@ -33,10 +33,10 @@ public class EndScreen implements Screen{
 	private Stage stage1;
 	private Stage stage2;
 	
-	int change_x = 0;
-	int change_y = 0;
-	int middle_x = Gdx.graphics.getWidth() / 2;
-	int middle_y = Gdx.graphics.getHeight() / 2;
+	private int change_x = 0;
+	private int change_y = 0;
+	private int middle_x = Gdx.graphics.getWidth() / 2;
+	private int middle_y = Gdx.graphics.getHeight() / 2;
 	
 	
 	public EndScreen(MazeGame game, int score, float time, boolean condition) {

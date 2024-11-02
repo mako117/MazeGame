@@ -25,10 +25,10 @@ public class MainMenuScreen implements Screen {
 	private Button exitbutton;
 	private Stage stage;
 	
-	int change_x = 0;
-	int change_y = 0;
-	int middle_x = Gdx.graphics.getWidth() / 2;
-	int middle_y = Gdx.graphics.getHeight() / 2;
+	private int change_x = 0;
+	private int change_y = 0;
+	private int middle_x = Gdx.graphics.getWidth() / 2;
+	private int middle_y = Gdx.graphics.getHeight() / 2;
 
 	public MainMenuScreen(final MazeGame game) {
 		this.game = game;
