@@ -38,7 +38,7 @@ public abstract class Block {
     }
     public abstract boolean enter();
 
-    public void draw(Batch batch) {
-        batch.draw(new TextureRegion(blockTexture), 100*x, 100*y, 100, 100);
+    public void draw(Batch batch, int tileSize) {
+        batch.draw(new TextureRegion(blockTexture), tileSize*x, tileSize*y, tileSize, tileSize);
     }
 }

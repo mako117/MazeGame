@@ -216,7 +216,7 @@ public class Board {
         for(int i = 0; i < getWidth(); i++) {
             for(int j = 0; j < getHeight(); j++) {
                 Block blockToDraw = getBlock(i, j);
-                blockToDraw.draw(batch);
+                blockToDraw.draw(batch,tilesize);
             }
         }
         for(int i = 0; i < array_bonReward.size(); i++) {
