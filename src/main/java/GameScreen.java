@@ -51,7 +51,7 @@ public class GameScreen implements Screen {
     private float playerMovementOffset = 0;
     private float enemyMovementOffset = 0;
 
-    private int score = 0;
+    private int score = 10;
     
     private float time = 0;
 
@@ -403,6 +403,7 @@ public class GameScreen implements Screen {
     public void dispose() {
         batch.dispose();
         font.dispose();
+        backgroundTexture.dispose();
     }
 
     /**
