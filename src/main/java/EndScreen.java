@@ -18,8 +18,6 @@ public class EndScreen implements Screen{
 	
 	private SpriteBatch batch;
 	private BitmapFont font;
-	private Viewport viewport;
-	private Camera camera;
 	
 	public EndScreen(MazeGame game, int score, float time) {
 		this.game = game;
@@ -38,26 +36,31 @@ public class EndScreen implements Screen{
 		// TODO Auto-generated method stub
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        viewport = new StretchViewport(2000, 3000, camera);
-        camera.update();
 		
-		//System.out.println("111 " + viewport.getWorldHeight() + " 2222 " + Gdx.graphics.getHeight());
 		ScreenUtils.clear(Color.BLACK);
-		
-		//viewport.apply();
-		batch.setProjectionMatrix(viewport.getCamera().combined);
 		
 		if(score > 0) {
 			batch.begin();
-			font.draw(batch, "You Win", camera.position.x, camera.position.y);
-			font.draw(batch, "Click to play again", camera.position.x, camera.position.y - 100);
+			font.getData().setScale(3, 3);
+			font.draw(batch, "You Win", Gdx.graphics.getWidth() / 2 - 10, Gdx.graphics.getHeight() / 2 + 40);
+			font.getData().setScale(1, 1);
+			font.draw(batch, "time: " + time, Gdx.graphics.getWidth() / 2 - 10, Gdx.graphics.getHeight() / 2);
+			font.getData().setScale(1, 1);
+			font.draw(batch, "score: " + score, Gdx.graphics.getWidth() / 2 - 10, Gdx.graphics.getHeight() / 2 - 40);
+			font.getData().setScale(2, 2);
+			font.draw(batch, "Click to start again", Gdx.graphics.getWidth() / 2 - 10, Gdx.graphics.getHeight() / 2 - 100);
 			batch.end();
 		}
 		else {
 			batch.begin();
-			font.draw(batch, "You lose", camera.position.x, camera.position.y);
-			font.draw(batch, "Click to try again", camera.position.x, camera.position.y - 100);
+			font.getData().setScale(3, 3);
+			font.draw(batch, "You lose", Gdx.graphics.getWidth() / 2 - 80, Gdx.graphics.getHeight() / 2 + 80);
+			font.getData().setScale(1.5f, 1.5f);
+			font.draw(batch, "time: " + (int)time, Gdx.graphics.getWidth() / 2 - 80, Gdx.graphics.getHeight() / 2 + 10);
+			font.getData().setScale(1.5f, 1.5f);
+			font.draw(batch, "score: " + score, Gdx.graphics.getWidth() / 2 - 80, Gdx.graphics.getHeight() / 2 - 50);
+			font.getData().setScale(2, 2);
+			font.draw(batch, "Click to try again", Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100);
 			batch.end();
 		}
 		
