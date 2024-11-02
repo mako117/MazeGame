@@ -285,7 +285,7 @@ public class GameScreen implements Screen {
             int anEnemyX = anEnemy.getX();
             int anEnemyY = anEnemy.getY();
             if(playerX == anEnemyX && playerY == anEnemyY) {
-                playerWins();
+                playerEnd(false);
                 break;
             }
         }
@@ -296,7 +296,7 @@ public class GameScreen implements Screen {
         int playerY = player.getY();
         int playerRewardCnt = player.getRewardsCollected();
         if((gameboard.getEnd().getXPosition() == playerX) && (gameboard.getEnd().getYPosition() == playerY) && (playerRewardCnt == gameboard.getTotalRegRewardCnt())) {
-            playerWins();
+            playerEnd(true);
         }
     }
 
@@ -317,7 +317,7 @@ public class GameScreen implements Screen {
      */
     public void checkScore() {
         if(this.score < 0) {
-            playerWins();
+            playerEnd(false);
         }
     }
 
@@ -334,8 +334,9 @@ public class GameScreen implements Screen {
     }
 
     // TODO: write code for if the player wins
-    private void playerWins() {
-    	game.setScreen(new EndScreen(game,score,time));
+    private void playerEnd(boolean condition) {
+    	game.setScreen(new EndScreen(game,score,time,condition));
+    	dispose();
     }
 
     // TODO: write code for if player loses
