@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 
 public class GameScreen implements Screen {
+	final MazeGame game;
 
     private Camera camera;
     private Viewport viewport;
@@ -58,7 +59,8 @@ public class GameScreen implements Screen {
 
     private boolean paused;
 
-    GameScreen() {
+    GameScreen(MazeGame game) {
+    	this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new StretchViewport(BOARD_WIDTH*TILE_SIZE, BOARD_HEIGHT*TILE_SIZE, camera);
         camera.update();
@@ -261,7 +263,7 @@ public class GameScreen implements Screen {
             int anEnemyX = anEnemy.getX();
             int anEnemyY = anEnemy.getY();
             if(playerX == anEnemyX && playerY == anEnemyY) {
-                playerLoses();
+                playerWins();
                 break;
             }
         }
@@ -293,7 +295,7 @@ public class GameScreen implements Screen {
      */
     public void checkScore() {
         if(this.score < 0) {
-            playerLoses();
+            playerWins();
         }
     }
 
@@ -311,7 +313,7 @@ public class GameScreen implements Screen {
 
     // TODO: write code for if the player wins
     private void playerWins() {
-
+    	game.setScreen(new EndScreen(game,score,time));
     }
 
     // TODO: write code for if player loses
