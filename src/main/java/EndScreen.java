@@ -87,7 +87,7 @@ public class EndScreen implements Screen{
 		});
 		stage2.addActor(tryagainbutton);
 		
-		change_x = -80;
+		change_x = -85;
 		change_y = -200;
 		
 		winexitbutton = new TextButton("Exit", skin, "small");
