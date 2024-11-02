@@ -22,7 +22,7 @@ public class MainMenuScreen implements Screen {
 		this.game = game;
 		backgroundTexture = new Texture("Space Background.png");
 		batch = new SpriteBatch();
-		font = new BitmapFont();
+		font = new BitmapFont(Gdx.files.internal("comic_sans.fnt"));
 	}
 	
 	public void render(float delta) {
@@ -33,9 +33,9 @@ public class MainMenuScreen implements Screen {
 		//draw text. Remember that x and y are in meters
 		batch.draw(backgroundTexture, 0, 0);
 		font.getData().setScale(2, 2);
-		font.draw(batch, "Game", Gdx.graphics.getWidth() / 2 - 20, Gdx.graphics.getHeight() / 2 + 40);
-		font.getData().setScale(3, 3);
-		font.draw(batch, "Click to Start", Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 40);
+		font.draw(batch, "Game", Gdx.graphics.getWidth() / 2 - 80, Gdx.graphics.getHeight() / 2 + 40);
+		font.getData().setScale(1.5f, 1.5f);
+		font.draw(batch, "Click to Start", Gdx.graphics.getWidth() / 2 - 160, Gdx.graphics.getHeight() / 2 - 40);
 		batch.end();
 
 		if (Gdx.input.isTouched()) {
