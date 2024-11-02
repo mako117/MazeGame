@@ -1,8 +1,6 @@
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,12 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class EndScreen implements Screen{
 	
@@ -39,6 +33,12 @@ public class EndScreen implements Screen{
 	private Stage stage1;
 	private Stage stage2;
 	
+	int change_x = 0;
+	int change_y = 0;
+	int middle_x = Gdx.graphics.getWidth() / 2;
+	int middle_y = Gdx.graphics.getHeight() / 2;
+	
+	
 	public EndScreen(MazeGame game, int score, float time, boolean condition) {
 		this.game = game;
 		this.score = score;
@@ -56,9 +56,12 @@ public class EndScreen implements Screen{
 		
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 		
+		change_x = -140;
+		change_y = -120;
+		
 		playagainbutton = new TextButton("Play Again", skin, "small");
 		playagainbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
-		playagainbutton.setPosition(Gdx.graphics.getWidth() / 2 - 150, Gdx.graphics.getHeight() / 2 - 120);
+		playagainbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
 		playagainbutton.addListener(new ChangeListener() {
@@ -72,7 +75,7 @@ public class EndScreen implements Screen{
 		
 		tryagainbutton = new TextButton("Try Again", skin, "small");
 		tryagainbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
-		tryagainbutton.setPosition(Gdx.graphics.getWidth() / 2 - 150, Gdx.graphics.getHeight() / 2 - 120);
+		tryagainbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
 		tryagainbutton.addListener(new ChangeListener() {
@@ -84,9 +87,12 @@ public class EndScreen implements Screen{
 		});
 		stage2.addActor(tryagainbutton);
 		
+		change_x = -80;
+		change_y = -200;
+		
 		winexitbutton = new TextButton("Exit", skin, "small");
-		winexitbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
-		winexitbutton.setPosition(Gdx.graphics.getWidth() / 2 - 150, Gdx.graphics.getHeight() / 2 - 200);
+		winexitbutton.setSize(Gdx.graphics.getWidth() / 12, Gdx.graphics.getHeight() / 12);
+		winexitbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
 		winexitbutton.addListener(new ChangeListener() {
@@ -99,8 +105,8 @@ public class EndScreen implements Screen{
 		stage1.addActor(winexitbutton);
 		
 		lossexitbutton = new TextButton("Exit", skin, "small");
-		lossexitbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
-		lossexitbutton.setPosition(Gdx.graphics.getWidth() / 2 - 150, Gdx.graphics.getHeight() / 2 - 200);
+		lossexitbutton.setSize(Gdx.graphics.getWidth() / 12, Gdx.graphics.getHeight() / 12);
+		lossexitbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
 		lossexitbutton.addListener(new ChangeListener() {
@@ -126,19 +132,28 @@ public class EndScreen implements Screen{
 		
 		batch.begin();
 		batch.draw(backgroundTexture, 0, 0);
+		change_x = -160;
+		change_y = 240;
 		if(condition) {
 			font.getData().setScale(2, 2);
-			font.draw(batch, "You Win", Gdx.graphics.getWidth() / 2 - 160, Gdx.graphics.getHeight() / 2 + 240);
+			font.draw(batch, "You Win", middle_x + change_x, middle_y + change_y);
 		}
 		else {
 			font.getData().setScale(2, 2);
-			font.draw(batch, "You lose", Gdx.graphics.getWidth() / 2 - 160, Gdx.graphics.getHeight() / 2 + 240);
+			font.draw(batch, "You lose", middle_x + change_x, middle_y + change_y);
 		}
 		
+		change_x = -100;
+		change_y = 80;
+		
 		font.getData().setScale(1, 1);
-		font.draw(batch, String.format("%s%.1f", "Time: ", time), Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 80);
+		font.draw(batch, String.format("%s%.1f", "Time: ", time), middle_x + change_x, middle_y + change_y);
+		
+		change_x = -100;
+		change_y = 20;
+		
 		font.getData().setScale(1, 1);
-		font.draw(batch, "score: " + score, Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 20);
+		font.draw(batch, "Score: " + score, middle_x + change_x, middle_y + change_y);
 		
 		batch.end();
 		
