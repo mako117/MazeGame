@@ -2,6 +2,7 @@ import board.Board;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,7 +28,7 @@ import org.lwjgl.opengl.GL20;
 import java.util.ArrayList;
 
 
-public class GameScreen implements Screen {
+public class GameScreen extends ScreenAdapter {
 	final MazeGame game;
 
     private OrthographicCamera camera;
@@ -85,7 +86,7 @@ public class GameScreen implements Screen {
     private float fullscreenTimer = 0f;
     private float zoomFactor = 2;
 
-    GameScreen(MazeGame game) {
+    GameScreen(final MazeGame game) {
     	this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         fullscreenCamera = new OrthographicCamera();

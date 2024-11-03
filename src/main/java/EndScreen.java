@@ -1,5 +1,6 @@
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class EndScreen implements Screen{
+public class EndScreen extends ScreenAdapter {
 	
 	private int score;
 	private float time;
@@ -39,7 +40,7 @@ public class EndScreen implements Screen{
 	private int middle_y = Gdx.graphics.getHeight() / 2;
 	
 	
-	public EndScreen(MazeGame game, int score, float time, boolean condition) {
+	public EndScreen(final MazeGame game, int score, float time, boolean condition) {
 		this.game = game;
 		this.score = score;
 		this.time = time;
@@ -165,24 +166,6 @@ public class EndScreen implements Screen{
 			stage2.act();
 			stage2.draw();
 		}
-		
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
 		
 	}
 
