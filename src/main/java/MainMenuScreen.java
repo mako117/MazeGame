@@ -73,8 +73,8 @@ public class MainMenuScreen implements Screen {
 		// listener for touch button
 		exitbutton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
+						game.dispose();
 						Gdx.app.exit();
-						dispose();
 					}
 			
 		});
@@ -112,7 +112,7 @@ public class MainMenuScreen implements Screen {
 		});
 		stage2.addActor(helpbackbutton);
 	}
-	
+
 	public void render(float delta) {
 		
 		ScreenUtils.clear(Color.BLACK);
@@ -171,31 +171,31 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
