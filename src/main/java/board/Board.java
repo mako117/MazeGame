@@ -21,7 +21,7 @@ public class Board {
     private ArrayList<Reward> array_bonReward;
     private ArrayList<Punishments> array_regPunishment;
     private ArrayList<Punishments> array_bonPunishment;
-	private int height = 15;
+	private int height = 20;
 	private int width = 20;
 
     public Board(){
@@ -39,14 +39,20 @@ public class Board {
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
                 if(i == 0 || j == 0  || i == width-1 || j == height-1){
-                    array.get(i).add(j, new BarrierBlock(i,j, new TextureRegion(new Texture("terrain_bottom_left.png"))));
+                    array.get(i).add(j, new BarrierBlock(i,j, new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 16, 32,16,16)));
                 }
                 else{
-                    array.get(i).add(j, new RoomBlock(i,j, new TextureRegion(new Texture("terrain_fill_center_center.png"))));
+                    array.get(i).add(j, new RoomBlock(i,j, new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 122, 0,16,16)));
                 }
-
 			}
 		}
+
+        for(int i = 0; i < 10; i++){
+            createWall(1+i, 6);
+        }
+        for(int i = 0; i < 10; i++){
+            createWall(width-2-i, 12);
+        }
 
         // TODO: add walls and "space" wall surrounding board
 
@@ -65,6 +71,9 @@ public class Board {
         setStart(array.get(width/2).get(0));
         setEnd(array.get(width/2).get(height-1));
 
+    }
+    private void createWall(int x, int y){
+        array.get(x).set(y, new Wall(x, y,new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 0, 128,16,16)));
     }
     public Block getStart() {
         return this.startRoomBlock;
