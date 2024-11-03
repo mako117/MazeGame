@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class GameScreen implements Screen {
 	final MazeGame game;
 
-    private Camera camera;
+    private OrthographicCamera camera;
     private Viewport viewport;
 
     private SpriteBatch batch;
@@ -79,9 +79,16 @@ public class GameScreen implements Screen {
 
     private boolean paused;
 
+    private OrthographicCamera fullscreenCamera;
+    private boolean fullScreenMode = true;
+    private float fullscreenDuration = 5f;
+    private float fullscreenTimer = 0f;
+    private float zoomFactor = 2;
+
     GameScreen(MazeGame game) {
     	this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        fullscreenCamera = new OrthographicCamera();
         viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 //        viewport = new ExtendViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         camera.update();
@@ -228,7 +235,29 @@ public class GameScreen implements Screen {
             return;
         }
 
+        if (fullScreenMode) {
+            fullscreenTimer += delta;
 
+            if (fullscreenTimer >= fullscreenDuration) {
+                fullScreenMode = false;
+                fullscreenTimer = 0;
+            } else {
+
+                fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                fullscreenCamera.update();
+                batch.setProjectionMatrix(fullscreenCamera.combined);
+                batch.begin();
+                batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                gameboard.draw(batch, time, TILE_SIZE);
+                renderPlayer(delta);
+                readyText();
+                renderEnemies(delta);
+                batch.end();
+                return;
+            }
+        }
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
 
 
         time+= Gdx.graphics.getDeltaTime();
@@ -282,6 +311,10 @@ public class GameScreen implements Screen {
         font.draw(batch, String.format("%s%d","Score: ", score),camera.position.x-viewport.getScreenWidth()/2+10, camera.position.y+viewport.getScreenHeight()/2);
 //        String scoreText = String.format("%d",score);
 //        font.draw(batch, scoreText, camera.position.x, camera.position.y);
+    }
+
+    private void readyText(){
+        font.draw(batch,String.format("READY!"), fullscreenCamera.position.x ,fullscreenCamera.position.y + viewport.getScreenHeight()/4 );
     }
 
     /**
