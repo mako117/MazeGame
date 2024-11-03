@@ -22,7 +22,33 @@ public class PatrollingEnemies extends Enemies {
     public @Override boolean direction(char input, Board gameBoard) {
         // not going to use char input, but want to prevent anybody from being able to move PatrollingEnemies in a different way
         this.create_path();
-        return super.direction(this.getMoveTo(), gameBoard);
+        switch (moveTo){
+            case 'W':
+                this.setFacing(Direction.Up);
+                if(gameBoard.getBlock(getX(), getY() + 1) != null) {
+                    this.setY(this.getY() + 1);
+                }
+                break;
+            case 'S':
+                this.setFacing(Direction.Down);
+                if(gameBoard.getBlock(getX(), getY() - 1) != null) {
+                    this.setY(this.getY() - 1);
+                }
+                break;
+            case 'A':
+                this.setFacing(Direction.Left);
+                if(gameBoard.getBlock(getX() - 1, getY()) != null) {
+                    this.setX(this.getX() - 1);
+                }
+                break;
+            case 'D':
+                this.setFacing(Direction.Right);
+                if(gameBoard.getBlock(getX() + 1, getY()) != null) {
+                    this.setX(this.getX() + 1);
+                }
+                break;
+        }
+        return true;
     }
     public char getMoveTo() {
         return this.moveTo;
