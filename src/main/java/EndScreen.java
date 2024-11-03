@@ -53,13 +53,13 @@ public class EndScreen extends ScreenAdapter {
 		stage1 = new Stage(new ScreenViewport());
 		stage2 = new Stage(new ScreenViewport());
 		
-		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+		skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
 		
-		change_x = -140;
+		change_x = -150;
 		change_y = -120;
 		
-		playagainbutton = new TextButton("Play Again", skin, "small");
-		playagainbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
+		playagainbutton = new TextButton("Play Again", skin);
+		playagainbutton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
 		playagainbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
@@ -72,8 +72,8 @@ public class EndScreen extends ScreenAdapter {
 		});
 		stage1.addActor(playagainbutton);
 		
-		tryagainbutton = new TextButton("Try Again", skin, "small");
-		tryagainbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
+		tryagainbutton = new TextButton("Try Again", skin);
+		tryagainbutton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
 		tryagainbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
@@ -86,11 +86,11 @@ public class EndScreen extends ScreenAdapter {
 		});
 		stage2.addActor(tryagainbutton);
 		
-		change_x = -85;
-		change_y = -200;
+		change_x = -100;
+		change_y = -220;
 		
-		winexitbutton = new TextButton("Exit", skin, "small");
-		winexitbutton.setSize(Gdx.graphics.getWidth() / 12, Gdx.graphics.getHeight() / 12);
+		winexitbutton = new TextButton("Exit", skin);
+		winexitbutton.setSize(Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 10);
 		winexitbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
@@ -103,8 +103,8 @@ public class EndScreen extends ScreenAdapter {
 		});
 		stage1.addActor(winexitbutton);
 		
-		lossexitbutton = new TextButton("Exit", skin, "small");
-		lossexitbutton.setSize(Gdx.graphics.getWidth() / 12, Gdx.graphics.getHeight() / 12);
+		lossexitbutton = new TextButton("Exit", skin);
+		lossexitbutton.setSize(Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 10);
 		lossexitbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
@@ -131,7 +131,7 @@ public class EndScreen extends ScreenAdapter {
 		
 		batch.begin();
 		batch.draw(backgroundTexture, 0, 0);
-		change_x = -160;
+		change_x = -140;
 		change_y = 240;
 		if(condition) {
 			font.getData().setScale(2, 2);
@@ -142,13 +142,12 @@ public class EndScreen extends ScreenAdapter {
 			font.draw(batch, "You lose", middle_x + change_x, middle_y + change_y);
 		}
 		
-		change_x = -100;
+		change_x = -80;
 		change_y = 80;
 		
 		font.getData().setScale(1, 1);
 		font.draw(batch, String.format("%s%.1f", "Time: ", time), middle_x + change_x, middle_y + change_y);
 		
-		change_x = -100;
 		change_y = 20;
 		
 		font.getData().setScale(1, 1);

@@ -114,7 +114,7 @@ public class GameScreen extends ScreenAdapter {
         System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
         System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
 
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin-glassy/glassy-ui.json"));
         stage0 = new Stage(viewport);
         pauseButton = new TextButton("PAUSE" , skin, "small");
         pauseButton.addListener(new ChangeListener() {

@@ -46,12 +46,12 @@ public class MainMenuScreen extends ScreenAdapter {
 		stage2 = new Stage(new ScreenViewport());
 		
 		
-		change_x = -120;
+		change_x = -150;
 		change_y = -60;
 		
-		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-		startbutton = new TextButton("Start", skin, "small");
-		startbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
+		skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
+		startbutton = new TextButton("Start", skin);
+		startbutton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
 		startbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
@@ -64,11 +64,11 @@ public class MainMenuScreen extends ScreenAdapter {
 		});
 		stage1.addActor(startbutton);
 		
-		change_x = -70;
+		change_x = -100;
 		change_y = -220;
 		
-		exitbutton = new TextButton("Exit", skin, "small");
-		exitbutton.setSize(Gdx.graphics.getWidth() / 12, Gdx.graphics.getHeight() / 12);
+		exitbutton = new TextButton("Exit", skin);
+		exitbutton.setSize(Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 10);
 		exitbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
@@ -81,11 +81,11 @@ public class MainMenuScreen extends ScreenAdapter {
 		});
 		stage1.addActor(exitbutton);
 		
-		change_x = -120;
+		change_x = -150;
 		change_y = -140;
 		
-		helpbutton = new TextButton("Help", skin, "small");
-		helpbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
+		helpbutton = new TextButton("Help", skin);
+		helpbutton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
 		helpbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
@@ -97,11 +97,11 @@ public class MainMenuScreen extends ScreenAdapter {
 		});
 		stage1.addActor(helpbutton);
 		
-		change_x = -120;
+		change_x = -150;
 		change_y = -300;
 		
-		helpbackbutton = new TextButton("Back", skin, "small");
-		helpbackbutton.setSize(Gdx.graphics.getWidth() / 12 * 2, Gdx.graphics.getHeight() / 12);
+		helpbackbutton = new TextButton("Back", skin);
+		helpbackbutton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
 		helpbackbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
