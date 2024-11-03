@@ -250,7 +250,7 @@ public class GameScreen extends ScreenAdapter {
                 fullscreenCamera.update();
                 batch.setProjectionMatrix(fullscreenCamera.combined);
                 batch.begin();
-                batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth() * 1.5f, Gdx.graphics.getHeight() * 1.5f);
                 gameboard.draw(batch, time, TILE_SIZE);
                 renderPlayer(delta);
                 readyText();
