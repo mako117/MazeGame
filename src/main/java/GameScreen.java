@@ -242,8 +242,10 @@ public class GameScreen implements Screen {
                 fullScreenMode = false;
                 fullscreenTimer = 0;
             } else {
-
+                fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
+                fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
                 fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                fullscreenCamera.zoom = 1.5f;
                 fullscreenCamera.update();
                 batch.setProjectionMatrix(fullscreenCamera.combined);
                 batch.begin();
