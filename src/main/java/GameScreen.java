@@ -1,9 +1,7 @@
 import board.Board;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,9 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import directions.Direction;
 import entities.Character;
@@ -26,6 +22,7 @@ import entities.enemy.PatrollingEnemies;
 import entities.enemy.Enemies;
 import org.lwjgl.opengl.GL20;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -52,6 +49,7 @@ public class GameScreen extends ScreenAdapter {
     // For smooth movement
     private boolean playerMovingXDirection = false;
     private float playerMovementOffset = 0;
+    private ArrayList<Boolean> canEnemyMove;
     private float enemyMovementOffset = 0;
 
     private int score = 0;
@@ -107,6 +105,8 @@ public class GameScreen extends ScreenAdapter {
         enemies = new ArrayList<Enemies>();
         enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 1, 10, 1, 10, new TextureRegion(new Texture("temp_ptero.png"))));
         enemies.add(new Moving_Enemies(1, 10, new TextureRegion(new Texture("rock.png"))));
+        System.out.println(enemies.size());
+        canEnemyMove = new ArrayList<Boolean>(Collections.nCopies(enemies.size(), Boolean.FALSE));
 
         gameboard = new Board();
 
@@ -344,7 +344,11 @@ public class GameScreen extends ScreenAdapter {
     // it will only draw the enemies in the array list
     private void renderEnemies(float delta){
         for (int i = 0; i < enemies.size(); i++){
-            enemies.get(i).draw(batch, TILE_SIZE, enemyMovementOffset);
+            if(canEnemyMove.get(i) == Boolean.TRUE){
+                enemies.get(i).draw(batch, TILE_SIZE, enemyMovementOffset);
+            } else {
+                enemies.get(i).draw(batch, TILE_SIZE, 0);
+            }
         }
         if(enemyMovementOffset < 0){
             enemyMovementOffset = 0;
@@ -374,10 +378,10 @@ public class GameScreen extends ScreenAdapter {
             boolean isMovingEnemy = (enemies.get(i)) instanceof Moving_Enemies; // Q: are objects in list of type Enemy or do they retain their subclass?
             if(isMovingEnemy == true) {
                 Moving_Enemies anEnemy = (Moving_Enemies) enemies.get(i);
-                anEnemy.direction((anEnemy.find_player(player, gameboard)), gameboard);
+                canEnemyMove.set(i, (Boolean) anEnemy.direction((anEnemy.find_player(player, gameboard)), gameboard));
             } else {
                 PatrollingEnemies anEnemy = (PatrollingEnemies) enemies.get(i);
-                anEnemy.direction('I', gameboard); // char input doesn't matter
+                canEnemyMove.set(i, (Boolean)anEnemy.direction('I', gameboard)); // char input doesn't matter
             }
         }
         enemyMovementOffset = TILE_SIZE;

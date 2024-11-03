@@ -19,10 +19,10 @@ public class PatrollingEnemies extends Enemies {
         setYMin(yMin);
         setYMax(yMax);
     }
-    public @Override void direction(char input, Board gameBoard) {
+    public @Override boolean direction(char input, Board gameBoard) {
         // not going to use char input, but want to prevent anybody from being able to move PatrollingEnemies in a different way
         this.create_path();
-        super.direction(this.getMoveTo(), gameBoard);      
+        return super.direction(this.getMoveTo(), gameBoard);
     }
     public char getMoveTo() {
         return this.moveTo;

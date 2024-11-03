@@ -26,7 +26,7 @@ import board.*;
         this.enemy_texture = texture;
         this.enemyNr = enemyCnt++;
     }
-    public void direction(char input, Board gameBoard) {
+    public boolean direction(char input, Board gameBoard) {
         Block toMoveTo;
         switch(input) {
             case 'W':
@@ -35,6 +35,7 @@ import board.*;
                     toMoveTo = gameBoard.getBlock(getX(), getY() + 1);
                     if(toMoveTo.enter() == true) {
                         this.setY(this.getY() + 1);
+                        return true;
                     }
                 }
                 break;
@@ -44,6 +45,7 @@ import board.*;
                     toMoveTo = gameBoard.getBlock(getX(), getY() - 1);
                     if(toMoveTo.enter() == true) {
                         this.setY(this.getY() - 1);
+                        return true;
                     }
                 }
                 break;
@@ -53,6 +55,7 @@ import board.*;
                     toMoveTo = gameBoard.getBlock(getX() - 1, getY());
                     if(toMoveTo.enter() == true) {
                         this.setX(this.getX() - 1);
+                        return true;
                     }
                 }
                 break;
@@ -62,10 +65,12 @@ import board.*;
                     toMoveTo = gameBoard.getBlock(getX() + 1, getY());
                     if(toMoveTo.enter() == true) {
                         this.setX(this.getX() + 1);
+                        return true;
                     }
                 }
                 break;
         }
+        return false;
     }
     public int getX() {
         return this.x;
