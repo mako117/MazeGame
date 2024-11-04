@@ -119,6 +119,8 @@ public class Board {
         addBonPunishment(4,10,10,"alien.png",40,50);
         addBonPunishment(16,8,10,"alien.png",50,60);
 
+        endRoomBlock = new RoomBlock(1,21,new TextureRegion(new Texture("green.png")));
+        array.get(1).set(endRoomBlock.getYPosition(), endRoomBlock);
         setStart(array.get(1).get(1));
         setEnd(array.get(1).get(21));
         
