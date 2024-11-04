@@ -148,7 +148,7 @@ public class EndScreen extends ScreenAdapter {
 			font.draw(batch, "You lose", middle_x + change_x, middle_y + change_y);
 		}
 		
-		change_x = -80;
+		change_x = -90;
 		change_y = 80;
 		
 		font.getData().setScale(1, 1);
