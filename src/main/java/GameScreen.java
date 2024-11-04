@@ -70,11 +70,13 @@ public class GameScreen extends ScreenAdapter {
     private Button page1Button;
     private Button page2Button;
     private Button page3Button;
+    private Button continueButton;
 	private Stage stage1;
     private Stage stage0;
     private Stage stage2;
     private Stage stage3;
     private Stage stage4;
+    private Stage missionStage;
 	private int change_x = 0;
 	private int change_y = 0;
 	private int middle_x = Gdx.graphics.getWidth() / 2;
@@ -89,6 +91,7 @@ public class GameScreen extends ScreenAdapter {
     private boolean helpMenu;
     private boolean page2;
     private boolean page3;
+    private boolean missionStatement = true;
 
     private OrthographicCamera fullscreenCamera;
     private boolean fullScreenMode = true;
@@ -238,6 +241,16 @@ public class GameScreen extends ScreenAdapter {
         });
         stage3.addActor(page3Button);
 
+        missionStage = new Stage(viewport);
+        continueButton = new TextButton("Continue", skin);
+        continueButton.setSize(Gdx.graphics.getWidth()/10 * 2, Gdx.graphics.getHeight()/10);
+        continueButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                missionStatement = false;
+            }
+        });
+        missionStage.addActor(continueButton);
 
         RrewardTex = new TextureRegion(new Texture("bomb.png"));
         BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
@@ -245,6 +258,8 @@ public class GameScreen extends ScreenAdapter {
         BpunishmentTex = new TextureRegion(new Texture("alien.png"));
         movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
         patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
+
+        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
     }
 
@@ -313,6 +328,26 @@ public class GameScreen extends ScreenAdapter {
 
         float centerX = (camera.position.x - (Gdx.graphics.getWidth())/2);
         float centerY = (camera.position.y - (Gdx.graphics.getHeight())/2);
+
+       
+        if(missionStatement){
+            continueButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
+            Gdx.input.setInputProcessor(missionStage);
+            batch.begin();
+            batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            font.getData().setScale(2, 2);
+            font.draw(batch, "The Mission", camera.position.x - 150, camera.position.y + 220);
+            font.getData().setScale(1, 1);
+            font.draw(batch, "The Dinosaurs are trying to stop their demise.\n" +
+                    "Collect All the bombs to ensure their extinction.\n" +
+                    "The fate of Humanity Rests in your hands.", centerX + 210, camera.position.y + 90);
+            batch.end();
+            missionStage.act();
+            missionStage.draw();
+            return;
+
+        }
+
         if(paused){
             if(helpMenu){
                 if(page3){
