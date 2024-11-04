@@ -7,13 +7,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * Rooms have sides that can be Walls or Doors
  */
 class BarrierBlock extends Block {
+    private int _BarriersBlockNr;
+    private static int _BarriersBlockCnt = 1;
+
     /**
      * Creates a Room and assigns it a unique room number
      */
     BarrierBlock() {
         _BarriersBlockNr = _BarriersBlockCnt++;
-        System.out.println("Creating Room #" + _BarriersBlockNr);
-
+//        For verification purposes
+//        System.out.println("Creating Room #" + _BarriersBlockNr);
     }
 
     /**
@@ -25,26 +28,17 @@ class BarrierBlock extends Block {
     BarrierBlock(int x_pos, int y_pos, TextureRegion  textureRegion) {
         super(x_pos, y_pos, textureRegion);
         _BarriersBlockNr = _BarriersBlockCnt++;
-        System.out.println("Creating Room #" + _BarriersBlockNr + " with x position " + x_pos + " and y position " + y_pos);
+
+//         For verification purposes
+//        System.out.println("Creating Room #" + _BarriersBlockNr + " with x position " + x_pos + " and y position " + y_pos);
     }
 
     /**
-     * Return the Barrier number as a string
-     * 
-     * @return a String of the Barrier Number
-     */
-    public String toString() {
-        return "Barrier #" + _BarriersBlockNr;
-    }
-
-    /**
-     * Entering a barrier block is not possible.
+     * Entering a barrier block is not possible so we return false.
      * @return false
      */
     public boolean enter(){
         return false;
     }
-
-    private int _BarriersBlockNr;
-    private static int _BarriersBlockCnt = 1;
+    
 }
