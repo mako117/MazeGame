@@ -246,7 +246,7 @@ public class Board {
         if(index == -1){
             return 0;
         }
-        int score = array_regPunishment.get(index).getPoint();
+        int score = array_regPunishment.get(index).getPunishmentScore();
         // System.out.println("reg punishment score = " + score);
         array_regPunishment.remove(index);
         return score;
@@ -276,7 +276,7 @@ public class Board {
             return 0;
         }
 
-        int score = array_bonPunishment.get(index).getPoint();
+        int score = array_bonPunishment.get(index).getPunishmentScore();
         // System.out.println("bonus punishment score = " + score);
         array_bonPunishment.remove(index);
         return score;

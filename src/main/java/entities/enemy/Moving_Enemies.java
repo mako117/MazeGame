@@ -4,15 +4,27 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import board.*;
 import entities.Character;
 
+/**
+ * A moving enemy that moves in the direction of the player at all times.
+ */
 public class Moving_Enemies extends Enemies {
+
     /**
-     * Moving Enemies Constructor
+     * Create a new moving enemy that moves towards the player.
+     * @param init_x The initial x position.
+     * @param init_y The initial y position.
+     * @param texture The texture.
      */
-
-
     public Moving_Enemies(int init_x, int init_y, TextureRegion texture) {
         super(init_x,init_y, new TextureRegion(new Texture("DinoSprite.png"),4,1, 17,17));
     }
+
+    /**
+     * Return the direction that the enemy has to take to get closer to the player.
+     * @param aCharacter The player.
+     * @param gameBoard The game board.
+     * @return The direction as a char.
+     */
     public char find_player(Character aCharacter, Board gameBoard) {
         int xDistance = this.getX() - aCharacter.getX();
         int yDistance = this.getY() - aCharacter.getY();
