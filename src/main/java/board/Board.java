@@ -89,15 +89,31 @@ public class Board {
         array_regPunishment = new ArrayList<Punishments>();
         array_bonPunishment = new ArrayList<Punishments>();
 
-        addRegReward(1,3,1,"bomb.png");
-        addBonReward(10,1,5,"dinosaur_egg.png",1,20);
-        addBonReward(9,2,5,"dinosaur_egg.png",21,40);
-        addRegPunishment(5,5,1,"baby_dinosaur.png");
-        addBonPunishment(9,2,5,"alien.png",1,20);
-        addBonPunishment(10,1,5,"alien.png",21,40);
+        // add regular rewards
+        addRegReward(4,15,10,"bomb.png");
+        addRegReward(8,11,10,"bomb.png");
+        addRegReward(18,19,10,"bomb.png");
 
-        setStart(array.get(width/2).get(1));
-        setEnd(array.get(width-2).get(1));
+        // add bonus rewards
+        addBonReward(3,21,10,"dinosaur_egg.png",10,20);
+        addBonReward(20,4,10,"dinosaur_egg.png",30,40);
+        addBonReward(21,21,10,"dinosaur_egg.png",50,60);
+
+        // add regular punishments
+        addRegPunishment(14,2,10,"baby_dinosaur.png");
+        addRegPunishment(9,6,10,"baby_dinosaur.png");
+        addRegPunishment(8,17,10,"baby_dinosaur.png");
+        addRegPunishment(21,13,10,"baby_dinosaur.png");
+
+        // add bonus punishments
+        addBonPunishment(13,21,10,"alien.png",0,10);
+        addBonPunishment(6,2,10,"alien.png",20,30);
+        addBonPunishment(12,11,10,"alien.png",30,40);
+        addBonPunishment(4,10,10,"alien.png",40,50);
+        addBonPunishment(16,8,10,"alien.png",50,60);
+
+        setStart(array.get(1).get(1));
+        setEnd(array.get(1).get(21));
         
     }
 

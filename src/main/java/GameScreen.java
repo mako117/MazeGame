@@ -125,16 +125,17 @@ public class GameScreen extends ScreenAdapter {
 
         backgroundTexture = new Texture("Space Background.png");
 
+        gameboard = new Board();
+
         playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
-        player = new Character(playerTexture);
+        player = new Character(playerTexture, gameboard.getStart().getXPosition(), gameboard.getStart().getYPosition());
 
         enemies = new ArrayList<Enemies>();
-        enemies.add(new PatrollingEnemies(2, 2, Direction.Up, 1, 10, 1, 10, new TextureRegion(new Texture("temp_ptero.png"))));
-        enemies.add(new Moving_Enemies(1, 10, new TextureRegion(new Texture("rock.png"))));
+        enemies.add(new PatrollingEnemies(1, 21, Direction.Up, 1, 21, 1, 21, new TextureRegion(new Texture("temp_ptero.png"))));
+        enemies.add(new PatrollingEnemies(1, 9, Direction.Right, 1, 21, 1, 21, new TextureRegion(new Texture("temp_ptero.png"))));
+        enemies.add(new Moving_Enemies(16, 14, new TextureRegion(new Texture("rock.png"))));
         System.out.println(enemies.size());
         canEnemyMove = new ArrayList<Boolean>(Collections.nCopies(enemies.size(), Boolean.FALSE));
-
-        gameboard = new Board();
 
         pauseTexture = new TextureRegion(new Texture("Space Background.png"));
         System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
