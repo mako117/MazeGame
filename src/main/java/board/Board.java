@@ -269,7 +269,8 @@ public class Board {
     }
 
     public void genNewBonus(float t) {
-        if (t - this.t_last == T_PERIOD) {
+        // System.out.println("t_last = " + this.t_last + ", t = " + t);
+        if ((int)(t - this.t_last) == T_PERIOD) {
             this.t_last = t;
             // add regular punishments
             addRegPunishment(14,2,10,"baby_dinosaur.png");
@@ -277,11 +278,11 @@ public class Board {
             addRegPunishment(8,17,10,"baby_dinosaur.png");
             addRegPunishment(21,13,10,"baby_dinosaur.png");
             // add bonus punishments
-            addBonPunishment(13,21,10,"alien.png",(int)t_last,(int)t_last + 10);
-            addBonPunishment(6,2,10,"alien.png",(int)t_last + 20,(int)t_last + 30);
-            addBonPunishment(12,11,10,"alien.png",(int)t_last + 30,(int)t_last + 40);
-            addBonPunishment(4,10,10,"alien.png",(int)t_last + 40,(int)t_last + 50);
-            addBonPunishment(16,8,10,"alien.png",(int)t_last + 50,(int)t_last + 60);
+            addBonPunishment(13,21,10,"alien.png",(int)this.t_last,(int)this.t_last + 10);
+            addBonPunishment(6,2,10,"alien.png",(int)this.t_last + 20,(int)this.t_last + 30);
+            addBonPunishment(12,11,10,"alien.png",(int)this.t_last + 30,(int)this.t_last + 40);
+            addBonPunishment(4,10,10,"alien.png",(int)this.t_last + 40,(int)this.t_last + 50);
+            addBonPunishment(16,8,10,"alien.png",(int)this.t_last + 50,(int)this.t_last + 60);
         }
     }
 

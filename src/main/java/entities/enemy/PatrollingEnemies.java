@@ -77,11 +77,11 @@ public class PatrollingEnemies extends Enemies {
                 }
                 break;
             case Right:
-                if(getX() == getXMin()) {
-                    setMoveTo('D');
+                if(getX() == getXMax()) {
+                    setMoveTo('A');
                     setFacing(Direction.Left);
                 } else {
-                    setMoveTo('A');
+                    setMoveTo('D');
                 }
                 break;
             case Down:
@@ -93,11 +93,11 @@ public class PatrollingEnemies extends Enemies {
                 }
                 break;
             case Left:
-                if(getX() == getXMax()) {
-                    setMoveTo('A');
+                if(getX() == getXMin()) {
+                    setMoveTo('D');
                     setFacing(Direction.Right);
                 } else {
-                    setMoveTo('D');
+                    setMoveTo('A');
                 }
                 break;
         }
