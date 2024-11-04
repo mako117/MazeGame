@@ -92,11 +92,14 @@ public class GameScreen extends ScreenAdapter {
     private TextureRegion BpunishmentTex;
     private TextureRegion movingEnemyTex;
     private TextureRegion patrollingEnemeyTex;
+    private TextureRegion endBlockTex;
 
 
-
-
-
+    /**
+     *
+     *
+     * @param game
+     */
     GameScreen(final MazeGame game) {
     	this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -240,6 +243,7 @@ public class GameScreen extends ScreenAdapter {
         BpunishmentTex = new TextureRegion(new Texture("alien.png"));
         movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
         patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
+        endBlockTex = new TextureRegion(new Texture("green.png"));
 
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -252,6 +256,9 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    /**
+     * Used to check the user input on the keyboard
+     */
     private void input() {
 
         if(INPUT_TIMEOUT <= 0){
@@ -682,13 +689,16 @@ public class GameScreen extends ScreenAdapter {
         batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         batch.draw(movingEnemyTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y + 30 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-        batch.draw(patrollingEnemeyTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 150, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        batch.draw(patrollingEnemeyTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 120, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        batch.draw(endBlockTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 240, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+
 
         font.getData().setScale(2, 2);
         font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
         font.getData().setScale(1, 1);
         font.draw(batch, ": This is the mighty T.rex.\n  He will hunt you.",camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y + 90);
-        font.draw(batch, ": The Pterodactyl is mighty territorial\n  Avoid his set path.", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 90);
+        font.draw(batch, ": The Pterodactyl is mighty territorial\n  Avoid his set path.", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 60);
+        font.draw(batch,": Come to this block to win when collect all the rewards.",camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 180);
 
         batch.end();
         stage4.draw();
