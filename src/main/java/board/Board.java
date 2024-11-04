@@ -81,8 +81,8 @@ public class Board {
         createLongWall(6,6,10,16);
         createLongWall(7,8,14,14);
         createLongWall(10,10,16,17);
-        createLongWall(10,10,9,15);
-        createLongWall(11,14,15,15);
+        createLongWall(10,10,8,14);
+        createLongWall(11,14,14,14);
         createLongWall(14,14,7,13);
 
         // Create punishments and rewards on board
@@ -272,11 +272,12 @@ public class Board {
         // System.out.println("t_last = " + this.t_last + ", t = " + t);
         if ((int)(t - this.t_last) == T_PERIOD) {
             this.t_last = t;
-            // add regular punishments
-            addRegPunishment(14,2,10,"baby_dinosaur.png");
-            addRegPunishment(9,6,10,"baby_dinosaur.png");
-            addRegPunishment(8,17,10,"baby_dinosaur.png");
-            addRegPunishment(21,13,10,"baby_dinosaur.png");
+            // add bonus punishments
+            addBonPunishment(13,21,10,"alien.png",0,10);
+            addBonPunishment(6,2,10,"alien.png",20,30);
+            addBonPunishment(12,11,10,"alien.png",30,40);
+            addBonPunishment(4,10,10,"alien.png",40,50);
+            addBonPunishment(16,8,10,"alien.png",50,60);
             // add bonus punishments
             addBonPunishment(13,21,10,"alien.png",(int)this.t_last,(int)this.t_last + 10);
             addBonPunishment(6,2,10,"alien.png",(int)this.t_last + 20,(int)this.t_last + 30);
