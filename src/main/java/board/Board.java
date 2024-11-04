@@ -21,8 +21,8 @@ public class Board {
     private ArrayList<Reward> array_bonReward;
     private ArrayList<Punishments> array_regPunishment;
     private ArrayList<Punishments> array_bonPunishment;
-	private int height = 20;
-	private int width = 20;
+	private int height = 23;
+	private int width = 23;
     private int totalRegRewardCnt = 0;
 
     public Board(){
@@ -31,13 +31,11 @@ public class Board {
 
     private void createBoard() {
 
-        // Create board and fill with room blocks (free tiles)
+        // Create board and fill with room blocks (free tiles), as well as surrounding the board with barrier blocks
 		array = new ArrayList<ArrayList<Block>>(width);
 		for(int i = 0; i < width; i++){
 			array.add(new ArrayList<Block>(height));
-
 		}
-        // creating barrier blocks around edge of board
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
                 if(i == 0 || j == 0  || i == width-1 || j == height-1){
@@ -49,8 +47,41 @@ public class Board {
 			}
 		}
 
-        createLongWall(1, width - 1, 6, 6);
-        createLongWall(width - 11, width - 1, 12, 12);
+        // set up walls
+        createLongWall(2, 2, 8, 21);
+        createLongWall(8,8,20,21);
+        createWallChunk(14,16,20,21);
+        createLongWall(20,20,16,21);
+        createLongWall(14,14,18,19);
+        createLongWall(3,8,18,18);
+        createLongWall(10,13,18,18);
+        createLongWall(16,16,17,18);
+
+        createLongWall(14,18,16,16);
+        createLongWall(16,17,12,12);
+        createLongWall(18,18,6,15);
+        createLongWall(19,20,10,10);
+        createLongWall(20,21,6,6);
+        createWallChunk(18,21,1,2);
+
+        createLongWall(1,4,6,6);
+        createLongWall(4,4,2,5);
+        createWall(2,4);
+        createLongWall(8,8,1,2);
+        createLongWall(12,12,2,8);
+        createLongWall(6,11,4,4);
+        createLongWall(6,6,4,8);
+        createLongWall(7,8,8,8);
+        createLongWall(13,15,6,6);
+        createLongWall(16,16,2,6);
+
+        createLongWall(4,5,12,12);
+        createLongWall(6,6,10,16);
+        createLongWall(7,8,14,14);
+        createLongWall(10,10,16,17);
+        createLongWall(10,10,9,15);
+        createLongWall(11,14,15,15);
+        createLongWall(14,14,7,13);
 
         // Create punishments and rewards on board
         array_regReward = new ArrayList<Reward>();
@@ -64,10 +95,10 @@ public class Board {
         addRegPunishment(5,5,1,"baby_dinosaur.png");
         addBonPunishment(9,2,5,"alien.png",1,20);
         addBonPunishment(10,1,5,"alien.png",21,40);
-        
+
         setStart(array.get(width/2).get(1));
         setEnd(array.get(width-2).get(1));
-        // System.out.println("end block is at x = " + this.getEnd().getXPosition() + ", y = " + this.getEnd().getYPosition());
+        
     }
 
     public Block getStart() {
@@ -234,15 +265,23 @@ public class Board {
 
     private void createLongWall(int startingX, int endingX, int startingY, int endingY) {
         if(startingX == endingX) {
-            for(int i = startingY; i < (endingY); i++) {
+            for(int i = startingY; i <= endingY; i++) {
                 createWall(startingX, i);
             }
         } else if(startingY == endingY) {
-            for(int i = startingX; i < (endingX); i++) {
+            for(int i = startingX; i <= endingX; i++) {
                 createWall(i, startingY);
             }
         } else {
             // we don't make a long wall if it isn't a straight line
+        }
+    }
+
+    private void createWallChunk(int leftX, int rightX, int bottomY, int topY) {
+        for(int i = leftX; i <= rightX; i++) {
+            for(int j = bottomY; j <= topY; j++) {
+                createWall(i,j);
+            }
         }
     }
 
