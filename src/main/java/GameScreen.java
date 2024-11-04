@@ -475,11 +475,11 @@ public class GameScreen extends ScreenAdapter {
                 fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
                 fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
                 fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                fullscreenCamera.zoom = 1.5f;
+                fullscreenCamera.zoom = 1.8f;
                 fullscreenCamera.update();
                 batch.setProjectionMatrix(fullscreenCamera.combined);
                 batch.begin();
-                batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth() * 1.5f, Gdx.graphics.getHeight() * 1.5f);
+                batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth() * 1.8f, Gdx.graphics.getHeight() * 1.8f);
                 gameboard.draw(batch, time, TILE_SIZE);
                 renderPlayer(delta);
                 readyText();
