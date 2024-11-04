@@ -25,7 +25,7 @@ class BarrierBlock extends Block {
     BarrierBlock(int x_pos, int y_pos, TextureRegion  textureRegion) {
         super(x_pos, y_pos, textureRegion);
         _BarriersBlockNr = _BarriersBlockCnt++;
-        System.out.println("Creating Room #" + _BarriersBlockNr + " with x position " + x + " and y position " + y);
+        System.out.println("Creating Room #" + _BarriersBlockNr + " with x position " + x_pos + " and y position " + y_pos);
     }
 
     /**
