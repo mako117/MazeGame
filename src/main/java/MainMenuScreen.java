@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -20,6 +21,11 @@ public class MainMenuScreen extends ScreenAdapter {
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private Texture backgroundTexture;
+	
+	private TextureRegion RrewardTex;
+	private TextureRegion RpunishmentTex;
+	private TextureRegion BrewardTex;
+	private TextureRegion BpunishmentTex;
 	
 	private Skin skin;
 	private Button startbutton;
@@ -46,6 +52,11 @@ public class MainMenuScreen extends ScreenAdapter {
 		batch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("comic_sans.fnt"));
 		backgroundTexture = new Texture("Space Background.png");
+		
+		RrewardTex = new TextureRegion(new Texture("bomb.png"));
+		BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
+		RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
+		BpunishmentTex = new TextureRegion(new Texture("alien.png"));
 		
 		stage1 = new Stage(new ScreenViewport());
 		stage2 = new Stage(new ScreenViewport());
@@ -104,7 +115,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		});
 		stage1.addActor(helpbutton);
 		
-		change_x = -450;
+		change_x = -560;
 		change_y = -300;
 		
 		helppage1button = new TextButton("Page 1", skin);
@@ -122,7 +133,6 @@ public class MainMenuScreen extends ScreenAdapter {
 		stage3.addActor(helppage1button);
 		
 		change_x = 300;
-		change_y = -300;
 		
 		helppage2button = new TextButton("Page 2", skin);
 		helppage2button.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
@@ -138,8 +148,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		});
 		stage2.addActor(helppage2button);
 		
-		change_x = -150;
-		change_y = -300;
+		change_x = -140;
 		
 		helpbackbutton = new TextButton("Back", skin);
 		helpbackbutton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
@@ -172,16 +181,16 @@ public class MainMenuScreen extends ScreenAdapter {
 				font.getData().setScale(2, 2);
 				font.draw(batch, "How to play", middle_x + change_x, middle_y + change_y);
 				
-				change_x = -(middle_x) + 50;
+				change_x = -(middle_x) + 30;
 				change_y = 200;
 				font.getData().setScale(1,1);;
-				font.draw(batch, "Movement: Use 'W', 'A', 'S', 'D' to move in the game page 1", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, "Movement: Use 'W', 'A', 'S', 'D' to move in the game", middle_x + change_x, middle_y + change_y);
 				
 				change_y = 100;
 				font.draw(batch, "Stop: Use 'Ese' can stop in the game", middle_x + change_x, middle_y + change_y);
 				
 				change_y = 0;
-				font.draw(batch, "Win the Game: Collect all the rewards show on the board and go to the end block", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, "Win the Game: Collect all the rewards show on ready board and go to the end block", middle_x + change_x, middle_y + change_y);
 				
 				change_y = -100;
 				font.draw(batch, "Loss the Game: Monster catch you or point lower than 0", middle_x + change_x, middle_y + change_y);
@@ -201,6 +210,43 @@ public class MainMenuScreen extends ScreenAdapter {
 				batch.draw(backgroundTexture, 0, 0);
 				font.getData().setScale(2, 2);
 				font.draw(batch, "How to play", middle_x + change_x, middle_y + change_y);
+				
+				change_x = -(middle_x) + 30;
+				change_y = 120;
+				
+				batch.draw(RrewardTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+				
+				change_y = 20;
+				
+				batch.draw(BrewardTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+				
+				change_y = -80;
+				
+				batch.draw(RpunishmentTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+				
+				change_y = -180;
+				
+				batch.draw(BpunishmentTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+				
+				change_x = -(middle_x) + 210;
+				change_y = 170;
+				
+				font.getData().setScale(1, 1);
+				font.draw(batch, ": Reward, collect can get 10 point", middle_x + change_x, middle_y + change_y);
+				
+				change_y = 70;
+				
+				font.draw(batch, ": Bonus reward, collect can get 10 point, appear on mape in fix time", middle_x + change_x, middle_y + change_y);
+				
+				change_y = -30;
+				
+				font.draw(batch, ": Punishment, collect will loss 10 point", middle_x + change_x, middle_y + change_y);
+				
+				change_y = -130;
+				
+				font.draw(batch, ": Bonus Punishment, collect will loss 10 point, appear on map in fix time", middle_x + change_x, middle_y + change_y);
+				
+				
 				/*
 				change_x = -(middle_x) + 50;
 				change_y = 200;
