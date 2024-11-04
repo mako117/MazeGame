@@ -16,7 +16,7 @@ public class Moving_Enemies extends Enemies {
      * @param texture The texture.
      */
     public Moving_Enemies(int init_x, int init_y, TextureRegion texture) {
-        super(init_x,init_y, new TextureRegion(new Texture("DinoSprite.png"),4,1, 17,17));
+        super(init_x,init_y, texture);
     }
 
     /**

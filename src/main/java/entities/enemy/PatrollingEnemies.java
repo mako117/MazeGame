@@ -27,7 +27,7 @@ public class PatrollingEnemies extends Enemies {
      * @param texture The texture.
      */
     public PatrollingEnemies(int init_x, int init_y, Direction d, int xMin, int xMax, int yMin, int yMax, TextureRegion texture) {
-        super(init_x, init_y, new TextureRegion(new Texture("ptero.png"),0,0, 31,16));
+        super(init_x, init_y, texture);
         setFacing(d);
         setXMin(xMin);
         setXMax(xMax);
