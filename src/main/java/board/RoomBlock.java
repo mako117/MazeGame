@@ -11,6 +11,7 @@ class RoomBlock extends Block {
      * Creates a Room and assigns it a unique room number
      */
     RoomBlock() {
+        super();
         _roomBlockNr = _roomBlockCnt++;
         System.out.println("Creating Room #" + _roomBlockNr);
 

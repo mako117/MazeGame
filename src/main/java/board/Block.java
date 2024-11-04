@@ -10,10 +10,20 @@ public abstract class Block {
     private int y;
     private TextureRegion blockTexture;
 
+    /**
+     * Create a default new block at coordinates (-1,-1).
+     */
     public Block(){
         x = -1;
         y = -1;
     }
+
+    /**
+     * Create a new block at the given coordinates.
+     * @param x1 The x position.
+     * @param y1 The y position.
+     * @param blockTexture The block texture.
+     */
     public Block(int x1, int y1, TextureRegion blockTexture){
         x = x1;
         y = y1;

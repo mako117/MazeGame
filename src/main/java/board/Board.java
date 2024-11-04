@@ -29,6 +29,9 @@ public class Board {
     private float t_last = 0;
     private static int T_PERIOD = 60;
 
+    /**
+     * Create a new board.
+     */
     public Board(){
         createBoard();
     }
