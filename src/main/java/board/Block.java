@@ -9,8 +9,8 @@ import directions.Direction;
  * A block is a cell on the board.
  */
 public abstract class Block {
-    protected int x; 
-    protected int y;
+    private int x; 
+    private int y;
     private TextureRegion blockTexture;
 
     public Block(){
