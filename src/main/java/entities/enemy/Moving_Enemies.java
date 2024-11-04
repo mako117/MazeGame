@@ -1,7 +1,6 @@
 package entities.enemy;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import directions.Direction;
 import board.*;
 import entities.Character;
 
