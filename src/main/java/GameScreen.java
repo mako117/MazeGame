@@ -117,6 +117,13 @@ public class GameScreen extends ScreenAdapter {
         font = new BitmapFont(Gdx.files.internal("comic_sans.fnt"));
 
         backgroundTexture = new Texture("Space Background.png");
+        RrewardTex = new TextureRegion(new Texture("bomb.png"));
+        BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
+        RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
+        BpunishmentTex = new TextureRegion(new Texture("alien.png"));
+        movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
+        patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
+        endBlockTex = new TextureRegion(new Texture("green.png"));
 
         gameboard = new Board();
 
@@ -129,10 +136,10 @@ public class GameScreen extends ScreenAdapter {
         player = new Character(playerTexture, gameboard.getStart().getXPosition(), gameboard.getStart().getYPosition());
 
         enemies = new ArrayList<Enemies>();
-        enemies.add(new PatrollingEnemies(1, 21, Direction.Up, 1, 21, 1, 21, new TextureRegion(new Texture("ptero.png"))));
-        enemies.add(new PatrollingEnemies(1, 9, Direction.Right, 1, 21, 1, 21, new TextureRegion(new Texture("ptero.png"))));
-        enemies.add(new Moving_Enemies(16, 14, new TextureRegion(new Texture("DinoSprite.png"))));
-        enemies.add(new Moving_Enemies(3, 20, new TextureRegion(new Texture("DinoSprite.png"))));
+        enemies.add(new PatrollingEnemies(1, 21, Direction.Up, 1, 21, 1, 21, patrollingEnemeyTex));
+        enemies.add(new PatrollingEnemies(1, 9, Direction.Right, 1, 21, 1, 21, patrollingEnemeyTex));
+        enemies.add(new Moving_Enemies(16, 14, movingEnemyTex));
+        enemies.add(new Moving_Enemies(3, 20, movingEnemyTex));
         System.out.println(enemies.size());
         canEnemyMove = new ArrayList<Boolean>(Collections.nCopies(enemies.size(), Boolean.FALSE));
 
@@ -248,13 +255,7 @@ public class GameScreen extends ScreenAdapter {
         });
         missionStage.addActor(continueButton);
 
-        RrewardTex = new TextureRegion(new Texture("bomb.png"));
-        BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
-        RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
-        BpunishmentTex = new TextureRegion(new Texture("alien.png"));
-        movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
-        patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
-        endBlockTex = new TextureRegion(new Texture("green.png"));
+
 
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
