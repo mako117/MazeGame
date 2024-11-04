@@ -40,5 +40,6 @@ class BarrierBlock extends Block {
     public boolean enter(){
         return false;
     }
-    
+
+
 }
