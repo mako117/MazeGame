@@ -1,5 +1,6 @@
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -44,7 +45,8 @@ public class MainMenuScreen extends ScreenAdapter {
 	private Stage stage2;
 	private Stage stage3;
 	private Stage stage4;
-	
+
+
 	private int change_x = 0;
 	private int change_y = 0;
 	private int middle_x = Gdx.graphics.getWidth() / 2;
@@ -54,7 +56,9 @@ public class MainMenuScreen extends ScreenAdapter {
 	private boolean helppage1 = false;
 	private boolean helppage2 = false;
 	private boolean helppage3 = false;
-	
+	Music music;
+
+
 	/**
 	 * This method set the information for button, texture, skin for button, stage for the main menu screen.
 	 * @param game
@@ -64,6 +68,10 @@ public class MainMenuScreen extends ScreenAdapter {
 		batch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("comic_sans.fnt"));
 		backgroundTexture = new Texture("Space Background.png");
+
+		music = Gdx.audio.newMusic(Gdx.files.internal("TitleMusic.mp3"));
+		music.setLooping(true);
+		music.play();
 		
 		RrewardTex = new TextureRegion(new Texture("bomb.png"));
 		BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
@@ -92,6 +100,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		startbutton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
 						game.setScreen(new GameScreen(game));
+						music.stop();
 						dispose();
 					}
 			
@@ -107,6 +116,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		// listener for touch button
 		exitbutton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
+						music.stop();
 						game.dispose();
 						Gdx.app.exit();
 					}
@@ -368,6 +378,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		stage2.dispose();
 		stage3.dispose();
 		stage4.dispose();
+		music.dispose();
 	}
 
 	@Override

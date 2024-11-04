@@ -2,6 +2,7 @@ import board.Board;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -94,6 +95,8 @@ public class GameScreen extends ScreenAdapter {
     private TextureRegion patrollingEnemeyTex;
     private TextureRegion endBlockTex;
 
+    Music gameMusic;
+
 
     /**
      *
@@ -116,6 +119,11 @@ public class GameScreen extends ScreenAdapter {
         backgroundTexture = new Texture("Space Background.png");
 
         gameboard = new Board();
+
+        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("Game Music.mp3"));
+        gameMusic.setLooping(true);
+        gameMusic.play();
+
 
         playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
         player = new Character(playerTexture, gameboard.getStart().getXPosition(), gameboard.getStart().getYPosition());
@@ -161,6 +169,7 @@ public class GameScreen extends ScreenAdapter {
         exitButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(new MainMenuScreen(game));
+                gameMusic.stop();
                 dispose();
             }
         });
@@ -179,6 +188,7 @@ public class GameScreen extends ScreenAdapter {
         restartButton.setSize(Gdx.graphics.getWidth()/6 * 2,Gdx.graphics.getHeight() /6 );
         restartButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameMusic.stop();
                 game.setScreen(new GameScreen(game));
             }
         });
@@ -575,6 +585,7 @@ public class GameScreen extends ScreenAdapter {
      * @param condition
      */
     private void playerEnd(boolean condition) {
+        gameMusic.stop();
     	game.setScreen(new EndScreen(game,score,time,condition));
     }
 
@@ -764,6 +775,7 @@ public class GameScreen extends ScreenAdapter {
         stage3.dispose();
         stage4.dispose();
         missionStage.dispose();
+        gameMusic.dispose();
     }
 
     /**
