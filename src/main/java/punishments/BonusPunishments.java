@@ -16,8 +16,8 @@ public class BonusPunishments extends Punishments{
         endtime = -1;
     }
 
-    public BonusPunishments(int inputX, int inputY, int inputScore, int startT, int endT){
-        super(inputX, inputY, inputScore);
+    public BonusPunishments(int inputX, int inputY, int inputScore, TextureRegion inputTexture, int startT, int endT){
+        super(inputX, inputY, inputScore, inputTexture);
         this.starttime = startT;
         this.endtime = endT;
     }

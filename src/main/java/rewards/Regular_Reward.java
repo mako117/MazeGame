@@ -1,5 +1,9 @@
 package rewards;
 
+import com.badlogic.gdx.utils.Null;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.Texture;
+
 public class Regular_Reward extends Reward {
 	private int regularNr;
 	private static int regularCnt = 1;
@@ -10,8 +14,9 @@ public class Regular_Reward extends Reward {
 		regularCnt++;
 	}
 	
-	public Regular_Reward(int x, int y, int s){
+	public Regular_Reward(int x, int y, int s, TextureRegion inputTexture){
 		super(x,y,s);
+		this.setTexture(inputTexture);
 		regularNr = regularCnt;
 		regularCnt++;
 	}

@@ -480,6 +480,10 @@ public class GameScreen extends ScreenAdapter {
     public void checkReward() {
         int playerX = player.getX();
         int playerY = player.getY();
+        if(gameboard.regRewardCollect(playerX, playerY) > 0) {
+            player.addRegReward();
+            // System.out.println("triggered, total reg rewards collected = " + player.getRewardsCollected());
+        }
         int score = gameboard.regRewardCollect(playerX, playerY) + gameboard.bonRewardCollect(playerX, playerY,time);
         this.add_score(score);
     }

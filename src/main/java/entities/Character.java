@@ -114,6 +114,9 @@ public class Character {
     public Direction getFacing() {
         return this.facing;
     }
+    public void addRegReward() {
+        this.setRewardsCollected(this.rewardsCollected + 1);
+    }
 
     /**
      * Sets the x-coordinate of the entities.Character's position as an integer.

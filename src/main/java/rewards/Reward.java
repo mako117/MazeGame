@@ -14,12 +14,11 @@ public class Reward {
 		this.y = y;
 		this.score = s;
 	}
-	
 	public void Set_score(int s) {
 		this.score = s;
 	}
 	
-	public void Set_poistion(int x, int y) {
+	public void Set_position(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -34,6 +33,10 @@ public class Reward {
 	
 	public int getPoint() {
 		return score;
+	}
+
+	protected void setTexture(TextureRegion inputTexture) {
+		this.RewardTexture = inputTexture;
 	}
 	
 	public void draw(Batch batch, int tilesize) {

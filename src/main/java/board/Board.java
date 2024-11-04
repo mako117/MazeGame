@@ -23,6 +23,7 @@ public class Board {
     private ArrayList<Punishments> array_bonPunishment;
 	private int height = 20;
 	private int width = 20;
+    private int totalRegRewardCnt = 0;
 
     public Board(){
         createBoard();
@@ -47,7 +48,7 @@ public class Board {
 			}
 		}
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < width-1; i++){
             createWall(1+i, 6);
         }
         for(int i = 0; i < 10; i++){
@@ -65,12 +66,16 @@ public class Board {
 
         // we will set the coordinates manually (see below example)
         // NOTE: make sure not to put the reward/punishment on a wall/another item
-        array_regReward.add(new Regular_Reward(1, 3, 1));
-        array_regPunishment.add(new NormalPunishments(5,5,1));
-
-        setStart(array.get(width/2).get(0));
-        setEnd(array.get(width/2).get(height-1));
-
+        array_regReward.add(new Regular_Reward(1, 3, 1,new TextureRegion(new Texture("bomb.png"))));
+        totalRegRewardCnt++;
+        array_bonReward.add(new Bonus_Reward(10,1,5,new TextureRegion(new Texture("dinosaur_egg.png")),1,20));
+        array_bonReward.add(new Bonus_Reward(9,2,5,new TextureRegion(new Texture("dinosaur_egg.png")),21,40));
+        array_regPunishment.add(new NormalPunishments(5,5,1,new TextureRegion(new Texture("baby_dinosaur.png"))));
+        array_bonPunishment.add(new BonusPunishments(9,2,5,new TextureRegion(new Texture("alien.png")),1,20));
+        array_bonPunishment.add(new BonusPunishments(10,1,5,new TextureRegion(new Texture("alien.png")),21,40));
+        setStart(array.get(width/2).get(1));
+        setEnd(array.get(width-2).get(1));
+        // System.out.println("end block is at x = " + this.getEnd().getXPosition() + ", y = " + this.getEnd().getYPosition());
     }
     private void createWall(int x, int y){
         array.get(x).set(y, new Wall(x, y,new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 0, 128,16,16)));
@@ -82,7 +87,7 @@ public class Board {
         return this.endRoomBlock;
     }
     public int getTotalRegRewardCnt() {
-        return this.array_regReward.size();
+        return this.totalRegRewardCnt;
     }
     public void setStart(Block thisRoomBlock) {
         this.startRoomBlock = thisRoomBlock;
@@ -156,6 +161,7 @@ public class Board {
             return 0;
         }
         int score = array_regReward.get(index).getPoint();
+        // System.out.println("reg reward score = " + score);
         array_regReward.remove(index);
         return score;
     }
@@ -173,6 +179,7 @@ public class Board {
         }
 
         int score = array_bonReward.get(index).getPoint();
+        // System.out.println("bonus reward score = " + score);
         array_bonReward.remove(index);
         return score;
     }
@@ -192,6 +199,7 @@ public class Board {
             return 0;
         }
         int score = array_regPunishment.get(index).getPoint();
+        // System.out.println("reg punishment score = " + score);
         array_regPunishment.remove(index);
         return score;
     }
@@ -209,6 +217,7 @@ public class Board {
         }
 
         int score = array_bonPunishment.get(index).getPoint();
+        // System.out.println("bonus punishment score = " + score);
         array_bonPunishment.remove(index);
         return score;
     }
@@ -236,7 +245,7 @@ public class Board {
                 rewardToDraw.draw(batch, tilesize);
             } 
         }
-        for(int i = 0; i < array_bonReward.size(); i++) {
+        for(int i = 0; i < array_regReward.size(); i++) {
             Regular_Reward rewardToDraw = (Regular_Reward) array_regReward.get(i);
             rewardToDraw.draw(batch, tilesize);
         }
@@ -248,7 +257,7 @@ public class Board {
                 punishmentsToDraw.draw(batch, tilesize);
             }        
         }
-        for(int i = 0; i < array_bonPunishment.size(); i++) {
+        for(int i = 0; i < array_regPunishment.size(); i++) {
             NormalPunishments punishmentsToDraw = (NormalPunishments) array_regPunishment.get(i);
             punishmentsToDraw.draw(batch, tilesize);
         }
