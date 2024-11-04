@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 /**
- * This class create the main menu for the game.
+ * This class create the main menu screen for the game.
  */
 public class MainMenuScreen extends ScreenAdapter {
 	final MazeGame game;
@@ -183,7 +183,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	}
 
 	/**
-	 * This method show what main menu screen look like, print all the things for the main menu need.
+	 * This method show what main menu screen look like, print all the things for the main menu screen need.
 	 */
 	public void render(float delta) {
 		
