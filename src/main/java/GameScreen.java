@@ -592,12 +592,12 @@ public class GameScreen extends ScreenAdapter {
      * This includes collision, moving enemies, checking/applying rewards/punishments
      */
     private void logic() {
-
         checkPlayerCollision();
         checkIfExitingMaze();
         checkScore();
         checkReward();
         checkPunishment();
+        gameboard.genNewBonus(time);
     }
 
 

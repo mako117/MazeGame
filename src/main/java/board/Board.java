@@ -24,6 +24,8 @@ public class Board {
 	private int height = 23;
 	private int width = 23;
     private int totalRegRewardCnt = 0;
+    private float t_last = 0;
+    private static int T_PERIOD = 60;
 
     public Board(){
         createBoard();
@@ -263,6 +265,23 @@ public class Board {
         for(int i = 0; i < array_regPunishment.size(); i++) {
             NormalPunishments punishmentsToDraw = (NormalPunishments) array_regPunishment.get(i);
             punishmentsToDraw.draw(batch, tilesize);
+        }
+    }
+
+    public void genNewBonus(float t) {
+        if (t - this.t_last == T_PERIOD) {
+            this.t_last = t;
+            // add regular punishments
+            addRegPunishment(14,2,10,"baby_dinosaur.png");
+            addRegPunishment(9,6,10,"baby_dinosaur.png");
+            addRegPunishment(8,17,10,"baby_dinosaur.png");
+            addRegPunishment(21,13,10,"baby_dinosaur.png");
+            // add bonus punishments
+            addBonPunishment(13,21,10,"alien.png",(int)t_last,(int)t_last + 10);
+            addBonPunishment(6,2,10,"alien.png",(int)t_last + 20,(int)t_last + 30);
+            addBonPunishment(12,11,10,"alien.png",(int)t_last + 30,(int)t_last + 40);
+            addBonPunishment(4,10,10,"alien.png",(int)t_last + 40,(int)t_last + 50);
+            addBonPunishment(16,8,10,"alien.png",(int)t_last + 50,(int)t_last + 60);
         }
     }
 
