@@ -13,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * This class create end screen for the game.
+ */
 public class EndScreen extends ScreenAdapter {
 	
 	private int score;
@@ -38,7 +41,13 @@ public class EndScreen extends ScreenAdapter {
 	private int middle_x = Gdx.graphics.getWidth() / 2;
 	private int middle_y = Gdx.graphics.getHeight() / 2;
 	
-	
+	/**
+	 * This method set the button, skin for button, score, time, and stage for the end screen.
+	 * @param game
+	 * @param score
+	 * @param time
+	 * @param condition
+	 */
 	public EndScreen(final MazeGame game, int score, float time, boolean condition) {
 		this.game = game;
 		this.score = score;
@@ -52,6 +61,7 @@ public class EndScreen extends ScreenAdapter {
 		stage1 = new Stage(new ScreenViewport());
 		stage2 = new Stage(new ScreenViewport());
 		
+		//start set the button.
 		skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
 		
 		change_x = -150;
@@ -117,12 +127,9 @@ public class EndScreen extends ScreenAdapter {
 		stage2.addActor(lossexitbutton);
 	}
 
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * This method show what end screen look like, print all the things for the end screen need.
+	 */
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
@@ -141,7 +148,7 @@ public class EndScreen extends ScreenAdapter {
 			font.draw(batch, "You lose", middle_x + change_x, middle_y + change_y);
 		}
 		
-		change_x = -80;
+		change_x = -90;
 		change_y = 80;
 		
 		font.getData().setScale(1, 1);
@@ -166,13 +173,10 @@ public class EndScreen extends ScreenAdapter {
 		}
 		
 	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	/**
+	 * This method dispose variable that need to dispose in the EndScreen.
+	 */
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -183,5 +187,16 @@ public class EndScreen extends ScreenAdapter {
 		stage1.dispose();
 		stage2.dispose();
 	}
+	
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
 }

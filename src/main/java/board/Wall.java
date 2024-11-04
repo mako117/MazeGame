@@ -14,13 +14,20 @@ class Wall extends Block {
         _wallNr = _wallCnt++;
         System.out.println("creating board.Wall #" + _wallNr);
     }
-    
+
+    /**
+     * Create a wall at the given coordinates.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param textureRegion The texture.
+     */
     Wall(int x, int y, TextureRegion textureRegion){
     	super(x,y, textureRegion);
     }
 
     /**
-     * Enter a wall
+     * Enter a wall.<br>
+     * Returns false.
      */
     public boolean enter() {
         return false;
