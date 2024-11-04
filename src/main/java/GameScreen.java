@@ -42,8 +42,6 @@ public class GameScreen extends ScreenAdapter {
     private Board gameboard;
     private Character player;
     private ArrayList<Enemies> enemies;
-    private final int BOARD_WIDTH = 15;
-    private final int BOARD_HEIGHT = 20;
     private final int TILE_SIZE = 50; // size of tile
 
     // For smooth movement
@@ -84,8 +82,6 @@ public class GameScreen extends ScreenAdapter {
     private int left_x = 0;
     private int top_y = Gdx.graphics.getHeight();
 
-    private int resumeX;
-    private int resumeY;
 
     private boolean paused;
     private boolean helpMenu;
@@ -97,7 +93,6 @@ public class GameScreen extends ScreenAdapter {
     private boolean fullScreenMode = true;
     private float fullscreenDuration = 5f;
     private float fullscreenTimer = 0f;
-    private float zoomFactor = 2;
 
     private TextureRegion RrewardTex;
     private TextureRegion RpunishmentTex;
@@ -153,8 +148,6 @@ public class GameScreen extends ScreenAdapter {
 
         stage1 = new Stage(viewport);
 		Gdx.input.setInputProcessor(stage1);
-		change_x = -780;
-		change_y = -400;
 
 		resumeButton = new TextButton("Resume", skin);
         resumeButton.setSize(Gdx.graphics.getWidth() / 6 * 2, Gdx.graphics.getHeight() / 6);
@@ -165,8 +158,6 @@ public class GameScreen extends ScreenAdapter {
 					}
 			
 		});
-        resumeX = (Gdx.graphics.getWidth() - (int)resumeButton.getWidth()) / 2;
-        resumeY = (Gdx.graphics.getHeight() - (int)resumeButton.getHeight()) / 2;
 		stage1.addActor(resumeButton);
         
         exitButton = new TextButton("Exit", skin);
@@ -223,7 +214,6 @@ public class GameScreen extends ScreenAdapter {
         page1Button = new TextButton("Page 1", skin);
         page1Button.setSize(Gdx.graphics.getWidth()/10 * 2, Gdx.graphics.getHeight()/10);
         page1Button.addListener(new ChangeListener() {
-            @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 page2 = false;
                 page3 = false;
@@ -246,7 +236,6 @@ public class GameScreen extends ScreenAdapter {
         continueButton = new TextButton("Continue", skin);
         continueButton.setSize(Gdx.graphics.getWidth()/10 * 2, Gdx.graphics.getHeight()/10);
         continueButton.addListener(new ChangeListener() {
-            @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 missionStatement = false;
             }
@@ -267,10 +256,6 @@ public class GameScreen extends ScreenAdapter {
     /**
      *
      */
-    public void show() {
-
-    }
-
     private void input() {
 
         if(INPUT_TIMEOUT <= 0){
@@ -280,8 +265,6 @@ public class GameScreen extends ScreenAdapter {
                 paused = true;
 
             } else
-
-
 
             if(Gdx.input.isKeyPressed(Input.Keys.W)){
                 if(player.direction('W', gameboard)){
@@ -317,34 +300,19 @@ public class GameScreen extends ScreenAdapter {
             }
         }
 
-
     }
 
     /**
+     * Used to render all aspects of GameScreen
+     *
      * @param delta
      */
     public void render(float delta) {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        float centerX = (camera.position.x - (Gdx.graphics.getWidth())/2);
-        float centerY = (camera.position.y - (Gdx.graphics.getHeight())/2);
-
-       
         if(missionStatement){
-            continueButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
-            Gdx.input.setInputProcessor(missionStage);
-            batch.begin();
-            batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            font.getData().setScale(2, 2);
-            font.draw(batch, "The Mission", camera.position.x - 150, camera.position.y + 220);
-            font.getData().setScale(1, 1);
-            font.draw(batch, "The Dinosaurs are trying to stop their demise.\n" +
-                    "Collect All the bombs to ensure their extinction.\n" +
-                    "The fate of Humanity Rests in your hands.", centerX + 210, camera.position.y + 90);
-            batch.end();
-            missionStage.act();
-            missionStage.draw();
+            missionMenu();
             return;
 
         }
@@ -352,114 +320,18 @@ public class GameScreen extends ScreenAdapter {
         if(paused){
             if(helpMenu){
                 if(page3){
-                    stage4.addActor(backButton);
-                    stage4.addActor(page2Button);
-                    backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
-                    page2Button.setPosition(camera.position.x - 384,camera.position.y - Gdx.graphics.getHeight()/2);
-                    Gdx.input.setInputProcessor(stage4);
-                    batch.begin();
-                    batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                    font.getData().setScale(2, 2);
-                    font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
-                    batch.draw(movingEnemyTex, centerX + 50, camera.position.y + 30 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-
-
-                    batch.draw(patrollingEnemeyTex, centerX + 50, camera.position.y - 150, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-
-                    font.getData().setScale(1, 1);
-
-                    font.draw(batch, ": This is the mighty T.rex.\n  He will hunt you.", centerX + 210, camera.position.y + 90);
-
-                    font.draw(batch, ": The Pterodactyl is mighty territorial\n  Avoid his set path.", centerX + 210, camera.position.y - 90);
-
-
-                    batch.end();
-                    stage4.draw();
-                    stage4.act();
                     page3Menu();
                     return;
                 }
 
                 if(page2){
-                    stage3.addActor(backButton);
-                    backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
-                    page1Button.setPosition(camera.position.x - 384,camera.position.y - Gdx.graphics.getHeight()/2);
-                    page3Button.setPosition(camera.position.x + 128,camera.position.y - Gdx.graphics.getHeight()/2);
-                    Gdx.input.setInputProcessor(stage3);
-
-                    batch.begin();
-                    batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                    font.getData().setScale(2, 2);
-                    font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
-
-                    batch.draw(RrewardTex, centerX + 50, camera.position.y + 30 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-
-
-                    batch.draw(BrewardTex, centerX + 50, camera.position.y - 60 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-
-
-                    batch.draw(RpunishmentTex, centerX + 50, camera.position.y - 150, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-
-
-                    batch.draw(BpunishmentTex, centerX + 50, camera.position.y - 240, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-
-
-                    font.getData().setScale(1, 1);
-                    font.draw(batch, ": Reward, collect can get 10 point", centerX + 210, camera.position.y + 90);
-
-                    font.draw(batch, ": Bonus reward, collect can get 10 point, appears on maps in fix time", centerX + 210, camera.position.y);
-
-
-                    font.draw(batch, ": Punishment, collecting loses 10 points", centerX + 210, camera.position.y - 90);
-
-
-                    font.draw(batch, ": Bonus Punishment, collect will loss 10 point, appear on map in fix time", centerX + 210, camera.position.y - 180);
-
-                    batch.end();
-                    stage3.draw();
-                    stage3.act();
                     page2Menu();
                     return;
                 }
-                stage2.addActor(backButton);
-                stage2.addActor(page2Button);
-                Gdx.input.setInputProcessor(stage2);
-                backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
-                page2Button.setPosition(camera.position.x + 128, camera.position.y - Gdx.graphics.getHeight()/2);
-                batch.begin();
-                batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                font.getData().setScale(2, 2);
-                font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
-                change_x = -(middle_x) + 50;
-                change_y = 200;
-                font.getData().setScale(1,1);;
-                font.draw(batch, "Movement: Use 'W', 'A', 'S', 'D' to move in the game", centerX + 50, camera.position.y + 90);
 
-                change_y = 100;
-                font.draw(batch, "Stop: Use 'Esc' can stop in the game", centerX + 50 ,camera.position.y);
-
-                change_y = 0;
-                font.draw(batch, "Win the Game: Collect all the rewards show on the board and go to the end block", centerX + 50 ,camera.position.y - 90);
-
-                change_y = -100;
-                font.draw(batch, "Lose the Game: Monster catch you or point lower than 0", centerX + 50,camera.position.y - 180);
-                batch.end();
-                stage2.act();
-                stage2.draw();
                 helpMenu();
                 return;
             }
-
-            Gdx.input.setInputProcessor(stage1);
-            batch.begin();
-            batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            batch.end();
-            resumeButton.setPosition(centerX + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, centerY + Gdx.graphics.getHeight()/2 + resumeButton.getHeight());
-            exitButton.setPosition(centerX + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,centerY + Gdx.graphics.getHeight()/2 - exitButton.getHeight() * 2);
-            helpButton.setPosition(centerX + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, centerY + Gdx.graphics.getHeight()/2);
-            restartButton.setPosition(centerX + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, centerY +Gdx.graphics.getHeight()/2 - restartButton.getHeight());
-            stage1.act();
-            stage1.draw();
 
             pause();
             return;
@@ -467,38 +339,25 @@ public class GameScreen extends ScreenAdapter {
 
         if (fullScreenMode) {
             fullscreenTimer += delta;
-
             if (fullscreenTimer >= fullscreenDuration) {
                 fullScreenMode = false;
                 fullscreenTimer = 0;
             } else {
-                fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
-                fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
-                fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                fullscreenCamera.zoom = 1.8f;
-                fullscreenCamera.update();
-                batch.setProjectionMatrix(fullscreenCamera.combined);
-                batch.begin();
-                batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth() * 1.8f, Gdx.graphics.getHeight() * 1.8f);
-                gameboard.draw(batch, time, TILE_SIZE);
-                renderPlayer(delta);
-                readyText();
-                renderEnemies(delta);
-                batch.end();
+                fullScreen(delta);
                 return;
             }
         }
+
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-
-
         time+= Gdx.graphics.getDeltaTime();
-
         tickCount -= delta;
+
         if(tickCount < 0){
             tickCount = TICKSPEED;
             moveEnemies();
         }
+
         logic();
 
         input();
@@ -530,7 +389,7 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
 
         pauseButton.setSize(Gdx.graphics.getWidth() /10 + 40,Gdx.graphics.getHeight()/10);
-        pauseButton.setPosition(centerX + Gdx.graphics.getWidth() - pauseButton.getWidth(),centerY + Gdx.graphics.getHeight() - pauseButton.getHeight());
+        pauseButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth() - pauseButton.getWidth(),camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight() - pauseButton.getHeight());
         Gdx.input.setInputProcessor(stage0);
         stage0.act();
         stage0.draw();
@@ -545,12 +404,24 @@ public class GameScreen extends ScreenAdapter {
 //        font.draw(batch, scoreText, camera.position.x, camera.position.y);
     }
 
+    /**
+     *Renders The Text for the Initial Screen
+     */
     private void readyText(){
-        font.draw(batch,String.format("READY!"), fullscreenCamera.position.x ,fullscreenCamera.position.y + viewport.getScreenHeight()/4 );
+        font.getData().setScale(1.5f,1.5f);
+        font.draw(batch,String.format("READY!"), fullscreenCamera.position.x + viewport.getScreenWidth()/10 ,fullscreenCamera.position.y + viewport.getScreenHeight()/2 );
+        font.draw(batch,String.format("Disarm all the bombs.\n\n" +
+                "Avoiding all the dinosaurs.\n\n" +
+                "Smash the dinosaur eggs for bonus points.\n\n" +
+                "Avoid falling into a dinosaur nest.\n\n" +
+                "Reach the end."), fullscreenCamera.position.x + viewport.getScreenWidth()/10, fullscreenCamera.position.y + viewport.getScreenHeight()/2 - 120);
+        font.getData().setScale(1,1);
     }
 
     /**
-     * Draw the player to the game screen
+     * Draws the player accounting for his movements to the game screen
+     *
+     * @param delta
      */
     private void renderPlayer(float delta) {
 //        System.out.println(playerMovementOffset);
@@ -570,7 +441,11 @@ public class GameScreen extends ScreenAdapter {
     }
 
 
-    // it will only draw the enemies in the array list
+    /**
+     * Draws all the enemies to the Game Screen
+     *
+     * @param delta
+     */
     private void renderEnemies(float delta){
         for (int i = 0; i < enemies.size(); i++){
             if(canEnemyMove.get(i) == Boolean.TRUE){
@@ -601,7 +476,9 @@ public class GameScreen extends ScreenAdapter {
     }
 
 
-    // add movement methods of the enemies in the list
+    /**
+     * This function checks and allows the enemies to move
+     */
     private void moveEnemies(){
         for(int i = 0; i < enemies.size(); i++) {
             boolean isMovingEnemy = (enemies.get(i)) instanceof Moving_Enemies; // Q: are objects in list of type Enemy or do they retain their subclass?
@@ -616,7 +493,9 @@ public class GameScreen extends ScreenAdapter {
         enemyMovementOffset = TILE_SIZE;
     }
 
-    // check if player coordinates are the same with any enemies and act accordingly
+    /**
+     * Checks if the player and an enemy
+     */
     private void checkPlayerCollision(){
         int playerX = player.getX();
         int playerY = player.getY();
@@ -631,6 +510,9 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Checks to see if the player has reached the end
+     */
     private void checkIfExitingMaze() {
         int playerX = player.getX();
         int playerY = player.getY();
@@ -680,6 +562,11 @@ public class GameScreen extends ScreenAdapter {
     }
 
     // TODO: write code for if the player wins
+
+    /**
+     * Sends the player to whichever screen depending on condition upon reaching the end.
+     * @param condition
+     */
     private void playerEnd(boolean condition) {
     	game.setScreen(new EndScreen(game,score,time,condition));
     }
@@ -695,29 +582,118 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
-     *
+     * This function controls the aspects of the pause menu, including drawing the buttons.
      */
     public void pause() {
+        Gdx.input.setInputProcessor(stage1);
+        batch.begin();
+        batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+        resumeButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 + resumeButton.getHeight());
+        exitButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 - exitButton.getHeight() * 2);
+        helpButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2);
+        restartButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, camera.position.y - (Gdx.graphics.getHeight())/2 +Gdx.graphics.getHeight()/2 - restartButton.getHeight());
+        stage1.act();
+        stage1.draw();
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             System.out.println("UNPAUSED");
             paused = false;
         }
     }
 
+    /**
+     * This function controls the aspects of the help menu page 1.
+     */
     public void helpMenu(){
+        stage2.addActor(backButton);
+        stage2.addActor(page2Button);
+        Gdx.input.setInputProcessor(stage2);
+        backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
+        page2Button.setPosition(camera.position.x + 128, camera.position.y - Gdx.graphics.getHeight()/2);
+
+        batch.begin();
+        batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        font.getData().setScale(2, 2);
+        font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
+
+        font.getData().setScale(1,1);
+        font.draw(batch, "Movement: Use 'W', 'A', 'S', 'D' to move in the game", camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y + 90);
+        font.draw(batch, "Stop: Use 'Esc' can stop in the game", camera.position.x - (Gdx.graphics.getWidth())/2 + 50 ,camera.position.y);
+        font.draw(batch, "Win the Game: Collect all the rewards show on the board and go to the end block", camera.position.x - (Gdx.graphics.getWidth())/2 + 50 ,camera.position.y - 90);
+        font.draw(batch, "Lose the Game: Monster catch you or point lower than 0", camera.position.x - (Gdx.graphics.getWidth())/2 + 50,camera.position.y - 180);
+
+        batch.end();
+
+        stage2.act();
+        stage2.draw();
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             helpMenu = false;
         }
     }
 
+    /**
+     * This function controls the aspects of the help menu page 2
+     */
     public void page2Menu(){
+        stage3.addActor(backButton);
+        backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
+        page1Button.setPosition(camera.position.x - 384,camera.position.y - Gdx.graphics.getHeight()/2);
+        page3Button.setPosition(camera.position.x + 128,camera.position.y - Gdx.graphics.getHeight()/2);
+        Gdx.input.setInputProcessor(stage3);
+
+        batch.begin();
+        batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        batch.draw(RrewardTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y + 30 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        batch.draw(BrewardTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 60 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        batch.draw(RpunishmentTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 150, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        batch.draw(BpunishmentTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 240, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+
+        font.getData().setScale(2, 2);
+        font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
+
+        font.getData().setScale(1, 1);
+        font.draw(batch, ": Reward, collect can get 10 point", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y + 90);
+        font.draw(batch, ": Bonus reward, collect can get 10 point, appears on maps in fix time", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y);
+        font.draw(batch, ": Punishment, collecting loses 10 points", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 90);
+        font.draw(batch, ": Bonus Punishment, collect will loss 10 point, appear on map in fix time", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 180);
+
+        batch.end();
+        stage3.draw();
+        stage3.act();
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             page2 = false;
             helpMenu = false;
         }
     }
 
+    /**
+     * This function controls the aspects of the helpe meny page 3
+     */
     public void page3Menu(){
+        stage4.addActor(backButton);
+        stage4.addActor(page2Button);
+        backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
+        page2Button.setPosition(camera.position.x - 384,camera.position.y - Gdx.graphics.getHeight()/2);
+        Gdx.input.setInputProcessor(stage4);
+
+        batch.begin();
+        batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        batch.draw(movingEnemyTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y + 30 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        batch.draw(patrollingEnemeyTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 150, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+
+        font.getData().setScale(2, 2);
+        font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
+        font.getData().setScale(1, 1);
+        font.draw(batch, ": This is the mighty T.rex.\n  He will hunt you.",camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y + 90);
+        font.draw(batch, ": The Pterodactyl is mighty territorial\n  Avoid his set path.", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 90);
+
+        batch.end();
+        stage4.draw();
+        stage4.act();
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             page3 = false;
             page2 = false;
@@ -725,23 +701,48 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-
     /**
-     *
+     * This function displays the mission statements before the start of the game.
      */
-    public void resume() {
-
+    public void missionMenu(){
+        continueButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
+        Gdx.input.setInputProcessor(missionStage);
+        batch.begin();
+        batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        font.getData().setScale(2, 2);
+        font.draw(batch, "The Mission", camera.position.x - 150, camera.position.y + 220);
+        font.getData().setScale(1, 1);
+        font.draw(batch, "The Dinosaurs are trying to stop their demise.\n" +
+                "Collect All the bombs to ensure their extinction.\n" +
+                "The fate of Humanity Rests in your hands.", camera.position.x - (Gdx.graphics.getWidth())/2 + 300, camera.position.y + 90);
+        batch.end();
+        missionStage.act();
+        missionStage.draw();
     }
 
     /**
+     * This functions displays the entire map before commencing the game.
      *
+     * @param delta
      */
-    public void hide() {
-
+    public void fullScreen(float delta){
+        fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
+        fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
+        fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        fullscreenCamera.zoom = 1.8f;
+        fullscreenCamera.update();
+        batch.setProjectionMatrix(fullscreenCamera.combined);
+        batch.begin();
+        batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth() * 1.8f, Gdx.graphics.getHeight() * 1.8f);
+        gameboard.draw(batch, time, TILE_SIZE);
+        renderPlayer(delta);
+        readyText();
+        renderEnemies(delta);
+        batch.end();
     }
 
     /**
-     *
+     * This function is used to dispose the screen elements.
      */
     public void dispose() {
         batch.dispose();
@@ -752,6 +753,7 @@ public class GameScreen extends ScreenAdapter {
         stage2.dispose();
         stage3.dispose();
         stage4.dispose();
+        missionStage.dispose();
     }
 
     /**
