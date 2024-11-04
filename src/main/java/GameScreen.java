@@ -64,8 +64,12 @@ public class GameScreen extends ScreenAdapter {
 	private Button pauseButton;
 	private Button resumeButton;
     private Button exitButton;
+    private Button helpButton;
+    private Button restartButton;
+    private Button backButton;
 	private Stage stage1;
     private Stage stage0;
+    private Stage stage2;
 	private int change_x = 0;
 	private int change_y = 0;
 	private int middle_x = Gdx.graphics.getWidth() / 2;
@@ -77,12 +81,15 @@ public class GameScreen extends ScreenAdapter {
     private int resumeY;
 
     private boolean paused;
+    private boolean helpMenu;
 
     private OrthographicCamera fullscreenCamera;
     private boolean fullScreenMode = true;
     private float fullscreenDuration = 5f;
     private float fullscreenTimer = 0f;
     private float zoomFactor = 2;
+
+
 
     GameScreen(final MazeGame game) {
     	this.game = game;
@@ -150,10 +157,35 @@ public class GameScreen extends ScreenAdapter {
                 dispose();
             }
         });
+        stage1.addActor(exitButton);
 
-        stage1.addActor((exitButton));
+        helpButton = new TextButton("Help", skin);
+        helpButton.setSize(Gdx.graphics.getWidth()/6 * 2,Gdx.graphics.getHeight() /6 );
+        helpButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                helpMenu = true;
+            }
+        });
+        stage1.addActor(helpButton);
 
+        restartButton = new TextButton("Restart", skin);
+        restartButton.setSize(Gdx.graphics.getWidth()/6 * 2,Gdx.graphics.getHeight() /6 );
+        restartButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                game.setScreen(new GameScreen(game));
+            }
+        });
+        stage1.addActor(restartButton);
 
+        stage2 = new Stage(viewport);
+        backButton = new TextButton("Back", skin);
+        backButton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
+        backButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                helpMenu = false;
+            }
+        });
+        stage2.addActor(backButton);
     }
 
     /**
@@ -222,13 +254,42 @@ public class GameScreen extends ScreenAdapter {
         float centerX = (camera.position.x - (Gdx.graphics.getWidth())/2);
         float centerY = (camera.position.y - (Gdx.graphics.getHeight())/2);
         if(paused){
+            if(helpMenu){
+                Gdx.input.setInputProcessor(stage2);
+                backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
+                batch.begin();
+                batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                font.getData().setScale(2, 2);
+                font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
+
+                change_x = -(middle_x) + 50;
+                change_y = 200;
+                font.getData().setScale(1,1);;
+                font.draw(batch, "Movement: Use 'W', 'A', 'S', 'D' to move in the game", centerX + 50, camera.position.y + 90);
+
+                change_y = 100;
+                font.draw(batch, "Stop: Use 'Esc' can stop in the game", centerX + 50 ,camera.position.y);
+
+                change_y = 0;
+                font.draw(batch, "Win the Game: Collect all the rewards show on the board and go to the end block", centerX + 50 ,camera.position.y - 90);
+
+                change_y = -100;
+                font.draw(batch, "Lose the Game: Monster catch you or point lower than 0", centerX + 50,camera.position.y - 180);
+                batch.end();
+                stage2.act();
+                stage2.draw();
+                helpMenu();
+                return;
+            }
+
             Gdx.input.setInputProcessor(stage1);
             batch.begin();
             batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             batch.end();
-            resumeButton.setPosition(centerX + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, centerY + (Gdx.graphics.getHeight() - resumeButton.getHeight())/2);
-
-            exitButton.setPosition(centerX + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,centerY + Gdx.graphics.getHeight()/5);
+            resumeButton.setPosition(centerX + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, centerY + Gdx.graphics.getHeight()/2 + resumeButton.getHeight());
+            exitButton.setPosition(centerX + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,centerY + Gdx.graphics.getHeight()/2 - exitButton.getHeight() * 2);
+            helpButton.setPosition(centerX + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, centerY + Gdx.graphics.getHeight()/2);
+            restartButton.setPosition(centerX + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, centerY +Gdx.graphics.getHeight()/2 - restartButton.getHeight());
             stage1.act();
             stage1.draw();
 
@@ -471,6 +532,12 @@ public class GameScreen extends ScreenAdapter {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             System.out.println("UNPAUSED");
             paused = false;
+        }
+    }
+
+    public void helpMenu(){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            helpMenu = false;
         }
     }
 
