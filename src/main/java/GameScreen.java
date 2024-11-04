@@ -123,7 +123,8 @@ public class GameScreen extends ScreenAdapter {
         enemies = new ArrayList<Enemies>();
         enemies.add(new PatrollingEnemies(1, 21, Direction.Up, 1, 21, 1, 21, new TextureRegion(new Texture("ptero.png"))));
         enemies.add(new PatrollingEnemies(1, 9, Direction.Right, 1, 21, 1, 21, new TextureRegion(new Texture("ptero.png"))));
-        enemies.add(new Moving_Enemies(16, 14, new TextureRegion(new Texture("rock.png"))));
+        enemies.add(new Moving_Enemies(16, 14, new TextureRegion(new Texture("DinoSprite.png"))));
+        enemies.add(new Moving_Enemies(3, 20, new TextureRegion(new Texture("DinoSprite.png"))));
         System.out.println(enemies.size());
         canEnemyMove = new ArrayList<Boolean>(Collections.nCopies(enemies.size(), Boolean.FALSE));
 
