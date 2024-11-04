@@ -318,12 +318,12 @@ public class MainMenuScreen extends ScreenAdapter {
 			
 			batch.begin();
 			
-			change_x = -100;
+			change_x = -260;
 			change_y = 150;
 			
 			batch.draw(backgroundTexture, 0, 0);
 			font.getData().setScale(2, 2);
-			font.draw(batch, "Game", middle_x + change_x, middle_y + change_y);
+			font.draw(batch, "Jurassic Meteor", middle_x + change_x, middle_y + change_y);
 			
 			batch.end();
 			
