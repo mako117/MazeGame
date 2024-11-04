@@ -32,7 +32,7 @@ public class Punishments {
         this.y = inputY;
     }
     protected void setScore(int inputScore) {
-        if(inputScore < 0) {
+        if(inputScore >= 0) {
             this.score = inputScore;
         }
     }
