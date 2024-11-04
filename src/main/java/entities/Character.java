@@ -5,9 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import directions.Direction;
 import board.Block;
 import board.Board;
-import punishments.Punishments;
-import rewards.Reward;
-
 
 /**
  * The entities.Character class creates a main character for the player to move around the maze

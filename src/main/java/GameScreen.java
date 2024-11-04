@@ -75,15 +75,7 @@ public class GameScreen extends ScreenAdapter {
     private Stage stage3;
     private Stage stage4;
     private Stage missionStage;
-	private int change_x = 0;
-	private int change_y = 0;
-	private int middle_x = Gdx.graphics.getWidth() / 2;
-	private int middle_y = Gdx.graphics.getHeight() / 2;
-    private int left_x = 0;
-    private int top_y = Gdx.graphics.getHeight();
-
-
-    private boolean paused;
+	private boolean paused;
     private boolean helpMenu;
     private boolean page2;
     private boolean page3;
@@ -256,6 +248,10 @@ public class GameScreen extends ScreenAdapter {
     /**
      *
      */
+    public void show() {
+
+    }
+
     private void input() {
 
         if(INPUT_TIMEOUT <= 0){
@@ -265,6 +261,8 @@ public class GameScreen extends ScreenAdapter {
                 paused = true;
 
             } else
+
+
 
             if(Gdx.input.isKeyPressed(Input.Keys.W)){
                 if(player.direction('W', gameboard)){
@@ -299,6 +297,7 @@ public class GameScreen extends ScreenAdapter {
                 System.out.println("DOWN");
             }
         }
+
 
     }
 

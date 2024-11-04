@@ -1,5 +1,4 @@
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,6 +27,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	private TextureRegion BpunishmentTex;
 	private TextureRegion movingEnemyTex;
 	private TextureRegion patrollingEnemeyTex;
+	private TextureRegion endblockTex;
 	
 	private Skin skin;
 	private Button startbutton;
@@ -62,6 +62,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
 		RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
 		BpunishmentTex = new TextureRegion(new Texture("alien.png"));
+		endblockTex = new TextureRegion(new Texture("green.png"));
         movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
         patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
         
@@ -204,16 +205,16 @@ public class MainMenuScreen extends ScreenAdapter {
 				change_x = -(middle_x) + 30;
 				change_y = 200;
 				font.getData().setScale(1,1);;
-				font.draw(batch, "Movement: Use 'W', 'A', 'S', 'D' to move in the game", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, "Movement" + ": Use 'W', 'A', 'S', 'D' to move in the game", middle_x + change_x, middle_y + change_y);
 				
 				change_y = 100;
-				font.draw(batch, "Stop: Use 'Ese' can stop in the game", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, "Stop" + ": Use 'Ese' can stop in the game", middle_x + change_x, middle_y + change_y);
 				
 				change_y = 0;
-				font.draw(batch, "Win the Game: Collect all the rewards show on ready board and go to the end block", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, "Win the Game" + ": Collect all the rewards show on ready board \nand go to the end block win the game", middle_x + change_x, middle_y + change_y);
 				
-				change_y = -100;
-				font.draw(batch, "Loss the Game: Monster catch you or point lower than 0", middle_x + change_x, middle_y + change_y);
+				change_y = -150;
+				font.draw(batch, "Loss the Game" + ": Monster catch you or point lower than 0", middle_x + change_x, middle_y + change_y);
 				
 				batch.end();
 				
@@ -252,22 +253,22 @@ public class MainMenuScreen extends ScreenAdapter {
 				batch.draw(BpunishmentTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 				
 				change_x = -(middle_x) + 210;
-				change_y = 170;
+				change_y = 190;
 				
 				font.getData().setScale(1, 1);
-				font.draw(batch, ": Reward, collect can get 10 point", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, ": Reward \n Collect can get 10 point", middle_x + change_x, middle_y + change_y);
 				
-				change_y = 70;
+				change_y = 90;
 				
-				font.draw(batch, ": Bonus reward, collect can get 10 point, appear on mape in fix time", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, ": Bonus reward \n Collect can get 10 point, appear on mape in fix time", middle_x + change_x, middle_y + change_y);
 				
-				change_y = -30;
+				change_y = -10;
 				
-				font.draw(batch, ": Punishment, collect will loss 10 point", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, ": Punishment \n Collect will loss 10 point", middle_x + change_x, middle_y + change_y);
 				
-				change_y = -130;
+				change_y = -110;
 				
-				font.draw(batch, ": Bonus Punishment, collect will loss 10 point, appear on map in fix time", middle_x + change_x, middle_y + change_y);
+				font.draw(batch, ": Bonus Punishment \n Collect will loss 10 point, appear on map in fix time.", middle_x + change_x, middle_y + change_y);
 				
 				batch.end();
 				
@@ -286,23 +287,31 @@ public class MainMenuScreen extends ScreenAdapter {
 				batch.begin();
 				
 				change_x = -(middle_x) + 30;
-				change_y = 120;
+				change_y = 150;
 				
 				batch.draw(movingEnemyTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 				
-				change_y = -80;
+				change_y = 0;
 				
 				batch.draw(patrollingEnemeyTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 				
+				change_y = -150;
+				
+				batch.draw(endblockTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+				
 				change_x = -(middle_x) + 210;
-				change_y = 170;
+				change_y = 200;
 				
 				font.getData().setScale(1,1);
 				font.draw(batch, ": This is the mighty T.rex.\n  He will hunt you.", middle_x + change_x, middle_y + change_y);
 				
-				change_y = -30;
+				change_y = 50;
 
                 font.draw(batch, ": The Pterodactyl is mighty territorial\n  Avoid his set path.", middle_x + change_x, middle_y + change_y);
+                
+                change_y = -100;
+                
+                font.draw(batch, ": Come to this block to win when collect all the rewards.", middle_x + change_x, middle_y + change_y);
 		
 				batch.end();
 				
@@ -319,12 +328,12 @@ public class MainMenuScreen extends ScreenAdapter {
 			
 			batch.begin();
 			
-			change_x = -100;
+			change_x = -260;
 			change_y = 150;
 			
 			batch.draw(backgroundTexture, 0, 0);
 			font.getData().setScale(2, 2);
-			font.draw(batch, "Game", middle_x + change_x, middle_y + change_y);
+			font.draw(batch, "Jurassic Meteor", middle_x + change_x, middle_y + change_y);
 			
 			batch.end();
 			

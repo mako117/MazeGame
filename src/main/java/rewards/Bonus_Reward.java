@@ -1,12 +1,8 @@
 package rewards;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Bonus_Reward extends Reward {
-	private int bonusNr;
-	private static int bonusCnt = 1;
 	private int starttime;
 	private int endtime;
 	
@@ -14,8 +10,6 @@ public class Bonus_Reward extends Reward {
 		super(-1,-1,0);
 		starttime = -1;
 		endtime = -1;
-		bonusNr = bonusCnt;
-		bonusCnt++;
 	}
 	
 	public Bonus_Reward(int x, int y, int s, TextureRegion inputTexture, int start, int end){

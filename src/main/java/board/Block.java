@@ -1,9 +1,6 @@
 package board;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-import directions.Direction;
 
 /**
  * A block is a cell on the board.
@@ -23,22 +20,50 @@ public abstract class Block {
         this.blockTexture = blockTexture;
     }
 
+    /**
+     * Return the X position of the block.
+     * @return The x position.
+     */
     public int getXPosition(){
         return x;
     }
+
+    /**
+     * Returns the y position of the block.
+     * @return the y position.
+     */
     public int getYPosition(){
         return y;
     }
 
+    /**
+     * Set the x position to the given point.
+     * @param x1 the x position to change to.
+     */
     public void setXPosition(int x1){
         x = x1;
     }
+
+    /**
+     * Set the y position to given point.
+     * @param y1 the y position to change to.
+     */
     public void setYPosition(int y1){
         y = y1;
     }
-    public abstract boolean enter();
 
+    /**
+     * Draw the block to the screen.
+     * @param batch the sprite batch
+     * @param tileSize the size of the tile
+     */
     public void draw(Batch batch, int tileSize) {
         batch.draw(new TextureRegion(blockTexture), tileSize*x, tileSize*y, tileSize, tileSize);
     }
+
+    /**
+     * All block objects must return whether they can be entered.
+     * @return if the object entry is possible
+     */
+    public abstract boolean enter();
 }
