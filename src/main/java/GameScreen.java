@@ -42,8 +42,6 @@ public class GameScreen extends ScreenAdapter {
     private Board gameboard;
     private Character player;
     private ArrayList<Enemies> enemies;
-    private final int BOARD_WIDTH = 15;
-    private final int BOARD_HEIGHT = 20;
     private final int TILE_SIZE = 50; // size of tile
 
     // For smooth movement
@@ -77,17 +75,7 @@ public class GameScreen extends ScreenAdapter {
     private Stage stage3;
     private Stage stage4;
     private Stage missionStage;
-	private int change_x = 0;
-	private int change_y = 0;
-	private int middle_x = Gdx.graphics.getWidth() / 2;
-	private int middle_y = Gdx.graphics.getHeight() / 2;
-    private int left_x = 0;
-    private int top_y = Gdx.graphics.getHeight();
-
-    private int resumeX;
-    private int resumeY;
-
-    private boolean paused;
+	private boolean paused;
     private boolean helpMenu;
     private boolean page2;
     private boolean page3;
@@ -97,8 +85,7 @@ public class GameScreen extends ScreenAdapter {
     private boolean fullScreenMode = true;
     private float fullscreenDuration = 5f;
     private float fullscreenTimer = 0f;
-    private float zoomFactor = 2;
-
+    
     private TextureRegion RrewardTex;
     private TextureRegion RpunishmentTex;
     private TextureRegion BrewardTex;
@@ -153,9 +140,6 @@ public class GameScreen extends ScreenAdapter {
 
         stage1 = new Stage(viewport);
 		Gdx.input.setInputProcessor(stage1);
-		change_x = -780;
-		change_y = -400;
-
 		resumeButton = new TextButton("Resume", skin);
         resumeButton.setSize(Gdx.graphics.getWidth() / 6 * 2, Gdx.graphics.getHeight() / 6);
 		// listener for touch button
@@ -165,8 +149,6 @@ public class GameScreen extends ScreenAdapter {
 					}
 			
 		});
-        resumeX = (Gdx.graphics.getWidth() - (int)resumeButton.getWidth()) / 2;
-        resumeY = (Gdx.graphics.getHeight() - (int)resumeButton.getHeight()) / 2;
 		stage1.addActor(resumeButton);
         
         exitButton = new TextButton("Exit", skin);
@@ -430,18 +412,13 @@ public class GameScreen extends ScreenAdapter {
                 batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 font.getData().setScale(2, 2);
                 font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
-                change_x = -(middle_x) + 50;
-                change_y = 200;
                 font.getData().setScale(1,1);;
                 font.draw(batch, "Movement: Use 'W', 'A', 'S', 'D' to move in the game", centerX + 50, camera.position.y + 90);
 
-                change_y = 100;
                 font.draw(batch, "Stop: Use 'Esc' can stop in the game", centerX + 50 ,camera.position.y);
 
-                change_y = 0;
                 font.draw(batch, "Win the Game: Collect all the rewards show on the board and go to the end block", centerX + 50 ,camera.position.y - 90);
 
-                change_y = -100;
                 font.draw(batch, "Lose the Game: Monster catch you or point lower than 0", centerX + 50,camera.position.y - 180);
                 batch.end();
                 stage2.act();
