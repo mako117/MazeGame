@@ -67,9 +67,12 @@ public class GameScreen extends ScreenAdapter {
     private Button helpButton;
     private Button restartButton;
     private Button backButton;
+    private Button page1Button;
+    private Button page2Button;
 	private Stage stage1;
     private Stage stage0;
     private Stage stage2;
+    private Stage stage3;
 	private int change_x = 0;
 	private int change_y = 0;
 	private int middle_x = Gdx.graphics.getWidth() / 2;
@@ -82,12 +85,20 @@ public class GameScreen extends ScreenAdapter {
 
     private boolean paused;
     private boolean helpMenu;
+    private boolean page2;
 
     private OrthographicCamera fullscreenCamera;
     private boolean fullScreenMode = true;
     private float fullscreenDuration = 5f;
     private float fullscreenTimer = 0f;
     private float zoomFactor = 2;
+
+    private TextureRegion RrewardTex;
+    private TextureRegion RpunishmentTex;
+    private TextureRegion BrewardTex;
+    private TextureRegion BpunishmentTex;
+
+
 
 
 
@@ -182,10 +193,39 @@ public class GameScreen extends ScreenAdapter {
         backButton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
         backButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                page2 = false;
                 helpMenu = false;
             }
         });
         stage2.addActor(backButton);
+
+        page2Button = new TextButton("Page 2", skin);
+        page2Button.setSize(Gdx.graphics.getWidth()/10*2,Gdx.graphics.getHeight()/10);
+        page2Button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                page2 = true;
+            }
+        });
+        stage2.addActor(page2Button);
+
+                stage3 = new Stage(viewport);
+        page1Button = new TextButton("Page 1", skin);
+        page1Button.setSize(Gdx.graphics.getWidth()/10 * 2, Gdx.graphics.getHeight()/10);
+        page1Button.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                page2 = false;
+            }
+        });
+        stage3.addActor(page1Button);
+        stage3.addActor(backButton);
+
+
+        RrewardTex = new TextureRegion(new Texture("bomb.png"));
+        BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
+        RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
+        BpunishmentTex = new TextureRegion(new Texture("alien.png"));
+
     }
 
     /**
@@ -255,8 +295,50 @@ public class GameScreen extends ScreenAdapter {
         float centerY = (camera.position.y - (Gdx.graphics.getHeight())/2);
         if(paused){
             if(helpMenu){
+                if(page2){
+                    stage3.addActor(backButton);
+                    backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
+                    page1Button.setPosition(camera.position.x - 384,camera.position.y - Gdx.graphics.getHeight()/2);
+                    Gdx.input.setInputProcessor(stage3);
+
+                    batch.begin();
+                    batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    font.getData().setScale(2, 2);
+                    font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
+
+                    batch.draw(RrewardTex, centerX + 50, camera.position.y + 30 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+
+
+                    batch.draw(BrewardTex, centerX + 50, camera.position.y - 60 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+
+
+                    batch.draw(RpunishmentTex, centerX + 50, camera.position.y - 150, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+
+
+                    batch.draw(BpunishmentTex, centerX + 50, camera.position.y - 240, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+
+
+                    font.getData().setScale(1, 1);
+                    font.draw(batch, ": Reward, collect can get 10 point", centerX + 210, camera.position.y + 90);
+
+                    font.draw(batch, ": Bonus reward, collect can get 10 point, appears on maps in fix time", centerX + 210, camera.position.y);
+
+
+                    font.draw(batch, ": Punishment, collecting loses 10 points", centerX + 210, camera.position.y - 90);
+
+
+                    font.draw(batch, ": Bonus Punishment, collect will loss 10 point, appear on map in fix time", centerX + 210, camera.position.y - 180);
+
+                    batch.end();
+                    stage3.draw();
+                    stage3.act();
+                    page2Menu();
+                    return;
+                }
+                stage2.addActor(backButton);
                 Gdx.input.setInputProcessor(stage2);
                 backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
+                page2Button.setPosition(camera.position.x + 128, camera.position.y - Gdx.graphics.getHeight()/2);
                 batch.begin();
                 batch.draw(pauseTexture, centerX, centerY, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 font.getData().setScale(2, 2);
@@ -539,6 +621,12 @@ public class GameScreen extends ScreenAdapter {
     public void helpMenu(){
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             helpMenu = false;
+        }
+    }
+
+    public void page2Menu(){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            page2 = false;
         }
     }
 
