@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * This class create the main menu for the game.
+ */
 public class MainMenuScreen extends ScreenAdapter {
 	final MazeGame game;
 	
@@ -51,7 +54,11 @@ public class MainMenuScreen extends ScreenAdapter {
 	private boolean helppage1 = false;
 	private boolean helppage2 = false;
 	private boolean helppage3 = false;
-
+	
+	/**
+	 * This method set the information for button, texture, skin for button, stage for the main menu screen.
+	 * @param game
+	 */
 	public MainMenuScreen(final MazeGame game) {
 		this.game = game;
 		batch = new SpriteBatch();
@@ -71,6 +78,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		stage3 = new Stage(new ScreenViewport());
 		stage4 = new Stage(new ScreenViewport());
 		
+		//start to set the button
 		skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
 		
 		change_x = -150;
@@ -174,6 +182,9 @@ public class MainMenuScreen extends ScreenAdapter {
 		});
 	}
 
+	/**
+	 * This method show what main menu screen look like, print all the things for the main menu need.
+	 */
 	public void render(float delta) {
 		
 		ScreenUtils.clear(Color.BLACK);
@@ -342,18 +353,10 @@ public class MainMenuScreen extends ScreenAdapter {
 			
 		}
 	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-
-	}
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
+	/**
+	 * This method dispose the variable that need to dispose in the MainMenuScreen
+	 */
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -365,5 +368,16 @@ public class MainMenuScreen extends ScreenAdapter {
 		stage2.dispose();
 		stage3.dispose();
 		stage4.dispose();
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+
 	}
 }
