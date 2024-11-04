@@ -15,10 +15,11 @@ public class Punishments {
         score = 0;
     }
 
-    public Punishments(int inputX, int inputY, int inputScore) {
+    public Punishments(int inputX, int inputY, int inputScore, TextureRegion textureRegion) {
         this.setX(inputX);
         this.setY(inputY);
         this.setScore(inputScore);
+        this.setTextureRegion(textureRegion);
     }
     public int getPunishmentScore() {
         return this.score;
@@ -34,6 +35,9 @@ public class Punishments {
         if(inputScore < 0) {
             this.score = inputScore;
         }
+    }
+    protected void setTextureRegion(TextureRegion textureRegion) {
+        this.PunishmentsTexture = textureRegion;
     }
 
     public int XPosition() {
