@@ -480,11 +480,13 @@ public class GameScreen extends ScreenAdapter {
     public void checkReward() {
         int playerX = player.getX();
         int playerY = player.getY();
-        if(gameboard.regRewardCollect(playerX, playerY) > 0) {
+        int fromRegs = gameboard.regRewardCollect(playerX, playerY);
+        int fromBons = gameboard.bonRewardCollect(playerX, playerY,time);
+        int score = fromRegs + fromBons;
+        if(fromRegs > 0) {
             player.addRegReward();
             // System.out.println("triggered, total reg rewards collected = " + player.getRewardsCollected());
         }
-        int score = gameboard.regRewardCollect(playerX, playerY) + gameboard.bonRewardCollect(playerX, playerY,time);
         this.add_score(score);
     }
 
@@ -512,11 +514,6 @@ public class GameScreen extends ScreenAdapter {
     // TODO: write code for if the player wins
     private void playerEnd(boolean condition) {
     	game.setScreen(new EndScreen(game,score,time,condition));
-    }
-
-    // TODO: write code for if player loses
-    private void playerLoses() {
-
     }
 
 
