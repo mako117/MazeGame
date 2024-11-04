@@ -110,13 +110,13 @@ public class GameScreen extends ScreenAdapter {
 
         gameboard = new Board();
 
-        pauseTexture = new TextureRegion(new Texture("temp_pause.jpg"));
+        pauseTexture = new TextureRegion(new Texture("Space Background.png"));
         System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
         System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
 
-        skin = new Skin(Gdx.files.internal("skin-glassy/glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
         stage0 = new Stage(viewport);
-        pauseButton = new TextButton("PAUSE" , skin, "small");
+        pauseButton = new TextButton("PAUSE" , skin);
         pauseButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 paused = true;
@@ -129,7 +129,7 @@ public class GameScreen extends ScreenAdapter {
 		change_x = -780;
 		change_y = -400;
 
-		resumeButton = new TextButton("Resume", skin, "small");
+		resumeButton = new TextButton("Resume", skin);
         resumeButton.setSize(Gdx.graphics.getWidth() / 6 * 2, Gdx.graphics.getHeight() / 6);
 		// listener for touch button
 		resumeButton.addListener(new ChangeListener() {
@@ -142,7 +142,7 @@ public class GameScreen extends ScreenAdapter {
         resumeY = (Gdx.graphics.getHeight() - (int)resumeButton.getHeight()) / 2;
 		stage1.addActor(resumeButton);
         
-        exitButton = new TextButton("Exit", skin, "small");
+        exitButton = new TextButton("Exit", skin);
         exitButton.setSize(Gdx.graphics.getWidth() / 6 * 2, Gdx.graphics.getHeight() / 6);
         exitButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
@@ -300,7 +300,7 @@ public class GameScreen extends ScreenAdapter {
 
         batch.end();
 
-        pauseButton.setSize(Gdx.graphics.getWidth() /10,Gdx.graphics.getHeight()/10);
+        pauseButton.setSize(Gdx.graphics.getWidth() /10 + 40,Gdx.graphics.getHeight()/10);
         pauseButton.setPosition(centerX + Gdx.graphics.getWidth() - pauseButton.getWidth(),centerY + Gdx.graphics.getHeight() - pauseButton.getHeight());
         Gdx.input.setInputProcessor(stage0);
         stage0.act();
