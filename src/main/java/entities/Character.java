@@ -30,7 +30,16 @@ public class Character {
         setSpeed(1);
         setRewardsCollected(0);
         this.playerTexture = playerTexture;
-       this.playerTexture.setRegion(0 ,0, 32, 32);
+        this.playerTexture.setRegion(0 ,0, 32, 32);
+    }
+    public Character(TextureRegion playerTexture, int startX, int startY) {
+        setX(startX);
+        setY(startY);
+        setFacing(Direction.Down);
+        setSpeed(1);
+        setRewardsCollected(0);
+        this.playerTexture = playerTexture;
+        this.playerTexture.setRegion(0 ,0, 32, 32);
     }
     /**
      * Moves the entities.Character one cell north, east, south, or west if there is nothing in their way.
