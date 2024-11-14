@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import directions.Direction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -12,8 +13,8 @@ import board.Block;
 public class CharacterTest {
 
     private Character character;
-    private Board board;
-    private Block block;
+    private Board mockBoard;
+    private Block mockBlock;
 
     /**
      *
@@ -23,14 +24,14 @@ public class CharacterTest {
 
         TextureRegion mockTextureRegion = mock(TextureRegion.class);
 
-        board = mock(Board.class);
-        block = mock(Block.class);
+        mockBoard = mock(Board.class);
+        mockBlock = mock(Block.class);
 
         character = new Character(mockTextureRegion, 1, 1);
     }
 
     /**
-     *
+     * Test to check the initial position of the character
      */
     @Test
     public void initialPositionTest() {
@@ -39,38 +40,62 @@ public class CharacterTest {
     }
 
     /**
-     *
+     * Test to move Character Up
      */
     @Test
     public void moveUpTest() {
-        when(board.getBlock(anyInt(), anyInt())).thenReturn(block);
-        when(block.enter()).thenReturn(true);
-        character.direction('W', board);
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
+        when(mockBlock.enter()).thenReturn(true);
+        character.direction('W', mockBoard);
         assertEquals(1, character.getX());
         assertEquals(2, character.getY());
     }
 
     /**
-     *
+     * Test to move Character Down
      */
     @Test
     public void moveDownTest() {
-        when(board.getBlock(anyInt(), anyInt())).thenReturn(block);
-        when(block.enter()).thenReturn(true);
-        character.direction('S', board);
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
+        when(mockBlock.enter()).thenReturn(true);
+        character.direction('S', mockBoard);
         assertEquals(1, character.getX());
         assertEquals(0, character.getY());
     }
 
     /**
-     *
+     * Test to move character Left
      */
     @Test
     public void moveLeftTest() {
-        when(board.getBlock(anyInt(), anyInt())).thenReturn(block);
-        when(block.enter()).thenReturn(true);
-        character.direction('A', board);
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
+        when(mockBlock.enter()).thenReturn(true);
+        character.direction('A', mockBoard);
         assertEquals(0, character.getX());
+        assertEquals(1, character.getY());
+    }
+
+    /**
+     * Test to move character Right
+     */
+    @Test
+    public void moveRightTest() {
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
+        when(mockBlock.enter()).thenReturn(true);
+        character.direction('D', mockBoard);
+        assertEquals(2, character.getX());
+        assertEquals(1, character.getY());
+    }
+
+    /**
+     * Test to see if Character stays in position if unable to move
+     */
+    @Test
+    public void unableToMoveTest() {
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
+        when(mockBlock.enter()).thenReturn(false);
+        assertFalse(character.direction('W', mockBoard));
+        assertEquals(1, character.getX());
         assertEquals(1, character.getY());
     }
 
@@ -78,11 +103,20 @@ public class CharacterTest {
      *
      */
     @Test
-    public void moveRightTest() {
-        when(board.getBlock(anyInt(), anyInt())).thenReturn(block);
-        when(block.enter()).thenReturn(true);
-        character.direction('D', board);
-        assertEquals(2, character.getX());
-        assertEquals(1, character.getY());
+    public void facingDirectionTest() {
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
+        when(mockBlock.enter()).thenReturn(true);
+
+        character.direction('W', mockBoard);
+        assertEquals(Direction.Up, character.getFacing());
+
+        character.direction('S', mockBoard);
+        assertEquals(Direction.Down, character.getFacing());
+
+        character.direction('A', mockBoard);
+        assertEquals(Direction.Left, character.getFacing());
+
+        character.direction('D', mockBoard);
+        assertEquals(Direction.Right, character.getFacing());
     }
 }
