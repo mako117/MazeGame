@@ -49,4 +49,40 @@ public class CharacterTest {
         assertEquals(1, character.getX());
         assertEquals(2, character.getY());
     }
+
+    /**
+     *
+     */
+    @Test
+    public void moveDownTest() {
+        when(board.getBlock(anyInt(), anyInt())).thenReturn(block);
+        when(block.enter()).thenReturn(true);
+        character.direction('S', board);
+        assertEquals(1, character.getX());
+        assertEquals(0, character.getY());
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void moveLeftTest() {
+        when(board.getBlock(anyInt(), anyInt())).thenReturn(block);
+        when(block.enter()).thenReturn(true);
+        character.direction('A', board);
+        assertEquals(0, character.getX());
+        assertEquals(1, character.getY());
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void moveRightTest() {
+        when(board.getBlock(anyInt(), anyInt())).thenReturn(block);
+        when(block.enter()).thenReturn(true);
+        character.direction('D', board);
+        assertEquals(2, character.getX());
+        assertEquals(1, character.getY());
+    }
 }
