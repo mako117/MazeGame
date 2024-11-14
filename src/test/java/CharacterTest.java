@@ -17,17 +17,15 @@ public class CharacterTest {
     private Block mockBlock;
 
     /**
-     *
+     * The setup to create the initial character and some mock classes
      */
     @BeforeEach
     public void setUp() {
 
-        TextureRegion mockTextureRegion = mock(TextureRegion.class);
-
         mockBoard = mock(Board.class);
         mockBlock = mock(Block.class);
 
-        character = new Character(mockTextureRegion, 1, 1);
+        character = new Character(mock(TextureRegion.class), 1, 1);
     }
 
     /**
@@ -100,7 +98,7 @@ public class CharacterTest {
     }
 
     /**
-     *
+     * Test for facing the right direction for the character after moving
      */
     @Test
     public void facingDirectionTest() {
@@ -119,4 +117,15 @@ public class CharacterTest {
         character.direction('D', mockBoard);
         assertEquals(Direction.Right, character.getFacing());
     }
+
+    /**
+     * Test for reward collection count;
+     */
+    @Test
+    public void rewardCollectionTest() {
+        int initialCnt = character.getRewardsCollected();
+        character.addRegReward();
+        assertEquals(initialCnt + 1, character.getRewardsCollected());
+    }
+
 }
