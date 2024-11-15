@@ -13,6 +13,7 @@ public class Character {
     private int x;
     private int y;
     private int speed;
+    private int score;
     private int rewardsCollected;
     private TextureRegion playerTexture;
     private Direction facing;
@@ -25,6 +26,7 @@ public class Character {
         setY(1);
         setFacing(Direction.Down);
         setSpeed(1);
+        setScore(0);
         setRewardsCollected(0);
         this.playerTexture = playerTexture;
         this.playerTexture.setRegion(0 ,0, 32, 32);
@@ -158,6 +160,18 @@ public class Character {
             this.rewardsCollected = newTally;
         }
     }
+
+    public int getScore() {
+        return this.score;
+    }
+    public void setScore(int s) {this.score = s;}
+    public void add_score(int s) {
+        this.score += s;
+    }
+    public void minus_score(int s) {
+        this.score -= s;
+    }
+
     private void setFacing(Direction d) {
         this.facing = d;
     }

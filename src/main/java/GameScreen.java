@@ -51,7 +51,6 @@ public class GameScreen extends ScreenAdapter {
     private ArrayList<Boolean> canEnemyMove;
     private float enemyMovementOffset = 0;
 
-    private int score = 0;
     private float time = 0;
 
     private final float TICKSPEED = 0.4f;
@@ -417,7 +416,7 @@ public class GameScreen extends ScreenAdapter {
     private void renderText(){
 //        String timeText = String.format("%.1f",time);
         font.draw(batch,String.format("%s%.1f","Time: ", time) , camera.position.x-viewport.getScreenWidth()/2+10, camera.position.y+viewport.getScreenHeight()/2-font.getLineHeight());
-        font.draw(batch, String.format("%s%d","Score: ", score),camera.position.x-viewport.getScreenWidth()/2+10, camera.position.y+viewport.getScreenHeight()/2);
+        font.draw(batch, String.format("%s%d","Score: ", player.getScore()),camera.position.x-viewport.getScreenWidth()/2+10, camera.position.y+viewport.getScreenHeight()/2);
 //        String scoreText = String.format("%d",score);
 //        font.draw(batch, scoreText, camera.position.x, camera.position.y);
     }
@@ -555,14 +554,14 @@ public class GameScreen extends ScreenAdapter {
             player.addRegReward();
             // System.out.println("triggered, total reg rewards collected = " + player.getRewardsCollected());
         }
-        this.add_score(score);
+        player.add_score(score);
     }
 
     /**
      * Checks if the player's score is less than zero.
      */
     public void checkScore() {
-        if(this.score < 0) {
+        if(player.getScore() < 0) {
             playerEnd(false);
         }
     }
@@ -576,7 +575,7 @@ public class GameScreen extends ScreenAdapter {
         int playerX = player.getX();
         int playerY = player.getY();
         int score = gameboard.regPunishmentCollect(playerX, playerY) + gameboard.bonPunishmentCollect(playerX, playerY, time);
-        this.minus_score(score);
+        player.minus_score(score);
     }
 
     // TODO: write code for if the player wins
@@ -587,7 +586,7 @@ public class GameScreen extends ScreenAdapter {
      */
     private void playerEnd(boolean condition) {
         gameMusic.stop();
-    	game.setScreen(new EndScreen(game,score,time,condition));
+    	game.setScreen(new EndScreen(game,player.getScore(),time,condition));
     }
 
 
@@ -779,24 +778,5 @@ public class GameScreen extends ScreenAdapter {
         gameMusic.dispose();
     }
 
-    /**
-     * Updates the entities.Character's score.
-     * @param change the change in the entities.Character's score.
-     */
-    public void scorechange(int change) {
-        this.score += change;
-    }
-    /**
-     * Returns the entities.Character's <score> as an integer.
-     * @return <score>
-     */
-    public int getScore() {
-        return this.score;
-    }
-    public void add_score(int s) {
-    	this.score += s;
-    }
-    public void minus_score(int s) {
-    	this.score -= s;
-    }
+
 }
