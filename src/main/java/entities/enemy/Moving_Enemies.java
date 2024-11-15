@@ -3,6 +3,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import board.*;
 import entities.Character;
+import directions.Direction;
 
 /**
  * A moving enemy that moves in the direction of the player at all times.
