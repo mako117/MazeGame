@@ -119,4 +119,20 @@ public class EnemiesTest {
         assertEquals(Direction.Right, enemy.getFacing());
     }
 
+    /**
+     *
+     */
+    @Test
+    public void entityOutOfBoundsTest() {
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
+        when(mockBlock.enter()).thenReturn(true);
+        enemy.direction('A', mockBoard);
+        enemy.direction('A', mockBoard);
+        enemy.direction('S', mockBoard);
+        enemy.direction('S', mockBoard);
+
+        assertEquals(0, enemy.getX());
+        assertEquals(0, enemy.getY());
+    }
+
 }
