@@ -48,7 +48,18 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+          <groupId>nl.weeaboo.gdx-test</groupId>
+          <artifactId>gdx-test-core</artifactId>
+          <version>3.0.0</version>
+        </dependency>
 
+        <dependency>
+          <groupId>com.badlogicgames.gdx</groupId>
+          <artifactId>gdx-backend-headless</artifactId>
+          <version>1.13.0</version>
+          <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
