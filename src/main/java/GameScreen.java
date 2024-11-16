@@ -64,21 +64,12 @@ public class GameScreen extends ScreenAdapter {
     private Button exitButton;
     private Button helpButton;
     private Button restartButton;
-    private Button backButton;
-    private Button page1Button;
-    private Button page2Button;
-    private Button page3Button;
     private Button continueButton;
 	private Stage stage1;
     private Stage stage0;
-    private Stage stage2;
-    private Stage stage3;
-    private Stage stage4;
     private Stage missionStage;
 	private boolean paused;
     private boolean helpMenu;
-    private boolean page2;
-    private boolean page3;
     private boolean missionStatement = true;
 
     private OrthographicCamera fullscreenCamera;
@@ -86,13 +77,8 @@ public class GameScreen extends ScreenAdapter {
     private float fullscreenDuration = 5f;
     private float fullscreenTimer = 0f;
 
-    private TextureRegion RrewardTex;
-    private TextureRegion RpunishmentTex;
-    private TextureRegion BrewardTex;
-    private TextureRegion BpunishmentTex;
     private TextureRegion movingEnemyTex;
     private TextureRegion patrollingEnemeyTex;
-    private TextureRegion endBlockTex;
 
     Music gameMusic;
 
@@ -116,13 +102,8 @@ public class GameScreen extends ScreenAdapter {
         font = new BitmapFont(Gdx.files.internal("comic_sans.fnt"));
 
         backgroundTexture = new Texture("Space Background.png");
-        RrewardTex = new TextureRegion(new Texture("bomb.png"));
-        BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
-        RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
-        BpunishmentTex = new TextureRegion(new Texture("alien.png"));
         movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
         patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
-        endBlockTex = new TextureRegion(new Texture("green.png"));
 
         gameboard = new Board();
 
@@ -199,50 +180,6 @@ public class GameScreen extends ScreenAdapter {
             }
         });
         stage1.addActor(restartButton);
-
-        stage2 = new Stage(viewport);
-        backButton = new TextButton("Back", skin);
-        backButton.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
-        backButton.addListener(new ChangeListener() {
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                page2 = false;
-                page3 = false;
-                helpMenu = false;
-            }
-        });
-        stage2.addActor(backButton);
-
-        page2Button = new TextButton("Page 2", skin);
-        page2Button.setSize(Gdx.graphics.getWidth()/10*2,Gdx.graphics.getHeight()/10);
-        page2Button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                page2 = true;
-                page3 = false;
-            }
-        });
-        stage2.addActor(page2Button);
-
-        stage3 = new Stage(viewport);
-        page1Button = new TextButton("Page 1", skin);
-        page1Button.setSize(Gdx.graphics.getWidth()/10 * 2, Gdx.graphics.getHeight()/10);
-        page1Button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                page2 = false;
-                page3 = false;
-            }
-        });
-        stage3.addActor(page1Button);
-
-        stage4 = new Stage(viewport);
-        page3Button = new TextButton("Page 3", skin);
-        page3Button.setSize(Gdx.graphics.getWidth()/10 * 2, Gdx.graphics.getHeight()/10);
-        page3Button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                page3 = true;
-                page2 = false;
-            }
-        });
-        stage3.addActor(page3Button);
 
         missionStage = new Stage(viewport);
         continueButton = new TextButton("Continue", skin);
@@ -335,21 +272,10 @@ public class GameScreen extends ScreenAdapter {
         }
 
         if(paused){
-            if(helpMenu){
-                if(page3){
-                    page3Menu();
-                    return;
-                }
-
-                if(page2){
-                    page2Menu();
-                    return;
-                }
-
-                helpMenu();
-                return;
+            if(helpMenu) {
+            	game.setScreen(new HelpScreen(game,this));
+            	helpMenu = false;
             }
-
             pause();
             return;
         }
@@ -621,108 +547,6 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
-     * This function controls the aspects of the help menu page 1.
-     */
-    public void helpMenu(){
-        stage2.addActor(backButton);
-        stage2.addActor(page2Button);
-        Gdx.input.setInputProcessor(stage2);
-        backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
-        page2Button.setPosition(camera.position.x + 128, camera.position.y - Gdx.graphics.getHeight()/2);
-
-        batch.begin();
-        batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        font.getData().setScale(2, 2);
-        font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
-
-        font.getData().setScale(1,1);
-        font.draw(batch, "Movement: Use 'W', 'A', 'S', 'D' to move in the game", camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y + 90);
-        font.draw(batch, "Stop: Use 'Esc' can stop in the game", camera.position.x - (Gdx.graphics.getWidth())/2 + 50 ,camera.position.y);
-        font.draw(batch, "Win the Game: Collect all the rewards show on the board and go to the end block", camera.position.x - (Gdx.graphics.getWidth())/2 + 50 ,camera.position.y - 90);
-        font.draw(batch, "Lose the Game: Monster catch you or point lower than 0", camera.position.x - (Gdx.graphics.getWidth())/2 + 50,camera.position.y - 180);
-
-        batch.end();
-
-        stage2.act();
-        stage2.draw();
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            helpMenu = false;
-        }
-    }
-
-    /**
-     * This function controls the aspects of the help menu page 2
-     */
-    public void page2Menu(){
-        stage3.addActor(backButton);
-        backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
-        page1Button.setPosition(camera.position.x - 384,camera.position.y - Gdx.graphics.getHeight()/2);
-        page3Button.setPosition(camera.position.x + 128,camera.position.y - Gdx.graphics.getHeight()/2);
-        Gdx.input.setInputProcessor(stage3);
-
-        batch.begin();
-        batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        batch.draw(RrewardTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y + 30 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-        batch.draw(BrewardTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 60 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-        batch.draw(RpunishmentTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 150, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-        batch.draw(BpunishmentTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 240, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-
-        font.getData().setScale(2, 2);
-        font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
-
-        font.getData().setScale(1, 1);
-        font.draw(batch, ": Reward, collect can get 10 point", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y + 90);
-        font.draw(batch, ": Bonus reward, collect can get 10 point, appears on maps in fix time", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y);
-        font.draw(batch, ": Punishment, collecting loses 10 points", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 90);
-        font.draw(batch, ": Bonus Punishment, collect will loss 10 point, appear on map in fix time", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 180);
-
-        batch.end();
-        stage3.draw();
-        stage3.act();
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            page2 = false;
-            helpMenu = false;
-        }
-    }
-
-    /**
-     * This function controls the aspects of the helpe meny page 3
-     */
-    public void page3Menu(){
-        stage4.addActor(backButton);
-        stage4.addActor(page2Button);
-        backButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
-        page2Button.setPosition(camera.position.x - 384,camera.position.y - Gdx.graphics.getHeight()/2);
-        Gdx.input.setInputProcessor(stage4);
-
-        batch.begin();
-        batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        batch.draw(movingEnemyTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y + 30 , Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-        batch.draw(patrollingEnemeyTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 120, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-        batch.draw(endBlockTex, camera.position.x - (Gdx.graphics.getWidth())/2 + 50, camera.position.y - 240, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
-
-
-        font.getData().setScale(2, 2);
-        font.draw(batch, "How to play", camera.position.x - 150, camera.position.y + 220);
-        font.getData().setScale(1, 1);
-        font.draw(batch, ": This is the mighty T.rex.\n  He will hunt you.",camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y + 90);
-        font.draw(batch, ": The Pterodactyl is mighty territorial\n  Avoid his set path.", camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 60);
-        font.draw(batch,": Come to this block to win when collect all the rewards.",camera.position.x - (Gdx.graphics.getWidth())/2 + 210, camera.position.y - 180);
-
-        batch.end();
-        stage4.draw();
-        stage4.act();
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            page3 = false;
-            page2 = false;
-            helpMenu = false;
-        }
-    }
-
-    /**
      * This function displays the mission statements before the start of the game.
      */
     public void missionMenu(){
@@ -771,9 +595,6 @@ public class GameScreen extends ScreenAdapter {
         backgroundTexture.dispose();
         stage1.dispose();
         stage0.dispose();
-        stage2.dispose();
-        stage3.dispose();
-        stage4.dispose();
         missionStage.dispose();
         gameMusic.dispose();
     }
