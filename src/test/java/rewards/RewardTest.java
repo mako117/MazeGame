@@ -24,6 +24,9 @@ class RewardTest {
 		assertEquals(20,Rr1.Yposition());
 		assertEquals(10,Rr1.getPoint());
 		
+		Rr1.Set_score(-10);
+		assertEquals(10,Rr1.getPoint());
+		
 		Regular_Reward Rr2 = new Regular_Reward();
 		
 		assertEquals(-1,Rr2.Xposition());
@@ -50,6 +53,9 @@ class RewardTest {
 		assertEquals(15,Br1.getPoint());
 		assertEquals(20,Br1.getStarttime());
 		assertEquals(60,Br1.getEndtime());
+		
+		Br1.Set_score(-15);
+		assertEquals(15,Br1.getPoint());
 		
 		Bonus_Reward Br2 = new Bonus_Reward();
 		
