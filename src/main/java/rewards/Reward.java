@@ -29,7 +29,9 @@ public class Reward {
 	 * @param s
 	 */
 	public void Set_score(int s) {
-		this.score = s;
+		if(s >= 0) {
+			this.score = s;
+		}
 	}
 	
 	/**
