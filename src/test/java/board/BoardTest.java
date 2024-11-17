@@ -41,8 +41,23 @@ public class BoardTest {
     void wallEnterTest(){
         Wall w = new Wall();
         Wall w2 = new Wall(0, 0, null);
-        
+
         assertEquals(false, w.enter());
         assertEquals(false, w2.enter());
+    }
+
+    @Test
+    void blockPositionTest(){
+        Block b = new RoomBlock(0,1, null);
+
+        assertEquals(0, b.getXPosition());
+        assertEquals(1, b.getYPosition());
+
+        b.setXPosition(1);
+        b.setYPosition(2);
+
+        assertEquals(1, b.getXPosition());
+        assertEquals(2, b.getYPosition());
+
     }
 }
