@@ -1,3 +1,5 @@
+package screens;
+
 import board.Board;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -24,7 +26,6 @@ import entities.enemy.Enemies;
 import org.lwjgl.opengl.GL20;
 import java.util.ArrayList;
 import java.util.Collections;
-
 
 public class GameScreen extends ScreenAdapter {
 	final MazeGame game;
