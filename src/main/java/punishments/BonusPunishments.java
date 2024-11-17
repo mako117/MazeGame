@@ -46,4 +46,9 @@ public class BonusPunishments extends Punishments{
     public int  getEndTime(){
         return endtime;
     }
+    
+    public void settime(int start, int end) {
+    	this.starttime = start;
+    	this.endtime = end;
+    }
 }
