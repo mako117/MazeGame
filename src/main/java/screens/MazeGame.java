@@ -1,6 +1,6 @@
+package screens;
+
 import com.badlogic.gdx.*;
-
-
 
 public class MazeGame extends Game {
     //GameScreen gameScreen;
