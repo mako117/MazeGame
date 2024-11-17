@@ -40,9 +40,6 @@ public class MainMenuScreen extends ScreenAdapter {
 	private int middle_y = Gdx.graphics.getHeight() / 2;
 	
 	private boolean helppage = false;
-	private boolean helppage1 = false;
-	private boolean helppage2 = false;
-	private boolean helppage3 = false;
 	Music music;
 
 
@@ -110,7 +107,6 @@ public class MainMenuScreen extends ScreenAdapter {
 		helpbutton.addListener(new ChangeListener() {
 					public void changed(ChangeEvent event, Actor actor) {
 						helppage = true;
-						helppage1 = true;
 					}
 			
 		});
