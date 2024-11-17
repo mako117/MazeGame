@@ -38,15 +38,7 @@ class RoomBlock extends Block {
     public boolean enter() {
         return true;
     }
-
-    /**
-     * Return the Room number as a string
-     * 
-     * @return a String of the Room Number
-     */
-    public String toString() {
-        return "Room #" + _roomBlockNr;
-    }
+    
 
     private int _roomBlockNr;
     private static int _roomBlockCnt = 1;

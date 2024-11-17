@@ -33,14 +33,7 @@ class Wall extends Block {
         return false;
     }
 
-    /**
-     * Return the wall number as a string
-     * 
-     * @return a wall number as a String
-     */
-    public String toString() {
-        return "board.Wall #" + _wallNr;
-    }
+
 
     private int _wallNr;
     private static int _wallCnt = 1;
