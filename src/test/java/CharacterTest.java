@@ -128,4 +128,26 @@ public class CharacterTest {
         assertEquals(initialCnt + 1, character.getRewardsCollected());
     }
 
+    /**
+     * Test for setting speed
+     */
+    @Test
+    public void speedTest() {
+        assertEquals(1, character.getSpeed());
+    }
+
+    /**
+     * Testing get score
+     */
+    @Test
+    public void getScoreTest() {
+        assertEquals(0,character.getScore());
+        character.add_score(1);
+        assertEquals(1,character.getScore());
+        character.minus_score(1);
+        assertEquals(0,character.getScore());
+        character.setScore(10);
+        assertEquals(10, character.getScore());
+
+    }
 }
