@@ -70,13 +70,12 @@ public class MainMenuScreen extends ScreenAdapter {
 		startbutton.setPosition(middle_x + change_x, middle_y + change_y);
 		
 		// listener for touch button
-		startbutton.addListener(new ChangeListener() {
-					public void changed(ChangeEvent event, Actor actor) {
+		startbutton.addListener(new ChangeListener() {		
+			public void changed(ChangeEvent event, Actor actor) {
 						game.setScreen(new GameScreen(game));
 						music.stop();
 						dispose();
 					}
-			
 		});
 		
 		change_x = -100;
@@ -170,5 +169,16 @@ public class MainMenuScreen extends ScreenAdapter {
 	public void hide() {
 		// TODO Auto-generated method stub
 
+	}
+
+	//*** Utility methods ***//
+	public Button getStartButton() {
+		return this.startbutton;
+	}
+	public Button getHelpButton() {
+		return this.helpbutton;
+	}
+	public Button getExitButton() {
+		return this.exitbutton;
 	}
 }

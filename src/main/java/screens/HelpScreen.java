@@ -281,5 +281,18 @@ public class HelpScreen extends ScreenAdapter{
 		stage2.dispose();
 		stage3.dispose();
 	}
-	
+
+	//*** Utility methods ***//
+	public Button getBackButton() {
+		return this.helpbackbutton;
+	}
+	public Button getPage1Button() {
+		return this.helppage1button;
+	}
+	public Button getPage2Button() {
+		return this.helppage2button;
+	}
+	public Button getPage3Button() {
+		return this.helppage3button;
+	}
 }

@@ -201,4 +201,19 @@ public class EndScreen extends ScreenAdapter {
 		// TODO Auto-generated method stub
 		
 	}
+
+	//*** Utility methods ***//
+	public Button getPlayAgainButton() {
+		return this.playagainbutton;
+	}
+	public Button getTryAgainButton() {
+		return this.tryagainbutton;
+	}
+	public Button getExitButton() {
+		if(condition == true) {
+			return this.lossexitbutton;
+		} else {
+			return this.winexitbutton;
+		}
+	}
 }

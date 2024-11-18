@@ -601,4 +601,26 @@ public class GameScreen extends ScreenAdapter {
     }
 
 
+    //*** Utility functions ***//
+    public Button getContinueButton() {
+        return this.continueButton;
+    }
+    public Button getPauseButton() {
+        return this.pauseButton;
+    }
+    public Button getResumeButton() {
+        return this.resumeButton;
+    }
+    public Button getHelpButton() {
+        return this.helpButton;
+    }
+    public Button getRestartButton() {
+        return this.restartButton;
+    }
+    public Button getExitButton() {
+        return this.exitButton;
+    }
+    public float getFullScreenDuration() {
+        return this.fullscreenDuration;
+    }
 }
