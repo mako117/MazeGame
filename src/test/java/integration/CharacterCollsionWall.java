@@ -1,3 +1,5 @@
+package integration;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -7,13 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import board.Board;
-import board.RoomBlock;
 import board.Wall;
-import entities.enemy.PatrollingEnemies;
-import directions.Direction;
+import board.RoomBlock;
+import entities.Character;
+import board.Board;
 
-class PatrollingEnemiesCollsionWall {
+class CharacterCollsionWall {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private Board mockboard = mock(Board.class);
 	
@@ -23,12 +24,12 @@ class PatrollingEnemiesCollsionWall {
 		Wall w = new Wall(1,2,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Up,2,2,2,2,tex);
+		Character c = new Character(tex);
 		
-		e.direction('W', mockboard);
+		c.direction('W', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(2,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(1,c.getY());
 	}
 	
 	@Test
@@ -36,12 +37,12 @@ class PatrollingEnemiesCollsionWall {
 		Wall w = new Wall(0,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Left,2,2,2,2,tex);
+		Character c = new Character(tex);
 		
-		e.direction('A', mockboard);
+		c.direction('A', mockboard);
 		
-		assertEquals(0,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(1,c.getY());
 	}
 
 	@Test
@@ -49,12 +50,12 @@ class PatrollingEnemiesCollsionWall {
 		Wall w = new Wall(2,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Right,2,2,2,2,tex);
+		Character c = new Character(tex);
 		
-		e.direction('D', mockboard);
+		c.direction('D', mockboard);
 		
-		assertEquals(2,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(1,c.getY());
 	}
 	
 	@Test
@@ -62,12 +63,12 @@ class PatrollingEnemiesCollsionWall {
 		Wall w = new Wall(1,0,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Down,2,2,2,2,tex);
+		Character c = new Character(tex);
 		
-		e.direction('S', mockboard);
+		c.direction('S', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(0,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(1,c.getY());
 	}
 	
 	//RoomBlock
@@ -76,12 +77,12 @@ class PatrollingEnemiesCollsionWall {
 		RoomBlock b = new RoomBlock(1,2,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Up,2,2,2,2,tex);
+		Character c = new Character(tex);
 		
-		e.direction('W', mockboard);
+		c.direction('W', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(2,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(2,c.getY());
 	}
 	
 	@Test
@@ -89,12 +90,12 @@ class PatrollingEnemiesCollsionWall {
 		RoomBlock b = new RoomBlock(0,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Left,2,2,2,2,tex);
+		Character c = new Character(tex);
 		
-		e.direction('A', mockboard);
+		c.direction('A', mockboard);
 		
-		assertEquals(0,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(0,c.getX());
+		assertEquals(1,c.getY());
 	}
 
 	@Test
@@ -102,12 +103,12 @@ class PatrollingEnemiesCollsionWall {
 		RoomBlock b = new RoomBlock(2,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Right,2,2,2,2,tex);
+		Character c = new Character(tex);
 		
-		e.direction('D', mockboard);
+		c.direction('D', mockboard);
 		
-		assertEquals(2,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(2,c.getX());
+		assertEquals(1,c.getY());
 	}
 	
 	@Test
@@ -115,12 +116,11 @@ class PatrollingEnemiesCollsionWall {
 		RoomBlock b = new RoomBlock(1,0,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Down,2,2,2,2,tex);
+		Character c = new Character(tex);
 		
-		e.direction('S', mockboard);
+		c.direction('S', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(0,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(0,c.getY());
 	}
-
 }
