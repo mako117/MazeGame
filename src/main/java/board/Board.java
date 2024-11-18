@@ -41,6 +41,10 @@ public class Board {
      */
     private void createBoard() {
 
+        TextureRegion barrierBlockTexture = new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 16, 32,16,16);
+        TextureRegion roomBlockTexture = new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 122, 0,16,16);
+
+
         // Create board and fill with room blocks (free tiles), as well as surrounding the board with barrier blocks
 		array = new ArrayList<ArrayList<Block>>(width);
 		for(int i = 0; i < width; i++){
@@ -49,10 +53,10 @@ public class Board {
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
                 if(i == 0 || j == 0  || i == width-1 || j == height-1){
-                    array.get(i).add(j, new BarrierBlock(i,j, new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 16, 32,16,16)));
+                    array.get(i).add(j, new BarrierBlock(i,j, barrierBlockTexture));
                 }
                 else{
-                    array.get(i).add(j, new RoomBlock(i,j, new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 122, 0,16,16)));
+                    array.get(i).add(j, new RoomBlock(i,j, roomBlockTexture));
                 }
 			}
 		}
