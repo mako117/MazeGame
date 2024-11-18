@@ -10,7 +10,24 @@ import entities.Character;
 public class GameLogic {
 
     /**
-     * Checks if the player and an enemy
+     * This function checks and allows the enemies to move
+     */
+    public float moveEnemies(ArrayList<Enemies> enemies, Character player, Board gameboard, ArrayList<Boolean> canEnemyMove, int TILE_SIZE){
+        for(int i = 0; i < enemies.size(); i++) {
+            boolean isMovingEnemy = (enemies.get(i)) instanceof Moving_Enemies; // Q: are objects in list of type Enemy or do they retain their subclass?
+            if(isMovingEnemy == true) {
+                Moving_Enemies anEnemy = (Moving_Enemies) enemies.get(i);
+                canEnemyMove.set(i, (Boolean) anEnemy.direction((anEnemy.find_player(player, gameboard)), gameboard));
+            } else {
+                PatrollingEnemies anEnemy = (PatrollingEnemies) enemies.get(i);
+                canEnemyMove.set(i, (Boolean)anEnemy.direction('I', gameboard)); // char input doesn't matter
+            }
+        }
+        return (float) TILE_SIZE;
+    }
+
+    /**
+     * Checks if the player and an enemy occupy same cell
      */
     public boolean checkPlayerCollision(Character player, ArrayList<Enemies> enemies){
         // System.out.println("Entering collision function");

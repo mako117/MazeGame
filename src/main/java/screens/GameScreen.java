@@ -301,7 +301,7 @@ public class GameScreen extends ScreenAdapter {
 
         if(tickCount < 0){
             tickCount = TICKSPEED;
-            moveEnemies();
+            enemyMovementOffset = logicObject.moveEnemies(enemies, player, gameboard, canEnemyMove, TILE_SIZE);
         }
 
         logic();
@@ -436,94 +436,6 @@ public class GameScreen extends ScreenAdapter {
 
         gameboard.genNewBonus(time);
     }
-
-
-    /**
-     * This function checks and allows the enemies to move
-     */
-    private void moveEnemies(){
-        for(int i = 0; i < enemies.size(); i++) {
-            boolean isMovingEnemy = (enemies.get(i)) instanceof Moving_Enemies; // Q: are objects in list of type Enemy or do they retain their subclass?
-            if(isMovingEnemy == true) {
-                Moving_Enemies anEnemy = (Moving_Enemies) enemies.get(i);
-                canEnemyMove.set(i, (Boolean) anEnemy.direction((anEnemy.find_player(player, gameboard)), gameboard));
-            } else {
-                PatrollingEnemies anEnemy = (PatrollingEnemies) enemies.get(i);
-                canEnemyMove.set(i, (Boolean)anEnemy.direction('I', gameboard)); // char input doesn't matter
-            }
-        }
-        enemyMovementOffset = TILE_SIZE;
-    }
-
-    // /**
-    //  * Checks if the player and an enemy
-    //  */
-    // private void checkPlayerCollision(){
-    //     int playerX = player.getX();
-    //     int playerY = player.getY();
-    //     for(int i = 0; i < enemies.size(); i++) {
-    //         Enemies anEnemy = enemies.get(i);
-    //         int anEnemyX = anEnemy.getX();
-    //         int anEnemyY = anEnemy.getY();
-    //         if(playerX == anEnemyX && playerY == anEnemyY) {
-    //             playerEnd(false);
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // /**
-    //  * Checks to see if the player has reached the end
-    //  */
-    // private void checkIfExitingMaze() {
-    //     int playerX = player.getX();
-    //     int playerY = player.getY();
-    //     int playerRewardCnt = player.getRewardsCollected();
-    //     if((gameboard.getEnd().getXPosition() == playerX) && (gameboard.getEnd().getYPosition() == playerY) && (playerRewardCnt == gameboard.getTotalRegRewardCnt())) {
-    //         playerEnd(true);
-    //     }
-    // }
-
-    // /**
-    //  * Check if the player as reached a reward. <br>
-    //  * If there is a reward, the reward will be collected and the score added to player score. <br>
-    //  * The reward is removed from board after. <br>
-    //  */
-    // public void checkReward() {
-    //     int playerX = player.getX();
-    //     int playerY = player.getY();
-    //     int fromRegs = gameboard.regRewardCollect(playerX, playerY);
-    //     int fromBons = gameboard.bonRewardCollect(playerX, playerY,time);
-    //     int score = fromRegs + fromBons;
-    //     if(fromRegs > 0) {
-    //         player.addRegReward();
-    //         // System.out.println("triggered, total reg rewards collected = " + player.getRewardsCollected());
-    //     }
-    //     player.add_score(score);
-    // }
-
-    // /**
-    //  * Checks if the player's score is less than zero.
-    //  */
-    // public void checkScore() {
-    //     if(player.getScore() < 0) {
-    //         playerEnd(false);
-    //     }
-    // }
-
-    // /**
-    //  * Check if the player reached a punishment. <br>
-    //  * If there is a punishment, the punishment will be given to the player. <br>
-    //  * The punishment is removed after.<br>
-    //  */
-    // public void checkPunishment() {
-    //     int playerX = player.getX();
-    //     int playerY = player.getY();
-    //     int score = gameboard.regPunishmentCollect(playerX, playerY) + gameboard.bonPunishmentCollect(playerX, playerY, time);
-    //     player.minus_score(score);
-    // }
-
-    // TODO: write code for if the player wins
 
     /**
      * Sends the player to whichever screen depending on condition upon reaching the end.
