@@ -5,11 +5,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * The board.Wall class is used to create a wall and its interactions
  */
-class Wall extends Block {
+public class Wall extends Block {
     /**
      * Creates a wall and assigns the wall a unique number
      */
-    Wall() {
+    public Wall() {
     	super();
         _wallNr = _wallCnt++;
         System.out.println("creating board.Wall #" + _wallNr);
@@ -21,7 +21,7 @@ class Wall extends Block {
      * @param y The y coordinate.
      * @param textureRegion The texture.
      */
-    Wall(int x, int y, TextureRegion textureRegion){
+    public Wall(int x, int y, TextureRegion textureRegion){
     	super(x,y, textureRegion);
     }
 
