@@ -83,6 +83,8 @@ public class GameScreen extends ScreenAdapter {
 
     Music gameMusic;
 
+    private GameLogic logicObject = new GameLogic();
+
 
     /**
      *
@@ -411,11 +413,27 @@ public class GameScreen extends ScreenAdapter {
      * This includes collision, moving enemies, checking/applying rewards/punishments
      */
     private void logic() {
-        checkPlayerCollision();
-        checkIfExitingMaze();
-        checkScore();
-        checkReward();
-        checkPunishment();
+        if(logicObject.checkPlayerCollision(player, enemies)) {
+            playerEnd(false);
+        }
+        // checkPlayerCollision();
+
+        if(logicObject.checkIfExitingMaze(player, gameboard)) {
+            playerEnd(true);
+        }
+        // checkIfExitingMaze();
+
+        if(logicObject.checkScore(player)) {
+            playerEnd(false);
+        }
+        // checkScore();
+
+        logicObject.checkReward(player, gameboard, time);
+        // checkReward();
+
+        logicObject.checkPunishment(player, gameboard, time);
+        // checkPunishment();
+
         gameboard.genNewBonus(time);
     }
 
@@ -437,73 +455,73 @@ public class GameScreen extends ScreenAdapter {
         enemyMovementOffset = TILE_SIZE;
     }
 
-    /**
-     * Checks if the player and an enemy
-     */
-    private void checkPlayerCollision(){
-        int playerX = player.getX();
-        int playerY = player.getY();
-        for(int i = 0; i < enemies.size(); i++) {
-            Enemies anEnemy = enemies.get(i);
-            int anEnemyX = anEnemy.getX();
-            int anEnemyY = anEnemy.getY();
-            if(playerX == anEnemyX && playerY == anEnemyY) {
-                playerEnd(false);
-                break;
-            }
-        }
-    }
+    // /**
+    //  * Checks if the player and an enemy
+    //  */
+    // private void checkPlayerCollision(){
+    //     int playerX = player.getX();
+    //     int playerY = player.getY();
+    //     for(int i = 0; i < enemies.size(); i++) {
+    //         Enemies anEnemy = enemies.get(i);
+    //         int anEnemyX = anEnemy.getX();
+    //         int anEnemyY = anEnemy.getY();
+    //         if(playerX == anEnemyX && playerY == anEnemyY) {
+    //             playerEnd(false);
+    //             break;
+    //         }
+    //     }
+    // }
 
-    /**
-     * Checks to see if the player has reached the end
-     */
-    private void checkIfExitingMaze() {
-        int playerX = player.getX();
-        int playerY = player.getY();
-        int playerRewardCnt = player.getRewardsCollected();
-        if((gameboard.getEnd().getXPosition() == playerX) && (gameboard.getEnd().getYPosition() == playerY) && (playerRewardCnt == gameboard.getTotalRegRewardCnt())) {
-            playerEnd(true);
-        }
-    }
+    // /**
+    //  * Checks to see if the player has reached the end
+    //  */
+    // private void checkIfExitingMaze() {
+    //     int playerX = player.getX();
+    //     int playerY = player.getY();
+    //     int playerRewardCnt = player.getRewardsCollected();
+    //     if((gameboard.getEnd().getXPosition() == playerX) && (gameboard.getEnd().getYPosition() == playerY) && (playerRewardCnt == gameboard.getTotalRegRewardCnt())) {
+    //         playerEnd(true);
+    //     }
+    // }
 
-    /**
-     * Check if the player as reached a reward. <br>
-     * If there is a reward, the reward will be collected and the score added to player score. <br>
-     * The reward is removed from board after. <br>
-     */
-    public void checkReward() {
-        int playerX = player.getX();
-        int playerY = player.getY();
-        int fromRegs = gameboard.regRewardCollect(playerX, playerY);
-        int fromBons = gameboard.bonRewardCollect(playerX, playerY,time);
-        int score = fromRegs + fromBons;
-        if(fromRegs > 0) {
-            player.addRegReward();
-            // System.out.println("triggered, total reg rewards collected = " + player.getRewardsCollected());
-        }
-        player.add_score(score);
-    }
+    // /**
+    //  * Check if the player as reached a reward. <br>
+    //  * If there is a reward, the reward will be collected and the score added to player score. <br>
+    //  * The reward is removed from board after. <br>
+    //  */
+    // public void checkReward() {
+    //     int playerX = player.getX();
+    //     int playerY = player.getY();
+    //     int fromRegs = gameboard.regRewardCollect(playerX, playerY);
+    //     int fromBons = gameboard.bonRewardCollect(playerX, playerY,time);
+    //     int score = fromRegs + fromBons;
+    //     if(fromRegs > 0) {
+    //         player.addRegReward();
+    //         // System.out.println("triggered, total reg rewards collected = " + player.getRewardsCollected());
+    //     }
+    //     player.add_score(score);
+    // }
 
-    /**
-     * Checks if the player's score is less than zero.
-     */
-    public void checkScore() {
-        if(player.getScore() < 0) {
-            playerEnd(false);
-        }
-    }
+    // /**
+    //  * Checks if the player's score is less than zero.
+    //  */
+    // public void checkScore() {
+    //     if(player.getScore() < 0) {
+    //         playerEnd(false);
+    //     }
+    // }
 
-    /**
-     * Check if the player reached a punishment. <br>
-     * If there is a punishment, the punishment will be given to the player. <br>
-     * The punishment is removed after.<br>
-     */
-    public void checkPunishment() {
-        int playerX = player.getX();
-        int playerY = player.getY();
-        int score = gameboard.regPunishmentCollect(playerX, playerY) + gameboard.bonPunishmentCollect(playerX, playerY, time);
-        player.minus_score(score);
-    }
+    // /**
+    //  * Check if the player reached a punishment. <br>
+    //  * If there is a punishment, the punishment will be given to the player. <br>
+    //  * The punishment is removed after.<br>
+    //  */
+    // public void checkPunishment() {
+    //     int playerX = player.getX();
+    //     int playerY = player.getY();
+    //     int score = gameboard.regPunishmentCollect(playerX, playerY) + gameboard.bonPunishmentCollect(playerX, playerY, time);
+    //     player.minus_score(score);
+    // }
 
     // TODO: write code for if the player wins
 
