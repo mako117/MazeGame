@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import board.Wall;
-import board.Block;
 import board.RoomBlock;
 import entities.Character;
 import board.Board;
