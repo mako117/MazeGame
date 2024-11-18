@@ -94,8 +94,24 @@ public class EnemiesTest {
         when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
         when(mockBlock.enter()).thenReturn(false);
         assertFalse(enemy.direction('W', mockBoard));
+        assertFalse(enemy.direction('S', mockBoard));
+        assertFalse(enemy.direction('A', mockBoard));
+        assertFalse(enemy.direction('D', mockBoard));
         assertEquals(1, enemy.getX());
         assertEquals(1, enemy.getY());
+    }
+
+    /**
+     * Entering a null block Test
+     */
+    @Test
+    public void nullBlockTest() {
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(null);
+        when(mockBlock.enter()).thenReturn(true);
+        assertFalse(enemy.direction('W', mockBoard));
+        assertFalse(enemy.direction('S', mockBoard));
+        assertFalse(enemy.direction('A', mockBoard));
+        assertFalse(enemy.direction('D', mockBoard));
     }
 
     /**
@@ -117,6 +133,16 @@ public class EnemiesTest {
 
         enemy.direction('D', mockBoard);
         assertEquals(Direction.Right, enemy.getFacing());
+    }
+
+    /**
+     * Wrong input test
+     */
+    @Test
+    public void badInputTest() {
+        when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(mockBlock);
+        when(mockBlock.enter()).thenReturn(true);
+        assertFalse(enemy.direction('B', mockBoard));
     }
 
     /**
