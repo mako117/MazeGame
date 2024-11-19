@@ -68,7 +68,7 @@ public abstract class Block {
      * @param tileSize the size of the tile
      */
     public void draw(Batch batch, int tileSize) {
-        batch.draw(new TextureRegion(blockTexture), tileSize*x, tileSize*y, tileSize, tileSize);
+        batch.draw(blockTexture, tileSize*x, tileSize*y, tileSize, tileSize);
     }
 
     /**
