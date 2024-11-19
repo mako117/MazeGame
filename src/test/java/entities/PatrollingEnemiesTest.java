@@ -58,6 +58,123 @@ public class PatrollingEnemiesTest {
         enemy = new PatrollingEnemies(1,1,Direction.Up,-1,-1,-1,-10,mockTextureRegion);
     }
 
+    /**
+     * Test Path Creation and Follow
+     */
+    @Test
+    public void createdPathYTest() {
+        enemy.direction('W', mockBoard);
+        assertEquals('W', enemy.getMoveTo());
 
+        enemy.setY(10);
+        enemy.direction('S', mockBoard);
+        assertEquals('S', enemy.getMoveTo());
+
+        enemy.setFacing(Direction.Down);
+        enemy.direction('S', mockBoard);
+        assertEquals('S', enemy.getMoveTo());
+        enemy.setY(1);
+        enemy.direction('S', mockBoard);
+        assertEquals('W', enemy.getMoveTo());
+
+    }
+    /**
+     * Test Path Creation and Follow
+     */
+    @Test
+    public void createdPathXTest() {
+        enemy = new PatrollingEnemies(1,1,Direction.Right,1,10,1,1,mockTextureRegion);
+
+        enemy.direction('D', mockBoard);
+        assertEquals('D', enemy.getMoveTo());
+
+        enemy.setX(10);
+        enemy.direction('A', mockBoard);
+        assertEquals('A', enemy.getMoveTo());
+
+        enemy.setFacing(Direction.Left);
+        enemy.direction('A', mockBoard);
+        assertEquals('A', enemy.getMoveTo());
+        enemy.setX(1);
+        enemy.direction('A', mockBoard);
+        assertEquals('D', enemy.getMoveTo());
+
+    }
+
+    /**
+     * Test Directional Block movement
+     */
+    @Test
+    public void directionBlockTest() {
+
+        enemy = new PatrollingEnemies(2, 2, Direction.Up, 0, 5, 0, 5, mockTextureRegion);
+
+        when(mockBoard.getBlock(2, 2)).thenReturn(mockBlock);
+
+        when(mockBoard.getBlock(2, 3)).thenReturn(mockBlock);
+
+        when(mockBoard.getBlock(2, 1)).thenReturn(mockBlock);
+
+
+        when(mockBoard.getBlock(1, 2)).thenReturn(mockBlock);
+
+
+        when(mockBoard.getBlock(3, 2)).thenReturn(mockBlock);
+
+
+        enemy.setFacing(Direction.Up);
+        assertEquals(2, enemy.getY());
+        boolean moved = enemy.direction('W', mockBoard);
+        assertTrue(moved);
+        assertEquals(3, enemy.getY());
+
+
+        enemy.setFacing(Direction.Down);
+        assertEquals(3, enemy.getY());
+        moved = enemy.direction('S', mockBoard);
+        assertTrue(moved);
+        assertEquals(2, enemy.getY());
+
+
+        enemy.setFacing(Direction.Left);
+        assertEquals(2, enemy.getX());
+        moved = enemy.direction('A', mockBoard);
+        assertTrue(moved);
+        assertEquals(1, enemy.getX());
+
+        enemy.setFacing(Direction.Right);
+        assertEquals(1, enemy.getX());
+        moved = enemy.direction('D', mockBoard);
+        assertTrue(moved);
+        assertEquals(2, enemy.getX());
+
+
+        when(mockBoard.getBlock(2, 3)).thenReturn(null);
+
+        when(mockBoard.getBlock(2, 1)).thenReturn(null);
+
+
+        when(mockBoard.getBlock(1, 2)).thenReturn(null);
+
+        when(mockBoard.getBlock(3, 2)).thenReturn(null);
+
+
+
+        moved = enemy.direction('W', mockBoard);
+        assertEquals(2, enemy.getY());
+
+
+        moved = enemy.direction('S', mockBoard);
+        assertEquals(2, enemy.getY());
+
+        moved = enemy.direction('A', mockBoard);
+        assertEquals(2, enemy.getX());
+
+        moved = enemy.direction('D', mockBoard);
+        assertEquals(2, enemy.getX());
+
+
+
+    }
 
 }
