@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import directions.Direction;
 import entities.enemy.Enemies;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,8 @@ public class EnemiesTest {
     private Enemies enemy;
     private Board mockBoard;
     private Block mockBlock;
+    private Batch mockBatch;
+    private TextureRegion mockTextureRegion;
 
     /**
      * The setup to create the initial enemy and some mock classes
@@ -27,8 +30,10 @@ public class EnemiesTest {
 
         mockBoard = mock(Board.class);
         mockBlock = mock(Block.class);
+        mockBatch = mock(Batch.class);
+        mockTextureRegion = mock(TextureRegion.class);
 
-        enemy = new Enemies(1,1,mock(TextureRegion.class));
+        enemy = new Enemies(1,1,mockTextureRegion);
     }
 
     /**
@@ -161,6 +166,94 @@ public class EnemiesTest {
 
         assertEquals(0, enemy.getX());
         assertEquals(0, enemy.getY());
+    }
+
+    /**
+     * Test drawing up with offset
+     */
+    @Test
+    public void testDrawUp() {
+
+        enemy.setX(1);
+        enemy.setY(1);
+        enemy.setFacing(Direction.Up);
+        int tileSize = 32;
+        float offset = 10.0f;
+
+        enemy.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * enemy.getX())), eq((float)(tileSize* enemy.getY() - offset)), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+
+    /**
+     * Test drawing down with offset
+     */
+    @Test
+    public void testDrawDown() {
+
+        enemy.setX(1);
+        enemy.setY(2);
+        enemy.setFacing(Direction.Down);
+        int tileSize = 32;
+        float offset = 10.0f;
+
+        enemy.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * enemy.getX())), eq((float)(tileSize* enemy.getY() + offset)), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+
+    /**
+     * Test drawing Right with offset
+     */
+    @Test
+    public void testDrawRight() {
+
+        enemy.setX(1);
+        enemy.setY(1);
+        enemy.setFacing(Direction.Right);
+        int tileSize = 32;
+        float offset = 10.0f;
+
+        enemy.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * enemy.getX() - offset)), eq((float)(tileSize* enemy.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+
+    /**
+     * Test drawing Left with offset
+     */
+    @Test
+    public void testDrawLeft() {
+
+        enemy.setX(2);
+        enemy.setY(1);
+        enemy.setFacing(Direction.Left);
+        int tileSize = 32;
+        float offset = 10.0f;
+
+        enemy.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * enemy.getX() + offset)), eq((float)(tileSize* enemy.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+
+
+    /**
+     * Test for drawing with no offset
+     */
+    @Test
+    public void testDrawWithoutOffset() {
+        // Setting mock position and facing direction
+        enemy.setX(1);
+        enemy.setY(1);
+        enemy.setFacing(Direction.Up);  // Set facing up
+        int tileSize = 32;
+        float offset = 0.0f;  // Zero offset
+
+        // Call the draw method
+        enemy.draw(mockBatch, tileSize, offset);
+
+        // Verify that batch.draw() was called without offset
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize* enemy.getX())), eq((float)(tileSize* enemy.getY())), eq((float)(tileSize)), eq((float) (tileSize)));
     }
 
 }
