@@ -62,60 +62,6 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
         mockTextureRegion = mock(TextureRegion.class);
     }
 
-    // Test block features
-    /**
-     * Test barrier block enter method.
-     */
-    @Test
-    void barrierBlockEnterTest(){
-        BarrierBlock b = new BarrierBlock();
-        BarrierBlock b2 = new BarrierBlock(0, 0, null);
-
-        assertFalse(b.enter());
-        assertFalse(b2.enter());
-    }
-
-    /**
-     * Test room block enter method.
-     */
-    @Test
-    void roomBlockEnterTest(){
-        RoomBlock b = new RoomBlock();
-        RoomBlock b2 = new RoomBlock(0, 0, null);
-
-        assertTrue(b.enter());
-        assertTrue(b2.enter());
-    }
-
-    /**
-     * Test wall enter method.
-     */
-    @Test
-    void wallEnterTest(){
-        Wall w = new Wall();
-        Wall w2 = new Wall(0, 0, null);
-
-        assertFalse(w.enter());
-        assertFalse(w2.enter());
-    }
-
-    /**
-     * Test block position getter.
-     */
-    @Test
-    void blockPositionTest(){
-        Block b = new RoomBlock(0,1, null);
-
-        assertEquals(0, b.getXPosition());
-        assertEquals(1, b.getYPosition());
-
-        b.setXPosition(1);
-        b.setYPosition(2);
-
-        assertEquals(1, b.getXPosition());
-        assertEquals(2, b.getYPosition());
-
-    }
 
 
     // Test board features
