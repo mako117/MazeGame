@@ -45,10 +45,12 @@ abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
 public class BoardTest extends AbstractTestWithHeadlessGdxContext{
 
     Board board;
+    Board mockBoard;
 
     @BeforeAll
     public void setup(){
         board = new Board();
+        mockBoard = mock(Board.class);
     }
 
     // Test block features
@@ -132,10 +134,22 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
     }
 
     /**
-     * Test get total regular reward count.
+     * Test get total regular rewards count and collection.
      */
     @Test
-    void getTotalRegRewardCnt() {
+    void regularRewardCollection() {
+        // Initial regular rewards in board.
+        int regRewardCnt = 3;
+        assertEquals(board.getTotalRegRewardCnt(), regRewardCnt);
+
+        // Collect a reward at where there is a reward.
+        board.regRewardCollect(4, 15);
+        regRewardCnt = 2;
+        assertEquals(board.getTotalRegRewardCnt(), regRewardCnt);
+
+        // Collect reward when there is no reward there.
+        board.regRewardCollect(0,0);
+        assertEquals(board.getTotalRegRewardCnt(), regRewardCnt);
     }
 
     /**
