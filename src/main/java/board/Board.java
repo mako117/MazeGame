@@ -38,7 +38,7 @@ public class Board {
     /**
      * Create a templated board
      */
-    private void createBoard() {
+    protected void createBoard() {
 
         TextureRegion barrierBlockTexture = new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 16, 32,16,16);
         TextureRegion roomBlockTexture = new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 122, 0,16,16);
@@ -157,6 +157,29 @@ public class Board {
     }
 
     /**
+     * Returns the total number of bonus rewards currently on the board.
+     */
+    public int getTotalBonusRewardCnt(){
+        return array_bonReward.size();
+    }
+
+    /**
+     * Returns the total number of regular punishments currently on the board.
+     * @return The regular punishment count.
+     */
+    public int getTotalRegPunishmentCnt(){
+        return array_regPunishment.size();
+    }
+
+    /**
+     * Returns the total number of bonus punishments currently on the board.
+     * @return The bonus punishment count.
+     */
+    public int getTotalBonusPunishmentCnt(){
+        return array_bonPunishment.size();
+    }
+
+    /**
      * Return the block that is at the coordinates <br>
      * Invalid coordinates will return null. <br>
      * @param x the x coordinate
@@ -253,7 +276,7 @@ public class Board {
             return 0;
         }
         int score = array_regPunishment.get(index).getPunishmentScore();
-        // System.out.println("reg punishment score = " + score);
+//         System.out.println("reg punishment score = " + score);
         array_regPunishment.remove(index);
         return score;
     }
@@ -387,12 +410,11 @@ public class Board {
             for(int i = startingY; i <= endingY; i++) {
                 createWall(startingX, i);
             }
-        } else if(startingY == endingY) {
+        }
+        else if(startingY == endingY) {
             for(int i = startingX; i <= endingX; i++) {
                 createWall(i, startingY);
             }
-        } else {
-            // we don't make a long wall if it isn't a straight line
         }
     }
 
@@ -476,7 +498,7 @@ public class Board {
      * @param internalTexturePath The texture.
      */
     private void addRegPunishment(int x, int y, int score, String internalTexturePath) {
-        array_regPunishment.add(new NormalPunishments(x,y,1,new TextureRegion(new Texture(internalTexturePath))));
+        array_regPunishment.add(new NormalPunishments(x,y,score,new TextureRegion(new Texture(internalTexturePath))));
     }
 
     /**
