@@ -17,13 +17,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import directions.Direction;
 
-class CharacterCollsionEnemies {
+class CharacterCollisionEnemies {
 
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
 	
 	@Test
-	void CharacterCollsionwithMovingEnemies() {
+	void CharacterCollisionwithMovingEnemies() {
 		Character c = new Character(tex);
 		
 		ArrayList<Enemies> enemies = new ArrayList<Enemies>();
@@ -46,7 +46,7 @@ class CharacterCollsionEnemies {
 	}
 	
 	@Test
-	void CharacterCollsionwithPatrollingEnemies() {
+	void CharacterCollisionwithPatrollingEnemies() {
 		Character c = new Character(tex);
 		
 		ArrayList<Enemies> enemies = new ArrayList<Enemies>();
