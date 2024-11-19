@@ -44,16 +44,12 @@ abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
 public class BoardTest extends AbstractTestWithHeadlessGdxContext{
 
     private Board board;
-    private Board mockBoard;
     private SpriteBatch mockBatch;
-    private TextureRegion mockTextureRegion;
 
     @BeforeEach
     public void setup(){
         board = new Board();
-        mockBoard = mock(Board.class);
         mockBatch = mock(SpriteBatch.class);
-        mockTextureRegion = mock(TextureRegion.class);
     }
 
 
@@ -247,10 +243,31 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
     }
 
     /**
-     * Test generate new bonus punishments. TODO: finish tests below
+     * Test generate new bonus punishments.
+     * Check that there is still the same amount of punishments and rewards after generating.
      */
     @Test
     void genNewBonusTest() {
+        int bonusRewardCnt = 3;
+        int bonusPunishmentCnt = 5;
+
+        // when the board doesn't generate bonuses
+        board.genNewBonus(1);
+        assertEquals( bonusRewardCnt, board.getTotalBonusRewardCnt());
+        assertEquals(bonusPunishmentCnt, board.getTotalBonusPunishmentCnt());
+
+        // Collect a bonus reward in between interval of time
+        // there is a reward at x:3, y:21, startTime:10, endTime: 20, score:10
+        // There is a bonus punish at x:13, y:21, score:10, startTime:0, endTime:10
+        board.bonRewardCollect(3, 21, 10);
+        board.bonPunishmentCollect(13, 21, 0);
+        assertEquals(bonusRewardCnt - 1 , board.getTotalBonusRewardCnt());
+        assertEquals(bonusPunishmentCnt - 1, board.getTotalBonusPunishmentCnt());
+
+        // when the board is supposed to generate bonuses
+        board.genNewBonus(60);
+        assertEquals(bonusRewardCnt, board.getTotalBonusRewardCnt());
+        assertEquals(bonusPunishmentCnt, board.getTotalBonusPunishmentCnt());
     }
 
     /**
@@ -258,8 +275,7 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
      */
     @Test
     void drawTest(){
-        // testing whether the draw method crashes or not bc idk what else to do rn
-
+        // testing whether the draw method crashes
         int tileSize = 100;
         board.draw(mockBatch, 0, tileSize);
 

@@ -107,14 +107,23 @@ public class Board {
         addRegReward(8,11,10,"bomb.png");
         addRegReward(18,19,10,"bomb.png");
 
+        // add bonus rewards
+        addBonReward(3,21,10,"dinosaur_egg.png",10,20);
+        addBonReward(20,4,10,"dinosaur_egg.png",30,40);
+        addBonReward(21,21,10,"dinosaur_egg.png",50,60);
+
         // add regular punishments
         addRegPunishment(14,2,10,"baby_dinosaur.png");
         addRegPunishment(9,6,10,"baby_dinosaur.png");
         addRegPunishment(8,17,10,"baby_dinosaur.png");
         addRegPunishment(21,13,10,"baby_dinosaur.png");
 
-        // generate initial bonus rewards and punishments
-        genNewBonus(0);
+        // add bonus punishments
+        addBonPunishment(13,21,10,"alien.png",0,10);
+        addBonPunishment(6,2,10,"alien.png",20,30);
+        addBonPunishment(12,11,10,"alien.png",30,40);
+        addBonPunishment(4,10,10,"alien.png",40,50);
+        addBonPunishment(16,8,10,"alien.png",50,60);
 
         endRoomBlock = new RoomBlock(1,21,new TextureRegion(new Texture("green.png")));
         array.get(1).set(endRoomBlock.getYPosition(), endRoomBlock);
@@ -342,7 +351,8 @@ public class Board {
     }
 
     /**
-     * Generate new bonus punishments and rewards on the board.
+     * Generate new bonus punishments and rewards on the board. <br>
+     * New rewards and punishments are generated every 60 seconds.
      * @param t the current time.
      */
     public void genNewBonus(float t) {
@@ -355,7 +365,7 @@ public class Board {
             addBonReward(20,4,10,"dinosaur_egg.png",(int)this.t_last + 30,(int)this.t_last + 40);
             addBonReward(21,21,10,"dinosaur_egg.png",(int)this.t_last + 50,(int)this.t_last + 60);
             // add bonus punishments
-            array_bonReward.clear();
+            array_bonPunishment.clear();
             addBonPunishment(13,21,10,"alien.png",(int)this.t_last,(int)this.t_last + 10);
             addBonPunishment(6,2,10,"alien.png",(int)this.t_last + 20,(int)this.t_last + 30);
             addBonPunishment(12,11,10,"alien.png",(int)this.t_last + 30,(int)this.t_last + 40);
