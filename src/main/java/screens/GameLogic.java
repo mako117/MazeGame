@@ -52,8 +52,7 @@ public class GameLogic {
     public boolean checkIfExitingMaze(Character player, Board gameboard) {
         int playerX = player.getX();
         int playerY = player.getY();
-        int playerRewardCnt = player.getRewardsCollected();
-        if((gameboard.getEnd().getXPosition() == playerX) && (gameboard.getEnd().getYPosition() == playerY) && (playerRewardCnt == gameboard.getTotalRegRewardCnt())) {
+        if((gameboard.getEnd().getXPosition() == playerX) && (gameboard.getEnd().getYPosition() == playerY) && (gameboard.getTotalRegRewardCnt() == 0)) {
             return true;
         }
         return false;
@@ -70,10 +69,6 @@ public class GameLogic {
         int fromRegs = gameboard.regRewardCollect(playerX, playerY);
         int fromBons = gameboard.bonRewardCollect(playerX, playerY,time);
         int score = fromRegs + fromBons;
-        if(fromRegs > 0) {
-            player.addRegReward();
-            // System.out.println("triggered, total reg rewards collected = " + player.getRewardsCollected());
-        }
         player.add_score(score);
     }
 

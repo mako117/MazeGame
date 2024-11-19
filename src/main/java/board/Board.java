@@ -25,7 +25,6 @@ public class Board {
     private ArrayList<Punishments> array_bonPunishment;
 	private final int height = 23;
 	private final int width = 23;
-    private int totalRegRewardCnt = 0;
     private float t_last = 0;
     private static int T_PERIOD = 60;
 
@@ -154,7 +153,7 @@ public class Board {
      * @return The regular reward count.
      */
     public int getTotalRegRewardCnt() {
-        return this.totalRegRewardCnt;
+        return array_regReward.size();
     }
 
     /**
@@ -454,7 +453,6 @@ public class Board {
      */
     private void addRegReward(int x, int y, int score, String internalTexturePath) {
         array_regReward.add(new Regular_Reward(x, y, score, new TextureRegion(new Texture(internalTexturePath))));
-        totalRegRewardCnt++;
     }
 
     /**

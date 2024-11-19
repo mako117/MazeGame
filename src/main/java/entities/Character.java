@@ -12,7 +12,6 @@ import board.Board;
 public class Character extends Entity {
     private int speed;
     private int score;
-    private int rewardsCollected;
 
     /**
      * Creates a entities.Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
@@ -21,13 +20,11 @@ public class Character extends Entity {
         super(playerTexture,1,1,Direction.Down);
         setSpeed(1);
         setScore(0);
-        setRewardsCollected(0);
         this.getTexture().setRegion(0 ,0, 32, 32);
     }
     public Character(TextureRegion playerTexture, int startX, int startY) {
         super(playerTexture,startX,startY,Direction.Down);
         setSpeed(1);
-        setRewardsCollected(0);
         this.getTexture().setRegion(0 ,0, 32, 32);
     }
     /**
@@ -47,16 +44,6 @@ public class Character extends Entity {
     public int getSpeed() {
         return this.speed;
     }
-    /**
-     * Returns the entities.Character's number of <rewardsCollected> as an integer.
-     * @return <rewardsCollected>
-     */
-    public int getRewardsCollected() {
-        return this.rewardsCollected;
-    }
-    public void addRegReward() {
-        this.setRewardsCollected(this.rewardsCollected + 1);
-    }
 
     /**
      * Sets the entities.Character's speed as an integer.
@@ -64,15 +51,6 @@ public class Character extends Entity {
      */
     private void setSpeed(int newSpeed) {
         this.speed = newSpeed;
-    }
-    /**
-     * Sets the entities.Character's number of <rewardsCollected> as an integer.
-     * @param newTally Possible new number of <rewardsCollected>.
-     */
-    private void setRewardsCollected(int newTally) {
-        if(newTally >= 0) {
-            this.rewardsCollected = newTally;
-        }
     }
 
     public int getScore() {
