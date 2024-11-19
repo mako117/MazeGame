@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import directions.Direction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,10 @@ public class CharacterTest {
     private Character character;
     private Board mockBoard;
     private Block mockBlock;
+    private Batch mockBatch;
+    private TextureRegion mockTextureRegion;
+    private Exception exception;
+
 
     /**
      * The setup to create the initial character and some mock classes
@@ -26,10 +31,22 @@ public class CharacterTest {
 
         mockBoard = mock(Board.class);
         mockBlock = mock(Block.class);
+        mockBatch = mock(Batch.class);
+        mockTextureRegion = mock(TextureRegion.class);
 
-        character = new Character(mock(TextureRegion.class), 1, 1);
+        character = new Character(mockTextureRegion, 1, 1);
     }
 
+    /**
+     * Test initial values for super
+     */
+    @Test
+    public void initialValuesTest() {
+        character = new Character(mockTextureRegion);
+        assertEquals(1, character.getSpeed());
+        assertEquals(0, character.getScore());
+        assertEquals(0, character.getRewardsCollected());
+    }
     /**
      * Test to check the initial position of the character
      */
@@ -151,5 +168,93 @@ public class CharacterTest {
         character.setScore(10);
         assertEquals(10, character.getScore());
 
+    }
+
+    /**
+     * Test drawing up with offset
+     */
+    @Test
+    public void testDrawUp() {
+
+        character.setX(1);
+        character.setY(1);
+        character.setFacing(Direction.Up);
+        int tileSize = 32;
+        float offset = 10.0f;
+
+        character.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * character.getX())), eq((float)(tileSize* character.getY() + offset)), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+
+    /**
+     * Test drawing down with offset
+     */
+    @Test
+    public void testDrawDown() {
+
+        character.setX(1);
+        character.setY(2);
+        character.setFacing(Direction.Down);
+        int tileSize = 32;
+        float offset = 10.0f;
+
+        character.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * character.getX())), eq((float)(tileSize* character.getY() + offset)), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+
+    /**
+     * Test drawing Right with offset
+     */
+    @Test
+    public void testDrawRight() {
+
+        character.setX(1);
+        character.setY(1);
+        character.setFacing(Direction.Right);
+        int tileSize = 32;
+        float offset = 10.0f;
+
+        character.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * character.getX() + offset)), eq((float)(tileSize* character.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+
+    /**
+     * Test drawing Left with offset
+     */
+    @Test
+    public void testDrawLeft() {
+
+        character.setX(2);
+        character.setY(1);
+        character.setFacing(Direction.Left);
+        int tileSize = 32;
+        float offset = 10.0f;
+
+        character.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * character.getX() + offset)), eq((float)(tileSize* character.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+
+
+    /**
+     * Test for drawing with no offset
+     */
+    @Test
+    public void testDrawWithoutOffset() {
+        // Setting mock position and facing direction
+        character.setX(1);
+        character.setY(1);
+        character.setFacing(Direction.Up);  // Set facing up
+        int tileSize = 32;
+        float offset = 0.0f;  // Zero offset
+
+        // Call the draw method
+        character.draw(mockBatch, tileSize, offset);
+
+        // Verify that batch.draw() was called without offset
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize* character.getX())), eq((float)(tileSize* character.getY())), eq((float)(tileSize)), eq((float) (tileSize)));
     }
 }
