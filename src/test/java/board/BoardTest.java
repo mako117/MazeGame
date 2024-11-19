@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.junit.jupiter.api.*;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -46,15 +49,17 @@ abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
 
 public class BoardTest extends AbstractTestWithHeadlessGdxContext{
 
-    Board board;
-    Board mockBoard;
-    Batch mockBatch;
+    private Board board;
+    private Board mockBoard;
+    private SpriteBatch mockBatch;
+    private TextureRegion mockTextureRegion;
 
     @BeforeEach
     public void setup(){
         board = new Board();
         mockBoard = mock(Board.class);
-        mockBatch = mock(Batch.class);
+        mockBatch = mock(SpriteBatch.class);
+        mockTextureRegion = mock(TextureRegion.class);
     }
 
     // Test block features
@@ -302,14 +307,32 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
     }
 
     /**
-     * Test generate new bonus punishments. TODO: finish
+     * Test generate new bonus punishments. TODO: finish tests below
      */
     @Test
     void genNewBonusTest() {
     }
 
+    /**
+     * Test the draw method has no error.
+     */
     @Test
     void drawTest(){
+        // testing whether the draw method crashes or not bc idk what else to do rn
+
+        int tileSize = 100;
+        board.draw(mockBatch, 0, tileSize);
+
+        // Test draw for timed events
+        // there is a reward at x:3, y:21, startTime:10, endTime: 20, score:10
+        board.draw(mockBatch, 9, tileSize);
+        board.draw(mockBatch, 21, tileSize);
+        board.draw(mockBatch, 10, tileSize);
+
+        // There is a bonus punish at x:13, y:21, score:10, startTime:0, endTime:10
+        board.draw(mockBatch, -1, tileSize);
+        board.draw(mockBatch, 11, tileSize);
+        board.draw(mockBatch, 10, tileSize);
 
     }
 }
