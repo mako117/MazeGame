@@ -9,12 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import board.Wall;
-import board.RoomBlock;
-import entities.Character;
 import board.Board;
+import board.RoomBlock;
+import board.Wall;
+import entities.enemy.PatrollingEnemies;
+import directions.Direction;
 
-class CharacterCollsionWall {
+class PatrollingEnemiesCollisionWall {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private Board mockboard = mock(Board.class);
 	
@@ -24,12 +25,12 @@ class CharacterCollsionWall {
 		Wall w = new Wall(1,2,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		Character c = new Character(tex);
+		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Up,2,2,2,2,tex);
 		
-		c.direction('W', mockboard);
+		e.direction('W', mockboard);
 		
-		assertEquals(1,c.getX());
-		assertEquals(1,c.getY());
+		assertEquals(1,e.getX());
+		assertEquals(2,e.getY());
 	}
 	
 	@Test
@@ -37,12 +38,12 @@ class CharacterCollsionWall {
 		Wall w = new Wall(0,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		Character c = new Character(tex);
+		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Left,2,2,2,2,tex);
 		
-		c.direction('A', mockboard);
+		e.direction('A', mockboard);
 		
-		assertEquals(1,c.getX());
-		assertEquals(1,c.getY());
+		assertEquals(0,e.getX());
+		assertEquals(1,e.getY());
 	}
 
 	@Test
@@ -50,12 +51,12 @@ class CharacterCollsionWall {
 		Wall w = new Wall(2,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		Character c = new Character(tex);
+		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Right,2,2,2,2,tex);
 		
-		c.direction('D', mockboard);
+		e.direction('D', mockboard);
 		
-		assertEquals(1,c.getX());
-		assertEquals(1,c.getY());
+		assertEquals(2,e.getX());
+		assertEquals(1,e.getY());
 	}
 	
 	@Test
@@ -63,12 +64,12 @@ class CharacterCollsionWall {
 		Wall w = new Wall(1,0,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		Character c = new Character(tex);
+		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Down,2,2,2,2,tex);
 		
-		c.direction('S', mockboard);
+		e.direction('S', mockboard);
 		
-		assertEquals(1,c.getX());
-		assertEquals(1,c.getY());
+		assertEquals(1,e.getX());
+		assertEquals(0,e.getY());
 	}
 	
 	//RoomBlock
@@ -77,12 +78,12 @@ class CharacterCollsionWall {
 		RoomBlock b = new RoomBlock(1,2,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		Character c = new Character(tex);
+		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Up,2,2,2,2,tex);
 		
-		c.direction('W', mockboard);
+		e.direction('W', mockboard);
 		
-		assertEquals(1,c.getX());
-		assertEquals(2,c.getY());
+		assertEquals(1,e.getX());
+		assertEquals(2,e.getY());
 	}
 	
 	@Test
@@ -90,12 +91,12 @@ class CharacterCollsionWall {
 		RoomBlock b = new RoomBlock(0,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		Character c = new Character(tex);
+		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Left,2,2,2,2,tex);
 		
-		c.direction('A', mockboard);
+		e.direction('A', mockboard);
 		
-		assertEquals(0,c.getX());
-		assertEquals(1,c.getY());
+		assertEquals(0,e.getX());
+		assertEquals(1,e.getY());
 	}
 
 	@Test
@@ -103,12 +104,12 @@ class CharacterCollsionWall {
 		RoomBlock b = new RoomBlock(2,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		Character c = new Character(tex);
+		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Right,2,2,2,2,tex);
 		
-		c.direction('D', mockboard);
+		e.direction('D', mockboard);
 		
-		assertEquals(2,c.getX());
-		assertEquals(1,c.getY());
+		assertEquals(2,e.getX());
+		assertEquals(1,e.getY());
 	}
 	
 	@Test
@@ -116,11 +117,12 @@ class CharacterCollsionWall {
 		RoomBlock b = new RoomBlock(1,0,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		Character c = new Character(tex);
+		PatrollingEnemies e = new PatrollingEnemies(1,1,Direction.Down,2,2,2,2,tex);
 		
-		c.direction('S', mockboard);
+		e.direction('S', mockboard);
 		
-		assertEquals(1,c.getX());
-		assertEquals(0,c.getY());
+		assertEquals(1,e.getX());
+		assertEquals(0,e.getY());
 	}
+
 }
