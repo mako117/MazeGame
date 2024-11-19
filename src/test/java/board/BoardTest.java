@@ -1,6 +1,9 @@
 package board;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.junit.jupiter.api.*;
 
 import static org.mockito.Mockito.mock;
@@ -10,8 +13,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
-
-
+import rewards.Bonus_Reward;
 
 
 /**
@@ -46,11 +48,13 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
 
     Board board;
     Board mockBoard;
+    Batch mockBatch;
 
-    @BeforeAll
+    @BeforeEach
     public void setup(){
         board = new Board();
         mockBoard = mock(Board.class);
+        mockBatch = mock(Batch.class);
     }
 
     // Test block features
@@ -115,55 +119,42 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
      * Test get start block method.
      */
     @Test
-    void getStart() {
+    void getStartTest() {
         Block start = board.getStart();
 
-        assertEquals(start.getXPosition(), 1);
-        assertEquals(start.getYPosition(), 1);
+        assertEquals(1, start.getXPosition());
+        assertEquals(1, start.getYPosition());
     }
 
     /**
      * Test get end block method.
      */
     @Test
-    void getEnd() {
+    void getEndTest() {
         Block end = board.getEnd();
 
-        assertEquals(end.getXPosition(), 1);
-        assertEquals(end.getYPosition(), 21);
-    }
-
-    /**
-     * Test get total regular rewards count and collection.
-     */
-    @Test
-    void regularRewardCollection() {
-        // Initial regular rewards in board.
-        int regRewardCnt = 3;
-        assertEquals(board.getTotalRegRewardCnt(), regRewardCnt);
-
-        // Collect a reward at where there is a reward.
-        board.regRewardCollect(4, 15);
-        regRewardCnt = 2;
-        assertEquals(board.getTotalRegRewardCnt(), regRewardCnt);
-
-        // Collect reward when there is no reward there.
-        board.regRewardCollect(0,0);
-        assertEquals(board.getTotalRegRewardCnt(), regRewardCnt);
+        assertEquals(1, end.getXPosition());
+        assertEquals(21, end.getYPosition());
     }
 
     /**
      * Test get block at coordinates x y.
      */
     @Test
-    void getBlock() {
+    void getBlockTest() {
         int x = 5;
         int y = 5;
         Block block = board.getBlock(x, y);
+        assertEquals(x, block.getXPosition());
+        assertEquals(y, block.getYPosition());
 
-        assertEquals(block.getXPosition(), x);
-        assertEquals(block.getYPosition(), y);
+        // x = F
+        assertNull(board.getBlock(-1, 5));
+        assertNull(board.getBlock(board.getWidth(), 5));
 
+        // y = F
+        assertNull(board.getBlock(5, -1));
+        assertNull(board.getBlock(5, board.getHeight()));
     }
 
 
@@ -171,50 +162,154 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
      * Test get board width method.
      */
     @Test
-    void getWidth() {
-        assertEquals(board.getWidth(), 23);
+    void getWidthTest() {
+        assertEquals(23, board.getWidth());
     }
 
     /**
      * Test get board height method.
      */
     @Test
-    void getHeight() {
-        assertEquals(board.getHeight(), 23);
+    void getHeightTest() {
+        assertEquals(23, board.getHeight());
     }
 
     /**
-     * Test collect regular reward.         // TODO: complete the rest
+     * Test get total regular rewards count and collection.
      */
     @Test
-    void regRewardCollect() {
+    void regularRewardCollectTest() {
+        // there is a reward at x:4, y:15, score:10
+        // Initial regular rewards in board.
+        int regRewardCnt = 3;
+        assertEquals(regRewardCnt, board.getTotalRegRewardCnt());
+
+        int expectedScore = 10;
+        int score = -1;
+        // Try collect reward when there is no reward there.
+        score = board.regRewardCollect(4,0); // TF
+        assertEquals(0, score);
+        assertEquals(regRewardCnt, board.getTotalRegRewardCnt());
+
+        score = board.regRewardCollect(0,15); // FT
+        assertEquals(0, score);
+        assertEquals(regRewardCnt, board.getTotalRegRewardCnt());
+
+        score = board.regRewardCollect(0,0); // FF
+        assertEquals(0, score);
+        assertEquals(regRewardCnt, board.getTotalRegRewardCnt());
+
+        // Collect a reward at where there is a reward.
+        score = board.regRewardCollect(4, 15); //TT
+        assertEquals(expectedScore, score);
+        assertEquals(regRewardCnt - 1, board.getTotalRegRewardCnt());
     }
 
     /**
      * Test collect bonus reward.
      */
     @Test
-    void bonRewardCollect() {
+    void bonRewardCollectTest() {
+        // there is a reward at x:3, y:21, startTime:10, endTime: 20, score:10
+        // initial bonus rewards in board.
+        int bonusRewardCnt = 3;
+        assertEquals(bonusRewardCnt, board.getTotalBonusRewardCnt());
+
+        int score = -1;
+        int expectedScore = 10;
+
+        // Try collect bonus reward when not there
+        score = board.bonRewardCollect(0,0, 0);
+        assertEquals(0, score);
+        assertEquals(bonusRewardCnt, board.getTotalBonusRewardCnt());
+
+        score = board.bonRewardCollect(3, 21, 9);
+        assertEquals(0, score);
+        assertEquals(bonusRewardCnt, board.getTotalBonusRewardCnt());
+
+        score = board.bonRewardCollect(3, 21, 21);
+        assertEquals(0, score);
+        assertEquals(bonusRewardCnt, board.getTotalBonusRewardCnt());
+
+        // Collect a bonus reward
+        score = board.bonRewardCollect(3, 21, 10);
+        assertEquals(expectedScore, score);
+        assertEquals(bonusRewardCnt-1, board.getTotalBonusRewardCnt());
     }
 
     /**
      * Test collect regular punishment.
      */
     @Test
-    void regPunishmentCollect() {
+    void regPunishmentCollectTest() {
+        // there is a reg punish at x:14, y:2, score:10
+        // initial regular punishment count.
+        int regPunishmentCnt = 4;
+        assertEquals(regPunishmentCnt, board.getTotalRegPunishmentCnt());
+
+        int score = -1;
+        int expectedScore = 10;
+
+        // Try collect punishment when there is no punishment there.
+        score = board.regPunishmentCollect(0,0);
+        assertEquals(0, score);
+        assertEquals(regPunishmentCnt, board.getTotalRegPunishmentCnt());
+
+        score = board.regPunishmentCollect(14,0);
+        assertEquals(0, score);
+        assertEquals(regPunishmentCnt, board.getTotalRegPunishmentCnt());
+
+        score = board.regPunishmentCollect(0,2);
+        assertEquals(0, score);
+        assertEquals(regPunishmentCnt, board.getTotalRegPunishmentCnt());
+
+        // Collect a punishment.
+        score = board.regPunishmentCollect(14,2);
+        assertEquals(expectedScore, score);
+        assertEquals(regPunishmentCnt - 1, board.getTotalRegPunishmentCnt());
     }
 
     /**
      * Test collect bonus punishment.
      */
     @Test
-    void bonPunishmentCollect() {
+    void bonPunishmentCollectTest() {
+        // There is a bonus punish at x:13, y:21, score:10, startTime:0, endTime:10
+        // Initial bonus punishments on the board.
+        int bonPunishCnt = 5;
+        assertEquals(bonPunishCnt, board.getTotalBonusPunishmentCnt());
+
+        int score = -1;
+        int expectedScore = 10;
+
+        // Try collecting bonus punishments when not possible.
+        score = board.bonPunishmentCollect(0,0,0);
+        assertEquals(0, score);
+        assertEquals(bonPunishCnt, board.getTotalBonusPunishmentCnt());
+
+        score = board.bonPunishmentCollect(13,21,-1);
+        assertEquals(0, score);
+        assertEquals(bonPunishCnt, board.getTotalBonusPunishmentCnt());
+
+        score = board.bonPunishmentCollect(13,21,11);
+        assertEquals(0, score);
+        assertEquals(bonPunishCnt, board.getTotalBonusPunishmentCnt());
+
+        // Collect a bonus punishment.
+        score = board.bonPunishmentCollect(13,21,0);
+        assertEquals(expectedScore, score);
+        assertEquals(bonPunishCnt - 1, board.getTotalBonusPunishmentCnt());
     }
 
     /**
-     * Test generate new bonus rewards.
+     * Test generate new bonus punishments. TODO: finish
      */
     @Test
-    void genNewBonus() {
+    void genNewBonusTest() {
+    }
+
+    @Test
+    void drawTest(){
+
     }
 }
