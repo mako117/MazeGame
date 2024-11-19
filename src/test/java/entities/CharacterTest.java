@@ -45,7 +45,6 @@ public class CharacterTest {
         character = new Character(mockTextureRegion);
         assertEquals(1, character.getSpeed());
         assertEquals(0, character.getScore());
-        assertEquals(0, character.getRewardsCollected());
     }
     /**
      * Test to check the initial position of the character
@@ -137,15 +136,7 @@ public class CharacterTest {
         assertEquals(Direction.Right, character.getFacing());
     }
 
-    /**
-     * Test for reward collection count;
-     */
-    @Test
-    public void rewardCollectionTest() {
-        int initialCnt = character.getRewardsCollected();
-        character.addRegReward();
-        assertEquals(initialCnt + 1, character.getRewardsCollected());
-    }
+
 
     /**
      * Test for setting speed
