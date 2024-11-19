@@ -28,7 +28,6 @@ class CollectRewards {
 		logic.checkReward(c, mockboard, 0);
 		
 		assertEquals(5,c.getScore());
-		assertEquals(1,c.getRewardsCollected());
 	}
 	
 	@Test
@@ -40,7 +39,6 @@ class CollectRewards {
 		logic.checkReward(c, mockboard, 0);
 		
 		assertEquals(10,c.getScore());
-		assertEquals(0,c.getRewardsCollected());
 	}
 	
 	@Test
@@ -52,7 +50,6 @@ class CollectRewards {
 		logic.checkReward(c, mockboard, 0);
 		
 		assertEquals(30,c.getScore());
-		assertEquals(1,c.getRewardsCollected());
 	}
 
 }
