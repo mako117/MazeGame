@@ -57,6 +57,9 @@ public class MainMenuScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Creates buttons and listeners.
+     */
     private void createButtons(){
         //start to set the button
         try {
@@ -112,6 +115,10 @@ public class MainMenuScreen extends ScreenAdapter {
         });
     }
 
+    /**
+     * Render the objects to the window.
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
@@ -142,9 +149,9 @@ public class MainMenuScreen extends ScreenAdapter {
         }
     }
 
-
-
-
+    /**
+     * This function is used to dispose the screen elements.
+     */
     @Override
     public void dispose() {
         super.dispose();

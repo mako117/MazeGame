@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sun.tools.javac.Main;
 import directions.Direction;
 import entities.Character;
 import entities.enemy.Moving_Enemies;
@@ -79,6 +78,9 @@ public class GameScreen extends ScreenAdapter {
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
+    /**
+     * Creates the enemies on the board.
+     */
     private void createEnemies(){
         enemies = new ArrayList<Enemies>();
         enemies.add(new PatrollingEnemies(1, 21, Direction.Up, 1, 21, 1, 21, patrollingEnemeyTex));
@@ -243,6 +245,9 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    /**
+     * Moves camera focus point to player
+     */
     private void moveCameraToPlayer(){
         // update camera position
         if(playerMovingXDirection){
@@ -304,17 +309,50 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Pause the game.
+     */
     @Override
     public void pause() {
         pauseScreen.paused();
     }
 
+    /**
+     * This function is used to dispose the screen elements.
+     */
     @Override
     public void dispose() {
-        super.dispose();
+        pauseScreen.dispose();
+        readyScreen.dispose();
+        gameMusic.dispose();
     }
 
+    //*** Utility functions ***//
+    public Button getContinueButton() {
+        return readyScreen.continueButton;
+    }
+    public Button getPauseButton() {
+        return pauseScreen.pauseButton;
+    }
+    public Button getResumeButton() {
+        return pauseScreen.resumeButton;
+    }
+    public Button getHelpButton() {
+        return pauseScreen.helpButton;
+    }
+    public Button getRestartButton() {
+        return pauseScreen.restartButton;
+    }
+    public Button getExitButton() {
+        return pauseScreen.exitButton;
+    }
+    public float getFullScreenDuration() {
+        return readyScreen.fullscreenDuration;
+    }
 
+    /**
+     * This class contains the pause screen.
+     */
     private class PauseScreen{
         private Button pauseButton;
         private Button resumeButton;
@@ -337,26 +375,8 @@ public class GameScreen extends ScreenAdapter {
         }
 
         /**
-         * This function controls the aspects of the pause menu, including drawing the buttons.
+         * Creates buttons and event listeners for pause screen.
          */
-        public void paused() {
-            Gdx.input.setInputProcessor(stage1);
-            game.batch.begin();
-            game.batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            game.batch.end();
-            resumeButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 + resumeButton.getHeight());
-            exitButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 - exitButton.getHeight() * 2);
-            helpButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2);
-            restartButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, camera.position.y - (Gdx.graphics.getHeight())/2 +Gdx.graphics.getHeight()/2 - restartButton.getHeight());
-            stage1.act();
-            stage1.draw();
-
-            if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-                System.out.println("UNPAUSED");
-                paused = false;
-            }
-        }
-
         private void createButtons(){
             stage0 = new Stage(viewport);
             pauseButton = new TextButton("PAUSE" , game.skin);
@@ -410,10 +430,41 @@ public class GameScreen extends ScreenAdapter {
                 }
             });
             stage1.addActor(restartButton);
+        }
 
+        /**
+         * This function controls the aspects of the pause menu, including drawing the buttons.
+         */
+        public void paused() {
+            Gdx.input.setInputProcessor(stage1);
+            game.batch.begin();
+            game.batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            game.batch.end();
+            resumeButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 + resumeButton.getHeight());
+            exitButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 - exitButton.getHeight() * 2);
+            helpButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2);
+            restartButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, camera.position.y - (Gdx.graphics.getHeight())/2 +Gdx.graphics.getHeight()/2 - restartButton.getHeight());
+            stage1.act();
+            stage1.draw();
+
+            if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+                System.out.println("UNPAUSED");
+                paused = false;
+            }
+        }
+
+        /**
+         * Dispose of gdx dependent objects.
+         */
+        void dispose(){
+            stage0.dispose();
+            stage1.dispose();
         }
     }
 
+    /**
+     * This class has the ready screen information.
+     */
     private class ReadyScreen{
         private Stage missionStage;
         private Button continueButton;
@@ -493,7 +544,12 @@ public class GameScreen extends ScreenAdapter {
             game.font.getData().setScale(1,1);
         }
 
-
+        /**
+         * Dispose of gdx dependent objects.
+         */
+        void dispose(){
+            missionStage.dispose();
+        }
     }
 
 

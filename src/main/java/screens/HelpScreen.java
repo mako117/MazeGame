@@ -63,7 +63,9 @@ public class HelpScreen extends ScreenAdapter {
         createButtons();
     }
 
-
+    /**
+     * Creates buttons and listeners.
+     */
     private void createButtons(){
         helppage1button = new TextButton("Page 1", game.skin);
         helppage1button.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
@@ -122,6 +124,10 @@ public class HelpScreen extends ScreenAdapter {
         });
     }
 
+    /**
+     * Sets the previous screen of this helpscreen.
+     * @param prev
+     */
     public void setPrevScreen(ScreenAdapter prev){
         if(prev != null){
             prevScreen = prev;
@@ -130,7 +136,10 @@ public class HelpScreen extends ScreenAdapter {
         }
     }
 
-
+    /**
+     * Render the objects to the window.
+     * @param delta
+     */
     @Override
     public void render(float delta) {
 
@@ -152,12 +161,14 @@ public class HelpScreen extends ScreenAdapter {
         else if (helppage2){
             showPage2();
         } else if (helppage3){
-            showPage1();
+            showPage3();
         }
 
     }
 
-
+    /**
+     * Show help page 1 contents.
+     */
     private void showPage1(){
         Gdx.input.setInputProcessor(stage1);
         change_y = -300;
@@ -189,6 +200,9 @@ public class HelpScreen extends ScreenAdapter {
         stage1.draw();
     }
 
+    /**
+     * Show help page 1 contents.
+     */
     private void showPage2(){
         Gdx.input.setInputProcessor(stage2);
         change_y = -300;
@@ -244,6 +258,9 @@ public class HelpScreen extends ScreenAdapter {
         stage2.draw();
     }
 
+    /**
+     * Show help page 3 contents.
+     */
     private void showPage3(){
         Gdx.input.setInputProcessor(stage3);
         change_y = -300;
@@ -288,7 +305,9 @@ public class HelpScreen extends ScreenAdapter {
         stage3.draw();
     }
 
-
+    /**
+     * This function is used to dispose the screen elements.
+     */
     @Override
     public void dispose() {
         stage1.dispose();

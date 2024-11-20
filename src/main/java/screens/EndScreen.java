@@ -15,7 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-
+/**
+ * This class create end screen for the game.
+ */
 public class EndScreen extends ScreenAdapter {
     final MazeGame game;
 
@@ -36,16 +38,25 @@ public class EndScreen extends ScreenAdapter {
     private int middle_x = Gdx.graphics.getWidth() / 2;
     private int middle_y = Gdx.graphics.getHeight() / 2;
 
-    public EndScreen(MazeGame game){
+    /**
+     * This method set the button, skin for button, score, time, and stage for the end screen.
+     * @param game
+     * @param score
+     * @param time
+     * @param condition
+     */
+    public EndScreen(final MazeGame game, int score, float time, boolean condition){
         this.game = game;
-
+		this.score = score;
+		this.time = time;
+		this.condition = condition;
 
         try {
             stage1 = new Stage(new ScreenViewport());
             stage2 = new Stage(new ScreenViewport());
             createButtons();
         } catch (Exception e){
-            System.out.println("Cannot set main menu stage");
+            System.out.println("Cannot set end screen stage");
         }
     }
 
@@ -114,7 +125,9 @@ public class EndScreen extends ScreenAdapter {
         stage2.addActor(lossexitbutton);
     }
 
-
+    /**
+     * This method show what end screen look like, print all the things for the end screen need.
+     */
     @Override
     public void render(float delta) {
         // TODO Auto-generated method stub
@@ -159,6 +172,9 @@ public class EndScreen extends ScreenAdapter {
 
     }
 
+    /**
+     * This method dispose variable that need to dispose in the EndScreen.
+     */
     @Override
     public void dispose() {
         stage1.dispose();
