@@ -34,16 +34,16 @@ public class Moving_Enemies extends Enemies {
         double POSITIVE_INFINITY = 1.0 / 0.0;
 
         if(xDistance < 0) {
-            moveXDistance = Math.sqrt( ((xDistance+1)^2 + yDistance^2) );
+            moveXDistance = Math.sqrt( Math.pow(xDistance + 1, 2) + Math.pow(yDistance, 2) );
         } else if (xDistance > 0) {
-            moveXDistance = Math.sqrt( ((xDistance-1)^2 + yDistance^2) );
+            moveXDistance = Math.sqrt( Math.pow(xDistance - 1, 2) + Math.pow(yDistance, 2) );
         } else {
             moveXDistance = POSITIVE_INFINITY;
         }
         if(yDistance < 0) {
-            moveYDistance = Math.sqrt( ((yDistance+1)^2 + xDistance^2) );
+            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance + 1, 2) );
         } else if (yDistance > 0) {
-            moveYDistance = Math.sqrt( ((yDistance-1)^2 + xDistance^2) );
+            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance - 1, 2) );
         } else {
             moveYDistance = POSITIVE_INFINITY;
         }
