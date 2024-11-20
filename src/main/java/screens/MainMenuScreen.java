@@ -17,9 +17,11 @@ public class MainMenuScreen extends ScreenAdapter {
     final screens.MazeGame game;
     private Stage stage;
 
-    protected Button startbutton;
-    protected Button exitbutton;
-    protected Button helpbutton;
+    private Button startbutton;
+    private Button exitbutton;
+    private Button helpbutton;
+
+    private boolean helpPage = false;
 
     private int change_x = 0;
     private int change_y = 0;
@@ -30,6 +32,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
 
     public MainMenuScreen(final MazeGame game) {
+        System.out.println("Create new main menu");
         this.game = game;
 
         try{
@@ -52,26 +55,6 @@ public class MainMenuScreen extends ScreenAdapter {
             System.out.println("Cannot set main menu stage");
             Gdx.input.setInputProcessor(stage);
         }
-    }
-
-    @Override
-    public void render(float delta) {
-        ScreenUtils.clear(Color.BLACK);
-
-        game.batch.begin();
-
-        change_x = -260;
-        change_y = 150;
-
-        game.batch.draw(game.backgroundTexture, 0, 0);
-        game.font.getData().setScale(2, 2);
-        game.font.draw(game.batch, "Jurassic Meteor", middle_x + change_x, middle_y + change_y);
-
-        game.batch.end();
-
-        stage.act();
-        stage.draw();
-
     }
 
     private void createButtons(){
@@ -108,7 +91,9 @@ public class MainMenuScreen extends ScreenAdapter {
         // listener for touch button
         startbutton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                game.startNewGame();
+                game.setScreen(new GameScreen(game));
+                music.stop();
+                dispose();
             }
         });
         // listener for touch button
@@ -122,10 +107,43 @@ public class MainMenuScreen extends ScreenAdapter {
         // listener for touch button
         helpbutton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                game.showHelpScreen(game.getCurrentScreen());
+                helpPage = true;
             }
         });
     }
+
+    @Override
+    public void render(float delta) {
+        ScreenUtils.clear(Color.BLACK);
+
+        if(helpPage){
+            game.setScreen(new HelpScreen(game,this));
+            System.out.println("here");
+            helpPage = false;
+        } else {
+            Gdx.input.setInputProcessor(stage);
+            stage.addActor(startbutton);
+            stage.addActor(helpbutton);
+            stage.addActor(exitbutton);
+
+            game.batch.begin();
+
+            change_x = -260;
+            change_y = 150;
+
+            game.batch.draw(game.backgroundTexture, 0, 0);
+            game.font.getData().setScale(2, 2);
+            game.font.draw(game.batch, "Jurassic Meteor", middle_x + change_x, middle_y + change_y);
+
+            game.batch.end();
+
+            stage.act();
+            stage.draw();
+        }
+    }
+
+
+
 
     @Override
     public void dispose() {

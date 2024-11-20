@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class HelpScreen extends ScreenAdapter {
 
     final screens.MazeGame game;
+    private ScreenAdapter prevScreen;
 
     private TextureRegion RrewardTex;
     private TextureRegion RpunishmentTex;
@@ -42,10 +43,11 @@ public class HelpScreen extends ScreenAdapter {
     private boolean helppage2 = false;
     private boolean helppage3 = false;
 
-    private ScreenAdapter prevScreen;
 
-    public HelpScreen(final MazeGame game) {
+
+    public HelpScreen(final MazeGame game, ScreenAdapter prev) {
         this.game = game;
+        this.prevScreen = prev;
 
         RrewardTex = new TextureRegion(new Texture("bomb.png"));
         BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
@@ -54,8 +56,6 @@ public class HelpScreen extends ScreenAdapter {
         endblockTex = new TextureRegion(new Texture("green.png"));
         movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
         patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
-
-        prevScreen = game.mainMenuScreen;
 
         stage1 = new Stage(new ScreenViewport());
         stage2 = new Stage(new ScreenViewport());
@@ -71,10 +71,8 @@ public class HelpScreen extends ScreenAdapter {
         helppage2button = new TextButton("Page 2", game.skin);
         helppage2button.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
 
-
         helppage3button = new TextButton("Page 3", game.skin);
         helppage3button.setSize(Gdx.graphics.getWidth() / 10 * 2, Gdx.graphics.getHeight() / 10);
-
 
         change_x = -140;
         change_y = -300;
@@ -117,11 +115,8 @@ public class HelpScreen extends ScreenAdapter {
                 helppage1 = false;
                 helppage2 = false;
                 helppage3 = false;
-                if(prevScreen != null){
-                    if(prevScreen instanceof MainMenuScreen){
-                        game.showMainMenuScreen();
-                    }
-                }
+                game.setScreen(prevScreen);
+                dispose();
             }
 
         });
@@ -151,16 +146,17 @@ public class HelpScreen extends ScreenAdapter {
 
         game.batch.end();
 
-        if(helppage3){
-            showPage3();
+        if (helppage1){
+            showPage1();
         }
         else if (helppage2){
             showPage2();
-        }
-        else {
+        } else if (helppage3){
             showPage1();
         }
+
     }
+
 
     private void showPage1(){
         Gdx.input.setInputProcessor(stage1);
