@@ -1,5 +1,6 @@
 package board;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,6 +27,7 @@ abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
         HeadlessApplicationConfiguration conf = new HeadlessApplicationConfiguration();
         application = new HeadlessApplication(this, conf);
         Gdx.gl = mock(GL20.class);
+
     }
 
     @Override
@@ -45,11 +47,13 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
 
     private Board board;
     private SpriteBatch mockBatch;
+    private Skin mockSkin;
 
     @BeforeEach
     public void setup(){
         board = new Board();
         mockBatch = mock(SpriteBatch.class);
+        mockSkin = mock(Skin.class);
     }
 
 
