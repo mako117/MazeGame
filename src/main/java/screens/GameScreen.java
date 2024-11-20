@@ -518,11 +518,11 @@ public class GameScreen extends ScreenAdapter {
             fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
             fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
             fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            fullscreenCamera.zoom = 4;
+            fullscreenCamera.zoom = 3.5f;
             fullscreenCamera.update();
             game.batch.setProjectionMatrix(fullscreenCamera.combined);
             game.batch.begin();
-            game.batch.draw(game.backgroundTexture, 0, 0, Gdx.graphics.getWidth() * 4, Gdx.graphics.getHeight() * 4);
+            game.batch.draw(game.backgroundTexture, 0, 0, (Gdx.graphics.getWidth() * 3.5f), (Gdx.graphics.getHeight() * 3.5f));
             gameboard.draw(game.batch, time, TILE_SIZE);
             renderPlayer(delta);
             readyText();
@@ -534,7 +534,7 @@ public class GameScreen extends ScreenAdapter {
          *Renders The Text for the Initial Screen
          */
         private void readyText(){
-            game.font.getData().setScale(1.5f,1.5f);
+            game.font.getData().setScale(1.8f,1.8f);
             game.font.draw(game.batch,String.format("READY!"), fullscreenCamera.position.x + viewport.getScreenWidth()/10 ,fullscreenCamera.position.y + viewport.getScreenHeight()/2 );
             game.font.draw(game.batch,String.format("Disarm all the bombs.\n\n" +
                     "Avoiding all the dinosaurs.\n\n" +
