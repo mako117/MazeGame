@@ -172,7 +172,10 @@ public class GameScreen extends ScreenAdapter {
      */
     private void playerEnd(boolean condition) {
         gameMusic.stop();
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.setProjectionMatrix(camera.combined);
         game.setScreen(new EndScreen(game, player.getScore(), time ,condition));
+        dispose();
     }
 
     /**
@@ -222,12 +225,13 @@ public class GameScreen extends ScreenAdapter {
             enemyMovementOffset = gameLogic.moveEnemies(enemies, player, gameboard, canEnemyMove, TILE_SIZE);
         }
 
+        // System.out.println(time);
+        moveCameraToPlayer();
         logic();
         input();
         INPUT_TIMEOUT -= delta;
 
-        // System.out.println(time);
-        moveCameraToPlayer();
+
 
         game.batch.begin();
         game.batch.draw(game.backgroundTexture, camera.position.x-viewport.getScreenWidth()/2,camera.position.y-viewport.getScreenHeight()/2,
