@@ -30,7 +30,6 @@ public class GameLogic {
      * Checks if the player and an enemy occupy same cell
      */
     public boolean checkPlayerCollision(Character player, ArrayList<Enemies> enemies){
-        // System.out.println("Entering collision function");
         int playerX = player.getX();
         int playerY = player.getY();
         for(int i = 0; i < enemies.size(); i++) {
@@ -38,12 +37,11 @@ public class GameLogic {
             int anEnemyX = anEnemy.getX();
             int anEnemyY = anEnemy.getY();
             if(playerX == anEnemyX && playerY == anEnemyY) {
-                // System.out.println("Player dead!");
+                System.out.println("Player dead!");
                 return true;
             }
         }
         return false;
-        // System.out.println("Out of for loop");
     }
 
     /**

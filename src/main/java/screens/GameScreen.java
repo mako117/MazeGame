@@ -172,7 +172,7 @@ public class GameScreen extends ScreenAdapter {
      */
     private void playerEnd(boolean condition) {
         gameMusic.stop();
-//        game.setScreen(new EndScreen(game, player.getScore(), time ,condition));
+        game.setScreen(new EndScreen(game, player.getScore(), time ,condition));
     }
 
     /**
@@ -518,11 +518,11 @@ public class GameScreen extends ScreenAdapter {
             fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
             fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
             fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            fullscreenCamera.zoom = 1.8f;
+            fullscreenCamera.zoom = 4;
             fullscreenCamera.update();
             game.batch.setProjectionMatrix(fullscreenCamera.combined);
             game.batch.begin();
-            game.batch.draw(game.backgroundTexture, 0, 0, Gdx.graphics.getWidth() * 1.8f, Gdx.graphics.getHeight() * 1.8f);
+            game.batch.draw(game.backgroundTexture, 0, 0, Gdx.graphics.getWidth() * 4, Gdx.graphics.getHeight() * 4);
             gameboard.draw(game.batch, time, TILE_SIZE);
             renderPlayer(delta);
             readyText();
