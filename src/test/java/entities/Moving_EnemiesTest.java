@@ -4,12 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import directions.Direction;
 import entities.enemy.*;
 import entities.Character;
 import entities.enemy.Enemies;
 import entities.enemy.Moving_Enemies;
+
+import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -23,6 +28,9 @@ public class Moving_EnemiesTest {
     private Moving_Enemies movingEnemy;
     private TextureRegion mockTextureRegion;
     private Block mockBlock;
+
+    private final PrintStream stdout = System.out;
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
     /**
      * Set up for all the test cases
@@ -39,6 +47,8 @@ public class Moving_EnemiesTest {
         when(mockBoard.getBlock(anyInt(),anyInt())).thenReturn(mockBlock);
 
         when(mockBoard.getBlock(anyInt(),anyInt()).enter()).thenReturn(true);
+
+        try{ System.setOut(new PrintStream(output, true, "UTF-8")); } catch (Exception e) {};
     }
 
     /**
@@ -263,44 +273,6 @@ public class Moving_EnemiesTest {
         testIdle();
     }
 
-
-    //*** Utility functions ***//
-    private void testUp() {
-        char result = movingEnemy.find_player(mockPlayer, mockBoard);
-        movingEnemy.direction(result,mockBoard);
-        assertEquals('W', result);
-        movingEnemy.direction('S',mockBoard); // reset position
-        when((mockBoard.getBlock(3,4)).enter()).thenReturn(false); // block off up
-    }
-    private void testDown() {
-        char result = movingEnemy.find_player(mockPlayer, mockBoard);
-        movingEnemy.direction(result,mockBoard);
-        assertEquals('S', result);
-        movingEnemy.direction('W',mockBoard); // reset position
-        when((mockBoard.getBlock(3,2)).enter()).thenReturn(false); // block off down
-    }
-    private void testRight() {
-        char result = movingEnemy.find_player(mockPlayer, mockBoard);
-        movingEnemy.direction(result,mockBoard);
-        assertEquals('D', result);
-        movingEnemy.direction('A',mockBoard); // reset position
-        when((mockBoard.getBlock(4,3)).enter()).thenReturn(false); // block off right
-    }
-    private void testLeft() {
-        char result = movingEnemy.find_player(mockPlayer, mockBoard);
-        movingEnemy.direction(result,mockBoard);
-        assertEquals('A', result);
-        movingEnemy.direction('D',mockBoard); // reset position
-        when((mockBoard.getBlock(2,3).enter())).thenReturn(false); // block off down
-    }
-    private void testIdle() {
-        char result;
-        when((mockBoard.getBlock(3,2)).enter()).thenReturn(false);
-        result = movingEnemy.find_player(mockPlayer, mockBoard);
-        movingEnemy.direction(result, mockBoard);
-        assertEquals('I', result);
-    }
-
     @Test
     public void greaterXDistanceTest(){
         when(mockPlayer.getX()).thenReturn(3);
@@ -309,5 +281,96 @@ public class Moving_EnemiesTest {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         movingEnemy.direction(result,mockBoard);
         assertEquals('W', result);
+    }
+
+
+    //*** Utility functions ***//
+    private void testUp() {
+        char result = movingEnemy.find_player(mockPlayer, mockBoard);
+        assertEquals('W', result);
+
+        movingEnemy.direction(result,mockBoard);
+        checkPosition(result, 3, 3);
+
+        movingEnemy.direction('S',mockBoard); // reset position
+        checkPosition(result, 3, 4);
+        when((mockBoard.getBlock(3,4)).enter()).thenReturn(false); // block off up
+    }
+    private void testDown() {
+        char result = movingEnemy.find_player(mockPlayer, mockBoard);
+        assertEquals('S', result);
+
+        movingEnemy.direction(result,mockBoard);
+        checkPosition(result, 3, 3);
+
+        movingEnemy.direction('W',mockBoard); // reset position
+        checkPosition(result, 3, 2);
+        when((mockBoard.getBlock(3,2)).enter()).thenReturn(false); // block off down
+    }
+    private void testRight() {
+        char result = movingEnemy.find_player(mockPlayer, mockBoard);
+        assertEquals('D', result);
+
+        movingEnemy.direction(result,mockBoard);
+        checkPosition(result, 3, 3);
+
+        movingEnemy.direction('A',mockBoard); // reset position
+        checkPosition(result, 4, 3);
+        when((mockBoard.getBlock(4,3)).enter()).thenReturn(false); // block off right
+    }
+    private void testLeft() {
+        char result = movingEnemy.find_player(mockPlayer, mockBoard);
+        assertEquals('A', result);
+
+        movingEnemy.direction(result,mockBoard);
+        checkPosition(result, 3, 3);
+
+        movingEnemy.direction('D',mockBoard); // reset position
+        checkPosition(result, 2, 3);
+        when((mockBoard.getBlock(2,3).enter())).thenReturn(false); // block off down
+    }
+    private void testIdle() {
+        char result;
+
+        result = movingEnemy.find_player(mockPlayer, mockBoard);
+        assertEquals('I', result);
+
+        movingEnemy.direction(result, mockBoard);
+        checkPosition(result, 3, 3);
+    }
+    private void checkPosition(char input, int startX, int startY) {
+        switch(input) {
+            case 'W':
+                System.out.println();
+                assertEquals(startX, movingEnemy.getX());
+                assertEquals(startY+1, movingEnemy.getY());
+            break;
+
+            case 'A':
+                assertEquals(startX-1, movingEnemy.getX());
+                assertEquals(startY, movingEnemy.getY());
+            break;
+
+            case 'S':
+                assertEquals(startX, movingEnemy.getX());
+                assertEquals(startY-1, movingEnemy.getY());
+            break;
+
+            case 'D':
+                assertEquals(startX+1, movingEnemy.getX());
+                assertEquals(startY, movingEnemy.getY());
+            break;
+
+            case 'I':
+                assertEquals(startX, movingEnemy.getX());
+                assertEquals(startY, movingEnemy.getY());
+            break;
+        }
+    }
+
+
+    @After
+    public void cleanUp() {
+        System.setOut(stdout);
     }
 }
