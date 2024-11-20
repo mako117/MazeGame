@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class MainMenuScreen extends ScreenAdapter {
     final screens.MazeGame game;
@@ -46,7 +47,7 @@ public class MainMenuScreen extends ScreenAdapter {
         createButtons();
 
         try {
-            stage = new Stage(game.viewport);
+            stage = new Stage(new ScreenViewport());
             stage.addActor(startbutton);
             stage.addActor(helpbutton);
             stage.addActor(exitbutton);

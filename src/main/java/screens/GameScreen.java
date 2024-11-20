@@ -182,21 +182,11 @@ public class GameScreen extends ScreenAdapter {
      */
     public void render(float delta) {
 
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if(readyScreen.missionStatement){
             readyScreen.missionMenu();
-            return;
-
-        }
-
-        if(pauseScreen.paused){
-
-            if(pauseScreen.helpMenu) {
-                game.setScreen(new HelpScreen(game, this));
-                pauseScreen.helpMenu = false;
-            }
-            pause();
             return;
         }
 
@@ -211,8 +201,19 @@ public class GameScreen extends ScreenAdapter {
             }
         }
 
-        camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
+        if(pauseScreen.paused){
+            // reset camera
+            camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            game.batch.setProjectionMatrix(camera.combined);
+
+            if(pauseScreen.helpMenu) {
+                game.setScreen(new HelpScreen(game, this));
+                pauseScreen.helpMenu = false;
+            }
+            pause();
+            return;
+        }
+
         time+= Gdx.graphics.getDeltaTime();
         tickCount -= delta;
 
@@ -242,7 +243,6 @@ public class GameScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(pauseScreen.stage0);
         pauseScreen.stage0.act();
         pauseScreen.stage0.draw();
-
     }
 
     /**
@@ -470,7 +470,7 @@ public class GameScreen extends ScreenAdapter {
         private Button continueButton;
         protected boolean missionStatement = true;
 
-        protected OrthographicCamera fullscreenCamera;
+        public OrthographicCamera fullscreenCamera;
         protected boolean fullScreenMode = true;
         protected float fullscreenDuration = 5f;
         protected float fullscreenTimer = 0f;
