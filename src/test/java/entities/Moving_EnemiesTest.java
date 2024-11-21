@@ -70,7 +70,9 @@ public class Moving_EnemiesTest {
         // try{
         //     FileHandler fileHandler = new FileHandler("C:/Users/caleb/CMPT276F24_group18/src/test/java/logging/status.log");
         //     log.addHandler(fileHandler);
+
         //     SimpleFormatter formatter = new SimpleFormatter();  
+
         //     fileHandler.setFormatter(formatter);
         // } catch (Exception e) {};
     }
@@ -113,7 +115,7 @@ public class Moving_EnemiesTest {
         
         // else move right
         testRight();
-        
+
         // else move down
         testDown();
     }
@@ -273,7 +275,9 @@ public class Moving_EnemiesTest {
         testDown();
 
         // can move right
+
         testRight();        
+
     }
 
     /**
@@ -295,7 +299,7 @@ public class Moving_EnemiesTest {
         testUp();
 
         // can move right
-        testRight();        
+        testRight();
     }
 
     /**
