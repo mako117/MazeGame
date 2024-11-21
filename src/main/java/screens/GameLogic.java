@@ -1,11 +1,13 @@
 package screens;
 
+import board.Board;
 import entities.enemy.Enemies;
 import entities.enemy.Moving_Enemies;
 import entities.enemy.PatrollingEnemies;
-import board.Board;
-import java.util.ArrayList;
 import entities.Character;
+
+import java.util.ArrayList;
+
 
 public class GameLogic {
 

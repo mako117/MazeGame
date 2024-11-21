@@ -1,6 +1,5 @@
 package screens;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
@@ -8,7 +7,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -126,7 +124,6 @@ public class MainMenuScreen extends ScreenAdapter {
 
         if(helpPage){
             game.setScreen(new HelpScreen(game,this));
-            System.out.println("here");
             helpPage = false;
         } else {
             Gdx.input.setInputProcessor(stage);

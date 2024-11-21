@@ -1,6 +1,5 @@
 package screens;
 
-import board.Board;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -16,11 +15,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import board.Board;
 import directions.Direction;
 import entities.Character;
 import entities.enemy.Moving_Enemies;
 import entities.enemy.PatrollingEnemies;
 import entities.enemy.Enemies;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -87,7 +89,6 @@ public class GameScreen extends ScreenAdapter {
         enemies.add(new PatrollingEnemies(1, 9, Direction.Right, 1, 21, 1, 21, patrollingEnemeyTex));
         enemies.add(new Moving_Enemies(16, 14, movingEnemyTex));
         enemies.add(new Moving_Enemies(3, 20, movingEnemyTex));
-        System.out.println(enemies.size());
         canEnemyMove = new ArrayList<Boolean>(Collections.nCopies(enemies.size(), Boolean.FALSE));
     }
 
@@ -374,8 +375,8 @@ public class GameScreen extends ScreenAdapter {
             createButtons();
 
             pauseTexture = new TextureRegion(game.backgroundTexture);
-            System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
-            System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
+//            System.out.println("Pause texture loaded: " + (pauseTexture.getTexture() != null));
+//            System.out.println("Pause texture width: " + pauseTexture.getRegionWidth() + ", height: " + pauseTexture.getRegionHeight());
         }
 
         /**
