@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.Screen;
 
 
 public class MazeGame extends Game {
@@ -51,6 +52,10 @@ public class MazeGame extends Game {
         batch.dispose();
         font.dispose();
         skin.dispose();
+    }
+
+    protected Screen getCurrentScreen() {
+        return super.getScreen();
     }
 
 }
