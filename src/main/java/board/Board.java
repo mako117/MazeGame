@@ -63,7 +63,7 @@ public class Board {
         // set up walls
         createLongWall(2, 2, 8, 21);
         createLongWall(8,8,20,21);
-        createWallChunk(14,16,20,21);
+        createLongWall(14,16,20,21);
         createLongWall(20,20,16,21);
         createLongWall(14,14,18,19);
         createLongWall(3,8,18,18);
@@ -75,7 +75,7 @@ public class Board {
         createLongWall(18,18,6,15);
         createLongWall(19,20,10,10);
         createLongWall(20,21,6,6);
-        createWallChunk(18,21,1,2);
+        createLongWall(18,21,1,2);
 
         createLongWall(1,4,6,6);
         createLongWall(4,4,2,5);
@@ -407,33 +407,23 @@ public class Board {
      * @param endingY The end y coordinate.
      */
     private void createLongWall(int startingX, int endingX, int startingY, int endingY) {
-        if(startingX == endingX) {
-            for(int i = startingY; i <= endingY; i++) {
+        if (startingX == endingX) {
+            for (int i = startingY; i <= endingY; i++) {
                 createWall(startingX, i);
             }
-        }
-        else if(startingY == endingY) {
-            for(int i = startingX; i <= endingX; i++) {
+        } else if (startingY == endingY) {
+            for (int i = startingX; i <= endingX; i++) {
                 createWall(i, startingY);
+            }
+        } else {
+            for (int i = startingX; i <= endingX; i++) {
+                for (int j = startingY; j <= endingY; j++) {
+                    createWall(i, j);
+                }
             }
         }
     }
 
-    /**
-     * Create a wall chunk within the given bound.<br>
-     * The wall is a group of wall blocks.
-     * @param leftX The left bound.
-     * @param rightX The right bound.
-     * @param bottomY The bottom bound.
-     * @param topY The top bound
-     */
-    private void createWallChunk(int leftX, int rightX, int bottomY, int topY) {
-        for(int i = leftX; i <= rightX; i++) {
-            for(int j = bottomY; j <= topY; j++) {
-                createWall(i,j);
-            }
-        }
-    }
 
     /**
      * Check if the given coordinates has a reward
