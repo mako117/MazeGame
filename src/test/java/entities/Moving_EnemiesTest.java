@@ -27,6 +27,10 @@ public class Moving_EnemiesTest {
     private Moving_Enemies movingEnemy;
     private TextureRegion mockTextureRegion;
     private Block mockBlock;
+    Block upBlock;
+    Block downBlock;
+    Block leftBlock;
+    Block rightBlock;
 
     private static Logger log = Logger.getLogger(Moving_EnemiesTest.class.getName());
 
@@ -42,9 +46,24 @@ public class Moving_EnemiesTest {
         mockBlock = mock(Block.class);
         movingEnemy = new Moving_Enemies(3, 3, mockTextureRegion);
 
-        when(mockBoard.getBlock(anyInt(),anyInt())).thenReturn(mockBlock);
+        upBlock = mock(Block.class);
+        downBlock = mock(Block.class);
+        leftBlock = mock(Block.class);
+        rightBlock = mock(Block.class);
 
+        when(mockBoard.getBlock(anyInt(),anyInt())).thenReturn(mockBlock);
         when(mockBoard.getBlock(anyInt(),anyInt()).enter()).thenReturn(true);
+
+        when(mockBoard.getBlock(3,4)).thenReturn(upBlock);
+        when(mockBoard.getBlock(2,4)).thenReturn(downBlock);
+        when(mockBoard.getBlock(4,3)).thenReturn(rightBlock);
+        when(mockBoard.getBlock(2,3)).thenReturn(leftBlock);
+
+        when(upBlock.enter()).thenReturn(true);
+        when(downBlock.enter()).thenReturn(true);
+        when(leftBlock.enter()).thenReturn(true);
+        when(rightBlock.enter()).thenReturn(true);
+
         try{
             FileHandler fileHandler = new FileHandler("C:/Users/caleb/CMPT276F24_group18/src/test/java/logging/status.log");
             log.addHandler(fileHandler);
@@ -57,7 +76,7 @@ public class Moving_EnemiesTest {
      * moveYDistance < moveXDistance, yDistance < 0, xDistance < 0
      */
     @Test
-    public void wantsToMoveUpElseRightTest() {
+    public void wantsToMoveUpTest() {
         when(mockPlayer.getX()).thenReturn(4);
         when(mockPlayer.getY()).thenReturn(6);
 
@@ -72,36 +91,207 @@ public class Moving_EnemiesTest {
         log.info("2 3 enter after = " + mockBoard.getBlock(2,3).enter()); // left
         log.info("3 2 enter after = " + mockBoard.getBlock(4,3).enter()); // down
 
+        testUp();
+
+        when(upBlock.enter()).thenReturn(false);
+
         // else move right
         testRight();
 
+        when(rightBlock.enter()).thenReturn(false);
         // else move left
         testLeft();
 
+        when(leftBlock.enter()).thenReturn(false);
         // else move down
         testDown();
     }
 
-    // /**
-    //  * moveYDistance < moveXDistance, yDistance < 0, xDistance > 0
-    //  */
-    // @Test
-    // public void wantsToMoveUpElseLeftTest() {
-    //     when(mockPlayer.getX()).thenReturn(2);
-    //     when(mockPlayer.getY()).thenReturn(5);
+     /**
+      * moveYDistance < moveXDistance, yDistance < 0, xDistance > 0
+      */
+     @Test
+     public void wantsToMoveUpLeftTest() {
+         when(mockPlayer.getX()).thenReturn(2);
+         when(mockPlayer.getY()).thenReturn(6);
 
-    //     // can move up
-    //     testUp();
+         when(upBlock.enter()).thenReturn(false);
 
-    //     // else move left
-    //     testLeft();
+         testLeft();
 
-    //     // else move right
-    //     testRight();
+         when(leftBlock.enter()).thenReturn(false);
+         // else move right
+         testRight();
 
-    //     // else move down
-    //     testDown();
-    // }
+         when(rightBlock.enter()).thenReturn(false);
+         // else move down
+         testDown();
+     }
+
+
+    /**
+     * Wants to move Down then Right
+     */
+    @Test
+    public void wantsToMoveDownRightTest() {
+        when(mockPlayer.getX()).thenReturn(6);
+        when(mockPlayer.getY()).thenReturn(2);
+//      Is this possible
+//        testDown();
+//
+//        when(downBlock.enter()).thenReturn(false);
+//
+//        testRight();
+//
+//        when(rightBlock.enter()).thenReturn(false);
+//
+//        testLeft();
+//
+//        when(leftBlock.enter()).thenReturn(false);
+//        // else move down
+//        testUp();
+    }
+
+    /**
+     * Wants to move Down then Left
+     */
+    @Test
+    public void wantsToMoveDownLeftTest() {
+        when(mockPlayer.getX()).thenReturn(2);
+        when(mockPlayer.getY()).thenReturn(1);
+//        Again is this possible
+//        testDown();
+//
+//        when(downBlock.enter()).thenReturn(false);
+//
+//        testLeft();
+//
+//        when(leftBlock.enter()).thenReturn(false);
+//        // else move right
+//        testRight();
+//
+//        when(rightBlock.enter()).thenReturn(false);
+//        // else move down
+//        testUp();
+    }
+
+    /**
+     * Wants to move Right then Up
+     */
+    @Test
+    public void wantsToMoveRightUpTest() {
+        when(mockPlayer.getX()).thenReturn(4);
+        when(mockPlayer.getY()).thenReturn(4);
+
+        testRight();
+
+        when(rightBlock.enter()).thenReturn(false);
+
+        testUp();
+
+        when(upBlock.enter()).thenReturn(false);
+
+        testDown();
+
+        when(downBlock.enter()).thenReturn(false);
+        testLeft();
+    }
+
+    /**
+     * Wants to move Right then Down
+     */
+    @Test
+    public void wantsToMoveRightDownTest() {
+        when(mockPlayer.getX()).thenReturn(4);
+        when(mockPlayer.getY()).thenReturn(2);
+
+        testRight();
+
+        when(rightBlock.enter()).thenReturn(false);
+
+        testDown();
+
+        when(downBlock.enter()).thenReturn(false);
+
+        testUp();
+
+    }
+
+    /**
+     * Wants to move Right then Up
+     */
+    @Test
+    public void wantsToMoveLeftUpTest() {
+        when(mockPlayer.getX()).thenReturn(2);
+        when(mockPlayer.getY()).thenReturn(4);
+
+        testLeft();
+
+        when(leftBlock.enter()).thenReturn(false);
+
+        testUp();
+
+        when(upBlock.enter()).thenReturn(false);
+
+        testDown();
+
+        when(downBlock.enter()).thenReturn(false);
+        testRight();
+    }
+
+    /**
+     * Wants to move Left then Down
+     */
+    @Test
+    public void wantsToMoveLeftDownTest() {
+        when(mockPlayer.getX()).thenReturn(2);
+        when(mockPlayer.getY()).thenReturn(2);
+
+        testLeft();
+
+        when(leftBlock.enter()).thenReturn(false);
+
+        testDown();
+
+        when(downBlock.enter()).thenReturn(false);
+
+        testUp();
+
+    }
+
+    /**
+     * Wants to move only Up, Does this do any new Tests???
+     */
+    @Test
+    public void wantsToMoveUpOnlyTest() {
+        when(mockPlayer.getX()).thenReturn(3);
+        when(mockPlayer.getY()).thenReturn(6);
+
+        testUp();
+
+        when(upBlock.enter()).thenReturn(false);
+
+        testIdle();
+
+    }
+
+    /**
+     * Wants to move only down, Does this do any new Tests???
+     */
+    @Test
+    public void wantsToMoveDownOnlyTest() {
+        when(mockPlayer.getX()).thenReturn(3);
+        when(mockPlayer.getY()).thenReturn(1);
+
+        testDown();
+
+        when(downBlock.enter()).thenReturn(false);
+
+        testIdle();
+
+    }
+
+
 
     // /**
     //  * moveYDistance < moveXDistance, yDistance < 0, xDistance = 0
@@ -332,7 +522,6 @@ public class Moving_EnemiesTest {
 
         movingEnemy.direction('S',mockBoard); // reset position
         // checkPosition(result, 3, 4);
-        when((mockBoard.getBlock(3,4)).enter()).thenReturn(false); // block up down
     }
     private void testDown() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
