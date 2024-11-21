@@ -176,5 +176,13 @@ public class PatrollingEnemiesTest {
 
 
     }
+    
+    @Test
+    void NoneDirectionTest() {
+    	enemy = new PatrollingEnemies(2, 2, Direction.None, 0, 5, 0, 5, mockTextureRegion);
+    	enemy.direction('I', mockBoard);
+    	assertEquals(2, enemy.getX());
+    	assertEquals(2, enemy.getY());
+    }
 
 }
