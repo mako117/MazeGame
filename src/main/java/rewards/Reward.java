@@ -82,6 +82,6 @@ public class Reward {
 	 * @param tilesize
 	 */
 	public void draw(Batch batch, int tilesize) {
-        batch.draw(new TextureRegion(RewardTexture), tilesize*this.Xposition(),  tilesize*this.Yposition(), tilesize, tilesize);
+        batch.draw(RewardTexture, tilesize*this.Xposition(),  tilesize*this.Yposition(), tilesize, tilesize);
     }
 }

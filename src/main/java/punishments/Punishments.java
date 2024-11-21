@@ -61,7 +61,7 @@ public class Punishments {
      * @param tilesize  The size of the tile.
      */
     public void draw(Batch batch, int tilesize) {
-        batch.draw(new TextureRegion(PunishmentsTexture), tilesize*this.XPosition(), tilesize*this.YPosition(), tilesize, tilesize);
+        batch.draw(PunishmentsTexture, tilesize*this.XPosition(), tilesize*this.YPosition(), tilesize, tilesize);
     }
 
     /**
