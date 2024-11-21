@@ -160,6 +160,19 @@ public class CharacterTest {
         assertEquals(10, character.getScore());
 
     }
+    
+    @Test
+    public void testDrawNull() {
+        character.setX(2);
+        character.setY(1);
+        character.setFacing(Direction.None);
+        int tileSize = 32;
+        float offset = 0.0f;
+
+        character.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * character.getX())), eq((float)(tileSize* character.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
 
     /**
      * Test drawing up with offset
@@ -228,7 +241,6 @@ public class CharacterTest {
 
         verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * character.getX() + offset)), eq((float)(tileSize* character.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
     }
-
 
     /**
      * Test for drawing with no offset
