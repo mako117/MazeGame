@@ -17,13 +17,13 @@ public class Character extends Entity {
      * Creates a entities.Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
      */
     public Character(TextureRegion playerTexture) {
-        super(playerTexture,1,1,Direction.Down);
+        super(playerTexture,1,1, Direction.None);
         setSpeed(1);
         setScore(0);
         this.getTexture().setRegion(0 ,0, 32, 32);
     }
     public Character(TextureRegion playerTexture, int startX, int startY) {
-        super(playerTexture,startX,startY,Direction.Down);
+        super(playerTexture,startX,startY,Direction.None);
         setSpeed(1);
         this.getTexture().setRegion(0 ,0, 32, 32);
     }
@@ -75,25 +75,22 @@ public class Character extends Entity {
 
         // this will allow for smooth transition between tiles
         // TODO: replace the entityTexture with walking sprite when offset != 0
-        if(offset != 0){
-            switch(this.getFacing()){
-                case Up:
-                    batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY())+offset, tileSize, tileSize);
-                    break;
-                case Down:
-                    batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY())+offset, tileSize, tileSize);
-                    break;
-                case Left:
-                    batch.draw(this.getTexture(), tileSize*(this.getX())+offset, tileSize*(this.getY()), tileSize, tileSize);
-                    break;
-                case Right:
-                    batch.draw(this.getTexture(), tileSize*(this.getX())+offset, tileSize*(this.getY()), tileSize, tileSize);
-                    break;
-            }
-        }
-        else {
-            // entity is standing still
-            batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY()), tileSize, tileSize);
+        switch(this.getFacing()){
+            case Up:
+                batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY())+offset, tileSize, tileSize);
+                break;
+            case Down:
+                batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY())+offset, tileSize, tileSize);
+                break;
+            case Left:
+                batch.draw(this.getTexture(), tileSize*(this.getX())+offset, tileSize*(this.getY()), tileSize, tileSize);
+                break;
+            case Right:
+                batch.draw(this.getTexture(), tileSize*(this.getX())+offset, tileSize*(this.getY()), tileSize, tileSize);
+                break;
+            default:
+            	batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY()), tileSize, tileSize);
+            	break;
         }
 
     }

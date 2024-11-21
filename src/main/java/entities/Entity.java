@@ -10,7 +10,7 @@ import directions.Direction;
 public class Entity {
     private int x;
     private int y;
-    private Direction facing;
+    private Direction facing = Direction.None;
     private TextureRegion entityTexture;
 
     /**
@@ -92,7 +92,7 @@ public class Entity {
      * @return  <facing>.
      */
     public Direction getFacing() {
-        return this.facing;
+		return this.facing;
     }
     public TextureRegion getTexture() {
         return this.entityTexture;
