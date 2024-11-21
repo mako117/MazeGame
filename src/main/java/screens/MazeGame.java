@@ -20,6 +20,12 @@ public class MazeGame extends Game {
     public Skin skin;
     public Texture backgroundTexture;
 
+    public boolean directStartGame;
+
+    public MazeGame(boolean isDirectStartGame){
+        directStartGame = isDirectStartGame;
+    }
+
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -27,7 +33,12 @@ public class MazeGame extends Game {
         skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
         backgroundTexture = new Texture("Space Background.png");
 
-        setScreen(new MainMenuScreen(this));
+        if(directStartGame){
+            setScreen(new GameScreen(this));
+        } else {
+            setScreen(new MainMenuScreen(this));
+        }
+
     }
 
     public void exitGame(){
@@ -46,4 +57,5 @@ public class MazeGame extends Game {
         font.dispose();
         skin.dispose();
     }
+
 }
