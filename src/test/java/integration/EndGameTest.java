@@ -13,7 +13,7 @@ import board.Board;
 import screens.GameLogic;
 import entities.Character;
 
-class EndGameTest {
+public class EndGameTest {
 	private GameLogic logic = new GameLogic();
 	private TextureRegion tex = mock(TextureRegion.class);
 	private Board mockboard = mock(Board.class);

@@ -9,143 +9,142 @@ import org.junit.jupiter.api.Test;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import board.Board;
-import board.RoomBlock;
 import board.Wall;
-import entities.enemy.Moving_Enemies;
+import board.RoomBlock;
+import entities.Character;
+import board.Board;
 
-class MovingEnemiesCollisionWall {
+public class CharacterCollisionWallTest {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private Board mockboard = mock(Board.class);
 	
 	//Wall
 	/**
-	 * Test moving enemies move up have a wall
+	 * Test when character move up have a wall
 	 */
 	@Test
 	void moveupwithwall() {
 		Wall w = new Wall(1,2,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		Character c = new Character(tex);
 		
-		e.direction('W', mockboard);
+		c.direction('W', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(1,c.getY());
 	}
 	
 	/**
-	 * Test moving enemies move left have a wall
+	 * Test when character move left have a wall
 	 */
 	@Test
 	void moveleftwithwall() {
 		Wall w = new Wall(0,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		Character c = new Character(tex);
 		
-		e.direction('A', mockboard);
+		c.direction('A', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(1,c.getY());
 	}
 
 	/**
-	 * Test moving enemies move right have a wall
+	 * Test when character move right have a wall
 	 */
 	@Test
 	void moverightwithwall() {
 		Wall w = new Wall(2,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		Character c = new Character(tex);
 		
-		e.direction('D', mockboard);
+		c.direction('D', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(1,c.getY());
 	}
 	
 	/**
-	 * Test moving enemies move down have a wall
+	 * Test when character move down have a wall
 	 */
 	@Test
 	void movedownwithwall() {
 		Wall w = new Wall(1,0,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
 		
-		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		Character c = new Character(tex);
 		
-		e.direction('S', mockboard);
+		c.direction('S', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(1,c.getY());
 	}
 	
 	//RoomBlock
-	
 	/**
-	 * Test moving enemies move up have a roomblock
+	 * Test when character move up have a roomblock
 	 */
 	@Test
 	void moveupwithroomblock() {
 		RoomBlock b = new RoomBlock(1,2,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		Character c = new Character(tex);
 		
-		e.direction('W', mockboard);
+		c.direction('W', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(2,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(2,c.getY());
 	}
 	
 	/**
-	 * Test moving enemies move left have a roomblock
+	 * Test when character move left have a roomblock
 	 */
 	@Test
 	void moveleftwithroomblock() {
 		RoomBlock b = new RoomBlock(0,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		Character c = new Character(tex);
 		
-		e.direction('A', mockboard);
+		c.direction('A', mockboard);
 		
-		assertEquals(0,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(0,c.getX());
+		assertEquals(1,c.getY());
 	}
 
 	/**
-	 * Test moving enemies move right have a roomblock
+	 * Test when character move right have a roomblock
 	 */
 	@Test
 	void moverightwithroomblock() {
 		RoomBlock b = new RoomBlock(2,1,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		Character c = new Character(tex);
 		
-		e.direction('D', mockboard);
+		c.direction('D', mockboard);
 		
-		assertEquals(2,e.getX());
-		assertEquals(1,e.getY());
+		assertEquals(2,c.getX());
+		assertEquals(1,c.getY());
 	}
 	
 	/**
-	 * Test moving enemies move down have a roomblock
+	 * Test when character move down have a roomblock
 	 */
 	@Test
 	void movedownwithroomblock() {
 		RoomBlock b = new RoomBlock(1,0,tex);
 		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
-		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		Character c = new Character(tex);
 		
-		e.direction('S', mockboard);
+		c.direction('S', mockboard);
 		
-		assertEquals(1,e.getX());
-		assertEquals(0,e.getY());
+		assertEquals(1,c.getX());
+		assertEquals(0,c.getY());
 	}
 }

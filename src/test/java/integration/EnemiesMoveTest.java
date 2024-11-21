@@ -23,7 +23,7 @@ import screens.GameLogic;
 import entities.Character;
 import board.Block;
 
-class EnemiesMoveTest {
+public class EnemiesMoveTest {
 	
 	private GameLogic logic = new GameLogic();
 	private Board mockBoard = mock(Board.class);

@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import directions.Direction;
 
-class CharacterCollisionEnemies {
+public class CharacterCollisionEnemiesTest {
 
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
@@ -28,17 +28,14 @@ class CharacterCollisionEnemies {
 	@Test
 	void CharacterCollisionwithMovingEnemies() {
 		Character c = new Character(tex);
-		
+
 		ArrayList<Enemies> enemies = new ArrayList<Enemies>();
-		
+		assertFalse(logic.checkPlayerCollision(c, enemies));
+
 		Moving_Enemies e1 = new Moving_Enemies(2,2,tex);
 		enemies.add(e1);
-		assertFalse(logic.checkPlayerCollision(c, enemies));
-		
 		Moving_Enemies e2 = new Moving_Enemies(1,2,tex);
 		enemies.add(e2);
-		assertFalse(logic.checkPlayerCollision(c, enemies));
-		
 		Moving_Enemies e3 = new Moving_Enemies(2,1,tex);
 		enemies.add(e3);
 		assertFalse(logic.checkPlayerCollision(c, enemies));

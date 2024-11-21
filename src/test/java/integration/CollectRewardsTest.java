@@ -14,7 +14,7 @@ import board.Board;
 import entities.Character;
 import screens.GameLogic;
 
-class CollectRewards {
+public class CollectRewardsTest {
 	private Board mockboard = mock(Board.class);
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
