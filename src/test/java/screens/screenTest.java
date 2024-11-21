@@ -54,8 +54,9 @@ public class screenTest extends AbstractTestWithHeadlessGdxContext{
         Runnable r = () -> {
             try{
                 Robot robot = new Robot();
-                for (int i = 0; i < 10; i++){
+                /* for (int i = 0; i < 10; i++) */ while(true) {
                     robot.keyPress(68);
+                    robot.keyRelease(68);
                     robot.delay(1000);
                 }
             } catch (AWTException e) {
@@ -63,38 +64,7 @@ public class screenTest extends AbstractTestWithHeadlessGdxContext{
             }
         };
 
-        TestGame game = new TestGame(true, r);
+        TestGame game = new TestGame(GameState.Game, r);
         application = new Lwjgl3Application(game, config);
     }
-
-//     /**
-//      * Test to see if the help button works.
-//      */
-//     @Test
-//     public void helpButtonWorks() {
-//         // doesn't click on help button
-//         Button helpButton = testScreen.getHelpButton();
-//         assertEquals(false, helpButton.isChecked());
-//
-//         // clicks help button
-////         ((ChangeListener) (helpButton.getListeners().first())).changed(new ChangeListener.ChangeEvent(), helpButton);
-//         testGame.showHelpScreen(testGame.getCurrentScreen());
-//         assertTrue(testGame.getCurrentScreen() instanceof HelpScreen);
-//     }
-//
-//     /**
-//      * Test to see if the exit button works.
-//      */
-//     @Test
-//     public void exitButtonWorks() {
-//         // doesn't click on exit button
-//         Button exitButton = testScreen.getExitButton();
-//         assertEquals(false, exitButton.isChecked());
-//
-//         // clicks help button
-////         ((ChangeListener) (exitButton.getListeners().first())).changed(new ChangeEvent(), exitButton);
-//            testGame.exitGame();
-//
-//         assertEquals(true, exitButton.isChecked());
-//     }
 }

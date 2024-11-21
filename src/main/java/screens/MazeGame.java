@@ -16,10 +16,10 @@ public class MazeGame extends Game {
     public Skin skin;
     public Texture backgroundTexture;
 
-    public boolean directStartGame;
+    public GameState gameState;
 
-    public MazeGame(boolean isDirectStartGame){
-        directStartGame = isDirectStartGame;
+    public MazeGame(GameState status){
+        gameState  = status;
     }
 
     @Override
@@ -29,12 +29,13 @@ public class MazeGame extends Game {
         skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
         backgroundTexture = new Texture("Space Background.png");
 
-        if(directStartGame){
-            setScreen(new GameScreen(this));
-        } else {
+        if(gameState == GameState.MainMenu){
             setScreen(new MainMenuScreen(this));
+        } else if (gameState == GameState.Game || gameState == GameState.Pause) {
+            setScreen(new GameScreen(this));
+        } else if(gameState == GameState.EndMenu) {
+            setScreen(new EndScreen(this, 0, 0, false));
         }
-
     }
 
     public void exitGame(){

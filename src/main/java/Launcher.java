@@ -12,7 +12,7 @@ public class Launcher {
         config.setTitle("JURASSIC METEOR");
         config.setWindowedMode(1280,720);
 
-        new Lwjgl3Application(new MazeGame(false), config);
+        new Lwjgl3Application(new MazeGame(GameState.MainMenu), config);
     }
 
 

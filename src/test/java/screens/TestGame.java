@@ -12,8 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class TestGame extends MazeGame {
     Runnable test;
 
-    public TestGame(boolean isDirectStartGame, Runnable test) {
-        super(isDirectStartGame);
+    public TestGame(GameState status, Runnable test) {
+        super(status);
         this.test = test;
     }
 

@@ -174,7 +174,7 @@ public class GameTest {
 
         //Gdx.graphics = mock(GL20.class);
 
-        testGame = new MazeGame(true);
+        testGame = new MazeGame(GameState.Game);
 
     }
 

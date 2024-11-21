@@ -1,81 +1,77 @@
-// package screens
+package screens;
 
-// import static org.junit.jupiter.api.Assertions.*;
-// import static org.mockito.Mockito.*;
+import java.awt.*;
 
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.*;
-// import org.junit.jupiter.api.Test;
-// import org.mockito.Mock;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
-// import com.badlogic.gdx.scenes.scene2d.InputEvent;
-// import com.badlogic.gdx.scenes.scene2d.ui.Button;
-// import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-// import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
-// import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-// import com.badlogic.gdx.ApplicationListener;
-// import com.badlogic.gdx.Gdx;
-// import com.badlogic.gdx.backends.headless.HeadlessApplication;
-// import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
-// import com.badlogic.gdx.backends.headless.mock.graphics.MockGraphics;
-// import com.badlogic.gdx.graphics.*;
-// import org.junit.runner.RunWith;
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.headless.HeadlessApplication;
+import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import org.junit.Rule;
+import org.junit.jupiter.api.*;
 
-// import screens.EndScreen;
-// import screens.MazeGame;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import org.junit.rules.ExpectedException;
 
-// // @RunWith(GdxTestRunner.class)
-// public class EndTest {
-//     final MazeGame testGame = mock(MazeGame.class);
-//     private EndScreen testScreen;
-//     private HeadlessApplication app;
+import screens.*;
+import screens.MazeGame;
 
-//     // TODO: get the headless backend working; the current problem is getting OpenGL methods working
-//     // assume the setup gets us to the Game Over screen.
-//     @BeforeEach
-//     public void setup() {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
+    Lwjgl3ApplicationConfiguration config;
+    Lwjgl3Application application;
 
-//     }
+    AbstractTestWithHeadlessGdxContext() {
+        config = new Lwjgl3ApplicationConfiguration();
+        config.setTitle("JURASSIC METEOR");
+        config.setWindowedMode(1280,720);
+     }
 
-//     /**
-//      * Test to see if the Play Again button works.
-//      */
-//     @Test
-//     public void playAgainButtonWorks() {
-//         // doesn't click on Play Again button
-//         Button playAgainButton = testScreen.getPlayAgainButton();
-//         assertEquals(false, playAgainButton.isChecked());
+    @AfterAll
+    void afterAll() {
+        application.exit();
+    }
+}
 
-//         // clicks Play Again button
-//         ((ChangeListener) (playAgainButton.getListeners().first())).changed(new ChangeEvent(), playAgainButton);
-//         assertEquals(true, playAgainButton.isChecked());
-//     }
+public class EndTest extends AbstractTestWithHeadlessGdxContext {
 
-//     /**
-//      * Test to see if the Try Again button works.
-//      */
-//     @Test
-//     public void tryAgainButtonWorks() {
-//         // doesn't click on Try Again button
-//         Button tryAgainButton = testScreen.getTryAgainButton();
-//         assertEquals(false, tryAgainButton.isChecked());
+    @Test
+    public void integrationTest() {
+        MazeGame endGame = new MazeGame(GameState.EndMenu);
+        application = new Lwjgl3Application(endGame, config);
+        assertEquals(true, (endGame.getCurrentScreen() instanceof EndScreen));
+    }
 
-//         // clicks Try Again button
-//         ((ChangeListener) (tryAgainButton.getListeners().first())).changed(new ChangeEvent(), tryAgainButton);
-//         assertEquals(true, tryAgainButton.isChecked());
-//     }
+    // // TODO: get the headless backend working; the current problem is getting OpenGL methods working
+    // // assume the setup gets us to the Game Over screen.
+    // @BeforeEach
+    // public void setup() {
+    // }
 
-//     /**
-//      * Test to see if the exit button works.
-//      */
-//     @Test
-//     public void exitButtonWorks() {
-//         // doesn't click on Exit button
-//         Button exitButton = testScreen.getExitButton();
-//         assertEquals(false, exitButton.isChecked());
+    // /**
+    //  * Test to see if the Play Again button works.
+    //  */
+    // @Test
+    // public void playAgainButtonWorks() {
+    // }
 
-//         // clicks Exit button
-//         ((ChangeListener) (exitButton.getListeners().first())).changed(new ChangeEvent(), exitButton);
-//         assertEquals(true, exitButton.isChecked());
-//     }
-// }
+    // /**
+    //  * Test to see if the Try Again button works.
+    //  */
+    // @Test
+    // public void tryAgainButtonWorks() {
+    // }
+
+    // /**
+    //  * Test to see if the exit button works.
+    //  */
+    // @Test
+    // public void exitButtonWorks() {
+    // }
+}
