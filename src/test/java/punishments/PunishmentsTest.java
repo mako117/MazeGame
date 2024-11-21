@@ -1,17 +1,25 @@
 package punishments;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 class PunishmentsTest {
+	private SpriteBatch bat = mock(SpriteBatch.class);
+	private TextureRegion tex = mock(TextureRegion.class);
 
+	/**
+	 * Test create normal punishments and change it set
+	 */
 	@Test
 	void setNormal_Punishments() {
-		NormalPunishments Np = new NormalPunishments(10,10,5,mock(TextureRegion.class));
+		NormalPunishments Np = new NormalPunishments(10,10,5,tex);
 		
 		assertEquals(10,Np.XPosition());
 		assertEquals(10,Np.YPosition());
@@ -29,9 +37,12 @@ class PunishmentsTest {
 		assertEquals(10,Np.getPunishmentScore());
 	}
 	
+	/**
+	 * Test create bonus punishments and change it set
+	 */
 	@Test
 	void setBonus_Punishments() {
-		BonusPunishments Bp1 = new BonusPunishments(15,15,10,mock(TextureRegion.class),12,30);
+		BonusPunishments Bp1 = new BonusPunishments(15,15,10,tex,12,30);
 		
 		assertEquals(15,Bp1.XPosition());
 		assertEquals(15,Bp1.YPosition());
@@ -62,4 +73,20 @@ class PunishmentsTest {
 		assertEquals(-1,Bp2.getEndTime());
 	}
 
+	/**
+	 * Test the draw method in punishments can come out correct information
+	 */
+	@Test
+	void drawPunishments() {
+		TextureRegion tex1 = mock(TextureRegion.class);
+		Punishments p1 = new NormalPunishments(0, 1, 10, tex1);
+        int tileSize = 100;
+        p1.draw(bat, tileSize);
+        verify(bat).draw(eq(tex1),eq((float)(tileSize * p1.XPosition())), eq((float)(tileSize* p1.YPosition())), eq((float)(tileSize)), eq((float)(tileSize)));
+        
+        TextureRegion tex2 = mock(TextureRegion.class);
+        Punishments p2 = new BonusPunishments(0, 1, 10, tex2, 5, 10);
+        p2.draw(bat, tileSize);
+        verify(bat).draw(eq(tex2),eq((float)(tileSize * p2.XPosition())), eq((float)(tileSize* p2.YPosition())), eq((float)(tileSize)), eq((float)(tileSize)));
+	}
 }
