@@ -33,23 +33,22 @@ import entities.Entity;
      * @param offset The image offset.
      */
     public void draw(Batch batch, int tileSize, float offset) {
-        if (offset != 0) {
-            switch (this.getFacing()) {
-                case Up:
-                    batch.draw(this.getTexture(), tileSize * (this.getX()), tileSize * (this.getY()) - offset, tileSize, tileSize);
-                    break;
-                case Down:
-                    batch.draw(this.getTexture(), tileSize * (this.getX()), tileSize * (this.getY()) + offset, tileSize, tileSize);
-                    break;
-                case Left:
-                    batch.draw(this.getTexture(), tileSize * (this.getX()) + offset, tileSize * (this.getY()), tileSize, tileSize);
-                    break;
-                case Right:
-                    batch.draw(this.getTexture(), tileSize * (this.getX()) - offset, tileSize * (this.getY()), tileSize, tileSize);
-                    break;
-            }
-        } else {
-            batch.draw(this.getTexture(), tileSize * (this.getX()), tileSize * (this.getY()), tileSize, tileSize);
+        switch (this.getFacing()) {
+            case Up:
+                batch.draw(this.getTexture(), tileSize * (this.getX()), tileSize * (this.getY()) - offset, tileSize, tileSize);
+                break;
+            case Down:
+                batch.draw(this.getTexture(), tileSize * (this.getX()), tileSize * (this.getY()) + offset, tileSize, tileSize);
+                break;
+            case Left:
+                batch.draw(this.getTexture(), tileSize * (this.getX()) + offset, tileSize * (this.getY()), tileSize, tileSize);
+                break;
+            case Right:
+                batch.draw(this.getTexture(), tileSize * (this.getX()) - offset, tileSize * (this.getY()), tileSize, tileSize);
+                break;
+            default:
+                batch.draw(this.getTexture(), tileSize * (this.getX()), tileSize * (this.getY()), tileSize, tileSize);
+            	break;
         }
     }
 }

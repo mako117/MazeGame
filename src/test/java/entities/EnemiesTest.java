@@ -168,6 +168,20 @@ public class EnemiesTest {
         assertEquals(0, enemy.getY());
     }
 
+    @Test
+    public void testDrawNone() {
+
+        enemy.setX(1);
+        enemy.setY(1);
+        enemy.setFacing(Direction.None);
+        int tileSize = 32;
+        float offset = 0.0f;
+
+        enemy.draw(mockBatch, tileSize, offset);
+
+        verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize * enemy.getX())), eq((float)(tileSize* enemy.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
+    }
+    
     /**
      * Test drawing up with offset
      */
