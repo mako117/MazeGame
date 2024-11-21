@@ -1,25 +1,25 @@
-// package screens;
+ package screens;
 
-// import static org.junit.jupiter.api.Assertions.*;
-// import static org.mockito.Mockito.*;
+ import static org.junit.jupiter.api.Assertions.*;
+ import static org.mockito.Mockito.*;
 
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.*;
-// import org.junit.jupiter.api.Test;
-// import org.mockito.Mock;
+ import org.junit.jupiter.api.BeforeEach;
+ import org.junit.jupiter.api.*;
+ import org.junit.jupiter.api.Test;
+ import org.mockito.Mock;
 
-// import com.badlogic.gdx.scenes.scene2d.InputEvent;
-// import com.badlogic.gdx.scenes.scene2d.ui.Button;
-// import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-// import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
-// import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-// import com.badlogic.gdx.ApplicationListener;
-// import com.badlogic.gdx.Gdx;
-// import com.badlogic.gdx.backends.headless.HeadlessApplication;
-// import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
-// import com.badlogic.gdx.backends.headless.mock.graphics.MockGraphics;
-// import com.badlogic.gdx.graphics.*;
-// import org.junit.runner.RunWith;
+ import com.badlogic.gdx.scenes.scene2d.InputEvent;
+ import com.badlogic.gdx.scenes.scene2d.ui.Button;
+ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+ import com.badlogic.gdx.ApplicationListener;
+ import com.badlogic.gdx.Gdx;
+ import com.badlogic.gdx.backends.headless.HeadlessApplication;
+ import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
+ import com.badlogic.gdx.backends.headless.mock.graphics.MockGraphics;
+ import com.badlogic.gdx.graphics.*;
+ import org.junit.runner.RunWith;
 
 // import screens.GameScreen;
 // import screens.MazeGame;
@@ -147,3 +147,45 @@
 //     }
 
 // }
+
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+ import com.badlogic.gdx.Application;
+import screens.MazeGame;
+
+public class GameTest {
+    MazeGame testGame;
+
+    SpriteBatch mockBatch;
+    BitmapFont mockBitmapFont;
+    Skin mockSkin;
+    Texture mockTexture;
+
+    @BeforeEach
+    public void setUp() {
+        mockBatch = mock(SpriteBatch.class);
+        mockBitmapFont = mock(BitmapFont.class);
+        mockSkin = mock(Skin.class);
+        mockTexture = mock(Texture.class);
+
+        //Gdx.graphics = mock(GL20.class);
+
+        testGame = new MazeGame(true);
+
+    }
+
+    @Test
+    public void MazeGameTest() {
+        //testGame.create();
+        //testGame.render();
+        //testGame.dispose();
+        testGame.exitGame();
+    }
+
+
+
+}
