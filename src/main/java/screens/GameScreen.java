@@ -30,7 +30,7 @@ public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private Viewport viewport;
 
-    private final int TILE_SIZE = 100;
+    private final int TILE_SIZE = 50;
     private final TextureRegion playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
     private final TextureRegion movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
     private final TextureRegion patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
@@ -522,11 +522,11 @@ public class GameScreen extends ScreenAdapter {
             fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
             fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
             fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            fullscreenCamera.zoom = 3.5f;
+            fullscreenCamera.zoom = 1.8f;
             fullscreenCamera.update();
             game.batch.setProjectionMatrix(fullscreenCamera.combined);
             game.batch.begin();
-            game.batch.draw(game.backgroundTexture, 0, 0, (Gdx.graphics.getWidth() * 3.5f), (Gdx.graphics.getHeight() * 3.5f));
+            game.batch.draw(game.backgroundTexture, 0, 0, (Gdx.graphics.getWidth() * 1.8f), (Gdx.graphics.getHeight() * 1.8f));
             gameboard.draw(game.batch, time, TILE_SIZE);
             renderPlayer(delta);
             readyText();
@@ -538,7 +538,7 @@ public class GameScreen extends ScreenAdapter {
          *Renders The Text for the Initial Screen
          */
         private void readyText(){
-            game.font.getData().setScale(1.8f,1.8f);
+            game.font.getData().setScale(1.5f,1.5f);
             game.font.draw(game.batch,String.format("READY!"), fullscreenCamera.position.x + viewport.getScreenWidth()/10 ,fullscreenCamera.position.y + viewport.getScreenHeight()/2 );
             game.font.draw(game.batch,String.format("Disarm all the bombs.\n\n" +
                     "Avoiding all the dinosaurs.\n\n" +
