@@ -145,7 +145,7 @@ public class Moving_Enemies extends Enemies {
                     return 'I';
                 }
             }
-            else if (xDistance > 0) { // wants to move left
+            else /* if (xDistance > 0) */ { // wants to move left
                 if(gameBoard.getBlock(this.getX() - 1, this.getY()).enter() == true) {
                     return 'A';
                 } else if(yDistance < 0) { // can't move left, so wants to move up
@@ -163,26 +163,6 @@ public class Moving_Enemies extends Enemies {
                         return 'W';
                     } else {
                         return 'D';
-                    }
-                } else {
-                    return 'I';
-                }
-            } else { // does not want to move on x-axis
-                if(yDistance < 0) {
-                    if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
-                        return 'W';
-                    } else if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
-                        return 'S';
-                    } else {
-                        return 'I';
-                    }
-                } else if (yDistance > 0) {
-                    if(gameBoard.getBlock(this.getX(), this.getY() - 1).enter() == true) {
-                        return 'S';
-                    } else if(gameBoard.getBlock(this.getX(), this.getY() + 1).enter() == true) {
-                        return 'W';
-                    } else {
-                        return 'I';
                     }
                 } else {
                     return 'I';

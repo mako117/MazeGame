@@ -32,7 +32,7 @@ public class Moving_EnemiesTest {
     Block leftBlock;
     Block rightBlock;
 
-    private static Logger log = Logger.getLogger(Moving_EnemiesTest.class.getName());
+    // private static Logger log = Logger.getLogger(Moving_EnemiesTest.class.getName());
 
     private static int INIT_X = 6;
     private static int INIT_Y = 6;
@@ -67,19 +67,79 @@ public class Moving_EnemiesTest {
         when(leftBlock.enter()).thenReturn(true);
         when(rightBlock.enter()).thenReturn(true);
 
-        try{
-            FileHandler fileHandler = new FileHandler("C:/Users/caleb/CMPT276F24_group18/src/test/java/logging/status.log");
-            log.addHandler(fileHandler);
-            SimpleFormatter formatter = new SimpleFormatter();  
-            fileHandler.setFormatter(formatter);
-        } catch (Exception e) {};
+        // try{
+        //     FileHandler fileHandler = new FileHandler("C:/Users/caleb/CMPT276F24_group18/src/test/java/logging/status.log");
+        //     log.addHandler(fileHandler);
+        //     SimpleFormatter formatter = new SimpleFormatter();  
+        //     fileHandler.setFormatter(formatter);
+        // } catch (Exception e) {};
     }
 
     /**
+     * moveYDistance < moveXDistance, yDistance < 0, xDistance < 0
+     */
+    @Test
+    public void wantsToMoveUpElseRightTest() {
+        when(mockPlayer.getX()).thenReturn(INIT_X + 1);
+        when(mockPlayer.getY()).thenReturn(INIT_Y + 3);
+
+        // can move up
+        testUp();
+
+        // else move right
+        testRight();
+
+        // else move left
+        testLeft();
+
+        // else move down
+        testDown();
+    }
+
+    /**
+     * Wants to move up and to the right, with up being of greater priority.
+     * moveYDistance < moveXDistance, yDistance < 0, xDistance > 0
+     */
+    @Test
+    public void wantsToMoveUpElseLeftTest() {
+        when(mockPlayer.getX()).thenReturn(INIT_X - 1);
+        when(mockPlayer.getY()).thenReturn(INIT_Y + 3);
+        
+        // can move up
+        testUp();
+        
+        // else move left
+        testLeft();
+        
+        // else move right
+        testRight();
+        
+        // else move down
+        testDown();
+    }
+
+    /**
+     * Wants to move up.
+     * moveYDistance < moveXDistance, yDistance < 0, xDistance = 0
+     */
+    @Test
+    public void wantsToMoveUpElseIdleTest() {
+        when(mockPlayer.getX()).thenReturn(INIT_X);
+        when(mockPlayer.getY()).thenReturn(INIT_Y + 2);
+
+        // can move up
+        testUp();
+
+        // else idle
+        testIdle();
+    }
+
+    /**
+     * Wants to move down and to the right, with down taking priority.
      * moveYDistance < moveXDistance, xDistance < 0, yDistance > 0
      */
     @Test
-    public void wantsToMoveDownElseRight() {
+    public void wantsToMoveDownElseRightTest() {
         when(mockPlayer.getX()).thenReturn(INIT_X + 1);
         when(mockPlayer.getY()).thenReturn(INIT_Y - 4);
 
@@ -96,31 +156,12 @@ public class Moving_EnemiesTest {
         testUp();
     }
 
-    //*** All of these ones are fine ***//
-
-    @Test
-    public void wantsToMoveLeftElseDown() {
-        when(mockPlayer.getX()).thenReturn(INIT_X - 2);
-        when(mockPlayer.getY()).thenReturn(INIT_Y - 1);
-
-        // else move left
-        testLeft();
-
-        // else move down
-        testDown();
-
-        // else move up
-        testUp();
-
-        // can move right
-        testRight();        
-    }
-
     /**
+     * Wants to move down and left, with down taking priority.
      * moveYDistance < moveXDistance, yDistance > 0, xDistance > 0
      */
     @Test
-    public void wantsToMoveDownElseLeft() {
+    public void wantsToMoveDownElseLeftTest() {
         when(mockPlayer.getX()).thenReturn(INIT_X - 1);
         when(mockPlayer.getY()).thenReturn(INIT_Y - 2);
 
@@ -138,67 +179,11 @@ public class Moving_EnemiesTest {
     }
 
     /**
-     * moveYDistance < moveXDistance, yDistance < 0, xDistance < 0
-     */
-    @Test
-    public void wantsToMoveUpTest() {
-        when(mockPlayer.getX()).thenReturn(INIT_X + 1);
-        when(mockPlayer.getY()).thenReturn(INIT_Y + 3);
-
-        // can move up
-        testUp();
-
-        // else move right
-        testRight();
-
-        // else move left
-        testLeft();
-
-        // else move down
-        testDown();
-    }
-
-     /**
-      * moveYDistance < moveXDistance, yDistance < 0, xDistance > 0
-      */
-     @Test
-     public void wantsToMoveUpLeftTest() {
-         when(mockPlayer.getX()).thenReturn(INIT_X - 1);
-         when(mockPlayer.getY()).thenReturn(INIT_Y + 3);
-
-         // can move up
-         testUp();
-
-         // else move left
-         testLeft();
-
-         // else move right
-         testRight();
-
-         // else move down
-         testDown();
-     }
-
-    /**
-     * moveYDistance < moveXDistance, yDistance < 0, xDistance = 0
-     */
-    @Test
-    public void wantsToMoveUpElseIdleTest() {
-        when(mockPlayer.getX()).thenReturn(INIT_X);
-        when(mockPlayer.getY()).thenReturn(INIT_Y + 2);
-
-        // can move up
-        testUp();
-
-        // else idle
-        testIdle();
-    }
-
-    /**
+     * Wants to move down.
      * moveYDistance < moveXDistance, yDistance > 0, xDistance = 0
      */
     @Test
-    public void wantsToMoveDownElseIdle() {
+    public void wantsToMoveDownElseIdleTest() {
         when(mockPlayer.getX()).thenReturn(INIT_X);
         when(mockPlayer.getY()).thenReturn(INIT_Y - 2);
 
@@ -210,10 +195,11 @@ public class Moving_EnemiesTest {
     }
 
     /**
+     * Wants to move right and up, with right taking priority.
      * moveYDistance > moveXDistance, yDistance < 0, xDistance < 0
      */
     @Test
-    public void wantsToMoveRightElseUp() {
+    public void wantsToMoveRightElseUpTest() {
         when(mockPlayer.getX()).thenReturn(INIT_X + 2);
         when(mockPlayer.getY()).thenReturn(INIT_Y + 1);
 
@@ -231,10 +217,11 @@ public class Moving_EnemiesTest {
     }
 
     /**
+     * Wants to move right and down, with right taking priority.
      * moveYDistance > moveXDistance, yDistance > 0, xDistance < 0
      */
     @Test
-    public void wantsToMoveRightElseDown() {
+    public void wantsToMoveRightElseDownTest() {
         when(mockPlayer.getX()).thenReturn(INIT_X + 3);
         when(mockPlayer.getY()).thenReturn(INIT_Y - 1);
 
@@ -252,10 +239,11 @@ public class Moving_EnemiesTest {
     }
 
     /**
+     * Wants to move right.
      * moveYDistance > moveXDistance, yDistance = 0, xDistance < 0
      */
     @Test
-    public void wantsToMoveRightElseIdle() {
+    public void wantsToMoveRightElseIdleTest() {
         when(mockPlayer.getX()).thenReturn(INIT_X + 2);
         when(mockPlayer.getY()).thenReturn(INIT_Y);
 
@@ -267,10 +255,11 @@ public class Moving_EnemiesTest {
     }
 
     /**
+     * Wants to move left and up, with left taking priority.
      * moveYDistance > moveXDistance, yDistance < 0, xDistance > 0
      */
     @Test
-    public void wantsToMoveLeftElseUp() {
+    public void wantsToMoveLeftElseUpTest() {
         when(mockPlayer.getX()).thenReturn(INIT_X - 2);
         when(mockPlayer.getY()).thenReturn(INIT_Y + 1);
 
@@ -287,8 +276,34 @@ public class Moving_EnemiesTest {
         testRight();        
     }
 
+    /**
+     * Wants to move left and down, with left taking priority.
+     * moveYDistance > moveXDistance, xDistance > 0, yDistance > 0
+     */
     @Test
-    public void wantsToMoveLeftElseIdle() {
+    public void wantsToMoveLeftElseDownTest() {
+        when(mockPlayer.getX()).thenReturn(INIT_X - 2);
+        when(mockPlayer.getY()).thenReturn(INIT_Y - 1);
+
+        // else move left
+        testLeft();
+
+        // else move down
+        testDown();
+
+        // else move up
+        testUp();
+
+        // can move right
+        testRight();        
+    }
+
+    /**
+     * Wants to move left.
+     * moveYDistance > moveXDistance, xDistance > 0, yDistance = 0
+     */
+    @Test
+    public void wantsToMoveLeftElseIdleTest() {
         when(mockPlayer.getX()).thenReturn(INIT_X - 2);
         when(mockPlayer.getY()).thenReturn(INIT_Y);
 
@@ -427,7 +442,7 @@ public class Moving_EnemiesTest {
             moveYDistance = POSITIVE_INFINITY;
         }
 
-        log.info("\nplayerX = " + mockPlayer.getX() + ", playerY = " + mockPlayer.getY() + "\nxDistance = " + xDistance + ", yDistance = " + yDistance + "\nmoveXDistance = " + moveXDistance +", moveYDistance = " + moveYDistance);
+        // log.info("\nplayerX = " + mockPlayer.getX() + ", playerY = " + mockPlayer.getY() + "\nxDistance = " + xDistance + ", yDistance = " + yDistance + "\nmoveXDistance = " + moveXDistance +", moveYDistance = " + moveYDistance);
 
         double [] array = {moveXDistance, moveYDistance};
         return array;
