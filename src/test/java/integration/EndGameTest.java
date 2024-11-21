@@ -19,6 +19,9 @@ class EndGameTest {
 	private Board mockboard = mock(Board.class);
 	private Block mockblock = mock(Block.class);
 	
+	/**
+	 * Test the score change make game end
+	 */
 	@Test
 	void EndGameScoreTest() {
 		Character c = new Character(tex);
@@ -32,6 +35,9 @@ class EndGameTest {
 		assertTrue(logic.checkScore(c));
 	}
 	
+	/**
+	 * Test the condition the fit for end game
+	 */
 	@Test
 	void EndGameConditionTest() {
 		Character c = new Character(tex);

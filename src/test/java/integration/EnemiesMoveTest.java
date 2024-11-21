@@ -30,6 +30,9 @@ class EnemiesMoveTest {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private int tile_size = 0;
 	
+	/**
+	 * Test will two type enemies will move or not when have wall or roomblock
+	 */
 	@Test
 	void EnemiesDirectionTest() {
 		ArrayList<Enemies> e = new ArrayList<Enemies>();

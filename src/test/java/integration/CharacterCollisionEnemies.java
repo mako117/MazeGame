@@ -22,6 +22,9 @@ class CharacterCollisionEnemies {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
 	
+	/**
+	 * Test when character collision with moving enemies
+	 */
 	@Test
 	void CharacterCollisionwithMovingEnemies() {
 		Character c = new Character(tex);
@@ -45,6 +48,9 @@ class CharacterCollisionEnemies {
 		assertTrue(logic.checkPlayerCollision(c, enemies));
 	}
 	
+	/**
+	 * Test when character collision with patrolling enemies
+	 */
 	@Test
 	void CharacterCollisionwithPatrollingEnemies() {
 		Character c = new Character(tex);

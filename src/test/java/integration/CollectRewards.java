@@ -19,6 +19,9 @@ class CollectRewards {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
 	
+	/**
+	 * Test character collect regular reward how score change
+	 */
 	@Test
 	void CharacterCollectRegularReward() {
 		when(mockboard.regRewardCollect(anyInt(), anyInt())).thenReturn(5);
@@ -30,6 +33,9 @@ class CollectRewards {
 		assertEquals(5,c.getScore());
 	}
 	
+	/**
+	 * Test character collect bonus reward how score change
+	 */
 	@Test
 	void CharacterCollectBonusReward() {
 		when(mockboard.regRewardCollect(anyInt(), anyInt())).thenReturn(0);
@@ -41,6 +47,9 @@ class CollectRewards {
 		assertEquals(10,c.getScore());
 	}
 	
+	/**
+	 * Test character collect two type reward how score change
+	 */
 	@Test
 	void CharacterCollectBothRewards() {
 		when(mockboard.regRewardCollect(anyInt(), anyInt())).thenReturn(20);

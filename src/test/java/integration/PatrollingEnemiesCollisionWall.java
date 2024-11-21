@@ -20,6 +20,9 @@ class PatrollingEnemiesCollisionWall {
 	private Board mockboard = mock(Board.class);
 	
 	//Wall
+	/**
+	 * Test patrolling enemies move up have a wall
+	 */
 	@Test
 	void moveupwithwall() {
 		Wall w = new Wall(1,2,tex);
@@ -33,6 +36,9 @@ class PatrollingEnemiesCollisionWall {
 		assertEquals(2,e.getY());
 	}
 	
+	/**
+	 * Test patrolling enemies move left have a wall
+	 */
 	@Test
 	void moveleftwithwall() {
 		Wall w = new Wall(0,1,tex);
@@ -46,6 +52,9 @@ class PatrollingEnemiesCollisionWall {
 		assertEquals(1,e.getY());
 	}
 
+	/**
+	 * Test patrolling enemies move right have a wall
+	 */
 	@Test
 	void moverightwithwall() {
 		Wall w = new Wall(2,1,tex);
@@ -59,6 +68,9 @@ class PatrollingEnemiesCollisionWall {
 		assertEquals(1,e.getY());
 	}
 	
+	/**
+	 * Test patrolling enemies move down have a wall
+	 */
 	@Test
 	void movedownwithwall() {
 		Wall w = new Wall(1,0,tex);
@@ -73,6 +85,9 @@ class PatrollingEnemiesCollisionWall {
 	}
 	
 	//RoomBlock
+	/**
+	 * Test patrolling enemies move up have a roomblock
+	 */
 	@Test
 	void moveupwithroomblock() {
 		RoomBlock b = new RoomBlock(1,2,tex);
@@ -86,6 +101,9 @@ class PatrollingEnemiesCollisionWall {
 		assertEquals(2,e.getY());
 	}
 	
+	/**
+	 * Test patrolling enemies move left have a roomblock
+	 */
 	@Test
 	void moveleftwithroomblock() {
 		RoomBlock b = new RoomBlock(0,1,tex);
@@ -99,6 +117,9 @@ class PatrollingEnemiesCollisionWall {
 		assertEquals(1,e.getY());
 	}
 
+	/**
+	 * Test patrolling enemies move right have a roomblock
+	 */
 	@Test
 	void moverightwithroomblock() {
 		RoomBlock b = new RoomBlock(2,1,tex);
@@ -112,6 +133,9 @@ class PatrollingEnemiesCollisionWall {
 		assertEquals(1,e.getY());
 	}
 	
+	/**
+	 * Test patrolling enemies move down have a roomblock
+	 */
 	@Test
 	void movedownwithroomblock() {
 		RoomBlock b = new RoomBlock(1,0,tex);

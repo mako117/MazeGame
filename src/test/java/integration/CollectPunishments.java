@@ -19,6 +19,9 @@ class CollectPunishments {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
 	
+	/**
+	 * Test character collect regular punishment how score change
+	 */
 	@Test
 	void CharacterCollectRegularPunishment() {
 		when(mockboard.regPunishmentCollect(anyInt(), anyInt())).thenReturn(5);
@@ -30,6 +33,9 @@ class CollectPunishments {
 		assertEquals(-5, c.getScore());
 	}
 	
+	/**
+	 * Test character collect bonus punishment how score change
+	 */
 	@Test
 	void CharacterCollectBonusPunishment() {
 		when(mockboard.regPunishmentCollect(anyInt(), anyInt())).thenReturn(0);
@@ -41,6 +47,9 @@ class CollectPunishments {
 		assertEquals(-10, c.getScore());
 	}
 	
+	/**
+	 * Test character collect two type punishment how score change
+	 */
 	@Test
 	void CharacterCollectBothPunishments() {
 		when(mockboard.regPunishmentCollect(anyInt(), anyInt())).thenReturn(20);
