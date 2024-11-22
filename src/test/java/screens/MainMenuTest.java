@@ -27,7 +27,10 @@ public class MainMenuTest extends AbstractTestWithHeadlessGdxContext {
     @Test
     public void integrationTest() {
         Runnable r = () -> {
-            try{ Thread.sleep(10000); mainMenu.exitGame();} catch(Exception e) {};
+            try{
+                Thread.sleep(1500);
+                mainMenu.exitGame();
+            } catch(Exception e) {};
         };
         mainMenu = new TestGame(GameState.MainMenu, r);
         application = new Lwjgl3Application(mainMenu, config);

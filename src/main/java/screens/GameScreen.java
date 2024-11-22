@@ -41,7 +41,7 @@ public class GameScreen extends ScreenAdapter {
     private float time = 0;
     private final float TICKSPEED = 0.4f;
     private float tickCount = TICKSPEED;
-    private float INPUT_TIMEOUT = TICKSPEED;    // Slow speed of input reading
+    protected float INPUT_TIMEOUT = TICKSPEED;    // Slow speed of input reading
 
     // For smooth movement
     private boolean playerMovingXDirection = false;
@@ -51,7 +51,7 @@ public class GameScreen extends ScreenAdapter {
 
     protected PauseScreen pauseScreen;
     protected ReadyScreen readyScreen;
-    private GameLogic gameLogic;
+    protected GameLogic gameLogic;
 
     private Board gameboard;
     private Character player;
@@ -172,6 +172,7 @@ public class GameScreen extends ScreenAdapter {
      * @param condition
      */
     private void playerEnd(boolean condition) {
+
         gameMusic.stop();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.batch.setProjectionMatrix(camera.combined);
@@ -186,22 +187,23 @@ public class GameScreen extends ScreenAdapter {
      */
     public void render(float delta) {
 
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(readyScreen.missionStatement){
-            readyScreen.missionMenu();
-            return;
-        }
-
-        if (readyScreen.fullScreenMode) {
-            readyScreen.fullscreenTimer += delta;
-            if (readyScreen.fullscreenTimer >= readyScreen.fullscreenDuration) {
-                readyScreen.fullScreenMode = false;
-                readyScreen.fullscreenTimer = 0;
-            } else {
-                readyScreen.fullScreen(delta, time, TILE_SIZE, gameboard, this);
+        if(game.gameState != GameState.DirectGame) {
+            if (readyScreen.missionStatement) {
+                readyScreen.missionMenu();
                 return;
+            }
+
+            if (readyScreen.fullScreenMode) {
+                readyScreen.fullscreenTimer += delta;
+                if (readyScreen.fullscreenTimer >= readyScreen.fullscreenDuration) {
+                    readyScreen.fullScreenMode = false;
+                    readyScreen.fullscreenTimer = 0;
+                } else {
+                    readyScreen.fullScreen(delta, time, TILE_SIZE, gameboard, this);
+                    return;
+                }
             }
         }
 

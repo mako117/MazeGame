@@ -31,7 +31,7 @@ public class MazeGame extends Game {
 
         if(gameState == GameState.MainMenu){
             setScreen(new MainMenuScreen(this));
-        } else if (gameState == GameState.Game || gameState == GameState.Pause) {
+        } else if (gameState == GameState.Game || gameState == GameState.Pause || gameState == GameState.DirectGame) {
             setScreen(new GameScreen(this));
         } else if(gameState == GameState.EndMenu) {
             setScreen(new EndScreen(this, 0, 0, false));

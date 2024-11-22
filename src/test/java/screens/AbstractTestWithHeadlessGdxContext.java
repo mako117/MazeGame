@@ -23,8 +23,4 @@ abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
         config.setWindowedMode(1280,720);
      }
 
-    @AfterAll
-    void afterAll() {
-        application.exit();
-    }
 }
