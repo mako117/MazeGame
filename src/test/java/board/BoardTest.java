@@ -1,6 +1,7 @@
 package board;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,7 +50,7 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
     private SpriteBatch mockBatch;
     private Skin mockSkin;
 
-    @BeforeEach
+    @BeforeAll
     public void setup(){
         board = new Board();
         mockBatch = mock(SpriteBatch.class);
@@ -59,6 +60,43 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
 
 
     // Test board features
+
+    /**
+     * Test initial regular reward count getter.
+     */
+    @Test
+    void getRegRewardCountTest(){
+        int expected = 3;
+        assertEquals(expected, board.getTotalRegRewardCnt());
+    }
+
+    /**
+     * Test initial bonus reward count getter.
+     */
+    @Test
+    void getBonRewardCountTest(){
+        int expected = 3;
+        assertEquals(expected, board.getTotalBonusRewardCnt());
+    }
+
+    /**
+     * Test initial regular punishment count getter.
+     */
+    @Test
+    void getRegPunishCountTest(){
+        int expected = 4;
+        assertEquals(expected, board.getTotalRegPunishmentCnt());
+    }
+
+    /**
+     * Test initial bonus punishment count getter.
+     */
+    @Test
+    void getBonPunishCountTest(){
+        int expected = 5;
+        assertEquals(expected, board.getTotalBonusPunishmentCnt());
+    }
+
 
     /**
      * Test get start block method.
@@ -124,9 +162,10 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
      */
     @Test
     void regularRewardCollectTest() {
+        board = new Board();
         // there is a reward at x:4, y:15, score:10
         // Initial regular rewards in board.
-        int regRewardCnt = 3;
+        int regRewardCnt = board.getTotalRegRewardCnt();
         assertEquals(regRewardCnt, board.getTotalRegRewardCnt());
 
         int expectedScore = 10;
@@ -155,9 +194,10 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
      */
     @Test
     void bonRewardCollectTest() {
+        board = new Board();
         // there is a reward at x:3, y:21, startTime:10, endTime: 20, score:10
         // initial bonus rewards in board.
-        int bonusRewardCnt = 3;
+        int bonusRewardCnt = board.getTotalBonusRewardCnt();
         assertEquals(bonusRewardCnt, board.getTotalBonusRewardCnt());
 
         int score = -1;
@@ -187,9 +227,10 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
      */
     @Test
     void regPunishmentCollectTest() {
+        board = new Board();
         // there is a reg punish at x:14, y:2, score:10
         // initial regular punishment count.
-        int regPunishmentCnt = 4;
+        int regPunishmentCnt = board.getTotalRegPunishmentCnt();
         assertEquals(regPunishmentCnt, board.getTotalRegPunishmentCnt());
 
         int score = -1;
@@ -219,9 +260,10 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
      */
     @Test
     void bonPunishmentCollectTest() {
+        board = new Board();
         // There is a bonus punish at x:13, y:21, score:10, startTime:0, endTime:10
         // Initial bonus punishments on the board.
-        int bonPunishCnt = 5;
+        int bonPunishCnt = board.getTotalBonusPunishmentCnt();
         assertEquals(bonPunishCnt, board.getTotalBonusPunishmentCnt());
 
         int score = -1;
@@ -252,8 +294,9 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
      */
     @Test
     void genNewBonusTest() {
-        int bonusRewardCnt = 3;
-        int bonusPunishmentCnt = 5;
+        // initial bonus reward count
+        int bonusRewardCnt = board.getTotalBonusRewardCnt();
+        int bonusPunishmentCnt = board.getTotalBonusPunishmentCnt();
 
         // when the board doesn't generate bonuses
         board.genNewBonus(1);
