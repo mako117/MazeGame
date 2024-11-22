@@ -189,7 +189,7 @@ public class GameScreen extends ScreenAdapter {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(game.gameState == GameState.Game) {
+        if(game.gameState != GameState.DirectGame && game.gameState != GameState.Pause) {
             if (readyScreen.missionStatement) {
                 readyScreen.missionMenu();
                 return;
