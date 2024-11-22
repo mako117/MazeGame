@@ -22,43 +22,16 @@ import org.junit.rules.ExpectedException;
 import screens.*;
 import screens.MazeGame;
 
-public class EndMenuTest extends AbstractTestWithHeadlessGdxContext {
+public class EndScreenTest extends AbstractTestWithHeadlessGdxContext {
     TestGame endGame;
     @Test
-    public void integrationTest() {
+    public void EndScreenIntegrationTest() {
         Runnable r = () -> {
-            try{ Thread.sleep(500); endGame.exitGame(); } catch(Exception e) {};
+            try{ Thread.sleep(1500); endGame.exitGame(); } catch(Exception e) {};
         };
         endGame = new TestGame(GameState.EndMenu, r);
         application = new Lwjgl3Application(endGame, config);
         // only buttons and no key input, so nothing to test except that it is an EndScreen object
         assertEquals(true, (endGame.getCurrentScreen() instanceof EndScreen));
     }
-
-    // // TODO: get the headless backend working; the current problem is getting OpenGL methods workingdddddd
-    // // assume the setup gets us to the Game Over screen.
-    // @BeforeEach
-    // public void setup() {
-    // }
-
-    // /**
-    //  * Test to see if the Play Again button works.
-    //  */
-    // @Test
-    // public void playAgainButtonWorks() {
-    // }
-
-    // /**
-    //  * Test to see if the Try Again button works.
-    //  */
-    // @Test
-    // public void tryAgainButtonWorks() {
-    // }
-
-    // /**
-    //  * Test to see if the exit button works.
-    //  */
-    // @Test
-    // public void exitButtonWorks() {
-    // }
 }

@@ -189,7 +189,7 @@ public class GameScreen extends ScreenAdapter {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(game.gameState != GameState.DirectGame) {
+        if(game.gameState == GameState.Game) {
             if (readyScreen.missionStatement) {
                 readyScreen.missionMenu();
                 return;
@@ -371,6 +371,9 @@ public class GameScreen extends ScreenAdapter {
         private boolean paused = false;
 
         PauseScreen(){
+            if(game.gameState == GameState.Pause) {
+                paused = true;
+            }
             createButtons();
 
             pauseTexture = new TextureRegion(game.backgroundTexture);

@@ -25,7 +25,7 @@ import screens.MazeGame;
 public class MainMenuTest extends AbstractTestWithHeadlessGdxContext {
     TestGame mainMenu;
     @Test
-    public void integrationTest() {
+    public void MainMenuScreenIntegrationTest() {
         Runnable r = () -> {
             try{
                 Thread.sleep(1500);
@@ -38,30 +38,4 @@ public class MainMenuTest extends AbstractTestWithHeadlessGdxContext {
         assertEquals(true, (mainMenu.getCurrentScreen() instanceof MainMenuScreen));
     }
 
-    // // TODO: get the headless backend working; the current problem is getting OpenGL methods working
-    // // assume the setup gets us to the Game Over screen.
-    // @BeforeEach
-    // public void setup() {
-    // }
-
-    // /**
-    //  * Test to see if the Play Again button works.
-    //  */
-    // @Test
-    // public void playAgainButtonWorks() {
-    // }
-
-    // /**
-    //  * Test to see if the Try Again button works.
-    //  */
-    // @Test
-    // public void tryAgainButtonWorks() {
-    // }
-
-    // /**
-    //  * Test to see if the exit button works.
-    //  */
-    // @Test
-    // public void exitButtonWorks() {
-    // }
 }

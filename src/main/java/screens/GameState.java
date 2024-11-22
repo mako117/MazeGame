@@ -1,5 +1,5 @@
 package screens;
 
 public enum GameState {
-    MainMenu,Game,Pause,EndMenu,DirectGame
+    MainMenu,Game,DirectGame,Pause,Help,EndMenu
 }
