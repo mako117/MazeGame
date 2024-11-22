@@ -59,4 +59,8 @@ public class MazeGame extends Game {
         return super.getScreen();
     }
 
+    public GameState getStatus() {
+        return this.gameState;
+    }
+
 }
