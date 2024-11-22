@@ -20,6 +20,7 @@ abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
     AbstractTestWithHeadlessGdxContext() {
         config = new Lwjgl3ApplicationConfiguration();
         config.setTitle("JURASSIC METEOR");
+        config.disableAudio(true);
         config.setWindowedMode(1280,720);
      }
 
