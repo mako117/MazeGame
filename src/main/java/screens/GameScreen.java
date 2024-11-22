@@ -75,7 +75,7 @@ public class GameScreen extends ScreenAdapter {
         gameMusic.play();
 
         pauseScreen = new PauseScreen();
-        readyScreen = new ReadyScreen();
+        readyScreen = new ReadyScreen(game);
 
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
@@ -200,7 +200,7 @@ public class GameScreen extends ScreenAdapter {
                 readyScreen.fullScreenMode = false;
                 readyScreen.fullscreenTimer = 0;
             } else {
-                readyScreen.fullScreen(delta);
+                readyScreen.fullScreen(delta, time, TILE_SIZE, gameboard, this);
                 return;
             }
         }
@@ -277,7 +277,7 @@ public class GameScreen extends ScreenAdapter {
      * Draws the player accounting for his movements to the game screen
      * @param delta
      */
-    private void renderPlayer(float delta) {
+    protected void renderPlayer(float delta) {
 //        System.out.println(playerMovementOffset);
         player.draw(game.batch,TILE_SIZE, playerMovementOffset);
 
@@ -298,7 +298,7 @@ public class GameScreen extends ScreenAdapter {
      *
      * @param delta
      */
-    private void renderEnemies(float delta){
+    protected void renderEnemies(float delta){
         for (int i = 0; i < enemies.size(); i++){
             if(canEnemyMove.get(i) == Boolean.TRUE){
                 enemies.get(i).draw(game.batch, TILE_SIZE, enemyMovementOffset);
@@ -333,9 +333,6 @@ public class GameScreen extends ScreenAdapter {
     }
 
     //*** Utility functions ***//
-    public Button getContinueButton() {
-        return readyScreen.continueButton;
-    }
     public Button getPauseButton() {
         return pauseScreen.pauseButton;
     }
@@ -364,7 +361,7 @@ public class GameScreen extends ScreenAdapter {
         private Button exitButton;
         private Button helpButton;
         private Button restartButton;
-        private Stage stage1;
+        Stage stage1;
         private Stage stage0;
         private TextureRegion pauseTexture;
 
@@ -466,96 +463,5 @@ public class GameScreen extends ScreenAdapter {
             stage1.dispose();
         }
     }
-
-    /**
-     * This class has the ready screen information.
-     */
-    private class ReadyScreen{
-        private Stage missionStage;
-        private Button continueButton;
-        protected boolean missionStatement = true;
-
-        public OrthographicCamera fullscreenCamera;
-        protected boolean fullScreenMode = true;
-        protected float fullscreenDuration = 5f;
-        protected float fullscreenTimer = 0f;
-
-        ReadyScreen(){
-            fullscreenCamera = new OrthographicCamera();
-
-            missionStage = new Stage(viewport);
-            continueButton = new TextButton("Continue", game.skin);
-            continueButton.setSize(Gdx.graphics.getWidth()/10 * 2, Gdx.graphics.getHeight()/10);
-            continueButton.addListener(new ChangeListener() {
-                public void changed(ChangeEvent changeEvent, Actor actor) {
-                    missionStatement = false;
-                }
-            });
-            missionStage.addActor(continueButton);
-            viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        }
-
-        /**
-         * This function displays the mission statements before the start of the game.
-         */
-        public void missionMenu(){
-            continueButton.setPosition(camera.position.x - 128,camera.position.y - Gdx.graphics.getHeight()/2);
-            Gdx.input.setInputProcessor(missionStage);
-            game.batch.begin();
-            game.batch.draw(game.backgroundTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            game.font.getData().setScale(2, 2);
-            game.font.draw(game.batch, "The Mission", camera.position.x - 150, camera.position.y + 220);
-            game.font.getData().setScale(1, 1);
-            game.font.draw(game.batch, "The Dinosaurs are trying to stop their demise.\n" +
-                    "Collect All the bombs to ensure their extinction.\n" +
-                    "The fate of Humanity Rests in your hands.", camera.position.x - (Gdx.graphics.getWidth())/2 + 300, camera.position.y + 90);
-            game.batch.end();
-            missionStage.act();
-            missionStage.draw();
-        }
-
-        /**
-         * This functions displays the entire map before commencing the game.
-         *
-         * @param delta
-         */
-        public void fullScreen(float delta){
-            fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
-            fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
-            fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            fullscreenCamera.zoom = 1.8f;
-            fullscreenCamera.update();
-            game.batch.setProjectionMatrix(fullscreenCamera.combined);
-            game.batch.begin();
-            game.batch.draw(game.backgroundTexture, 0, 0, (Gdx.graphics.getWidth() * 1.8f), (Gdx.graphics.getHeight() * 1.8f));
-            gameboard.draw(game.batch, time, TILE_SIZE);
-            renderPlayer(delta);
-            readyText();
-            renderEnemies(delta);
-            game.batch.end();
-        }
-
-        /**
-         *Renders The Text for the Initial Screen
-         */
-        private void readyText(){
-            game.font.getData().setScale(1.5f,1.5f);
-            game.font.draw(game.batch,String.format("READY!"), fullscreenCamera.position.x + viewport.getScreenWidth()/10 ,fullscreenCamera.position.y + viewport.getScreenHeight()/2 );
-            game.font.draw(game.batch,String.format("Disarm all the bombs.\n\n" +
-                    "Avoiding all the dinosaurs.\n\n" +
-                    "Smash the dinosaur eggs for bonus points.\n\n" +
-                    "Avoid falling into a dinosaur nest.\n\n" +
-                    "Reach the end."), fullscreenCamera.position.x + viewport.getScreenWidth()/10, fullscreenCamera.position.y + viewport.getScreenHeight()/2 - 120);
-            game.font.getData().setScale(1,1);
-        }
-
-        /**
-         * Dispose of gdx dependent objects.
-         */
-        void dispose(){
-            missionStage.dispose();
-        }
-    }
-
 
 }

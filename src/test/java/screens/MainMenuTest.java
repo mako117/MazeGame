@@ -23,16 +23,16 @@ import screens.*;
 import screens.MazeGame;
 
 public class MainMenuTest extends AbstractTestWithHeadlessGdxContext {
-
+    TestGame mainMenu;
     @Test
     public void integrationTest() {
         Runnable r = () -> {
-            try{ Thread.sleep(500); } catch(Exception e) {};
+            try{ Thread.sleep(10000); mainMenu.exitGame();} catch(Exception e) {};
         };
-        TestGame endGame = new TestGame(GameState.MainMenu, r);
-        application = new Lwjgl3Application(endGame, config);
+        mainMenu = new TestGame(GameState.MainMenu, r);
+        application = new Lwjgl3Application(mainMenu, config);
         // only buttons and no key input, so nothing to test except that it is an MainMenuScreen object
-        assertEquals(true, (endGame.getCurrentScreen() instanceof MainMenuScreen));
+        assertEquals(true, (mainMenu.getCurrentScreen() instanceof MainMenuScreen));
     }
 
     // // TODO: get the headless backend working; the current problem is getting OpenGL methods working

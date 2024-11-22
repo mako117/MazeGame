@@ -19,30 +19,6 @@ import org.junit.jupiter.api.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import org.junit.rules.ExpectedException;
 
-
-/**
- * Create context for libgdx components in board. T-T <br>
- * By extending this in our test class, we will override the create method, allowing Gdx textures to be initialized. <br>
- * Solution from: <a href="https://www.reddit.com/r/libgdx/comments/1by4jgn/loading_assets_for_tests_in_libgdx/">Loading assets for tests in libgdx?</a>
- */
-
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
-    Lwjgl3ApplicationConfiguration config;
-    Lwjgl3Application application;
-
-    AbstractTestWithHeadlessGdxContext() {
-        config = new Lwjgl3ApplicationConfiguration();
-        config.setTitle("JURASSIC METEOR");
-        config.setWindowedMode(1280,720);
-     }
-
-    @AfterAll
-    void afterAll() {
-        application.exit();
-    }
-}
-
 // @RunWith(GdxTestRunner.class)
 public class screenTest extends AbstractTestWithHeadlessGdxContext{
 
@@ -54,10 +30,13 @@ public class screenTest extends AbstractTestWithHeadlessGdxContext{
         Runnable r = () -> {
             try{
                 Robot robot = new Robot();
-                /* for (int i = 0; i < 10; i++) */ while(true) {
+                robot.delay(5000);
+                long time = 120l;
+                /* for (int i = 0; i < 10; i++) */ while(time > 0l) {
                     robot.keyPress(68);
                     robot.keyRelease(68);
                     robot.delay(1000);
+                    time -= 1;  
                 }
             } catch (AWTException e) {
                 throw new RuntimeException(e);
