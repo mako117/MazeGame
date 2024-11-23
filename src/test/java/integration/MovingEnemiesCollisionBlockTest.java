@@ -12,9 +12,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import board.Board;
 import board.RoomBlock;
 import board.Wall;
+import board.BarrierBlock;
 import entities.enemy.Moving_Enemies;
 
-public class MovingEnemiesCollisionWallTest {
+public class MovingEnemiesCollisionBlockTest {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private Board mockboard = mock(Board.class);
 	
@@ -147,5 +148,70 @@ public class MovingEnemiesCollisionWallTest {
 		
 		assertEquals(1,e.getX());
 		assertEquals(0,e.getY());
+	}
+	
+	//BarrierBlock
+	/**
+	 * Test moving enemies move up have a BarrierBlock
+	 */
+	@Test
+	void moveupwithBarrierBlock() {
+		BarrierBlock w = new BarrierBlock(1,2,tex);
+		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
+		
+		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		
+		e.direction('W', mockboard);
+		
+		assertEquals(1,e.getX());
+		assertEquals(1,e.getY());
+	}
+	
+	/**
+	 * Test moving enemies move left have a BarrierBlock
+	 */
+	@Test
+	void moveleftwithBarrierBlock() {
+		BarrierBlock w = new BarrierBlock(0,1,tex);
+		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
+		
+		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		
+		e.direction('A', mockboard);
+		
+		assertEquals(1,e.getX());
+		assertEquals(1,e.getY());
+	}
+
+	/**
+	 * Test moving enemies move right have a BarrierBlock
+	 */
+	@Test
+	void moverightwithBarrierBlock() {
+		BarrierBlock w = new BarrierBlock(2,1,tex);
+		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
+		
+		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		
+		e.direction('D', mockboard);
+		
+		assertEquals(1,e.getX());
+		assertEquals(1,e.getY());
+	}
+	
+	/**
+	 * Test moving enemies move down have a BarrierBlock
+	 */
+	@Test
+	void movedownwithBarrierBlock() {
+		BarrierBlock w = new BarrierBlock(1,0,tex);
+		when(mockboard.getBlock(anyInt(), anyInt())).thenReturn(w);
+		
+		Moving_Enemies e = new Moving_Enemies(1,1,tex);
+		
+		e.direction('S', mockboard);
+		
+		assertEquals(1,e.getX());
+		assertEquals(1,e.getY());
 	}
 }
