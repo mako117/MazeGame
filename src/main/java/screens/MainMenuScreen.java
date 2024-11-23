@@ -156,14 +156,14 @@ public class MainMenuScreen extends ScreenAdapter {
         music.dispose();
     }
 
-    //*** Utility methods ***//
-    public Button getStartButton() {
-        return this.startbutton;
-    }
-    public Button getHelpButton() {
-        return this.helpbutton;
-    }
-    public Button getExitButton() {
-        return this.exitbutton;
-    }
+    // //*** Utility methods ***//
+    // public Button getStartButton() {
+    //     return this.startbutton;
+    // }
+    // public Button getHelpButton() {
+    //     return this.helpbutton;
+    // }
+    // public Button getExitButton() {
+    //     return this.exitbutton;
+    // }
 }

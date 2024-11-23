@@ -109,7 +109,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
             missionStage.dispose();
         }
 
-        public Button getContinueButton() {
-            return this.continueButton;
-        }
+        // public Button getContinueButton() {
+        //     return this.continueButton;
+        // }
     }

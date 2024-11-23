@@ -334,25 +334,25 @@ public class GameScreen extends ScreenAdapter {
         gameMusic.dispose();
     }
 
-    //*** Utility functions ***//
-    public Button getPauseButton() {
-        return pauseScreen.pauseButton;
-    }
-    public Button getResumeButton() {
-        return pauseScreen.resumeButton;
-    }
-    public Button getHelpButton() {
-        return pauseScreen.helpButton;
-    }
-    public Button getRestartButton() {
-        return pauseScreen.restartButton;
-    }
-    public Button getExitButton() {
-        return pauseScreen.exitButton;
-    }
-    public float getFullScreenDuration() {
-        return readyScreen.fullscreenDuration;
-    }
+    // //*** Utility functions ***//
+    // public Button getPauseButton() {
+    //     return pauseScreen.pauseButton;
+    // }
+    // public Button getResumeButton() {
+    //     return pauseScreen.resumeButton;
+    // }
+    // public Button getHelpButton() {
+    //     return pauseScreen.helpButton;
+    // }
+    // public Button getRestartButton() {
+    //     return pauseScreen.restartButton;
+    // }
+    // public Button getExitButton() {
+    //     return pauseScreen.exitButton;
+    // }
+    // public float getFullScreenDuration() {
+    //     return readyScreen.fullscreenDuration;
+    // }
 
     /**
      * This class contains the pause screen.
