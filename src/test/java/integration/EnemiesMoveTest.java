@@ -21,6 +21,7 @@ import entities.enemy.Moving_Enemies;
 import entities.enemy.PatrollingEnemies;
 import screens.GameLogic;
 import entities.Character;
+import board.BarrierBlock;
 import board.Block;
 
 public class EnemiesMoveTest {
@@ -75,8 +76,8 @@ public class EnemiesMoveTest {
 		e.add(me8);
 		Emove.add(false);
 		
-		RoomBlock b = new RoomBlock(0,0,tex);
-		when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(b);
+		RoomBlock r = new RoomBlock(0,0,tex);
+		when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(r);
 		
 		logic.moveEnemies(e, c, mockBoard, Emove, tile_size);
 		
@@ -91,6 +92,20 @@ public class EnemiesMoveTest {
 		
 		Wall w = new Wall(0,0,tex);
 		when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(w);
+		
+		logic.moveEnemies(e, c, mockBoard, Emove, tile_size);
+		
+		assertFalse(Emove.get(0));
+		assertFalse(Emove.get(1));
+		assertFalse(Emove.get(2));
+		assertFalse(Emove.get(3));
+		assertTrue(Emove.get(4));
+		assertTrue(Emove.get(5));
+		assertTrue(Emove.get(6));
+		assertTrue(Emove.get(7));
+		
+		BarrierBlock b = new BarrierBlock(0,0,tex);
+		when(mockBoard.getBlock(anyInt(), anyInt())).thenReturn(b);
 		
 		logic.moveEnemies(e, c, mockBoard, Emove, tile_size);
 		
