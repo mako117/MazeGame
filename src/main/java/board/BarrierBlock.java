@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * The BarriersBlock class creates barrier blocks for the maze
  */
-class BarrierBlock extends Block {
+public class BarrierBlock extends Block {
     private int _BarriersBlockNr;
     private static int _BarriersBlockCnt = 1;
 
     /**
      * Create a default barrier block.
      */
-    BarrierBlock(){
+    public BarrierBlock(){
         super();
         _BarriersBlockNr = _BarriersBlockCnt++;
     }
@@ -23,7 +23,7 @@ class BarrierBlock extends Block {
      * @param x_pos The x position of the barrier
      * @param y_pos The y position of the barrier
      */
-    BarrierBlock(int x_pos, int y_pos, TextureRegion  textureRegion) {
+    public BarrierBlock(int x_pos, int y_pos, TextureRegion  textureRegion) {
         super(x_pos, y_pos, textureRegion);
         _BarriersBlockNr = _BarriersBlockCnt++;
 
