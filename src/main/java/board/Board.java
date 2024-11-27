@@ -158,6 +158,7 @@ public class Board {
 
     /**
      * Returns the total number of bonus rewards currently on the board.
+     * @return The bonus reward count.
      */
     public int getTotalBonusRewardCnt(){
         return array_bonReward.size();

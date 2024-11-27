@@ -20,8 +20,9 @@ public class RoomBlock extends Block {
     /**
      * Creates a Room with a unique room number and a set position
      * 
-     * @param x_pos The x position of the block
-     * @param y_pos The y position of the block
+     * @param x_pos The x position of the block.
+     * @param y_pos The y position of the block.
+     * @param texture The texture of the block.
      */
     public RoomBlock( int x_pos, int y_pos, TextureRegion texture) {
         super(x_pos, y_pos, texture);

@@ -22,6 +22,7 @@ public class BarrierBlock extends Block {
      * 
      * @param x_pos The x position of the barrier
      * @param y_pos The y position of the barrier
+     * @param textureRegion The texture of the block
      */
     public BarrierBlock(int x_pos, int y_pos, TextureRegion  textureRegion) {
         super(x_pos, y_pos, textureRegion);
