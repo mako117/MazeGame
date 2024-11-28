@@ -29,7 +29,6 @@ import java.util.Collections;
 public class GameScreen extends ScreenAdapter {
     final MazeGame game;
 
-    private OrthographicCamera camera;
     private Viewport viewport;
 
     private final int TILE_SIZE = 50;
@@ -58,11 +57,10 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(final MazeGame game) {
         this.game = game;
-
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
-        camera.update();
-
+        
+        
+        viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), game.camera);
+        
         gameLogic = new GameLogic();
         gameboard = new Board();
         player = new Character(game.playerTex, 1, 1);
@@ -172,8 +170,7 @@ public class GameScreen extends ScreenAdapter {
     private void playerEnd(boolean condition) {
 
         gameMusic.stop();
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        game.batch.setProjectionMatrix(camera.combined);
+        game.resetCamera();
         game.setScreen(new EndScreen(game, player.getScore(), time ,condition));
         dispose();
     }
@@ -227,7 +224,7 @@ public class GameScreen extends ScreenAdapter {
 
 
         game.batch.begin();
-        game.batch.draw(game.backgroundTexture, camera.position.x-viewport.getScreenWidth()/2,camera.position.y-viewport.getScreenHeight()/2,
+        game.batch.draw(game.backgroundTexture, game.camera.position.x-viewport.getScreenWidth()/2,game.camera.position.y-viewport.getScreenHeight()/2,
                 Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         gameboard.draw(game.batch, time, TILE_SIZE);
         renderPlayer(delta);
@@ -245,20 +242,26 @@ public class GameScreen extends ScreenAdapter {
     private void moveCameraToPlayer(){
         // update camera position
         if(playerMovingXDirection){
-            camera.position.x = (player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
-            camera.position.y = (player.getY()*TILE_SIZE) + TILE_SIZE/2;
+        	game.setCamera((player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2, (player.getY()*TILE_SIZE) + TILE_SIZE/2, 1.0f);
+            /*
+        	game.camera.position.x = (player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
+            game.camera.position.y = (player.getY()*TILE_SIZE) + TILE_SIZE/2;
+            */
         } else {
-            camera.position.x = (player.getX()*TILE_SIZE) + TILE_SIZE/2;
-            camera.position.y = (player.getY()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
+        	game.setCamera((player.getX()*TILE_SIZE) + TILE_SIZE/2, (player.getY()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2, 1.0f);
+        	/*
+            game.camera.position.x = (player.getX()*TILE_SIZE) + TILE_SIZE/2;
+            game.camera.position.y = (player.getY()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
+        	*/
         }
-        camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
+        //camera.update();
+        //game.batch.setProjectionMatrix(camera.combined);
 
     }
 
     private void renderText(){
-        game.font.draw(game.batch,String.format("%s%.1f","Time: ", time) , camera.position.x-viewport.getScreenWidth()/2+10, camera.position.y+viewport.getScreenHeight()/2-game.font.getLineHeight());
-        game.font.draw(game.batch, String.format("%s%d","Score: ", player.getScore()),camera.position.x-viewport.getScreenWidth()/2+10, camera.position.y+viewport.getScreenHeight()/2);
+        game.font.draw(game.batch,String.format("%s%.1f","Time: ", time) , game.camera.position.x-viewport.getScreenWidth()/2+10, game.camera.position.y+viewport.getScreenHeight()/2-game.font.getLineHeight());
+        game.font.draw(game.batch, String.format("%s%d","Score: ", player.getScore()),game.camera.position.x-viewport.getScreenWidth()/2+10, game.camera.position.y+viewport.getScreenHeight()/2);
 
     }
 
@@ -309,8 +312,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void pause() {
         // reset camera
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        game.batch.setProjectionMatrix(camera.combined);
+        game.resetCamera();
 
         if(pauseScreen.helpMenu) {
             game.setScreen(new HelpScreen(game, this));
@@ -441,12 +443,12 @@ public class GameScreen extends ScreenAdapter {
         public void paused() {
             Gdx.input.setInputProcessor(stage1);
             game.batch.begin();
-            game.batch.draw(pauseTexture, camera.position.x - (Gdx.graphics.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            game.batch.draw(pauseTexture, game.camera.position.x - (Gdx.graphics.getWidth())/2, game.camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             game.batch.end();
-            resumeButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 + resumeButton.getHeight());
-            exitButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 - exitButton.getHeight() * 2);
-            helpButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2);
-            restartButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, camera.position.y - (Gdx.graphics.getHeight())/2 +Gdx.graphics.getHeight()/2 - restartButton.getHeight());
+            resumeButton.setPosition(game.camera.position.x - (Gdx.graphics.getWidth())/2 + (Gdx.graphics.getWidth() - resumeButton.getWidth())/2, game.camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 + resumeButton.getHeight());
+            exitButton.setPosition(game.camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - exitButton.getWidth()/2,game.camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2 - exitButton.getHeight() * 2);
+            helpButton.setPosition(game.camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, game.camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight()/2);
+            restartButton.setPosition(game.camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth()/2 - helpButton.getWidth()/2, game.camera.position.y - (Gdx.graphics.getHeight())/2 +Gdx.graphics.getHeight()/2 - restartButton.getHeight());
             stage1.act();
             stage1.draw();
 
@@ -458,7 +460,7 @@ public class GameScreen extends ScreenAdapter {
 
         private void renderPauseButton(){
             pauseButton.setSize(Gdx.graphics.getWidth() /10 + 40,Gdx.graphics.getHeight()/10);
-            pauseButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth() - pauseButton.getWidth(),camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight() - pauseButton.getHeight());
+            pauseButton.setPosition(game.camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth() - pauseButton.getWidth(),game.camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight() - pauseButton.getHeight());
             Gdx.input.setInputProcessor(pauseScreen.stage0);
             stage0.act();
             stage0.draw();

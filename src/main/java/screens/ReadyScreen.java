@@ -23,7 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
         private Button continueButton;
         protected boolean missionStatement = true;
 
-        public OrthographicCamera fullscreenCamera;
+        //public OrthographicCamera fullscreenCamera;
         protected boolean fullScreenMode = true;
         protected float fullscreenDuration = 5f;
         protected float fullscreenTimer = 0f;
@@ -33,8 +33,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
         ReadyScreen(final MazeGame game){
             this.game = game;
-            fullscreenCamera = new OrthographicCamera();
-            viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), fullscreenCamera);
+//            fullscreenCamera = new OrthographicCamera();
+            game.resetCamera();
+            viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), game.camera);
 
             missionStage = new Stage(viewport);
             continueButton = new TextButton("Continue", game.skin);
@@ -52,16 +53,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
          * This function displays the mission statements before the start of the game.
          */
         public void missionMenu(){
-            continueButton.setPosition(fullscreenCamera.position.x - 128,fullscreenCamera.position.y - Gdx.graphics.getHeight()/2);
+            continueButton.setPosition(game.camera.position.x - 128, game.camera.position.y - Gdx.graphics.getHeight()/2);
             Gdx.input.setInputProcessor(missionStage);
             game.batch.begin();
-            game.batch.draw(game.backgroundTexture, fullscreenCamera.position.x - (Gdx.graphics.getWidth())/2, fullscreenCamera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            game.batch.draw(game.backgroundTexture, game.camera.position.x - (Gdx.graphics.getWidth())/2, game.camera.position.y - (Gdx.graphics.getHeight())/2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             game.font.getData().setScale(2, 2);
-            game.font.draw(game.batch, "The Mission", fullscreenCamera.position.x - 150, fullscreenCamera.position.y + 220);
+            game.font.draw(game.batch, "The Mission", game.camera.position.x - 150, game.camera.position.y + 220);
             game.font.getData().setScale(1, 1);
             game.font.draw(game.batch, "The Dinosaurs are trying to stop their demise.\n" +
                     "Collect All the bombs to ensure their extinction.\n" +
-                    "The fate of Humanity Rests in your hands.", fullscreenCamera.position.x - (Gdx.graphics.getWidth())/2 + 300, fullscreenCamera.position.y + 90);
+                    "The fate of Humanity Rests in your hands.", game.camera.position.x - (Gdx.graphics.getWidth())/2 + 300, game.camera.position.y + 90);
             game.batch.end();
             missionStage.act();
             missionStage.draw();
@@ -73,12 +74,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
          * @param delta
          */
         public void fullScreen(float delta, float time, int TILE_SIZE, Board gameboard, GameScreen nextScreen){
+            game.resetCamera();
+            game.setCamera(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 1.8f);
+        	
+        	/*
             fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
             fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
             fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             fullscreenCamera.zoom = 1.8f;
             fullscreenCamera.update();
-            game.batch.setProjectionMatrix(fullscreenCamera.combined);
+            */
+            //game.batch.setProjectionMatrix(fullscreenCamera.combined);
             game.batch.begin();
             game.batch.draw(game.backgroundTexture, 0, 0, (Gdx.graphics.getWidth() * 1.8f), (Gdx.graphics.getHeight() * 1.8f));
             gameboard.draw(game.batch, time, TILE_SIZE);
@@ -93,12 +99,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
          */
         private void readyText(){
             game.font.getData().setScale(1.5f,1.5f);
-            game.font.draw(game.batch,String.format("READY!"), fullscreenCamera.position.x + viewport.getScreenWidth()/10 ,fullscreenCamera.position.y + viewport.getScreenHeight()/2 );
+            game.font.draw(game.batch,String.format("READY!"), game.camera.position.x + viewport.getScreenWidth()/10 ,game.camera.position.y + viewport.getScreenHeight()/2 );
             game.font.draw(game.batch,String.format("Disarm all the bombs.\n\n" +
                     "Avoiding all the dinosaurs.\n\n" +
                     "Smash the dinosaur eggs for bonus points.\n\n" +
                     "Avoid falling into a dinosaur nest.\n\n" +
-                    "Reach the end."), fullscreenCamera.position.x + viewport.getScreenWidth()/10, fullscreenCamera.position.y + viewport.getScreenHeight()/2 - 120);
+                    "Reach the end."), game.camera.position.x + viewport.getScreenWidth()/10, game.camera.position.y + viewport.getScreenHeight()/2 - 120);
             game.font.getData().setScale(1,1);
         }
 

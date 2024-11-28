@@ -2,6 +2,7 @@ package screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,6 +27,8 @@ public class MazeGame extends Game {
     protected TextureRegion endblockTex;
 
     protected TextureRegion playerTex;
+    
+    protected OrthographicCamera camera;
 
     public GameState gameState;
 
@@ -51,6 +54,8 @@ public class MazeGame extends Game {
         movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
         patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
         playerTex = new TextureRegion(new Texture("Prototype_Character.png"));
+        
+        camera = new OrthographicCamera(); 
 
         if(gameState == GameState.MainMenu){
             setScreen(new MainMenuScreen(this));
@@ -88,4 +93,18 @@ public class MazeGame extends Game {
         return this.gameState;
     }
 
+    public void resetCamera() {
+    	camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    	camera.zoom = 1.0f;
+    	camera.update();
+        batch.setProjectionMatrix(camera.combined);
+    }
+    
+    public void setCamera(float x, float y, float zoom) {
+    	camera.position.x = x;
+    	camera.position.y = y;
+    	camera.zoom = zoom;
+    	camera.update();
+    	batch.setProjectionMatrix(camera.combined);
+    }
 }
