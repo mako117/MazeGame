@@ -19,10 +19,13 @@ public class GameLogic {
             boolean isMovingEnemy = (enemies.get(i)) instanceof Moving_Enemies; // Q: are objects in list of type Enemy or do they retain their subclass?
             if(isMovingEnemy == true) {
                 Moving_Enemies anEnemy = (Moving_Enemies) enemies.get(i);
-                canEnemyMove.set(i, (Boolean) anEnemy.direction((anEnemy.find_player(player, gameboard)), gameboard));
+                char direction = anEnemy.find_player(player, gameboard);
+                boolean value = anEnemy.direction(direction, gameboard);
+                canEnemyMove.set(i, value);
             } else {
                 PatrollingEnemies anEnemy = (PatrollingEnemies) enemies.get(i);
-                canEnemyMove.set(i, (Boolean)anEnemy.direction('I', gameboard)); // char input doesn't matter
+                boolean value = anEnemy.direction('I', gameboard); // char input doesn't matter
+                canEnemyMove.set(i, value);
             }
         }
         return (float) TILE_SIZE;
