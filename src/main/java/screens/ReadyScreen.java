@@ -74,17 +74,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
          * @param delta
          */
         public void fullScreen(float delta, float time, int TILE_SIZE, Board gameboard, GameScreen nextScreen){
-            game.resetCamera();
-            game.setCamera(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 1.8f);
-        	
-        	/*
-            fullscreenCamera.position.x = Gdx.graphics.getWidth()/2;
-            fullscreenCamera.position.y = Gdx.graphics.getHeight()/2;
-            fullscreenCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            fullscreenCamera.zoom = 1.8f;
-            fullscreenCamera.update();
-            */
-            //game.batch.setProjectionMatrix(fullscreenCamera.combined);
+            game.camera.position.x = Gdx.graphics.getWidth()/2;
+            game.camera.position.y = Gdx.graphics.getHeight()/2;
+            game.camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            game.camera.zoom = 1.8f;
+            game.camera.update();
+            game.batch.setProjectionMatrix(game.camera.combined);
+
             game.batch.begin();
             game.batch.draw(game.backgroundTexture, 0, 0, (Gdx.graphics.getWidth() * 1.8f), (Gdx.graphics.getHeight() * 1.8f));
             gameboard.draw(game.batch, time, TILE_SIZE);
