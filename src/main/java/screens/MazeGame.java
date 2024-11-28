@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.Screen;
 
@@ -15,6 +16,16 @@ public class MazeGame extends Game {
     public BitmapFont font;
     public Skin skin;
     public Texture backgroundTexture;
+
+    protected TextureRegion RrewardTex;
+    protected TextureRegion RpunishmentTex;
+    protected TextureRegion BrewardTex;
+    protected TextureRegion BpunishmentTex;
+    protected TextureRegion movingEnemyTex;
+    protected TextureRegion patrollingEnemeyTex;
+    protected TextureRegion endblockTex;
+
+    protected TextureRegion playerTex;
 
     public GameState gameState;
 
@@ -28,6 +39,18 @@ public class MazeGame extends Game {
         font = new BitmapFont(Gdx.files.internal("comic_sans.fnt"));
         skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
         backgroundTexture = new Texture("Space Background.png");
+
+        RrewardTex = new TextureRegion(new Texture("bomb.png"));
+        BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
+
+        RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
+        BpunishmentTex = new TextureRegion(new Texture("alien.png"));
+
+        endblockTex = new TextureRegion(new Texture("green.png"));
+
+        movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
+        patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
+        playerTex = new TextureRegion(new Texture("Prototype_Character.png"));
 
         if(gameState == GameState.MainMenu){
             setScreen(new MainMenuScreen(this));

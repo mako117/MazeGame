@@ -18,14 +18,6 @@ public class HelpScreen extends ScreenAdapter {
     final screens.MazeGame game;
     private ScreenAdapter prevScreen;
 
-    private TextureRegion RrewardTex;
-    private TextureRegion RpunishmentTex;
-    private TextureRegion BrewardTex;
-    private TextureRegion BpunishmentTex;
-    private TextureRegion movingEnemyTex;
-    private TextureRegion patrollingEnemeyTex;
-    private TextureRegion endblockTex;
-
     private Button helppage1button;
     private Button helppage2button;
     private Button helppage3button;
@@ -49,13 +41,7 @@ public class HelpScreen extends ScreenAdapter {
         this.game = game;
         this.prevScreen = prev;
 
-        RrewardTex = new TextureRegion(new Texture("bomb.png"));
-        BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
-        RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
-        BpunishmentTex = new TextureRegion(new Texture("alien.png"));
-        endblockTex = new TextureRegion(new Texture("green.png"));
-        movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
-        patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
+
 
         stage1 = new Stage(new ScreenViewport());
         stage2 = new Stage(new ScreenViewport());
@@ -220,19 +206,19 @@ public class HelpScreen extends ScreenAdapter {
         change_x = -(middle_x) + 30;
         change_y = 120;
 
-        game.batch.draw(RrewardTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        game.batch.draw(game.RrewardTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 
         change_y = 20;
 
-        game.batch.draw(BrewardTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        game.batch.draw(game.BrewardTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 
         change_y = -80;
 
-        game.batch.draw(RpunishmentTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        game.batch.draw(game.RpunishmentTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 
         change_y = -180;
 
-        game.batch.draw(BpunishmentTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        game.batch.draw(game.BpunishmentTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 
         change_x = -(middle_x) + 210;
         change_y = 190;
@@ -275,15 +261,15 @@ public class HelpScreen extends ScreenAdapter {
         change_x = -(middle_x) + 30;
         change_y = 150;
 
-        game.batch.draw(movingEnemyTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        game.batch.draw(game.movingEnemyTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 
         change_y = 0;
 
-        game.batch.draw(patrollingEnemeyTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        game.batch.draw(game.patrollingEnemeyTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 
         change_y = -150;
 
-        game.batch.draw(endblockTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
+        game.batch.draw(game.endblockTex, middle_x + change_x, middle_y + change_y, Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/10);
 
         change_x = -(middle_x) + 210;
         change_y = 200;

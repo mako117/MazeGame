@@ -33,9 +33,7 @@ public class GameScreen extends ScreenAdapter {
     private Viewport viewport;
 
     private final int TILE_SIZE = 50;
-    private final TextureRegion playerTexture = new TextureRegion(new Texture("Prototype_Character.png"));
-    private final TextureRegion movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
-    private final TextureRegion patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
+
     private final Music gameMusic;
 
     private float time = 0;
@@ -67,7 +65,7 @@ public class GameScreen extends ScreenAdapter {
 
         gameLogic = new GameLogic();
         gameboard = new Board();
-        player = new Character(playerTexture, 1, 1);
+        player = new Character(game.playerTex, 1, 1);
         createEnemies();
 
         gameMusic = Gdx.audio.newMusic(Gdx.files.internal("Game Music.mp3"));
@@ -85,10 +83,10 @@ public class GameScreen extends ScreenAdapter {
      */
     private void createEnemies(){
         enemies = new ArrayList<Enemies>();
-        enemies.add(new PatrollingEnemies(1, 21, Direction.Up, 1, 21, 1, 21, patrollingEnemeyTex));
-        enemies.add(new PatrollingEnemies(1, 9, Direction.Right, 1, 21, 1, 21, patrollingEnemeyTex));
-        enemies.add(new Moving_Enemies(16, 14, movingEnemyTex));
-        enemies.add(new Moving_Enemies(3, 20, movingEnemyTex));
+        enemies.add(new PatrollingEnemies(1, 21, Direction.Up, 1, 21, 1, 21, game.patrollingEnemeyTex));
+        enemies.add(new PatrollingEnemies(1, 9, Direction.Right, 1, 21, 1, 21, game.patrollingEnemeyTex));
+        enemies.add(new Moving_Enemies(16, 14, game.movingEnemyTex));
+        enemies.add(new Moving_Enemies(3, 20, game.movingEnemyTex));
         canEnemyMove = new ArrayList<Boolean>(Collections.nCopies(enemies.size(), Boolean.FALSE));
     }
 
