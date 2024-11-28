@@ -208,14 +208,6 @@ public class GameScreen extends ScreenAdapter {
         }
 
         if(pauseScreen.paused){
-            // reset camera
-            camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            game.batch.setProjectionMatrix(camera.combined);
-
-            if(pauseScreen.helpMenu) {
-                game.setScreen(new HelpScreen(game, this));
-                pauseScreen.helpMenu = false;
-            }
             pause();
             return;
         }
@@ -245,11 +237,8 @@ public class GameScreen extends ScreenAdapter {
         renderText();
         game.batch.end();
 
-        pauseScreen.pauseButton.setSize(Gdx.graphics.getWidth() /10 + 40,Gdx.graphics.getHeight()/10);
-        pauseScreen.pauseButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth() - pauseScreen.pauseButton.getWidth(),camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight() - pauseScreen.pauseButton.getHeight());
-        Gdx.input.setInputProcessor(pauseScreen.stage0);
-        pauseScreen.stage0.act();
-        pauseScreen.stage0.draw();
+
+        pauseScreen.renderPauseButton();
     }
 
     /**
@@ -321,6 +310,15 @@ public class GameScreen extends ScreenAdapter {
      */
     @Override
     public void pause() {
+        // reset camera
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.setProjectionMatrix(camera.combined);
+
+        if(pauseScreen.helpMenu) {
+            game.setScreen(new HelpScreen(game, this));
+            pauseScreen.helpMenu = false;
+        }
+
         pauseScreen.paused();
     }
 
@@ -458,6 +456,14 @@ public class GameScreen extends ScreenAdapter {
                 System.out.println("UNPAUSED");
                 paused = false;
             }
+        }
+
+        private void renderPauseButton(){
+            pauseButton.setSize(Gdx.graphics.getWidth() /10 + 40,Gdx.graphics.getHeight()/10);
+            pauseButton.setPosition(camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth() - pauseButton.getWidth(),camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight() - pauseButton.getHeight());
+            Gdx.input.setInputProcessor(pauseScreen.stage0);
+            stage0.act();
+            stage0.draw();
         }
 
         /**
