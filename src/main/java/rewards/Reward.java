@@ -18,10 +18,9 @@ public class Reward {
 	 * @param y
 	 * @param s
 	 */
-	public Reward(int x, int y, int s){
-		this.x = x;
-		this.y = y;
-		this.score = s;
+	public Reward(int x, int y, int s) {
+		this.Set_position(x, y);
+		this.Set_score(s);
 	}
 	
 	/**

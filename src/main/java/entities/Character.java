@@ -63,7 +63,7 @@ public class Character extends Entity {
      * Sets the entities.Character's <score> as an integer.
      * @param s Possible new <score>.
      */
-    private void setScore(int s) {
+    public void setScore(int s) {
         this.score = s;
     }
 

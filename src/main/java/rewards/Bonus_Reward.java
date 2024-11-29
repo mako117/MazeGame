@@ -19,25 +19,24 @@ public class Bonus_Reward extends Reward {
 	}
 	
 	/**
-	 * This method have x, y, score, texture, start time and end time for bonus reward
-	 * @param x
-	 * @param y
-	 * @param s
-	 * @param inputTexture
-	 * @param start
-	 * @param end
+	 * This method creates a bonus reward with x, y, score, texture, start time and end time for bonus reward
+	 * @param x	Possible value for the bonus reward's <x>-coordinate.
+	 * @param y	Possible value for the bonus reward's <y>-coordinate.
+	 * @param s	Possible value for the bonus reward's <score>.
+	 * @param inputTexture	Possible texture for the bonus reward's <RewardTexture>.
+	 * @param start Possible value for the bonus reward's <starttime>.
+	 * @param end	Possible value for the bonus reward's <endtime>.
 	 */
 	public Bonus_Reward(int x, int y, int s, TextureRegion inputTexture, int start, int end){
 		super(x,y,s);
-		starttime = start;
-		endtime = end;
+		this.Settime(start,end);
 		this.setTexture(inputTexture);
 	}
 	
 	/**
-	 * This method set the time for bonus reward
-	 * @param start
-	 * @param end
+	 * This method sets the time for the bonus reward. 
+	 * @param start Possible value for the bonus reward's <starttime>.
+	 * @param end	Possible value for the bonus reward's <endtime>.
 	 */
 	public void Settime(int start, int end) {
 		this.starttime = start;
@@ -45,21 +44,18 @@ public class Bonus_Reward extends Reward {
 	}
 	
 	/**
-	 * This method set the start time for bonus reward
-	 * @return
+	 * This method gets the <starttime> for the bonus reward.
+	 * @return	<starttime>.
 	 */
 	public int getStarttime() {
 		return starttime;
 	}
 	
 	/**
-	 * This method use to get the end time for bonus reward
-	 * @return time for end
+	 * This method gets the endtime for the bonus reward.
+	 * @return <endtime>
 	 */
 	public int getEndtime() {
 		return endtime;
 	}
-	
-
-	
 }
