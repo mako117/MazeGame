@@ -20,7 +20,7 @@ public class Entity {
         setX(startX);
         setY(startY);
         setFacing(startFacing);
-        this.entityTexture = playerTexture; // no set function
+        setTexture(playerTexture);
     }
 
     /**
@@ -106,6 +106,13 @@ public class Entity {
     protected void setFacing(Direction d) {
         this.facing = d;
     }
+    /**
+     * Sets the texture that represents the Entity in the UI.
+     * @param textureInput  Possible new value for <entityTexture>.
+     */
+    protected void setTexture(TextureRegion textureInput) {
+        this.entityTexture = textureInput;
+    }
 
     /**
      * Checks if the block the entity wants to move to is enterable, and updates the entity's position and direction accordingly.
@@ -114,7 +121,7 @@ public class Entity {
      * @param gameBoard The Board object on which the entity is moving.
      * @return  true if they successfully moved, else return false.
      */
-    private boolean checkAndMove(int increment, boolean movingOnX, Board gameBoard) {
+    protected boolean checkAndMove(int increment, boolean movingOnX, Board gameBoard) {
         if(movingOnX) {
             Block toMoveTo;
             if(increment > 0) {

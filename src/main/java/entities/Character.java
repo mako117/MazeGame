@@ -76,16 +76,16 @@ public class Character extends Entity {
         // this will allow for smooth transition between tiles
         // TODO: replace the entityTexture with walking sprite when offset != 0
         switch(this.getFacing()){
-            case Up:
+            case Direction.Up:
                 batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY())+offset, tileSize, tileSize);
                 break;
-            case Down:
+            case Direction.Down:
                 batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY())+offset, tileSize, tileSize);
                 break;
-            case Left:
+            case Direction.Left:
                 batch.draw(this.getTexture(), tileSize*(this.getX())+offset, tileSize*(this.getY()), tileSize, tileSize);
                 break;
-            case Right:
+            case Direction.Right:
                 batch.draw(this.getTexture(), tileSize*(this.getX())+offset, tileSize*(this.getY()), tileSize, tileSize);
                 break;
             default:
