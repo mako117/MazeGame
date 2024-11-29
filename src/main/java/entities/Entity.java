@@ -20,7 +20,7 @@ public class Entity {
         setX(startX);
         setY(startY);
         setFacing(startFacing);
-        this.entityTexture = playerTexture;
+        this.entityTexture = playerTexture; // no set function
     }
 
     /**
@@ -30,42 +30,25 @@ public class Entity {
      * @return Whether the movement was successful.
      */
     public boolean direction(char input, Board gameBoard) {
-        Block toMoveTo;
         // System.out.println(x + " " + y);
         switch(input){
             case 'W':
-                this.setFacing(Direction.Up);
-                toMoveTo = gameBoard.getBlock(x, y+1);
-                if(toMoveTo != null && toMoveTo.enter()){
-                    //y++;
-                    this.setY(getY() + 1);
+                if(checkAndMove(1, false, gameBoard)) {
                     return true;
                 }
                 break;
             case 'S':
-                this.setFacing(Direction.Down);
-                toMoveTo = gameBoard.getBlock(x, y-1);
-                if(toMoveTo != null && toMoveTo.enter()){
-                    // y--;
-                    this.setY(getY() - 1);
+                if(checkAndMove(-1, false, gameBoard)) {
                     return true;
                 }
                 break;
             case 'A':
-                this.setFacing(Direction.Left);
-                toMoveTo = gameBoard.getBlock(x-1, y);
-                if(toMoveTo != null && toMoveTo.enter()){
-                    // x--;
-                    this.setX(getX() - 1);
+                if(checkAndMove(-1, true, gameBoard)) {
                     return true;
                 }
                 break;
             case 'D':
-                this.setFacing(Direction.Right);
-                toMoveTo = gameBoard.getBlock(x+1, y);
-                if(toMoveTo != null && toMoveTo.enter()){
-                    // x++;
-                    this.setX(getX() + 1);
+                if(checkAndMove(1, true, gameBoard)) {
                     return true;
                 }
                 break;
@@ -122,5 +105,45 @@ public class Entity {
      */
     protected void setFacing(Direction d) {
         this.facing = d;
+    }
+
+    /**
+     * Checks if the block the entity wants to move to is enterable, and updates the entity's position and direction accordingly.
+     * @param increment The amount the entity wants to increase its position on one of the axis by; if they want to decrease their position, this number is negative.
+     * @param movingOnX Indicates whether the entity wants to move along the X axis; if not, then they want to move along the Y axis.
+     * @param gameBoard The Board object on which the entity is moving.
+     * @return  true if they successfully moved, else return false.
+     */
+    private boolean checkAndMove(int increment, boolean movingOnX, Board gameBoard) {
+        if(movingOnX) {
+            Block toMoveTo;
+            if(increment > 0) {
+                this.setFacing(Direction.Right);
+                toMoveTo = gameBoard.getBlock(x+1, y);
+            } else {
+                this.setFacing(Direction.Left);
+                toMoveTo = gameBoard.getBlock(x-1, y);
+            }
+
+            if(toMoveTo != null && toMoveTo.enter()){
+                this.setX(getX() + increment);
+                return true;
+            }
+        } else {
+            Block toMoveTo;
+            if(increment > 0) {
+                this.setFacing(Direction.Up);
+                toMoveTo = gameBoard.getBlock(x, y+1);
+            } else {
+                this.setFacing(Direction.Down);
+                toMoveTo = gameBoard.getBlock(x, y-1);
+            }
+
+            if(toMoveTo != null && toMoveTo.enter()){
+                this.setY(getY() + increment);
+                return true;
+            }
+        }
+        return false;
     }
 }
