@@ -44,6 +44,13 @@ public class Character extends Entity {
     public int getSpeed() {
         return this.speed;
     }
+    /**
+     * Gets the entities.Character's <score> as an integer.
+     * @return  <score>.
+     */
+    public int getScore() {
+        return this.score;
+    }
 
     /**
      * Sets the entities.Character's speed as an integer.
@@ -52,16 +59,27 @@ public class Character extends Entity {
     private void setSpeed(int newSpeed) {
         this.speed = newSpeed;
     }
+    /**
+     * Sets the entities.Character's <score> as an integer.
+     * @param s Possible new <score>.
+     */
+    private void setScore(int s) {
+        this.score = s;
+    }
 
-    public int getScore() {
-        return this.score;
-    }
-    public void setScore(int s) {this.score = s;}
+    /**
+     * Attempts to increase the entities.Character's score.
+     * @param s Amount to increase the <score> by.
+     */
     public void add_score(int s) {
-        this.score += s;
+        this.setScore(this.getScore() + s);
     }
+    /**
+     * Attempts to decrease the entities.Character's score.
+     * @param s Amount to decrease the <score> by.
+     */
     public void minus_score(int s) {
-        this.score -= s;
+        this.setScore(this.getScore() - s);
     }
 
     /**
@@ -76,16 +94,16 @@ public class Character extends Entity {
         // this will allow for smooth transition between tiles
         // TODO: replace the entityTexture with walking sprite when offset != 0
         switch(this.getFacing()){
-            case Direction.Up:
+            case Up:
                 batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY())+offset, tileSize, tileSize);
                 break;
-            case Direction.Down:
+            case Down:
                 batch.draw(this.getTexture(), tileSize*(this.getX()), tileSize*(this.getY())+offset, tileSize, tileSize);
                 break;
-            case Direction.Left:
+            case Left:
                 batch.draw(this.getTexture(), tileSize*(this.getX())+offset, tileSize*(this.getY()), tileSize, tileSize);
                 break;
-            case Direction.Right:
+            case Right:
                 batch.draw(this.getTexture(), tileSize*(this.getX())+offset, tileSize*(this.getY()), tileSize, tileSize);
                 break;
             default:

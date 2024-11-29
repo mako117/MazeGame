@@ -34,16 +34,16 @@ import entities.Entity;
      */
     public void draw(Batch batch, int tileSize, float offset) {
         switch (this.getFacing()) {
-            case Direction.Up:
+            case Up:
                 batch.draw(this.getTexture(), tileSize * (this.getX()), tileSize * (this.getY()) - offset, tileSize, tileSize);
                 break;
-            case Direction.Down:
+            case Down:
                 batch.draw(this.getTexture(), tileSize * (this.getX()), tileSize * (this.getY()) + offset, tileSize, tileSize);
                 break;
-            case Direction.Left:
+            case Left:
                 batch.draw(this.getTexture(), tileSize * (this.getX()) + offset, tileSize * (this.getY()), tileSize, tileSize);
                 break;
-            case Direction.Right:
+            case Right:
                 batch.draw(this.getTexture(), tileSize * (this.getX()) - offset, tileSize * (this.getY()), tileSize, tileSize);
                 break;
             default:
