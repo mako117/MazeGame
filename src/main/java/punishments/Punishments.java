@@ -14,10 +14,10 @@ public class Punishments {
     /**
      * Initializes position to an invalid value, and the punishment score to 0.
      */
-    public Punishments(){
-        x = -1;
-        y = -1;
-        score = 0;
+    public Punishments() {
+        this.setX(-1);
+        this.setY(-1);
+        this.setScore(0);
     }
     /**
      * Initializes the punishment's position, the amount it decreases the character's score by, and the texture that represents it on the board.
@@ -45,14 +45,14 @@ public class Punishments {
      * @return  <x>.
      */
     public int XPosition() {
-        return x;
+        return this.x;
     }
     /**
      * Gets the punishment's <y>-coordinate.
      * @return  <y>.
      */
     public int YPosition() {
-        return y;
+        return this.y;
     }
 
     /**
