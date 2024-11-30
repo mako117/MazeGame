@@ -29,26 +29,9 @@ public class Moving_Enemies extends Enemies {
     public char find_player(Character aCharacter, Board gameBoard) {
         int xDistance = this.getX() - aCharacter.getX();
         int yDistance = this.getY() - aCharacter.getY();
-        double moveXDistance;
-        double moveYDistance;
-        double POSITIVE_INFINITY = 1.0 / 0.0;
-
-        if(xDistance < 0) {
-            moveXDistance = Math.sqrt( Math.pow(xDistance + 1, 2) + Math.pow(yDistance, 2) );
-        } else if (xDistance > 0) {
-            moveXDistance = Math.sqrt( Math.pow(xDistance - 1, 2) + Math.pow(yDistance, 2) );
-        } else {
-            moveXDistance = POSITIVE_INFINITY;
-        }
-        if(yDistance < 0) {
-            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance + 1, 2) );
-        } else if (yDistance > 0) {
-            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance - 1, 2) );
-        } else {
-            moveYDistance = POSITIVE_INFINITY;
-        }
-
-        // System.out.println("moveXDistance = " + moveXDistance + ", moveYDistance = " + moveYDistance + "\nxDistance = " + xDistance + ", yDistance = " + yDistance);
+        double[] results = findPlayerCalculations(xDistance, yDistance);
+        double moveXDistance = results[0];
+        double moveYDistance = results[1];
 
 
         /*
@@ -169,6 +152,37 @@ public class Moving_Enemies extends Enemies {
                 }
             }
         }        
+    }
+
+    /**
+     * Calculates the distance from the moving enemy to the character if the enemy moves along the x-axis and if it moves along the y-axis.
+     * @param xDistance The enemy's <x>-coordinate - the character's <x>-coordinate.
+     * @param yDistance The enemy's <y>-coordinate - the character's <y>-coordinate.
+     * @return  A length 2 double array with the distance after moving along the x-axis stored first, and the y-axis distance stored second.
+     */
+    private double[] findPlayerCalculations(int xDistance, int yDistance) {
+        double POSITIVE_INFINITY = 1.0 / 0.0;
+        double moveXDistance;
+        double moveYDistance;
+        if(xDistance < 0) {
+            moveXDistance = Math.sqrt( Math.pow(xDistance + 1, 2) + Math.pow(yDistance, 2) );
+        } else if (xDistance > 0) {
+            moveXDistance = Math.sqrt( Math.pow(xDistance - 1, 2) + Math.pow(yDistance, 2) );
+        } else {
+            moveXDistance = POSITIVE_INFINITY;
+        }
+        if(yDistance < 0) {
+            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance + 1, 2) );
+        } else if (yDistance > 0) {
+            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance - 1, 2) );
+        } else {
+            moveYDistance = POSITIVE_INFINITY;
+        }
+
+        // log.info("\nplayerX = " + mockPlayer.getX() + ", playerY = " + mockPlayer.getY() + "\nxDistance = " + xDistance + ", yDistance = " + yDistance + "\nmoveXDistance = " + moveXDistance +", moveYDistance = " + moveYDistance);
+
+        double [] array = {moveXDistance, moveYDistance};
+        return array;
     }
 
 }
