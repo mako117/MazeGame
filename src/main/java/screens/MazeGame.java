@@ -49,7 +49,7 @@ public class MazeGame extends Game {
         RpunishmentTex = new TextureRegion(new Texture("baby_dinosaur.png"));
         BpunishmentTex = new TextureRegion(new Texture("alien.png"));
 
-        endblockTex = new TextureRegion(new Texture("green.png"));
+        endblockTex = new TextureRegion(new Texture("endPortal.png"));
 
         movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
         patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
