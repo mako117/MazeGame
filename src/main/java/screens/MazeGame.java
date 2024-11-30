@@ -53,7 +53,7 @@ public class MazeGame extends Game {
 
         movingEnemyTex = new TextureRegion(new Texture("DinoSprite.png"),4,1,17,17);
         patrollingEnemeyTex = new TextureRegion(new Texture("ptero.png"), 0,0,31,16);
-        playerTex = new TextureRegion(new Texture("Prototype_Character.png"));
+        playerTex = new TextureRegion(new Texture("character.png"));
         
         camera = new OrthographicCamera(); 
 
