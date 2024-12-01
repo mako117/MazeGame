@@ -43,7 +43,6 @@ public class Board {
         TextureRegion barrierBlockTexture = new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 16, 32,16,16);
         TextureRegion roomBlockTexture = new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 122, 0,16,16);
 
-
         // Create board and fill with room blocks (free tiles), as well as surrounding the board with barrier blocks
 		array = new ArrayList<ArrayList<Block>>(width);
 		for(int i = 0; i < width; i++){
@@ -60,70 +59,21 @@ public class Board {
 			}
 		}
 
-        // set up walls
-        createLongWall(2, 2, 8, 21);
-        createLongWall(8,8,20,21);
-        createLongWall(14,16,20,21);
-        createLongWall(20,20,16,21);
-        createLongWall(14,14,18,19);
-        createLongWall(3,8,18,18);
-        createLongWall(10,13,18,18);
-        createLongWall(16,16,17,18);
-
-        createLongWall(14,18,16,16);
-        createLongWall(16,17,12,12);
-        createLongWall(18,18,6,15);
-        createLongWall(19,20,10,10);
-        createLongWall(20,21,6,6);
-        createLongWall(18,21,1,2);
-
-        createLongWall(1,4,6,6);
-        createLongWall(4,4,2,5);
-        createWall(2,4);
-        createLongWall(8,8,1,2);
-        createLongWall(12,12,2,8);
-        createLongWall(6,11,4,4);
-        createLongWall(6,6,4,8);
-        createLongWall(7,8,8,8);
-        createLongWall(13,15,6,6);
-        createLongWall(16,16,2,6);
-
-        createLongWall(4,5,12,12);
-        createLongWall(6,6,10,16);
-        createLongWall(7,8,14,14);
-        createLongWall(10,10,16,17);
-        createLongWall(10,10,8,14);
-        createLongWall(11,14,14,14);
-        createLongWall(14,14,7,13);
-
-        // Create punishments and rewards on board
+        // Create punishment and reward arrays
         array_regReward = new ArrayList<Reward>();
         array_bonReward = new ArrayList<Reward>();
         array_regPunishment = new ArrayList<Punishments>();
         array_bonPunishment = new ArrayList<Punishments>();
 
-        // add regular rewards
-        addRegReward(4,15,10,"bomb.png");
-        addRegReward(8,11,10,"bomb.png");
-        addRegReward(18,19,10,"bomb.png");
+        createAllWalls();
 
-        // add bonus rewards
-        addBonReward(3,21,10,"dinosaur_egg.png",10,20);
-        addBonReward(20,4,10,"dinosaur_egg.png",30,40);
-        addBonReward(21,21,10,"dinosaur_egg.png",50,60);
+        createAllRegularRewards();
 
-        // add regular punishments
-        addRegPunishment(14,2,10,"baby_dinosaur.png");
-        addRegPunishment(9,6,10,"baby_dinosaur.png");
-        addRegPunishment(8,17,10,"baby_dinosaur.png");
-        addRegPunishment(21,13,10,"baby_dinosaur.png");
+        createAllBonusRewards();
 
-        // add bonus punishments
-        addBonPunishment(13,21,10,"alien.png",0,10);
-        addBonPunishment(6,2,10,"alien.png",20,30);
-        addBonPunishment(12,11,10,"alien.png",30,40);
-        addBonPunishment(4,10,10,"alien.png",40,50);
-        addBonPunishment(16,8,10,"alien.png",50,60);
+        createAllNormalPunishments();
+
+        createAllBonusPunishments();
 
         endRoomBlock = new RoomBlock(1,21,new TextureRegion(new Texture("endPortal.png")));
         array.get(1).set(endRoomBlock.getYPosition(), endRoomBlock);
@@ -139,7 +89,6 @@ public class Board {
     public Block getStart() {
         return this.startRoomBlock;
     }
-
     /**
      * Returns the block that the player ends on.
      * @return The end block.
@@ -147,7 +96,6 @@ public class Board {
     public Block getEnd() {
         return this.endRoomBlock;
     }
-
     /**
      * Returns the total number of regulars reward currently on the board.
      * @return The regular reward count.
@@ -155,7 +103,6 @@ public class Board {
     public int getTotalRegRewardCnt() {
         return array_regReward.size();
     }
-
     /**
      * Returns the total number of bonus rewards currently on the board.
      * @return The bonus reward count.
@@ -163,7 +110,6 @@ public class Board {
     public int getTotalBonusRewardCnt(){
         return array_bonReward.size();
     }
-
     /**
      * Returns the total number of regular punishments currently on the board.
      * @return The regular punishment count.
@@ -171,7 +117,6 @@ public class Board {
     public int getTotalRegPunishmentCnt(){
         return array_regPunishment.size();
     }
-
     /**
      * Returns the total number of bonus punishments currently on the board.
      * @return The bonus punishment count.
@@ -179,7 +124,6 @@ public class Board {
     public int getTotalBonusPunishmentCnt(){
         return array_bonPunishment.size();
     }
-
     /**
      * Return the block that is at the coordinates <br>
      * Invalid coordinates will return null. <br>
@@ -197,7 +141,6 @@ public class Board {
 
 		return array.get(x).get(y);
     }
-
     /**
      * Returns the width of the board.
      * @return The width.
@@ -205,7 +148,6 @@ public class Board {
     public int getWidth() {
         return this.width;
     }
-
     /**
      * Returns the height of the board.
      * @return The height.
@@ -382,7 +324,6 @@ public class Board {
     private void setStart(Block thisRoomBlock) {
         this.startRoomBlock = thisRoomBlock;
     }
-
     /**
      * Set the end block to the given block.
      * @param thisRoomBlock
@@ -399,15 +340,14 @@ public class Board {
     private void createWall(int x, int y){
         array.get(x).set(y, new Wall(x, y,new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 0, 128,16,16)));
     }
-
     /**
-     * Create a long straight wall between two points.
+     * Create a rectangular section of Wall blocks.
      * @param startingX The start x coordinate.
      * @param endingX The end x coordinate.
      * @param startingY The start y coordinate.
      * @param endingY The end y coordinate.
      */
-    private void createLongWall(int startingX, int endingX, int startingY, int endingY) {
+    private void createWallSection(int startingX, int endingX, int startingY, int endingY) {
         if (startingX == endingX) {
             for (int i = startingY; i <= endingY; i++) {
                 createWall(startingX, i);
@@ -424,7 +364,133 @@ public class Board {
             }
         }
     }
+    /**
+     * Create all of the wall blocks on the board; change this function to change the map.
+     */
+    private void createAllWalls() {
+        // set up walls
+        createWallSection(2, 2, 8, 21);
+        createWallSection(8,8,20,21);
+        createWallSection(14,16,20,21);
+        createWallSection(20,20,16,21);
+        createWallSection(14,14,18,19);
+        createWallSection(3,8,18,18);
+        createWallSection(10,13,18,18);
+        createWallSection(16,16,17,18);
 
+        createWallSection(14,18,16,16);
+        createWallSection(16,17,12,12);
+        createWallSection(18,18,6,15);
+        createWallSection(19,20,10,10);
+        createWallSection(20,21,6,6);
+        createWallSection(18,21,1,2);
+
+        createWallSection(1,4,6,6);
+        createWallSection(4,4,2,5);
+        createWallSection(2,2,4,4);
+        createWallSection(8,8,1,2);
+        createWallSection(12,12,2,8);
+        createWallSection(6,11,4,4);
+        createWallSection(6,6,4,8);
+        createWallSection(7,8,8,8);
+        createWallSection(13,15,6,6);
+        createWallSection(16,16,2,6);
+
+        createWallSection(4,5,12,12);
+        createWallSection(6,6,10,16);
+        createWallSection(7,8,14,14);
+        createWallSection(10,10,16,17);
+        createWallSection(10,10,8,14);
+        createWallSection(11,14,14,14);
+        createWallSection(14,14,7,13);
+    }
+
+    /**
+     * Add a new regular reward to the board.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param score The score of the new reward.
+     * @param internalTexturePath The texture.
+     */
+    private void addRegReward(int x, int y, int score, String internalTexturePath) {
+        array_regReward.add(new Regular_Reward(x, y, score, new TextureRegion(new Texture(internalTexturePath))));
+    }
+    /**
+     * Creates all regular rewards on the map.
+     */
+    private void createAllRegularRewards() {
+        // add regular rewards
+        addRegReward(4,15,10,"bomb.png");
+        addRegReward(8,11,10,"bomb.png");
+        addRegReward(18,19,10,"bomb.png");
+    }
+
+    /**
+     * Add a new bonus reward to the board.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param score The score of the new bonus reward.
+     * @param internalTexturePath The texture.
+     * @param t1 The start time.
+     * @param t2 The end time.
+     */
+    private void addBonReward(int x, int y, int score, String internalTexturePath, int t1, int t2) {
+        array_bonReward.add(new Bonus_Reward(x,y,score,new TextureRegion(new Texture(internalTexturePath)),t1,t2));
+    }
+    /**
+     * Creates first set of bonus rewards on the map.
+     */
+    private void createAllBonusRewards() {
+        // add bonus rewards
+        addBonReward(3,21,10,"dinosaur_egg.png",10,20);
+        addBonReward(20,4,10,"dinosaur_egg.png",30,40);
+        addBonReward(21,21,10,"dinosaur_egg.png",50,60);
+    }
+
+    /**
+     * Add a new regular punishment to the board.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param score The score of the punishment.
+     * @param internalTexturePath The texture.
+     */
+    private void addRegPunishment(int x, int y, int score, String internalTexturePath) {
+        array_regPunishment.add(new NormalPunishments(x,y,score,new TextureRegion(new Texture(internalTexturePath))));
+    }
+    /**
+     * Creates all normal punishments on the board.
+     */
+    private void createAllNormalPunishments() {
+        // add regular punishments
+        addRegPunishment(14,2,10,"baby_dinosaur.png");
+        addRegPunishment(9,6,10,"baby_dinosaur.png");
+        addRegPunishment(8,17,10,"baby_dinosaur.png");
+        addRegPunishment(21,13,10,"baby_dinosaur.png");
+    }
+    
+    /**
+     * Add a new bonus punishment to the board.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param score The score of the bonus punishment.
+     * @param internalTexturePath The texture.
+     * @param t1 The start time.
+     * @param t2 The end time.
+     */
+    private void addBonPunishment(int x, int y, int score, String internalTexturePath, int t1, int t2) {
+        array_bonPunishment.add(new BonusPunishments(x,y,score,new TextureRegion(new Texture(internalTexturePath)),t1,t2));
+    }
+    /**
+     * Creates the first set of bonus punishments on the board.
+     */
+    private void createAllBonusPunishments() {
+        // add bonus punishments
+        addBonPunishment(13,21,10,"alien.png",0,10);
+        addBonPunishment(6,2,10,"alien.png",20,30);
+        addBonPunishment(12,11,10,"alien.png",30,40);
+        addBonPunishment(4,10,10,"alien.png",40,50);
+        addBonPunishment(16,8,10,"alien.png",50,60);
+    }
 
     /**
      * Check if the given coordinates has a reward
@@ -441,7 +507,6 @@ public class Board {
         }
         return -1;
     }
-
     /**
      * Check if the given coordinates have a punishment
      * Return the index the punishment is in, in the punishment array, otherwise -1.
@@ -456,53 +521,5 @@ public class Board {
             }
         }
         return -1;
-    }
-
-    /**
-     * Add a new regular reward to the board.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
-     * @param score The score of the new reward.
-     * @param internalTexturePath The texture.
-     */
-    private void addRegReward(int x, int y, int score, String internalTexturePath) {
-        array_regReward.add(new Regular_Reward(x, y, score, new TextureRegion(new Texture(internalTexturePath))));
-    }
-
-    /**
-     * Add a new bonus reward to the board.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
-     * @param score The score of the new bonus reward.
-     * @param internalTexturePath The texture.
-     * @param t1 The start time.
-     * @param t2 The end time.
-     */
-    private void addBonReward(int x, int y, int score, String internalTexturePath, int t1, int t2) {
-        array_bonReward.add(new Bonus_Reward(x,y,score,new TextureRegion(new Texture(internalTexturePath)),t1,t2));
-    }
-
-    /**
-     * Add a new regular punishment to the board.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
-     * @param score The score of the punishment.
-     * @param internalTexturePath The texture.
-     */
-    private void addRegPunishment(int x, int y, int score, String internalTexturePath) {
-        array_regPunishment.add(new NormalPunishments(x,y,score,new TextureRegion(new Texture(internalTexturePath))));
-    }
-
-    /**
-     * Add a new bonus punishment to the board.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
-     * @param score The score of the bonus punishment.
-     * @param internalTexturePath The texture.
-     * @param t1 The start time.
-     * @param t2 The end time.
-     */
-    private void addBonPunishment(int x, int y, int score, String internalTexturePath, int t1, int t2) {
-        array_bonPunishment.add(new BonusPunishments(x,y,score,new TextureRegion(new Texture(internalTexturePath)),t1,t2));
     }
 }
