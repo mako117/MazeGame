@@ -17,6 +17,8 @@ public class MazeGame extends Game {
     public BitmapFont font;
     public Skin skin;
     public Texture backgroundTexture;
+    public Texture playerWinsBackgroundTexture;
+    public Texture playerLosesBackgroundTexture;
 
     protected TextureRegion RrewardTex;
     protected TextureRegion RpunishmentTex;
@@ -32,8 +34,16 @@ public class MazeGame extends Game {
 
     public GameState gameState;
 
+    private boolean winOrLose;
+
     public MazeGame(GameState status){
         gameState  = status;
+        winOrLose = false;
+    }
+
+    public MazeGame(GameState status, boolean condition){
+        gameState  = status;
+        winOrLose = condition;
     }
 
     @Override
@@ -42,6 +52,9 @@ public class MazeGame extends Game {
         font = new BitmapFont(Gdx.files.internal("comic_sans.fnt"));
         skin = new Skin(Gdx.files.internal("skin-soldier/star-soldier-ui.json"));
         backgroundTexture = new Texture("Space Background.png");
+        // playerWinsBackgroundTexture = new Texture("Meteor Hits Earth.png");
+        playerWinsBackgroundTexture = new Texture("Killing the Dinosaurs.png");
+        playerLosesBackgroundTexture = new Texture("Meteor Explodes.png");
 
         RrewardTex = new TextureRegion(new Texture("bomb.png"));
         BrewardTex = new TextureRegion(new Texture("dinosaur_egg.png"));
@@ -64,7 +77,7 @@ public class MazeGame extends Game {
         } else if(gameState == GameState.Help) {
             setScreen(new HelpScreen(this, new GameScreen(this)));
         }else if(gameState == GameState.EndMenu) {
-            setScreen(new EndScreen(this, 0, 0, false));
+            setScreen(new EndScreen(this, 0, 0, winOrLose));
         }
     }
 

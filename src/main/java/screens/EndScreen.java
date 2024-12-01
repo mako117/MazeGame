@@ -1,5 +1,7 @@
 package screens;
 
+import javax.swing.event.ChangeEvent;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
@@ -130,7 +132,14 @@ public class EndScreen extends ScreenAdapter {
         ScreenUtils.clear(Color.BLACK);
 
         game.batch.begin();
-        game.batch.draw(game.backgroundTexture, 0, 0);
+        if(condition) {
+            game.batch.draw(game.playerWinsBackgroundTexture, 0, 0,
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        } else {
+            game.batch.draw(game.playerLosesBackgroundTexture, 0, 0,
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
+
         change_x = -140;
         change_y = 240;
         if(condition) {

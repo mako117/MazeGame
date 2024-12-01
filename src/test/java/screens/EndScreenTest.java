@@ -29,7 +29,7 @@ public class EndScreenTest extends AbstractTestWithHeadlessGdxContext {
         Runnable r = () -> {
             try{ Thread.sleep(1500); endGame.exitGame(); } catch(Exception e) {};
         };
-        endGame = new TestGame(GameState.EndMenu, r);
+        endGame = new TestGame(GameState.EndMenu, true, r);
         application = new Lwjgl3Application(endGame, config);
         // only buttons and no key input, so nothing to test except that it is an EndScreen object
         assertEquals(true, (endGame.getCurrentScreen() instanceof EndScreen));

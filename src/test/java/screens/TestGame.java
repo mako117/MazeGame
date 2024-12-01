@@ -17,6 +17,11 @@ public class TestGame extends MazeGame {
         this.test = test;
     }
 
+    public TestGame(GameState status, boolean condition, Runnable test) {
+        super(status, condition);
+        this.test = test;
+    }
+
     @Override
     public void create() {
         super.create();
