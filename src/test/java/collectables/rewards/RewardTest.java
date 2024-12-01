@@ -1,4 +1,4 @@
-package rewards;
+package collectables.rewards;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,23 +31,23 @@ class RewardTest {
 		
 		assertEquals(10,Rr1.getX());
 		assertEquals(10,Rr1.getY());
-		assertEquals(5,Rr1.getRewardScore());
+		assertEquals(5,Rr1.getCollectableScore());
 		
 		Rr1.setX(20); Rr1.setY(20);
 		Rr1.setScore(10);
 		
 		assertEquals(20,Rr1.getX());
 		assertEquals(20,Rr1.getY());
-		assertEquals(10,Rr1.getRewardScore());
+		assertEquals(10,Rr1.getCollectableScore());
 		
 		Rr1.setScore(-10);
-		assertEquals(10,Rr1.getRewardScore());
+		assertEquals(10,Rr1.getCollectableScore());
 		
 		Regular_Reward Rr2 = new Regular_Reward();
 		
 		assertEquals(-1,Rr2.getX());
 		assertEquals(-1,Rr2.getY());
-		assertEquals(0,Rr2.getRewardScore());
+		assertEquals(0,Rr2.getCollectableScore());
 	}
 	
 	/**
@@ -59,7 +59,7 @@ class RewardTest {
 		
 		assertEquals(12,Br1.getX());
 		assertEquals(12,Br1.getY());
-		assertEquals(6,Br1.getRewardScore());
+		assertEquals(6,Br1.getCollectableScore());
 		assertEquals(15,Br1.getStartTime());
 		assertEquals(30,Br1.getEndTime());
 		
@@ -69,18 +69,18 @@ class RewardTest {
 		
 		assertEquals(30,Br1.getX());
 		assertEquals(30,Br1.getY());
-		assertEquals(15,Br1.getRewardScore());
+		assertEquals(15,Br1.getCollectableScore());
 		assertEquals(20,Br1.getStartTime());
 		assertEquals(60,Br1.getEndTime());
 		
 		Br1.setScore(-15);
-		assertEquals(15,Br1.getRewardScore());
+		assertEquals(15,Br1.getCollectableScore());
 		
 		Bonus_Reward Br2 = new Bonus_Reward();
 		
 		assertEquals(-1,Br2.getX());
 		assertEquals(-1,Br2.getY());
-		assertEquals(0,Br2.getRewardScore());
+		assertEquals(0,Br2.getCollectableScore());
 		assertEquals(-1,Br2.getStartTime());
 		assertEquals(-1,Br2.getEndTime());
 	}

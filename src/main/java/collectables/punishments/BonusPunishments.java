@@ -1,4 +1,4 @@
-package punishments;
+package collectables.punishments;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -49,4 +49,32 @@ public class BonusPunishments extends Punishments{
     	this.starttime = start;
     	this.endtime = end;
     }
+    /**
+     * Sets the bonus punishment's <x>-coordinate.
+     * @param inputX    Input for <x>.
+     */
+    protected void setX(int inputX) {
+        super.setX(inputX);
+    }
+	/**
+     * Sets the bonus punishment's <y>-coordinate.
+     * @param inputX    Input for <y>.
+     */
+    protected void setY(int inputY) {
+        super.setY(inputY);
+    }
+	/**
+	 * This method set the score for punishment.
+	 * @param s
+	 */
+	protected void setScore(int s) {
+		super.setScore(s);
+	}
+	/**
+	 * This method set the texture for punishment.
+	 * @param inputTexture
+	 */
+	protected void setTextureRegion(TextureRegion inputTexture) {
+		super.setTextureRegion(inputTexture);
+	}
 }

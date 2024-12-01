@@ -1,4 +1,4 @@
-package rewards;
+package collectables.rewards;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -51,8 +51,36 @@ public class Bonus_Reward extends Reward {
 	 * @param start Possible value for the bonus reward's <starttime>.
 	 * @param end	Possible value for the bonus reward's <endtime>.
 	 */
-	public void setTime(int start, int end) {
+	protected void setTime(int start, int end) {
 		this.starttime = start;
 		this.endtime = end;
+	}
+	/**
+     * Sets the bonus reward's <x>-coordinate.
+     * @param inputX    Input for <x>.
+     */
+    protected void setX(int inputX) {
+        super.setX(inputX);
+    }
+	/**
+     * Sets the bonus reward's <y>-coordinate.
+     * @param inputX    Input for <y>.
+     */
+    protected void setY(int inputY) {
+        super.setY(inputY);
+    }
+	/**
+	 * This method set the score for reward.
+	 * @param s
+	 */
+	protected void setScore(int s) {
+		super.setScore(s);
+	}
+	/**
+	 * This method set the texture for reward.
+	 * @param inputTexture
+	 */
+	protected void setTextureRegion(TextureRegion inputTexture) {
+		super.setTextureRegion(inputTexture);
 	}
 }

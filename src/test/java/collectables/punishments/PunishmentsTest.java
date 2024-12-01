@@ -1,4 +1,4 @@
-package punishments;
+package collectables.punishments;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
@@ -23,7 +23,7 @@ class PunishmentsTest {
 		
 		assertEquals(10,Np.getX());
 		assertEquals(10,Np.getY());
-		assertEquals(5,Np.getPunishmentScore());
+		assertEquals(5,Np.getCollectableScore());
 		
 		Np.setX(20);
 		Np.setY(20);
@@ -31,10 +31,10 @@ class PunishmentsTest {
 		
 		assertEquals(20,Np.getX());
 		assertEquals(20,Np.getY());
-		assertEquals(10,Np.getPunishmentScore());
+		assertEquals(10,Np.getCollectableScore());
 		
 		Np.setScore(-10);
-		assertEquals(10,Np.getPunishmentScore());
+		assertEquals(10,Np.getCollectableScore());
 	}
 	
 	/**
@@ -46,7 +46,7 @@ class PunishmentsTest {
 		
 		assertEquals(15,Bp1.getX());
 		assertEquals(15,Bp1.getY());
-		assertEquals(10,Bp1.getPunishmentScore());
+		assertEquals(10,Bp1.getCollectableScore());
 		assertEquals(12,Bp1.getStartTime());
 		assertEquals(30,Bp1.getEndTime());
 		
@@ -57,18 +57,18 @@ class PunishmentsTest {
 		
 		assertEquals(25,Bp1.getX());
 		assertEquals(25,Bp1.getY());
-		assertEquals(20,Bp1.getPunishmentScore());
+		assertEquals(20,Bp1.getCollectableScore());
 		assertEquals(20,Bp1.getStartTime());
 		assertEquals(50,Bp1.getEndTime());
 		
 		Bp1.setScore(-10);
-		assertEquals(20,Bp1.getPunishmentScore());
+		assertEquals(20,Bp1.getCollectableScore());
 		
 		BonusPunishments Bp2 = new BonusPunishments();
 		
 		assertEquals(-1,Bp2.getX());
 		assertEquals(-1,Bp2.getY());
-		assertEquals(0,Bp2.getPunishmentScore());
+		assertEquals(0,Bp2.getCollectableScore());
 		assertEquals(-1,Bp2.getStartTime());
 		assertEquals(-1,Bp2.getEndTime());
 	}

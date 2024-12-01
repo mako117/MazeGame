@@ -1,11 +1,11 @@
 package board;
 import com.badlogic.gdx.graphics.Texture;
-import punishments.NormalPunishments;
-import punishments.Punishments;
-import rewards.Bonus_Reward;
-import rewards.Regular_Reward;
-import rewards.Reward;
-import punishments.BonusPunishments;
+import collectables.punishments.NormalPunishments;
+import collectables.punishments.Punishments;
+import collectables.rewards.Bonus_Reward;
+import collectables.rewards.Regular_Reward;
+import collectables.rewards.Reward;
+import collectables.punishments.BonusPunishments;
 
 import java.util.ArrayList;
 
@@ -228,7 +228,7 @@ public class Board {
         if(index == -1) {
             return 0;
         }
-        int score = array_regReward.get(index).getRewardScore();
+        int score = array_regReward.get(index).getCollectableScore();
         // System.out.println("reg reward score = " + score);
         array_regReward.remove(index);
         return score;
@@ -256,7 +256,7 @@ public class Board {
             return 0;
         }
 
-        int score = array_bonReward.get(index).getRewardScore();
+        int score = array_bonReward.get(index).getCollectableScore();
         // System.out.println("bonus reward score = " + score);
         array_bonReward.remove(index);
         return score;
@@ -276,7 +276,7 @@ public class Board {
         if(index == -1){
             return 0;
         }
-        int score = array_regPunishment.get(index).getPunishmentScore();
+        int score = array_regPunishment.get(index).getCollectableScore();
 //         System.out.println("reg punishment score = " + score);
         array_regPunishment.remove(index);
         return score;
@@ -306,7 +306,7 @@ public class Board {
             return 0;
         }
 
-        int score = array_bonPunishment.get(index).getPunishmentScore();
+        int score = array_bonPunishment.get(index).getCollectableScore();
         // System.out.println("bonus punishment score = " + score);
         array_bonPunishment.remove(index);
         return score;
