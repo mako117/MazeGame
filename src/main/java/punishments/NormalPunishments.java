@@ -8,6 +8,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class NormalPunishments extends Punishments{
 
     /**
+	 * This method used to create a normal punishment with default position and score, and no texture
+	 */
+	public NormalPunishments(){
+		super();
+	}
+
+    /**
      * Initializes the NormalPunishment's <x> and <y>-coordinates, <score>, and <PunishmentsTexture>.
      * @param inputX    Input for the punishment's x-coordinate.
      * @param inputY    Input for the punishment's y-coordinate.

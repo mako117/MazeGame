@@ -13,9 +13,8 @@ public class Bonus_Reward extends Reward {
 	 * This method use to create a bonus reward with default set
 	 */
 	public Bonus_Reward(){
-		super(-1,-1,0);
-		starttime = -1;
-		endtime = -1;
+		super();
+		this.setTime(-1, -1);
 	}
 	
 	/**
@@ -28,34 +27,32 @@ public class Bonus_Reward extends Reward {
 	 * @param end	Possible value for the bonus reward's <endtime>.
 	 */
 	public Bonus_Reward(int x, int y, int s, TextureRegion inputTexture, int start, int end){
-		super(x,y,s);
-		this.Settime(start,end);
-		this.setTexture(inputTexture);
-	}
-	
-	/**
-	 * This method sets the time for the bonus reward. 
-	 * @param start Possible value for the bonus reward's <starttime>.
-	 * @param end	Possible value for the bonus reward's <endtime>.
-	 */
-	public void Settime(int start, int end) {
-		this.starttime = start;
-		this.endtime = end;
+		super(x,y,s,inputTexture);
+		this.setTime(start,end);
 	}
 	
 	/**
 	 * This method gets the <starttime> for the bonus reward.
 	 * @return	<starttime>.
 	 */
-	public int getStarttime() {
+	public int getStartTime() {
 		return starttime;
 	}
-	
 	/**
 	 * This method gets the endtime for the bonus reward.
 	 * @return <endtime>
 	 */
-	public int getEndtime() {
+	public int getEndTime() {
 		return endtime;
+	}
+
+	/**
+	 * This method sets the time for the bonus reward. 
+	 * @param start Possible value for the bonus reward's <starttime>.
+	 * @param end	Possible value for the bonus reward's <endtime>.
+	 */
+	public void setTime(int start, int end) {
+		this.starttime = start;
+		this.endtime = end;
 	}
 }

@@ -228,7 +228,7 @@ public class Board {
         if(index == -1) {
             return 0;
         }
-        int score = array_regReward.get(index).getPoint();
+        int score = array_regReward.get(index).getRewardScore();
         // System.out.println("reg reward score = " + score);
         array_regReward.remove(index);
         return score;
@@ -250,13 +250,13 @@ public class Board {
         }
 
         Bonus_Reward aBonus = (Bonus_Reward) array_bonReward.get(index);
-        int start = aBonus.getStarttime();
-        int end = aBonus.getEndtime();
+        int start = aBonus.getStartTime();
+        int end = aBonus.getEndTime();
         if(currentTime < start || currentTime > end) {
             return 0;
         }
 
-        int score = array_bonReward.get(index).getPoint();
+        int score = array_bonReward.get(index).getRewardScore();
         // System.out.println("bonus reward score = " + score);
         array_bonReward.remove(index);
         return score;
@@ -327,8 +327,8 @@ public class Board {
         }
         for(int i = 0; i < array_bonReward.size(); i++) {
             Bonus_Reward rewardToDraw = (Bonus_Reward) array_bonReward.get(i);
-            int start = rewardToDraw.getStarttime();
-            int end = rewardToDraw.getEndtime();
+            int start = rewardToDraw.getStartTime();
+            int end = rewardToDraw.getEndTime();
             if(!(time < start || time > end)) {
                 rewardToDraw.draw(batch, tilesize);
             } 
@@ -435,7 +435,7 @@ public class Board {
      */
     private int isRewardHere(int x, int y, ArrayList<Reward> array_reward) {
     	for(int i = 0; i < array_reward.size(); i++){
-            if (x == array_reward.get(i).Xposition() && y == array_reward.get(i).Yposition()){
+            if (x == array_reward.get(i).getX() && y == array_reward.get(i).getY()){
                 return i;
             }
         }
@@ -451,7 +451,7 @@ public class Board {
      */
     private int isPunishmentHere(int x, int y, ArrayList<Punishments> array_punishments) {
         for(int i = 0; i < array_punishments.size(); i++){
-            if (x == array_punishments.get(i).XPosition() && y == array_punishments.get(i).YPosition()){
+            if (x == array_punishments.get(i).getX() && y == array_punishments.get(i).getY()){
                 return i;
             }
         }

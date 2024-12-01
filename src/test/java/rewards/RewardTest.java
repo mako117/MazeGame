@@ -29,25 +29,25 @@ class RewardTest {
 	void setRegular_Reward() {
 		Regular_Reward Rr1 = new Regular_Reward(10,10,5,tex);
 		
-		assertEquals(10,Rr1.Xposition());
-		assertEquals(10,Rr1.Yposition());
-		assertEquals(5,Rr1.getPoint());
+		assertEquals(10,Rr1.getX());
+		assertEquals(10,Rr1.getY());
+		assertEquals(5,Rr1.getRewardScore());
 		
-		Rr1.Set_position(20, 20);
-		Rr1.Set_score(10);
+		Rr1.setX(20); Rr1.setY(20);
+		Rr1.setScore(10);
 		
-		assertEquals(20,Rr1.Xposition());
-		assertEquals(20,Rr1.Yposition());
-		assertEquals(10,Rr1.getPoint());
+		assertEquals(20,Rr1.getX());
+		assertEquals(20,Rr1.getY());
+		assertEquals(10,Rr1.getRewardScore());
 		
-		Rr1.Set_score(-10);
-		assertEquals(10,Rr1.getPoint());
+		Rr1.setScore(-10);
+		assertEquals(10,Rr1.getRewardScore());
 		
 		Regular_Reward Rr2 = new Regular_Reward();
 		
-		assertEquals(-1,Rr2.Xposition());
-		assertEquals(-1,Rr2.Yposition());
-		assertEquals(0,Rr2.getPoint());
+		assertEquals(-1,Rr2.getX());
+		assertEquals(-1,Rr2.getY());
+		assertEquals(0,Rr2.getRewardScore());
 	}
 	
 	/**
@@ -57,32 +57,32 @@ class RewardTest {
 	void setBonus_Reward() {
 		Bonus_Reward Br1 = new Bonus_Reward(12,12,6,tex,15,30);
 		
-		assertEquals(12,Br1.Xposition());
-		assertEquals(12,Br1.Yposition());
-		assertEquals(6,Br1.getPoint());
-		assertEquals(15,Br1.getStarttime());
-		assertEquals(30,Br1.getEndtime());
+		assertEquals(12,Br1.getX());
+		assertEquals(12,Br1.getY());
+		assertEquals(6,Br1.getRewardScore());
+		assertEquals(15,Br1.getStartTime());
+		assertEquals(30,Br1.getEndTime());
 		
-		Br1.Set_position(30, 30);
-		Br1.Set_score(15);
-		Br1.Settime(20, 60);;
+		Br1.setX(30); Br1.setY(30);
+		Br1.setScore(15);
+		Br1.setTime(20, 60);;
 		
-		assertEquals(30,Br1.Xposition());
-		assertEquals(30,Br1.Yposition());
-		assertEquals(15,Br1.getPoint());
-		assertEquals(20,Br1.getStarttime());
-		assertEquals(60,Br1.getEndtime());
+		assertEquals(30,Br1.getX());
+		assertEquals(30,Br1.getY());
+		assertEquals(15,Br1.getRewardScore());
+		assertEquals(20,Br1.getStartTime());
+		assertEquals(60,Br1.getEndTime());
 		
-		Br1.Set_score(-15);
-		assertEquals(15,Br1.getPoint());
+		Br1.setScore(-15);
+		assertEquals(15,Br1.getRewardScore());
 		
 		Bonus_Reward Br2 = new Bonus_Reward();
 		
-		assertEquals(-1,Br2.Xposition());
-		assertEquals(-1,Br2.Yposition());
-		assertEquals(0,Br2.getPoint());
-		assertEquals(-1,Br2.getStarttime());
-		assertEquals(-1,Br2.getEndtime());
+		assertEquals(-1,Br2.getX());
+		assertEquals(-1,Br2.getY());
+		assertEquals(0,Br2.getRewardScore());
+		assertEquals(-1,Br2.getStartTime());
+		assertEquals(-1,Br2.getEndTime());
 	}
 
 	/**
@@ -94,12 +94,12 @@ class RewardTest {
 		Reward r1 = new Regular_Reward(0, 1, 10, tex1);
         int tileSize = 100;
         r1.draw(bat, tileSize);
-        verify(bat).draw(eq(tex1),eq((float)(tileSize * r1.Xposition())), eq((float)(tileSize* r1.Yposition())), eq((float)(tileSize)), eq((float)(tileSize)));
+        verify(bat).draw(eq(tex1),eq((float)(tileSize * r1.getX())), eq((float)(tileSize* r1.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
         
         TextureRegion tex2 = mock(TextureRegion.class);
         Reward r2 = new Bonus_Reward(0, 1, 10, tex2, 5, 10);
         r2.draw(bat, tileSize);
-        verify(bat).draw(eq(tex2),eq((float)(tileSize * r2.Xposition())), eq((float)(tileSize* r2.Yposition())), eq((float)(tileSize)), eq((float)(tileSize)));
+        verify(bat).draw(eq(tex2),eq((float)(tileSize * r2.getX())), eq((float)(tileSize* r2.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
 	}
 	
 }

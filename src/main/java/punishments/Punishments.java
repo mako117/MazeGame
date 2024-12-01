@@ -34,34 +34,34 @@ public class Punishments {
     }
 
     /**
-     * Gets the punishment's <score>.
-     * @return  <score>.
-     */
-    public int getPunishmentScore() {
-        return this.score;
-    }
-    /**
      * Gets the punishment's <x>-coordinate.
      * @return  <x>.
      */
-    public int XPosition() {
+    public int getX() {
         return this.x;
     }
     /**
      * Gets the punishment's <y>-coordinate.
      * @return  <y>.
      */
-    public int YPosition() {
+    public int getY() {
         return this.y;
     }
-
+    /**
+     * Gets the punishment's <score>.
+     * @return  <score>.
+     */
+    public int getPunishmentScore() {
+        return this.score;
+    }
+    
     /**
      * Draw the punishment onto the screen.
      * @param batch The sprite batch.
      * @param tilesize  The size of the tile.
      */
     public void draw(Batch batch, int tilesize) {
-        batch.draw(PunishmentsTexture, tilesize*this.XPosition(), tilesize*this.YPosition(), tilesize, tilesize);
+        batch.draw(PunishmentsTexture, tilesize*this.getX(), tilesize*this.getY(), tilesize, tilesize);
     }
 
     /**

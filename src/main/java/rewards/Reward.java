@@ -11,6 +11,15 @@ public class Reward {
 	private int y;
 	private int score;
 	private TextureRegion RewardTexture;
+
+	/**
+     * Initializes position to an invalid value, and the punishment score to 0.
+     */
+	public Reward() {
+		this.setX(-1);
+		this.setY(-1);
+		this.setScore(0);
+	}
 	
 	/**
 	 * This method use x, y, score to set reward.
@@ -18,69 +27,72 @@ public class Reward {
 	 * @param y
 	 * @param s
 	 */
-	public Reward(int x, int y, int s) {
-		this.Set_position(x, y);
-		this.Set_score(s);
+	public Reward(int x, int y, int s, TextureRegion inputTexture) {
+		this.setX(x);
+		this.setY(y);
+		this.setScore(s);
+		this.setTextureRegion(inputTexture);
 	}
-	
-	/**
-	 * This method set the score for reward.
-	 * @param s
-	 */
-	public void Set_score(int s) {
-		if(s >= 0) {
-			this.score = s;
-		}
-	}
-	
-	/**
-	 * This method set the x, y position for reward.
-	 * @param x
-	 * @param y
-	 */
-	public void Set_position(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-	
+
 	/**
 	 * This method get the x position for reward.
 	 * @return x
 	 */
-	public int Xposition() {
+	public int getX() {
 		return x;
 	}
-	
 	/**
 	 * This method get the y position for reward.
 	 * @return y
 	 */
-	public int Yposition() {
+	public int getY() {
 		return y;
 	}
-	
 	/**
 	 * This method get the score for reward.
 	 * @return score
 	 */
-	public int getPoint() {
+	public int getRewardScore() {
 		return score;
 	}
 
-	/**
-	 * This method set the texture for reward.
-	 * @param inputTexture
-	 */
-	protected void setTexture(TextureRegion inputTexture) {
-		this.RewardTexture = inputTexture;
-	}
-	
 	/**
 	 * This method draw the reward in game.
 	 * @param batch
 	 * @param tilesize
 	 */
 	public void draw(Batch batch, int tilesize) {
-        batch.draw(RewardTexture, tilesize*this.Xposition(),  tilesize*this.Yposition(), tilesize, tilesize);
+        batch.draw(RewardTexture, tilesize*this.getX(),  tilesize*this.getY(), tilesize, tilesize);
     }
+	
+	/**
+     * Sets the reward's <x>-coordinate.
+     * @param inputX    Input for <x>.
+     */
+    protected void setX(int inputX) {
+        this.x = inputX;
+    }
+    /**
+     * Sets the reward's <y>-coordinate.
+     * @param inputY    Input for <y>.
+     */
+    protected void setY(int inputY) {
+        this.y = inputY;
+    }
+	/**
+	 * This method set the score for reward.
+	 * @param s
+	 */
+	protected void setScore(int s) {
+		if(s >= 0) {
+			this.score = s;
+		}
+	}
+	/**
+	 * This method set the texture for reward.
+	 * @param inputTexture
+	 */
+	protected void setTextureRegion(TextureRegion inputTexture) {
+		this.RewardTexture = inputTexture;
+	}
 }

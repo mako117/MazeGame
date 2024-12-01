@@ -21,16 +21,16 @@ class PunishmentsTest {
 	void setNormal_Punishments() {
 		NormalPunishments Np = new NormalPunishments(10,10,5,tex);
 		
-		assertEquals(10,Np.XPosition());
-		assertEquals(10,Np.YPosition());
+		assertEquals(10,Np.getX());
+		assertEquals(10,Np.getY());
 		assertEquals(5,Np.getPunishmentScore());
 		
 		Np.setX(20);
 		Np.setY(20);
 		Np.setScore(10);
 		
-		assertEquals(20,Np.XPosition());
-		assertEquals(20,Np.YPosition());
+		assertEquals(20,Np.getX());
+		assertEquals(20,Np.getY());
 		assertEquals(10,Np.getPunishmentScore());
 		
 		Np.setScore(-10);
@@ -44,8 +44,8 @@ class PunishmentsTest {
 	void setBonus_Punishments() {
 		BonusPunishments Bp1 = new BonusPunishments(15,15,10,tex,12,30);
 		
-		assertEquals(15,Bp1.XPosition());
-		assertEquals(15,Bp1.YPosition());
+		assertEquals(15,Bp1.getX());
+		assertEquals(15,Bp1.getY());
 		assertEquals(10,Bp1.getPunishmentScore());
 		assertEquals(12,Bp1.getStartTime());
 		assertEquals(30,Bp1.getEndTime());
@@ -53,10 +53,10 @@ class PunishmentsTest {
 		Bp1.setX(25);
 		Bp1.setY(25);
 		Bp1.setScore(20);
-		Bp1.settime(20, 50);;
+		Bp1.setTime(20, 50);;
 		
-		assertEquals(25,Bp1.XPosition());
-		assertEquals(25,Bp1.YPosition());
+		assertEquals(25,Bp1.getX());
+		assertEquals(25,Bp1.getY());
 		assertEquals(20,Bp1.getPunishmentScore());
 		assertEquals(20,Bp1.getStartTime());
 		assertEquals(50,Bp1.getEndTime());
@@ -66,8 +66,8 @@ class PunishmentsTest {
 		
 		BonusPunishments Bp2 = new BonusPunishments();
 		
-		assertEquals(-1,Bp2.XPosition());
-		assertEquals(-1,Bp2.YPosition());
+		assertEquals(-1,Bp2.getX());
+		assertEquals(-1,Bp2.getY());
 		assertEquals(0,Bp2.getPunishmentScore());
 		assertEquals(-1,Bp2.getStartTime());
 		assertEquals(-1,Bp2.getEndTime());
@@ -82,11 +82,11 @@ class PunishmentsTest {
 		Punishments p1 = new NormalPunishments(0, 1, 10, tex1);
         int tileSize = 100;
         p1.draw(bat, tileSize);
-        verify(bat).draw(eq(tex1),eq((float)(tileSize * p1.XPosition())), eq((float)(tileSize* p1.YPosition())), eq((float)(tileSize)), eq((float)(tileSize)));
+        verify(bat).draw(eq(tex1),eq((float)(tileSize * p1.getX())), eq((float)(tileSize* p1.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
         
         TextureRegion tex2 = mock(TextureRegion.class);
         Punishments p2 = new BonusPunishments(0, 1, 10, tex2, 5, 10);
         p2.draw(bat, tileSize);
-        verify(bat).draw(eq(tex2),eq((float)(tileSize * p2.XPosition())), eq((float)(tileSize* p2.YPosition())), eq((float)(tileSize)), eq((float)(tileSize)));
+        verify(bat).draw(eq(tex2),eq((float)(tileSize * p2.getX())), eq((float)(tileSize* p2.getY())), eq((float)(tileSize)), eq((float)(tileSize)));
 	}
 }

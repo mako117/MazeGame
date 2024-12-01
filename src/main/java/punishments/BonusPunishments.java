@@ -14,7 +14,7 @@ public class BonusPunishments extends Punishments{
      */
     public BonusPunishments(){
         super();
-        this.settime(-1, -1);
+        this.setTime(-1, -1);
     }
     /**
      * Initializes the BonusPunishment's <x> and <y>-coordinates, <score>, <PunishmentsTexture>, <starttime>, and <endtime>.
@@ -27,7 +27,7 @@ public class BonusPunishments extends Punishments{
      */
     public BonusPunishments(int inputX, int inputY, int inputScore, TextureRegion inputTexture, int startT, int endT){
         super(inputX, inputY, inputScore, inputTexture);
-        this.settime(startT, endT);
+        this.setTime(startT, endT);
     }
 
     /**
@@ -45,7 +45,7 @@ public class BonusPunishments extends Punishments{
         return endtime;
     }
     
-    public void settime(int start, int end) {
+    public void setTime(int start, int end) {
     	this.starttime = start;
     	this.endtime = end;
     }

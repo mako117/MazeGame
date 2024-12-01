@@ -11,7 +11,7 @@ public class Regular_Reward extends Reward {
 	 * This method used to create a regular reward with default position and score, and no texture
 	 */
 	public Regular_Reward(){
-		super(-1,-1,0);
+		super();
 	}
 	
 	/**
@@ -22,7 +22,6 @@ public class Regular_Reward extends Reward {
 	 * @param inputTexture	Possible texture for the regular reward's <RewardTexture>.
 	 */
 	public Regular_Reward(int x, int y, int s, TextureRegion inputTexture){
-		super(x,y,s);
-		this.setTexture(inputTexture);
+		super(x,y,s,inputTexture);
 	}
 }

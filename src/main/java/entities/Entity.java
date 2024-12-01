@@ -20,7 +20,7 @@ public class Entity {
         setX(startX);
         setY(startY);
         setFacing(startFacing);
-        setTexture(playerTexture);
+        setTextureRegion(playerTexture);
     }
 
     /**
@@ -110,7 +110,7 @@ public class Entity {
      * Sets the texture that represents the Entity in the UI.
      * @param textureInput  Possible new value for <entityTexture>.
      */
-    protected void setTexture(TextureRegion textureInput) {
+    protected void setTextureRegion(TextureRegion textureInput) {
         this.entityTexture = textureInput;
     }
 
