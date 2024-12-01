@@ -69,11 +69,11 @@ public class Board {
 
         createAllRegularRewards();
 
-        createAllBonusRewards();
+        createAllBonusRewards(0.0f);
 
         createAllNormalPunishments();
 
-        createAllBonusPunishments();
+        createAllBonusPunishments(0.0f);
 
         endRoomBlock = new RoomBlock(1,21,new TextureRegion(new Texture("endPortal.png")));
         array.get(1).set(endRoomBlock.getYPosition(), endRoomBlock);
@@ -304,16 +304,11 @@ public class Board {
             this.t_last = t;
             // add bonus rewards
             array_bonReward.clear();
-            addBonReward(3,21,10,"dinosaur_egg.png",(int)this.t_last + 10,(int)this.t_last + 20);
-            addBonReward(20,4,10,"dinosaur_egg.png",(int)this.t_last + 30,(int)this.t_last + 40);
-            addBonReward(21,21,10,"dinosaur_egg.png",(int)this.t_last + 50,(int)this.t_last + 60);
+            createAllBonusRewards(this.t_last);
+
             // add bonus punishments
             array_bonPunishment.clear();
-            addBonPunishment(13,21,10,"alien.png",(int)this.t_last,(int)this.t_last + 10);
-            addBonPunishment(6,2,10,"alien.png",(int)this.t_last + 20,(int)this.t_last + 30);
-            addBonPunishment(12,11,10,"alien.png",(int)this.t_last + 30,(int)this.t_last + 40);
-            addBonPunishment(4,10,10,"alien.png",(int)this.t_last + 40,(int)this.t_last + 50);
-            addBonPunishment(16,8,10,"alien.png",(int)this.t_last + 50,(int)this.t_last + 60);
+            createAllBonusPunishments(this.t_last);
         }
     }
 
@@ -440,11 +435,11 @@ public class Board {
     /**
      * Creates first set of bonus rewards on the map.
      */
-    private void createAllBonusRewards() {
+    private void createAllBonusRewards(float time) {
         // add bonus rewards
-        addBonReward(3,21,10,"dinosaur_egg.png",10,20);
-        addBonReward(20,4,10,"dinosaur_egg.png",30,40);
-        addBonReward(21,21,10,"dinosaur_egg.png",50,60);
+        addBonReward(3, 21, 10, "dinosaur_egg.png", (int)(time + 10), (int)(time + 20));
+        addBonReward(20, 4, 10, "dinosaur_egg.png", (int)(time + 30), (int)(time + 40));
+        addBonReward(21, 21, 10, "dinosaur_egg.png", (int)(time + 50), (int)(time + 60));
     }
 
     /**
@@ -483,13 +478,13 @@ public class Board {
     /**
      * Creates the first set of bonus punishments on the board.
      */
-    private void createAllBonusPunishments() {
+    private void createAllBonusPunishments(float time) {
         // add bonus punishments
-        addBonPunishment(13,21,10,"alien.png",0,10);
-        addBonPunishment(6,2,10,"alien.png",20,30);
-        addBonPunishment(12,11,10,"alien.png",30,40);
-        addBonPunishment(4,10,10,"alien.png",40,50);
-        addBonPunishment(16,8,10,"alien.png",50,60);
+        addBonPunishment(13, 21, 10, "alien.png", (int)time, (int)(time + 10));
+        addBonPunishment(6, 2, 10, "alien.png", (int)time + 20, (int)(time + 30));
+        addBonPunishment(12, 11, 10, "alien.png", (int)time + 30, (int)(time + 40));
+        addBonPunishment(4, 10, 10, "alien.png", (int)time + 40, (int)(time + 50));
+        addBonPunishment(16, 8, 10, "alien.png", (int)time + 50, (int)(time + 60));
     }
 
     /**
