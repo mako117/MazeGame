@@ -121,39 +121,6 @@ public class Entity {
      * @param gameBoard The Board object on which the entity is moving.
      * @return  true if they successfully moved, else return false.
      */
-//    protected boolean checkAndMove(int increment, boolean movingOnX, Board gameBoard) {
-//        if(movingOnX) {
-//            Block toMoveTo;
-//            if(increment > 0) {
-//                this.setFacing(Direction.Right);
-//                toMoveTo = gameBoard.getBlock(x+1, y);
-//            } else {
-//                this.setFacing(Direction.Left);
-//                toMoveTo = gameBoard.getBlock(x-1, y);
-//            }
-//
-//            if(toMoveTo != null && toMoveTo.enter()){
-//                this.setX(getX() + increment);
-//                return true;
-//            }
-//        } else {
-//            Block toMoveTo;
-//            if(increment > 0) {
-//                this.setFacing(Direction.Up);
-//                toMoveTo = gameBoard.getBlock(x, y+1);
-//            } else {
-//                this.setFacing(Direction.Down);
-//                toMoveTo = gameBoard.getBlock(x, y-1);
-//            }
-//
-//            if(toMoveTo != null && toMoveTo.enter()){
-//                this.setY(getY() + increment);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     protected boolean checkAndMove(int increment, boolean movingOnX, Board gameBoard){
         Block toMoveTo = getTargetBlock(increment, movingOnX,gameBoard);
         if (toMoveTo != null && toMoveTo.enter()){
