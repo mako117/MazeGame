@@ -15,7 +15,7 @@ public class NormalPunishments extends Punishments{
 	}
 
     /**
-     * Initializes the NormalPunishment's <x> and <y>-coordinates, <score>, and <PunishmentsTexture>.
+     * Initializes the NormalPunishment's x and y-coordinates, score, and PunishmentsTexture.
      * @param inputX    Input for the punishment's x-coordinate.
      * @param inputY    Input for the punishment's y-coordinate.
      * @param inputScore    Input for the punishment's score. 
@@ -26,29 +26,29 @@ public class NormalPunishments extends Punishments{
     }
 
     /**
-     * Sets the normal punishment's <x>-coordinate.
-     * @param inputX    Input for <x>.
+     * Sets the normal punishment's x-coordinate.
+     * @param inputX    Input for x.
      */
     protected void setX(int inputX) {
         super.setX(inputX);
     }
 	/**
-     * Sets the normal punishment's <y>-coordinate.
-     * @param inputX    Input for <y>.
+     * Sets the normal punishment's y-coordinate.
+     * @param inputY    Input for y.
      */
     protected void setY(int inputY) {
         super.setY(inputY);
     }
 	/**
 	 * This method set the score for punishment.
-	 * @param s
+	 * @param s the score for the punishment
 	 */
 	protected void setScore(int s) {
 		super.setScore(s);
 	}
 	/**
 	 * This method set the texture for punishment.
-	 * @param inputTexture
+	 * @param inputTexture the texture for the punishment
 	 */
 	protected void setTextureRegion(TextureRegion inputTexture) {
 		super.setTextureRegion(inputTexture);

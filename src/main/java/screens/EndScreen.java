@@ -38,10 +38,10 @@ public class EndScreen extends ScreenAdapter {
 
     /**
      * This method set the button, skin for button, score, time, and stage for the end screen.
-     * @param game
-     * @param score
-     * @param time
-     * @param condition
+     * @param game the current game
+     * @param score the current score
+     * @param time the current time
+     * @param condition the win or lose condition
      */
     public EndScreen(final MazeGame game, int score, float time, boolean condition){
         this.game = game;
@@ -58,6 +58,9 @@ public class EndScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Used to create the buttons used in the screen
+     */
     private void createButtons(){
 
         change_x = -150;
@@ -125,6 +128,8 @@ public class EndScreen extends ScreenAdapter {
 
     /**
      * This method show what end screen look like, print all the things for the end screen need.
+     *
+     * @param delta timekeeper
      */
     @Override
     public void render(float delta) {

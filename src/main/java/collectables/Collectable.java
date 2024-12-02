@@ -3,6 +3,9 @@ package collectables;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * The public Collectable parent class for Collectables
+ */
 public class Collectable {
     private int x;
     private int y;
@@ -20,9 +23,10 @@ public class Collectable {
 	
 	/**
 	 * This method use x, y, score to set the collectable.
-	 * @param x
-	 * @param y
-	 * @param s
+	 * @param x The collectibles x position
+	 * @param y The collectibles y position
+	 * @param s the collectibles score
+	 * @param inputTexture the collectibles texture
 	 */
 	public Collectable(int x, int y, int s, TextureRegion inputTexture) {
 		this.setX(x);
@@ -55,30 +59,30 @@ public class Collectable {
 
 	/**
 	 * This method draw the collectable in game.
-	 * @param batch
-	 * @param tilesize
+	 * @param batch the batch for drawing the collectable
+	 * @param tilesize the tile size of the collectable
 	 */
 	public void draw(Batch batch, int tilesize) {
         batch.draw(collectableTexture, tilesize*this.getX(),  tilesize*this.getY(), tilesize, tilesize);
     }
 	
 	/**
-     * Sets the collectable's <x>-coordinate.
-     * @param inputX    Input for <x>.
+     * Sets the collectable's x-coordinate.
+     * @param inputX    Input for x.
      */
     protected void setX(int inputX) {
         this.x = inputX;
     }
     /**
-     * Sets the collectable's <y>-coordinate.
-     * @param inputY    Input for <y>.
+     * Sets the collectable's y-coordinate.
+     * @param inputY    Input for y.
      */
     protected void setY(int inputY) {
         this.y = inputY;
     }
 	/**
 	 * This method set the score for the collectable.
-	 * @param s
+	 * @param s the score set for the collectable
 	 */
 	protected void setScore(int s) {
 		if(s >= 0) {
@@ -87,7 +91,7 @@ public class Collectable {
 	}
 	/**
 	 * This method set the texture for the collectable.
-	 * @param inputTexture
+	 * @param inputTexture the texture for the collectable
 	 */
 	protected void setTextureRegion(TextureRegion inputTexture) {
 		this.collectableTexture = inputTexture;

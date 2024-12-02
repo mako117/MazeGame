@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 
-
 /**
      * This class has the ready screen information.
      */
@@ -28,7 +27,11 @@ import com.badlogic.gdx.ScreenAdapter;
         private Viewport viewport;
         private MazeGame game;
 
-        ReadyScreen(final MazeGame game){
+    /**
+     * Creates the ready screen
+     * @param game the current game
+     */
+    ReadyScreen(final MazeGame game){
             this.game = game;
 //            fullscreenCamera = new OrthographicCamera();
             game.resetCamera();
@@ -65,11 +68,15 @@ import com.badlogic.gdx.ScreenAdapter;
             missionStage.draw();
         }
 
-        /**
-         * This functions displays the entire map before commencing the game.
-         *
-         * @param delta
-         */
+    /**
+     * This functions displays the entire map before commencing the game.
+     *
+     * @param delta timekeeper
+     * @param time current time
+     * @param TILE_SIZE the size of the tiles
+     * @param gameboard the current gameboard
+     * @param nextScreen the next screen
+     */
         public void fullScreen(float delta, float time, int TILE_SIZE, Board gameboard, GameScreen nextScreen){
             game.camera.position.x = Gdx.graphics.getWidth()/2;
             game.camera.position.y = Gdx.graphics.getHeight()/2;

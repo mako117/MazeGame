@@ -12,6 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * The Screen Adapter class for the Main Menu
+ */
 public class MainMenuScreen extends ScreenAdapter {
     final screens.MazeGame game;
     private Stage stage;
@@ -29,7 +32,10 @@ public class MainMenuScreen extends ScreenAdapter {
 
     private Music music;
 
-
+    /**
+     * The main menu
+     * @param game the current game
+     */
     public MainMenuScreen(final MazeGame game) {
         System.out.println("Create new main menu");
         this.game = game;
@@ -116,7 +122,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
     /**
      * Render the objects to the window.
-     * @param delta
+     * @param delta timekeeper
      */
     @Override
     public void render(float delta) {

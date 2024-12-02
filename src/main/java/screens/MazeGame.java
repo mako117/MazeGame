@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.Screen;
 
-
+/**
+ * The public game class MazeGame
+ */
 public class MazeGame extends Game {
 
     public SpriteBatch batch;
@@ -36,16 +38,28 @@ public class MazeGame extends Game {
 
     private boolean winOrLose;
 
+    /**
+     * Used to create a new Maze Game
+     * @param status the current Game state of the game
+     */
     public MazeGame(GameState status){
         gameState  = status;
         winOrLose = false;
     }
 
+    /**
+     * Used to create a new game based on the condition
+     * @param status the current Game state of the game
+     * @param condition determines if win or lose
+     */
     public MazeGame(GameState status, boolean condition){
         gameState  = status;
         winOrLose = condition;
     }
 
+    /**
+     * Creates many of the Textures, camera, and gamestates
+     */
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -81,15 +95,24 @@ public class MazeGame extends Game {
         }
     }
 
+    /**
+     * Used to exit the application
+     */
     public void exitGame(){
         Gdx.app.exit();
     }
 
+    /**
+     * Used to render objects
+     */
     @Override
     public void render() {
         super.render();
     }
 
+    /**
+     * Used to dispose
+     */
     @Override
     public void dispose() {
         super.dispose();
@@ -98,21 +121,38 @@ public class MazeGame extends Game {
         skin.dispose();
     }
 
+    /**
+     * Gets the current screen
+     * @return the current screen
+     */
     protected Screen getCurrentScreen() {
         return super.getScreen();
     }
 
+    /**
+     * gets the current game state
+     * @return the current game state
+     */
     public GameState getStatus() {
         return this.gameState;
     }
 
+    /**
+     * Resets the current camera
+     */
     public void resetCamera() {
     	camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     	camera.zoom = 1.0f;
     	camera.update();
         batch.setProjectionMatrix(camera.combined);
     }
-    
+
+    /**
+     * Sets the camera given the x-position y-position and the zoom level
+     * @param x the desired x position
+     * @param y the desired y position
+     * @param zoom the desired zoom level.
+     */
     public void setCamera(float x, float y, float zoom) {
     	camera.position.x = x;
     	camera.position.y = y;

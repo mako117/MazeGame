@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * The Screen Adapter Class for the Help Screen
+ */
 public class HelpScreen extends ScreenAdapter {
 
     final screens.MazeGame game;
@@ -34,7 +37,11 @@ public class HelpScreen extends ScreenAdapter {
     private boolean helppage3 = false;
 
 
-
+    /**
+     * The help screen
+     * @param game the current game
+     * @param prev the previous menu screen
+     */
     public HelpScreen(final MazeGame game, ScreenAdapter prev) {
         this.game = game;
         this.prevScreen = prev;
@@ -110,7 +117,7 @@ public class HelpScreen extends ScreenAdapter {
 
     /**
      * Sets the previous screen of this helpscreen.
-     * @param prev
+     * @param prev the previous screen
      */
     public void setPrevScreen(ScreenAdapter prev){
         if(prev != null){
@@ -122,7 +129,7 @@ public class HelpScreen extends ScreenAdapter {
 
     /**
      * Render the objects to the window.
-     * @param delta
+     * @param delta timekeeper
      */
     @Override
     public void render(float delta) {

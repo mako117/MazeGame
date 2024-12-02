@@ -2,10 +2,16 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import screens.*;
 
+/**
+ * The Main Class Launcher
+ */
 public class Launcher {
     // initial class (may remove/change)
 
-
+    /**
+     * The launcher of the game
+     * @param args Command line arguments not required
+     */
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 

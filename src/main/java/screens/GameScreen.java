@@ -24,6 +24,9 @@ import entities.enemy.Enemies;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The public ScreenAdapter class GameScreen
+ */
 public class GameScreen extends ScreenAdapter {
     final MazeGame game;
 
@@ -36,7 +39,7 @@ public class GameScreen extends ScreenAdapter {
     private float time = 0;
     private final float TICKSPEED = 0.4f;
     private float tickCount = TICKSPEED;
-    protected float INPUT_TIMEOUT = TICKSPEED;    // Slow speed of input reading
+    protected float INPUT_TIMEOUT = TICKSPEED;
 
     // For smooth movement
     private boolean playerMovingXDirection = false;
@@ -52,7 +55,10 @@ public class GameScreen extends ScreenAdapter {
     private Character player;
     private ArrayList<Enemies> enemies;
 
-
+    /**
+     * Constructs the game screen
+     * @param game the current game
+     */
     public GameScreen(final MazeGame game) {
         this.game = game;
         
@@ -163,7 +169,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Sends the player to whichever screen depending on condition upon reaching the end.
-     * @param condition
+     * @param condition the condition for the player to end the game
      */
     private void playerEnd(boolean condition) {
 
@@ -176,7 +182,7 @@ public class GameScreen extends ScreenAdapter {
     /**
      * Used to render all aspects of GameScreen
      *
-     * @param delta
+     * @param delta timekeeper
      */
     public void render(float delta) {
 
@@ -265,7 +271,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Draws the player accounting for his movements to the game screen
-     * @param delta
+     * @param delta timekeeper
      */
     protected void renderPlayer(float delta) {
 //        System.out.println(playerMovementOffset);
@@ -286,7 +292,7 @@ public class GameScreen extends ScreenAdapter {
     /**
      * Draws all the enemies to the Game Screen
      *
-     * @param delta
+     * @param delta timekeeper
      */
     protected void renderEnemies(float delta){
         for (int i = 0; i < enemies.size(); i++){
