@@ -37,7 +37,7 @@ public class Moving_Enemies extends Enemies {
             return wantsToMoveAlongY(xDistance, yDistance, gameBoard);
         } else {
             return wantsToMoveAlongX(xDistance, yDistance, gameBoard);
-        }       
+        }
     }
     
 
@@ -49,27 +49,23 @@ public class Moving_Enemies extends Enemies {
      */
     private double[] findPlayerCalculations(int xDistance, int yDistance) {
         double POSITIVE_INFINITY = 1.0 / 0.0;
-        double moveXDistance;
-        double moveYDistance;
-        if(xDistance < 0) {
-            moveXDistance = Math.sqrt( Math.pow(xDistance + 1, 2) + Math.pow(yDistance, 2) );
-        } else if (xDistance > 0) {
-            moveXDistance = Math.sqrt( Math.pow(xDistance - 1, 2) + Math.pow(yDistance, 2) );
-        } else {
-            moveXDistance = POSITIVE_INFINITY;
-        }
-        if(yDistance < 0) {
-            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance + 1, 2) );
-        } else if (yDistance > 0) {
-            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance - 1, 2) );
-        } else {
-            moveYDistance = POSITIVE_INFINITY;
-        }
+        double moveXDistance = (xDistance == 0) ? POSITIVE_INFINITY : calculateMovementDistance(xDistance, yDistance, true, xDistance < 0);
+        double moveYDistance = (yDistance == 0) ? POSITIVE_INFINITY : calculateMovementDistance(xDistance, yDistance, false, yDistance < 0);
+        return new double[]{moveXDistance, moveYDistance};
+    }
 
-        // log.info("\nplayerX = " + mockPlayer.getX() + ", playerY = " + mockPlayer.getY() + "\nxDistance = " + xDistance + ", yDistance = " + yDistance + "\nmoveXDistance = " + moveXDistance +", moveYDistance = " + moveYDistance);
-
-        double [] array = {moveXDistance, moveYDistance};
-        return array;
+    /**
+     * Calculates the distance from the moving enemy to the character
+     * @param xDistance The enemy's <x>-coordinate - the character's <x>-coordinate.
+     * @param yDistance The enemy's <y>-coordinate - the character's <y>-coordinate.
+     * @param moveX Determines if enemy moves aling x axis or y axis
+     * @param increase Determines the direction of the movement
+     * @return The distance after simulating a movement
+     */
+    private double calculateMovementDistance(int xDistance, int yDistance,boolean moveX, boolean increase ){
+        int xDelta = moveX ? (increase ? 1 : -1) : 0;
+        int yDelta = moveX ? 0 : (increase ? 1 : -1);
+        return Math.sqrt(Math.pow(xDistance + xDelta, 2) + Math.pow(yDistance + yDelta, 2));
     }
 
     /**
