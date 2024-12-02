@@ -64,15 +64,30 @@
     </dependencies>
 
     <build>
+        <finalName>Jurassic Meteor</finalName>
     <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.5.0</version>
-        <configuration>
-          <mainClass>Launcher</mainClass>
-        </configuration>
-      </plugin>
+        <plugin><groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.7.1</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>Launcher</mainClass>
+                    </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions></plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -89,7 +104,7 @@
             <goals>
               <goal>report</goal>
             </goals>
-            <phase>verify</phase>
+            <phase>package</phase>
           </execution>
         </executions>
       </plugin>
