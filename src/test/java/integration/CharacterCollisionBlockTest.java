@@ -213,6 +213,9 @@ public class CharacterCollisionBlockTest {
 		assertEquals(1,c.getX());
 		assertEquals(1,c.getY());
 	}
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public CharacterCollisionBlockTest() {};
 }
 
 

@@ -451,4 +451,7 @@ public class Moving_EnemiesTest {
         double [] array = {moveXDistance, moveYDistance};
         return array;
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public Moving_EnemiesTest() {};
 }

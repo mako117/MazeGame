@@ -27,4 +27,5 @@ public class TestGame extends MazeGame {
         super.create();
         Gdx.app.postRunnable(test);
     }
+
 }

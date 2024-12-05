@@ -1,11 +1,11 @@
 package collectables.rewards;
 
-import collectables.Collectable;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import collectables.Collectable;
+
 /**
- * This class create reward in game.
+ * A reward is a collectable which increases the score of any Character that enters its space.
  */
 public class Reward extends Collectable {
 

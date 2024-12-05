@@ -118,6 +118,8 @@ public class EnemiesMoveTest {
 		assertTrue(Emove.get(6));
 		assertTrue(Emove.get(7));
 		
-		
 	}
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public EnemiesMoveTest() {};
 }

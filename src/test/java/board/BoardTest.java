@@ -24,6 +24,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
     HeadlessApplication application;
 
+    /**
+     * Creates a headless application to mock libGDX functions.
+     */
     AbstractTestWithHeadlessGdxContext() {
         HeadlessApplicationConfiguration conf = new HeadlessApplicationConfiguration();
         application = new HeadlessApplication(this, conf);
@@ -43,13 +46,21 @@ abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
 }
 
 
-
+/**
+ * Unit test for the Board class.
+ */
 public class BoardTest extends AbstractTestWithHeadlessGdxContext{
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public BoardTest() {};
 
     private Board board;
     private SpriteBatch mockBatch;
     private Skin mockSkin;
 
+    /**
+     * Setup done at the start of each test.
+     */
     @BeforeAll
     public void setup(){
         board = new Board();
@@ -318,7 +329,7 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
     }
 
     /**
-     * Test the draw method has no error.
+     * Test that the draw method has no error.
      */
     @Test
     void drawTest(){

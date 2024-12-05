@@ -22,4 +22,7 @@ public class HelpScreenTest extends AbstractTestWithHeadlessGdxContext {
         // only buttons and no key input, so nothing to test except that it is an MainMenuScreen object
         assertEquals(true, (gameHelp.getCurrentScreen() instanceof HelpScreen));
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public HelpScreenTest() {};
 }

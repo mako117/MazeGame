@@ -34,4 +34,7 @@ public class EndScreenTest extends AbstractTestWithHeadlessGdxContext {
         // only buttons and no key input, so nothing to test except that it is an EndScreen object
         assertEquals(true, (endGame.getCurrentScreen() instanceof EndScreen));
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public EndScreenTest() {};
 }

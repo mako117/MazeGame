@@ -38,4 +38,7 @@ public class MainMenuTest extends AbstractTestWithHeadlessGdxContext {
         assertEquals(true, (mainMenu.getCurrentScreen() instanceof MainMenuScreen));
     }
 
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public MainMenuTest() {};
+
 }

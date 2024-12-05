@@ -87,4 +87,7 @@ public class EndGameTest {
 		assertFalse(logic.checkIfExitingMaze(c, mockboard));
 	}
 
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public EndGameTest() {};
+
 }

@@ -1,6 +1,8 @@
 package entities;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -260,4 +262,7 @@ public class CharacterTest {
         // Verify that batch.draw() was called without offset
         verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize* character.getX())), eq((float)(tileSize* character.getY())), eq((float)(tileSize)), eq((float) (tileSize)));
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public CharacterTest() {};
 }

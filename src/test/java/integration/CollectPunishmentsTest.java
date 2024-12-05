@@ -60,4 +60,7 @@ public class CollectPunishmentsTest {
 		logic.checkPunishment(c, mockboard, 0);
 		assertEquals(-30, c.getScore());
 	}
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public CollectPunishmentsTest() {};
 }

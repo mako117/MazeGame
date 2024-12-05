@@ -61,4 +61,7 @@ public class CollectRewardsTest {
 		assertEquals(30,c.getScore());
 	}
 
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public CollectRewardsTest() {};
+
 }

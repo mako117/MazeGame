@@ -71,4 +71,6 @@ public class CharacterCollisionEnemiesTest {
 		assertTrue(logic.checkPlayerCollision(c, enemies));
 	}
 
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public CharacterCollisionEnemiesTest() {};
 }

@@ -185,4 +185,6 @@ public class PatrollingEnemiesTest {
     	assertEquals(2, enemy.getY());
     }
 
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public PatrollingEnemiesTest() {};
 }

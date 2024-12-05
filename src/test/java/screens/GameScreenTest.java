@@ -73,4 +73,7 @@ public class GameScreenTest extends AbstractTestWithHeadlessGdxContext{
         game = new TestGame(GameState.Pause, r);
         application = new Lwjgl3Application(game, config);
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public GameScreenTest() {};
 }

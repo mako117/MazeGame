@@ -214,4 +214,7 @@ public class MovingEnemiesCollisionBlockTest {
 		assertEquals(1,e.getX());
 		assertEquals(1,e.getY());
 	}
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public MovingEnemiesCollisionBlockTest() {};
 }
