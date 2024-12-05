@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * A board contain blocks, rewards, and punishments.
+ * The Board class represents a board consisting of blocks, rewards, and punishments.
  */
 public class Board {
     private Block startRoomBlock;
@@ -36,7 +36,7 @@ public class Board {
     }
 
     /**
-     * Create a templated board
+     * Create a templated board.
      */
     protected void createBoard() {
 
@@ -127,9 +127,9 @@ public class Board {
     /**
      * Return the block that is at the coordinates <br>
      * Invalid coordinates will return null. <br>
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @return the block or null
+     * @param x the <code>x</code> coordinate.
+     * @param y the <code>y</code> coordinate.
+     * @return the block or null.
      */
     public Block getBlock(int x, int y) {
         if(x < 0 || x >= width){
@@ -161,8 +161,8 @@ public class Board {
      * The reward will be removed from the rewards array.<br>
      * Return the score of the corresponding reward.<br>
      * If there is no reward, the score returned will be zero. <br>
-     * @param x the x coordinate
-     * @param y the y coordinate
+     * @param x the <code>x</code> coordinate
+     * @param y the <code>y</code> coordinate
      * @return the number of points from the reward.
      */
     public int regRewardCollect(int x, int y) {
@@ -180,8 +180,8 @@ public class Board {
      * Collect the bonus reward if there is a bonus reward at the given coordinates and time. <br>
      * The reward will be removed from the bonus rewards array.<br>
      * Return the score of the corresponding bonus reward.<br>
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The <code>x</code> coordinate.
+     * @param y The <code>y</code> coordinate.
      * @param currentTime The current time.
      * @return the number of points from the reward.
      */
@@ -209,8 +209,8 @@ public class Board {
      * The punishment will be removed from the punishments array. <br>
      * Return the points from the punishments. <br>
      * If there is no punishment, the points returned will be zero. <br>
-     * @param x the x coordinate
-     * @param y the y coordinate
+     * @param x the <code>x</code> coordinate
+     * @param y the <code>y</code> coordinate
      * @return the points of the punishments
      */
     public int regPunishmentCollect(int x, int y) {
@@ -219,7 +219,6 @@ public class Board {
             return 0;
         }
         int score = array_regPunishment.get(index).getCollectableScore();
-//         System.out.println("reg punishment score = " + score);
         array_regPunishment.remove(index);
         return score;
     }
@@ -230,8 +229,8 @@ public class Board {
      * The punishment will be removed from the bonus punishments array. <br>
      * Return the points from the bonus punishments. <br>
      * If there is no punishment, the points returned will be zero. <br>
-     * @param x the x coordinate.
-     * @param y the y coordinate.
+     * @param x the <code>x</code> coordinate.
+     * @param y the <code>y</code> coordinate.
      * @param currentTime the current time.
      * @return the points of the punishments.
      */
@@ -249,7 +248,6 @@ public class Board {
         }
 
         int score = array_bonPunishment.get(index).getCollectableScore();
-        // System.out.println("bonus punishment score = " + score);
         array_bonPunishment.remove(index);
         return score;
     }
@@ -329,18 +327,18 @@ public class Board {
 
     /**
      * Create a wall at the given coordinates.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The <code>x</code> coordinate.
+     * @param y The <code>y</code> coordinate.
      */
     private void createWall(int x, int y){
         array.get(x).set(y, new Wall(x, y,new TextureRegion(new Texture("cave-platformer-tileset-16x16.png"), 0, 128,16,16)));
     }
     /**
      * Create a rectangular section of Wall blocks.
-     * @param startingX The start x coordinate.
-     * @param endingX The end x coordinate.
-     * @param startingY The start y coordinate.
-     * @param endingY The end y coordinate.
+     * @param startingX The start <code>x</code> coordinate.
+     * @param endingX The end <code>x</code> coordinate.
+     * @param startingY The start <code>y</code> coordinate.
+     * @param endingY The end <code>y</code> coordinate.
      */
     private void createWallSection(int startingX, int endingX, int startingY, int endingY) {
         if (startingX == endingX) {
@@ -402,8 +400,8 @@ public class Board {
 
     /**
      * Add a new regular reward to the board.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The <code>x</code> coordinate.
+     * @param y The <code>y</code> coordinate.
      * @param score The score of the new reward.
      * @param internalTexturePath The texture.
      */
@@ -422,8 +420,8 @@ public class Board {
 
     /**
      * Add a new bonus reward to the board.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The <code>x</code> coordinate.
+     * @param y The <code>y</code> coordinate.
      * @param score The score of the new bonus reward.
      * @param internalTexturePath The texture.
      * @param t1 The start time.
@@ -444,8 +442,8 @@ public class Board {
 
     /**
      * Add a new regular punishment to the board.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The <code>x</code> coordinate.
+     * @param y The <code>y</code> coordinate.
      * @param score The score of the punishment.
      * @param internalTexturePath The texture.
      */
@@ -465,8 +463,8 @@ public class Board {
     
     /**
      * Add a new bonus punishment to the board.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The <code>x</code> coordinate.
+     * @param y The  <code>y</code>.
      * @param score The score of the bonus punishment.
      * @param internalTexturePath The texture.
      * @param t1 The start time.
@@ -490,8 +488,8 @@ public class Board {
     /**
      * Check if the given coordinates has a reward
      * Return the index that the reward is in, in the reward_array, otherwise -1.
-     * @param x the x coordinate
-     * @param y the y coordinate
+     * @param x the <code>x</code> coordinate
+     * @param y the <code>y</code> coordinate
      * @return the index in the reward array
      */
     private int isRewardHere(int x, int y, ArrayList<Reward> array_reward) {
@@ -505,8 +503,8 @@ public class Board {
     /**
      * Check if the given coordinates have a punishment
      * Return the index the punishment is in, in the punishment array, otherwise -1.
-     * @param x the x coordinate
-     * @param y the y coordinate
+     * @param x the <code>x</code> coordinate
+     * @param y the <code>y</code> coordinate
      * @return the index in the punishment array
      */
     private int isPunishmentHere(int x, int y, ArrayList<Punishments> array_punishments) {
