@@ -13,6 +13,9 @@ import board.Board;
 import screens.GameLogic;
 import entities.Character;
 
+/**
+ * Integration tests for interactions between the GameLogic and Character classes.
+ */
 public class EndGameTest {
 	private GameLogic logic = new GameLogic();
 	private TextureRegion tex = mock(TextureRegion.class);
@@ -20,7 +23,7 @@ public class EndGameTest {
 	private Block mockblock = mock(Block.class);
 	
 	/**
-	 * Test the score change make game end
+	 * Test to see how changes in the character's score do or do not cause the game to end.
 	 */
 	@Test
 	void EndGameScoreTest() {
@@ -36,7 +39,7 @@ public class EndGameTest {
 	}
 	
 	/**
-	 * Test the condition the fit for end game
+	 * Test to see under what conditions the game ends.
 	 */
 	@Test
 	void EndGameConditionTest() {

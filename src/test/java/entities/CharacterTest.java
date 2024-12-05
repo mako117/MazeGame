@@ -15,6 +15,9 @@ import entities.Character;
 import board.Board;
 import board.Block;
 
+/**
+ * Unit test for the Character class.
+ */
 public class CharacterTest {
 
     private Character character;
@@ -162,7 +165,10 @@ public class CharacterTest {
         assertEquals(10, character.getScore());
 
     }
-    
+
+    /**
+     * Test to draw the Character facing Direction.none.
+     */
     @Test
     public void testDrawNull() {
         character.setX(2);

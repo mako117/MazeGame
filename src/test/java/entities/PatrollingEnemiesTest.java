@@ -15,6 +15,9 @@ import entities.enemy.Enemies;
 import board.Board;
 import board.Block;
 
+/**
+ * Unit test for the PatrollingEnemies class.
+ */
 public class PatrollingEnemiesTest {
 
     private PatrollingEnemies enemy;
@@ -176,7 +179,10 @@ public class PatrollingEnemiesTest {
 
 
     }
-    
+
+    /**
+     * Test draw method when facing Direction.None.
+     */
     @Test
     void NoneDirectionTest() {
     	enemy = new PatrollingEnemies(2, 2, Direction.None, 0, 5, 0, 5, mockTextureRegion);

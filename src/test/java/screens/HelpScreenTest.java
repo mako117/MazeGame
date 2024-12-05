@@ -6,9 +6,15 @@ import org.junit.Test;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 
+/**
+ * "Unit" test for the HelpScreen class.
+ */
 public class HelpScreenTest extends AbstractTestWithHeadlessGdxContext {
     TestGame gameHelp;
 
+    /**
+     * Tests if the HelpScreen class runs.
+     */
     @Test
     public void HelpScreenIntegrationTest() {
         Runnable r = () -> {

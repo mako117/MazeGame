@@ -16,13 +16,16 @@ import board.BarrierBlock;
 import entities.enemy.PatrollingEnemies;
 import directions.Direction;
 
+/**
+ * Integration tests for interactions between the PatrollingEnemies and Block classes.
+ */
 public class PatrollingEnemiesCollisionBlockTest {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private Board mockboard = mock(Board.class);
 	
 	//Wall
 	/**
-	 * Test patrolling enemies move up have a wall
+	 * Test if patrolling enemies can move up into a wall.
 	 */
 	@Test
 	void moveupwithwall() {
@@ -38,7 +41,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test patrolling enemies move left have a wall
+	 * Test if patrolling enemies can move left into a wall.
 	 */
 	@Test
 	void moveleftwithwall() {
@@ -54,7 +57,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 
 	/**
-	 * Test patrolling enemies move right have a wall
+	 * Test if patrolling enemies can move right into a wall.
 	 */
 	@Test
 	void moverightwithwall() {
@@ -70,7 +73,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test patrolling enemies move down have a wall
+	 * Test if patrolling enemies can move down into a wall.
 	 */
 	@Test
 	void movedownwithwall() {
@@ -87,7 +90,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	
 	//RoomBlock
 	/**
-	 * Test patrolling enemies move up have a roomblock
+	 * Test if patrolling enemies can move up into a RoomBlock.
 	 */
 	@Test
 	void moveupwithroomblock() {
@@ -103,7 +106,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test patrolling enemies move left have a roomblock
+	 * Test if patrolling enemies can move left into a RoomBlock.
 	 */
 	@Test
 	void moveleftwithroomblock() {
@@ -119,7 +122,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 
 	/**
-	 * Test patrolling enemies move right have a roomblock
+	 * Test if patrolling enemies can move right into a RoomBlock.
 	 */
 	@Test
 	void moverightwithroomblock() {
@@ -135,7 +138,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test patrolling enemies move down have a roomblock
+	 * Test if patrolling enemies can move down into a RoomBlock.
 	 */
 	@Test
 	void movedownwithroomblock() {
@@ -152,7 +155,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 
 	//BarrierBlock
 	/**
-	 * Test moving enemies move up have a BarrierBlock
+	 * Test if patrolling enemies can move up into a BarrierBlock.
 	 */
 	@Test
 	void moveupwithBarrierBlock() {
@@ -168,7 +171,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test moving enemies move left have a BarrierBlock
+	 * Test if patrolling enemies can move left into a BarrierBlock.
 	 */
 	@Test
 	void moveleftwithBarrierBlock() {
@@ -184,7 +187,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 
 	/**
-	 * Test moving enemies move right have a BarrierBlock
+	 * Test if patrolling enemies can move right into a BarrierBlock.
 	 */
 	@Test
 	void moverightwithBarrierBlock() {
@@ -200,7 +203,7 @@ public class PatrollingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test moving enemies move down have a BarrierBlock
+	 * Test if patrolling enemies can move down into a BarrierBlock.
 	 */
 	@Test
 	void movedownwithBarrierBlock() {

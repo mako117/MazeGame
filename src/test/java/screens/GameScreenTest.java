@@ -8,7 +8,9 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// @RunWith(GdxTestRunner.class)
+/**
+ * "Unit" test for the GameScreen, PauseScreen, and ReadyScreen classes.
+ */
 public class GameScreenTest extends AbstractTestWithHeadlessGdxContext{
     TestGame game;
 
@@ -56,7 +58,7 @@ public class GameScreenTest extends AbstractTestWithHeadlessGdxContext{
     }
 
     /**
-     * Test if game with ready screen runs.
+     * Test if game with pause screen runs.
      */
     @Test
     public void PauseScreenIntegrationTest() {

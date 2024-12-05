@@ -22,8 +22,15 @@ import org.junit.rules.ExpectedException;
 import screens.*;
 import screens.MazeGame;
 
+/**
+ * "Unit" test for the MainMenuScreen class.
+ */
 public class MainMenuTest extends AbstractTestWithHeadlessGdxContext {
     TestGame mainMenu;
+
+    /**
+     * Test if MainMenuScreen runs.
+     */
     @Test
     public void MainMenuScreenIntegrationTest() {
         Runnable r = () -> {

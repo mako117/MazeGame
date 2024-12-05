@@ -16,6 +16,10 @@ import entities.enemy.Enemies;
 import board.Board;
 import board.Block;
 
+/**
+ * Unit test for the Enemies class.
+ */
+
 public class EnemiesTest {
 
     private Enemies enemy;
@@ -155,7 +159,7 @@ public class EnemiesTest {
     }
 
     /**
-     *
+     * Test what happens when the enemy is out of bounds.
      */
     @Test
     public void entityOutOfBoundsTest() {
@@ -170,6 +174,9 @@ public class EnemiesTest {
         assertEquals(0, enemy.getY());
     }
 
+    /**
+     * Test drawing the entity facing Direction.None.
+     */
     @Test
     public void testDrawNone() {
 

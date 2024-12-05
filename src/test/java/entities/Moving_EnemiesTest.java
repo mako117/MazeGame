@@ -20,6 +20,9 @@ import org.mockito.Mock;
 import board.Board;
 import board.Block;
 
+/**
+ * Unit test for the Moving_Enemies class.
+ */
 public class Moving_EnemiesTest {
 
     private Board mockBoard;
@@ -344,6 +347,10 @@ public class Moving_EnemiesTest {
     // }
 
     //*** Utility functions ***//
+
+    /**
+     * Utility function for testing the enemy trying to move up.
+     */
     private void testUp() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         assertEquals('W', result);
@@ -355,6 +362,9 @@ public class Moving_EnemiesTest {
         // checkPosition(result, 3, 4);
         when(upBlock.enter()).thenReturn(false); // block off up
     }
+    /**
+     * Utility function for testing the enemy trying to move down.
+     */
     private void testDown() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         assertEquals('S', result);
@@ -366,6 +376,9 @@ public class Moving_EnemiesTest {
         // checkPosition(result, 3, 2);
         when(downBlock.enter()).thenReturn(false); // block off down
     }
+    /**
+     * Utility function for testing the enemy trying to move right.
+     */
     private void testRight() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         assertEquals('D', result);
@@ -377,6 +390,9 @@ public class Moving_EnemiesTest {
         // checkPosition(result, 4, 3);
         when(rightBlock.enter()).thenReturn(false); // block off right
     }
+    /**
+     * Utility function for testing the enemy trying to move left.
+     */
     private void testLeft() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         assertEquals('A', result);
@@ -388,6 +404,9 @@ public class Moving_EnemiesTest {
         // checkPosition(result, 2, 3);
         when(leftBlock.enter()).thenReturn(false); // block off left
     }
+    /**
+     * Utility function for testing the enemy not trying to move anywhere.
+     */
     private void testIdle() {
         char result;
 
@@ -397,60 +416,70 @@ public class Moving_EnemiesTest {
         movingEnemy.direction(result, mockBoard);
         // checkPosition(result, 3, 3);
     }
-    private void checkPosition(char input, int startX, int startY) {
-        switch(input) {
-            case 'W':
-                System.out.println();
-                assertEquals(startX, movingEnemy.getX());
-                assertEquals(startY+1, movingEnemy.getY());
-            break;
+    
+    // /**
+    //  * Utility function for verifying the enemy's position.
+    //  */
+    // private void checkPosition(char input, int startX, int startY) {
+    //     switch(input) {
+    //         case 'W':
+    //             System.out.println();
+    //             assertEquals(startX, movingEnemy.getX());
+    //             assertEquals(startY+1, movingEnemy.getY());
+    //         break;
 
-            case 'A':
-                assertEquals(startX-1, movingEnemy.getX());
-                assertEquals(startY, movingEnemy.getY());
-            break;
+    //         case 'A':
+    //             assertEquals(startX-1, movingEnemy.getX());
+    //             assertEquals(startY, movingEnemy.getY());
+    //         break;
 
-            case 'S':
-                assertEquals(startX, movingEnemy.getX());
-                assertEquals(startY-1, movingEnemy.getY());
-            break;
+    //         case 'S':
+    //             assertEquals(startX, movingEnemy.getX());
+    //             assertEquals(startY-1, movingEnemy.getY());
+    //         break;
 
-            case 'D':
-                assertEquals(startX+1, movingEnemy.getX());
-                assertEquals(startY, movingEnemy.getY());
-            break;
+    //         case 'D':
+    //             assertEquals(startX+1, movingEnemy.getX());
+    //             assertEquals(startY, movingEnemy.getY());
+    //         break;
 
-            case 'I':
-                assertEquals(startX, movingEnemy.getX());
-                assertEquals(startY, movingEnemy.getY());
-            break;
-        }
-    }
+    //         case 'I':
+    //             assertEquals(startX, movingEnemy.getX());
+    //             assertEquals(startY, movingEnemy.getY());
+    //         break;
+    //     }
+    // }
 
-    private double[] findPlayerCalculations(int xDistance, int yDistance) {
-        double POSITIVE_INFINITY = 1.0 / 0.0;
-        double moveXDistance;
-        double moveYDistance;
-        if(xDistance < 0) {
-            moveXDistance = Math.sqrt( Math.pow(xDistance + 1, 2) + Math.pow(yDistance, 2) );
-        } else if (xDistance > 0) {
-            moveXDistance = Math.sqrt( Math.pow(xDistance - 1, 2) + Math.pow(yDistance, 2) );
-        } else {
-            moveXDistance = POSITIVE_INFINITY;
-        }
-        if(yDistance < 0) {
-            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance + 1, 2) );
-        } else if (yDistance > 0) {
-            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance - 1, 2) );
-        } else {
-            moveYDistance = POSITIVE_INFINITY;
-        }
+    // /**
+    //  * Utility function for verifying find_player calculations.
+    //  * @param xDistance The enemy's x-coordinate - the character's x-coordinate.
+    //  * @param yDistance The enemy's y-coordinate - the character's y-coordinate.
+    //  * @return  A double array containing moveX and moveY.
+    //  */
+    // private double[] findPlayerCalculations(int xDistance, int yDistance) {
+    //     double POSITIVE_INFINITY = 1.0 / 0.0;
+    //     double moveXDistance;
+    //     double moveYDistance;
+    //     if(xDistance < 0) {
+    //         moveXDistance = Math.sqrt( Math.pow(xDistance + 1, 2) + Math.pow(yDistance, 2) );
+    //     } else if (xDistance > 0) {
+    //         moveXDistance = Math.sqrt( Math.pow(xDistance - 1, 2) + Math.pow(yDistance, 2) );
+    //     } else {
+    //         moveXDistance = POSITIVE_INFINITY;
+    //     }
+    //     if(yDistance < 0) {
+    //         moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance + 1, 2) );
+    //     } else if (yDistance > 0) {
+    //         moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance - 1, 2) );
+    //     } else {
+    //         moveYDistance = POSITIVE_INFINITY;
+    //     }
 
-        // log.info("\nplayerX = " + mockPlayer.getX() + ", playerY = " + mockPlayer.getY() + "\nxDistance = " + xDistance + ", yDistance = " + yDistance + "\nmoveXDistance = " + moveXDistance +", moveYDistance = " + moveYDistance);
+    //     // log.info("\nplayerX = " + mockPlayer.getX() + ", playerY = " + mockPlayer.getY() + "\nxDistance = " + xDistance + ", yDistance = " + yDistance + "\nmoveXDistance = " + moveXDistance +", moveYDistance = " + moveYDistance);
 
-        double [] array = {moveXDistance, moveYDistance};
-        return array;
-    }
+    //     double [] array = {moveXDistance, moveYDistance};
+    //     return array;
+    // }
 
     /** Empty default constructor to allow creation of Javadocs without errors. */
     public Moving_EnemiesTest() {};

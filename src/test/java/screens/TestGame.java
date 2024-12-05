@@ -8,15 +8,28 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-
+/**
+ * Creates a MazeGame that takes runnables.
+ */
 public class TestGame extends MazeGame {
     Runnable test;
 
+    /**
+     * Default constructor.
+     * @param status    Sets which window MazeGame will open.
+     * @param test      The runnable.
+     */
     public TestGame(GameState status, Runnable test) {
         super(status);
         this.test = test;
     }
 
+    /**
+     * EndScreen constructor.
+     * @param status    Sets which window MazeGame will open.
+     * @param condition Determines whether it will open the win or lose version of EndScreen.
+     * @param test      The runnable.
+     */
     public TestGame(GameState status, boolean condition, Runnable test) {
         super(status, condition);
         this.test = test;

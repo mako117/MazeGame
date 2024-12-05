@@ -14,13 +14,16 @@ import board.Board;
 import entities.Character;
 import screens.GameLogic;
 
+/**
+ * Integration test for interactions between the Character and Reward classes.
+ */
 public class CollectRewardsTest {
 	private Board mockboard = mock(Board.class);
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
 	
 	/**
-	 * Test character collect regular reward how score change
+	 * Test how the character's score changes when they collide with a regular reward.
 	 */
 	@Test
 	void CharacterCollectRegularReward() {
@@ -34,7 +37,7 @@ public class CollectRewardsTest {
 	}
 	
 	/**
-	 * Test character collect bonus reward how score change
+	 * Test how the character's score changes when they collide with a bonus reward.
 	 */
 	@Test
 	void CharacterCollectBonusReward() {
@@ -48,7 +51,7 @@ public class CollectRewardsTest {
 	}
 	
 	/**
-	 * Test character collect two type reward how score change
+	 * Test how the character's score changes when they collide with a regular and bonus reward at the same time.
 	 */
 	@Test
 	void CharacterCollectBothRewards() {
