@@ -81,7 +81,7 @@ public class Moving_EnemiesTest {
     }
 
     /**
-     * moveYDistance < moveXDistance, yDistance < 0, xDistance < 0
+     * moveYDistance is less than moveXDistance, yDistance is less than 0, and xDistance is less than 0.
      */
     @Test
     public void wantsToMoveUpElseRightTest() {
@@ -103,7 +103,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move up and to the right, with up being of greater priority.
-     * moveYDistance < moveXDistance, yDistance < 0, xDistance > 0
+     * moveYDistance is less than moveXDistance, yDistance is less than 0, and xDistance is greater than 0.
      */
     @Test
     public void wantsToMoveUpElseLeftTest() {
@@ -125,7 +125,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move up.
-     * moveYDistance < moveXDistance, yDistance < 0, xDistance = 0
+     * moveYDistance is less than moveXDistance, yDistance is less than 0, and xDistance = 0.
      */
     @Test
     public void wantsToMoveUpElseIdleTest() {
@@ -141,7 +141,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move down and to the right, with down taking priority.
-     * moveYDistance < moveXDistance, xDistance < 0, yDistance > 0
+     * moveYDistance is less than moveXDistance, xDistance is less than 0, and yDistance is greater than 0.
      */
     @Test
     public void wantsToMoveDownElseRightTest() {
@@ -163,7 +163,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move down and left, with down taking priority.
-     * moveYDistance < moveXDistance, yDistance > 0, xDistance > 0
+     * moveYDistance is less than moveXDistance, yDistance is greater than 0, and xDistance is greater than 0.
      */
     @Test
     public void wantsToMoveDownElseLeftTest() {
@@ -185,7 +185,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move down.
-     * moveYDistance < moveXDistance, yDistance > 0, xDistance = 0
+     * moveYDistance is less than moveXDistance, yDistance is greater than 0, and xDistance = 0.
      */
     @Test
     public void wantsToMoveDownElseIdleTest() {
@@ -201,7 +201,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move right and up, with right taking priority.
-     * moveYDistance > moveXDistance, yDistance < 0, xDistance < 0
+     * moveYDistance is greater than moveXDistance, yDistance is less than 0, and xDistance is less than 0.
      */
     @Test
     public void wantsToMoveRightElseUpTest() {
@@ -223,7 +223,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move right and down, with right taking priority.
-     * moveYDistance > moveXDistance, yDistance > 0, xDistance < 0
+     * moveYDistance is greater than moveXDistance, yDistance is greater than 0, and xDistance is less than 0.
      */
     @Test
     public void wantsToMoveRightElseDownTest() {
@@ -245,7 +245,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move right.
-     * moveYDistance > moveXDistance, yDistance = 0, xDistance < 0
+     * moveYDistance is greater than moveXDistance, yDistance = 0, and xDistance is less than 0.
      */
     @Test
     public void wantsToMoveRightElseIdleTest() {
@@ -261,7 +261,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move left and up, with left taking priority.
-     * moveYDistance > moveXDistance, yDistance < 0, xDistance > 0
+     * moveYDistance is greater than moveXDistance, yDistance is less than 0, and xDistance is greater than 0.
      */
     @Test
     public void wantsToMoveLeftElseUpTest() {
@@ -285,7 +285,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move left and down, with left taking priority.
-     * moveYDistance > moveXDistance, xDistance > 0, yDistance > 0
+     * moveYDistance is greater than moveXDistance, xDistance is greater than 0, and yDistance is greater than 0.
      */
     @Test
     public void wantsToMoveLeftElseDownTest() {
@@ -307,7 +307,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move left.
-     * moveYDistance > moveXDistance, xDistance > 0, yDistance = 0
+     * moveYDistance is greater than moveXDistance, xDistance is greater than 0, and yDistance = 0.
      */
     @Test
     public void wantsToMoveLeftElseIdleTest() {
