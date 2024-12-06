@@ -27,7 +27,7 @@ public class PatrollingEnemiesTest {
     private TextureRegion mockTextureRegion;
 
     /**
-     * The setup to create the initial enemy and some mock classes
+     * The setup to create the initial enemy and some mock classes.
      */
     @BeforeEach
     public void setUp() {
@@ -41,7 +41,7 @@ public class PatrollingEnemiesTest {
     }
 
     /**
-     * Test to check the initial position of the enemy
+     * Test to check the initial position of the enemy.
      */
     @Test
     public void initialPositionTest() {
@@ -54,7 +54,7 @@ public class PatrollingEnemiesTest {
     }
 
     /**
-     * Test invalid min and max x and y
+     * Test invalid min and max x and y.
      */
     @Test
     public void invalidXYTest() {
@@ -62,7 +62,7 @@ public class PatrollingEnemiesTest {
     }
 
     /**
-     * Test Path Creation and Follow
+     * Test Path Creation and Following.
      */
     @Test
     public void createdPathYTest() {
@@ -82,7 +82,7 @@ public class PatrollingEnemiesTest {
 
     }
     /**
-     * Test Path Creation and Follow
+     * Test Path Creation and Following.
      */
     @Test
     public void createdPathXTest() {
@@ -105,7 +105,7 @@ public class PatrollingEnemiesTest {
     }
 
     /**
-     * Test Directional Block movement
+     * Test Directional Block movement.
      */
     @Test
     public void directionBlockTest() {

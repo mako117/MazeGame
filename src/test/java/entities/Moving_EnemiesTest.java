@@ -321,31 +321,6 @@ public class Moving_EnemiesTest {
         testIdle();
     }
 
-    // @Test
-    // public void greaterXDistanceTest(){
-    //     when(mockPlayer.getX()).thenReturn(3);
-    //     when(mockPlayer.getY()).thenReturn(5);
-
-    //     char result = movingEnemy.find_player(mockPlayer, mockBoard);
-    //     movingEnemy.direction(result,mockBoard);
-    //     assertEquals('W', result);
-    // }
-
-    // @Test
-    // public void checkFindPlayerCalculations() {
-    //     // moveYDistance < moveXDistance, xDistance < 0, yDistance > 0
-    //     when(mockPlayer.getX()).thenReturn(7);
-    //     when(mockPlayer.getY()).thenReturn(2);
-    //     int xDistance = movingEnemy.getX() - mockPlayer.getX();
-    //     int yDistance = movingEnemy.getY() - mockPlayer.getY();
-    //     double [] resultArray = findPlayerCalculations(xDistance, yDistance);
-    //     double moveXDistance = resultArray[0];
-    //     double moveYDistance = resultArray[1];
-    //     assertEquals(true, xDistance < 0);
-    //     assertEquals(true, yDistance > 0);
-    //     assertEquals(true, moveYDistance < moveXDistance);
-    // }
-
     //*** Utility functions ***//
 
     /**
@@ -356,10 +331,8 @@ public class Moving_EnemiesTest {
         assertEquals('W', result);
 
         movingEnemy.direction(result,mockBoard);
-        // checkPosition(result, 3, 3);
 
         movingEnemy.direction('S',mockBoard); // reset position
-        // checkPosition(result, 3, 4);
         when(upBlock.enter()).thenReturn(false); // block off up
     }
     /**
@@ -370,10 +343,8 @@ public class Moving_EnemiesTest {
         assertEquals('S', result);
 
         movingEnemy.direction(result,mockBoard);
-        // checkPosition(result, 3, 3);
 
         movingEnemy.direction('W',mockBoard); // reset position
-        // checkPosition(result, 3, 2);
         when(downBlock.enter()).thenReturn(false); // block off down
     }
     /**
@@ -384,10 +355,8 @@ public class Moving_EnemiesTest {
         assertEquals('D', result);
 
         movingEnemy.direction(result,mockBoard);
-        // checkPosition(result, 3, 3);
 
         movingEnemy.direction('A',mockBoard); // reset position
-        // checkPosition(result, 4, 3);
         when(rightBlock.enter()).thenReturn(false); // block off right
     }
     /**
@@ -398,10 +367,8 @@ public class Moving_EnemiesTest {
         assertEquals('A', result);
 
         movingEnemy.direction(result,mockBoard);
-        // checkPosition(result, 3, 3);
 
         movingEnemy.direction('D',mockBoard); // reset position
-        // checkPosition(result, 2, 3);
         when(leftBlock.enter()).thenReturn(false); // block off left
     }
     /**
@@ -414,72 +381,7 @@ public class Moving_EnemiesTest {
         assertEquals('I', result);
 
         movingEnemy.direction(result, mockBoard);
-        // checkPosition(result, 3, 3);
     }
-    
-    // /**
-    //  * Utility function for verifying the enemy's position.
-    //  */
-    // private void checkPosition(char input, int startX, int startY) {
-    //     switch(input) {
-    //         case 'W':
-    //             System.out.println();
-    //             assertEquals(startX, movingEnemy.getX());
-    //             assertEquals(startY+1, movingEnemy.getY());
-    //         break;
-
-    //         case 'A':
-    //             assertEquals(startX-1, movingEnemy.getX());
-    //             assertEquals(startY, movingEnemy.getY());
-    //         break;
-
-    //         case 'S':
-    //             assertEquals(startX, movingEnemy.getX());
-    //             assertEquals(startY-1, movingEnemy.getY());
-    //         break;
-
-    //         case 'D':
-    //             assertEquals(startX+1, movingEnemy.getX());
-    //             assertEquals(startY, movingEnemy.getY());
-    //         break;
-
-    //         case 'I':
-    //             assertEquals(startX, movingEnemy.getX());
-    //             assertEquals(startY, movingEnemy.getY());
-    //         break;
-    //     }
-    // }
-
-    // /**
-    //  * Utility function for verifying find_player calculations.
-    //  * @param xDistance The enemy's x-coordinate - the character's x-coordinate.
-    //  * @param yDistance The enemy's y-coordinate - the character's y-coordinate.
-    //  * @return  A double array containing moveX and moveY.
-    //  */
-    // private double[] findPlayerCalculations(int xDistance, int yDistance) {
-    //     double POSITIVE_INFINITY = 1.0 / 0.0;
-    //     double moveXDistance;
-    //     double moveYDistance;
-    //     if(xDistance < 0) {
-    //         moveXDistance = Math.sqrt( Math.pow(xDistance + 1, 2) + Math.pow(yDistance, 2) );
-    //     } else if (xDistance > 0) {
-    //         moveXDistance = Math.sqrt( Math.pow(xDistance - 1, 2) + Math.pow(yDistance, 2) );
-    //     } else {
-    //         moveXDistance = POSITIVE_INFINITY;
-    //     }
-    //     if(yDistance < 0) {
-    //         moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance + 1, 2) );
-    //     } else if (yDistance > 0) {
-    //         moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance - 1, 2) );
-    //     } else {
-    //         moveYDistance = POSITIVE_INFINITY;
-    //     }
-
-    //     // log.info("\nplayerX = " + mockPlayer.getX() + ", playerY = " + mockPlayer.getY() + "\nxDistance = " + xDistance + ", yDistance = " + yDistance + "\nmoveXDistance = " + moveXDistance +", moveYDistance = " + moveYDistance);
-
-    //     double [] array = {moveXDistance, moveYDistance};
-    //     return array;
-    // }
 
     /** Empty default constructor to allow creation of Javadocs without errors. */
     public Moving_EnemiesTest() {};

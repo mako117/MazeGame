@@ -39,6 +39,9 @@ abstract class AbstractTestWithHeadlessGdxContext extends ApplicationAdapter {
         // no-op, prevents exception when trying to render since we are using a headless application
     }
 
+    /**
+     * Cleanup done after every test.
+     */
     @AfterAll
     void afterAll() {
         application.exit();
@@ -301,7 +304,7 @@ public class BoardTest extends AbstractTestWithHeadlessGdxContext{
 
     /**
      * Test generate new bonus punishments.
-     * Check that there is still the same amount of punishments and rewards after generating.
+     * Check that there are still the same amount of punishments and rewards after generating.
      */
     @Test
     void genNewBonusTest() {
