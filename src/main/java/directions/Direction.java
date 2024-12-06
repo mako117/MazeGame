@@ -1,11 +1,31 @@
 package directions;
 
 /**
- * All possible directions in the 2D game.
+ * All possible direcions in the 2D game.
  */
 public enum Direction {
     /**
-     * The Different possible directions
+     * Up
      */
-    Up, Right, Down, Left, None
+    Up, 
+
+    /**
+     * Right
+     */
+    Right, 
+
+    /**
+     * Down
+     */
+    Down, 
+
+    /**
+     * Left
+     */
+    Left, 
+
+    /**
+     * No direction
+     */
+    None
 }

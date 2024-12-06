@@ -10,12 +10,18 @@ import org.junit.jupiter.api.Test;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Unit test for the collectables.punishments package.
+ */
 class PunishmentsTest {
 	private SpriteBatch bat = mock(SpriteBatch.class);
 	private TextureRegion tex = mock(TextureRegion.class);
 
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public PunishmentsTest() {};
+
 	/**
-	 * Test create normal punishments and change it set
+	 * Test creation and changing of normal punishments.
 	 */
 	@Test
 	void setNormal_Punishments() {
@@ -38,7 +44,7 @@ class PunishmentsTest {
 	}
 	
 	/**
-	 * Test create bonus punishments and change it set
+	 * Test creation and changing of bonus punishments.
 	 */
 	@Test
 	void setBonus_Punishments() {
@@ -74,7 +80,7 @@ class PunishmentsTest {
 	}
 
 	/**
-	 * Test the draw method in punishments can come out correct information
+	 * Test the draw method in punishments.
 	 */
 	@Test
 	void drawPunishments() {

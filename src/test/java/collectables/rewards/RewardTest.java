@@ -12,10 +12,19 @@ import org.junit.jupiter.api.Test;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Unit test for the collectables.rewards package.
+ */
 class RewardTest {
 	private TextureRegion tex;
 	private SpriteBatch bat;
-	
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public RewardTest() {};
+
+	/**
+	 * Setup done before every test.
+	 */
 	@BeforeEach
 	void setup() {
 		tex = mock(TextureRegion.class);
@@ -23,7 +32,7 @@ class RewardTest {
 	}
 	
 	/**
-	 * Test create the regular reward and change it set 
+	 * Test creation and changing of the regular reward.
 	 */
 	@Test
 	void setRegular_Reward() {
@@ -51,7 +60,7 @@ class RewardTest {
 	}
 	
 	/**
-	 * Test create the bonus reward and change it set
+	 * Test creation and changing of bonus reward.
 	 */
 	@Test
 	void setBonus_Reward() {
@@ -86,7 +95,7 @@ class RewardTest {
 	}
 
 	/**
-	 * Test the draw method in reward can come out correct information
+	 * Test reward's draw method.
 	 */
 	@Test
 	void drawReward() {

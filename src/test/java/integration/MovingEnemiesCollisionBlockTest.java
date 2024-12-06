@@ -15,13 +15,16 @@ import board.Wall;
 import board.BarrierBlock;
 import entities.enemy.Moving_Enemies;
 
+/**
+ * Integration test for interactions between the Moving_Enemies and Block classes.
+ */
 public class MovingEnemiesCollisionBlockTest {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private Board mockboard = mock(Board.class);
 	
 	//Wall
 	/**
-	 * Test moving enemies move up have a wall
+	 * Test if moving enemies will move up into a wall.
 	 */
 	@Test
 	void moveupwithwall() {
@@ -37,7 +40,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test moving enemies move left have a wall
+	 * Test if moving enemies will move left into a wall.
 	 */
 	@Test
 	void moveleftwithwall() {
@@ -53,7 +56,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 
 	/**
-	 * Test moving enemies move right have a wall
+	 * Test if moving enemies will move right into a wall.
 	 */
 	@Test
 	void moverightwithwall() {
@@ -69,7 +72,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test moving enemies move down have a wall
+	 * Test if moving enemies will move down into a wall.
 	 */
 	@Test
 	void movedownwithwall() {
@@ -87,7 +90,7 @@ public class MovingEnemiesCollisionBlockTest {
 	//RoomBlock
 	
 	/**
-	 * Test moving enemies move up have a roomblock
+	 * Test if moving enemies will move up into a RoomBlock.
 	 */
 	@Test
 	void moveupwithroomblock() {
@@ -103,7 +106,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test moving enemies move left have a roomblock
+	 * Test if moving enemies will move left into a RoomBlock.
 	 */
 	@Test
 	void moveleftwithroomblock() {
@@ -119,7 +122,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 
 	/**
-	 * Test moving enemies move right have a roomblock
+	 * Test if moving enemies will move right into a RoomBlock.
 	 */
 	@Test
 	void moverightwithroomblock() {
@@ -135,7 +138,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test moving enemies move down have a roomblock
+	 * Test if moving enemies will move down into a RoomBlock.
 	 */
 	@Test
 	void movedownwithroomblock() {
@@ -152,7 +155,7 @@ public class MovingEnemiesCollisionBlockTest {
 	
 	//BarrierBlock
 	/**
-	 * Test moving enemies move up have a BarrierBlock
+	 * Test if moving enemies will move up into a BarrierBlock.
 	 */
 	@Test
 	void moveupwithBarrierBlock() {
@@ -168,7 +171,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test moving enemies move left have a BarrierBlock
+	 * Test if moving enemies will move left into a BarrierBlock.
 	 */
 	@Test
 	void moveleftwithBarrierBlock() {
@@ -184,7 +187,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 
 	/**
-	 * Test moving enemies move right have a BarrierBlock
+	 * Test if moving enemies will move right into a BarrierBlock.
 	 */
 	@Test
 	void moverightwithBarrierBlock() {
@@ -200,7 +203,7 @@ public class MovingEnemiesCollisionBlockTest {
 	}
 	
 	/**
-	 * Test moving enemies move down have a BarrierBlock
+	 * Test if moving enemies will move down into a BarrierBlock.
 	 */
 	@Test
 	void movedownwithBarrierBlock() {
@@ -214,4 +217,7 @@ public class MovingEnemiesCollisionBlockTest {
 		assertEquals(1,e.getX());
 		assertEquals(1,e.getY());
 	}
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public MovingEnemiesCollisionBlockTest() {};
 }

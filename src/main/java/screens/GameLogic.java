@@ -1,27 +1,29 @@
 package screens;
 
+import java.util.ArrayList;
+
 import board.Board;
+import entities.Character;
 import entities.enemy.Enemies;
 import entities.enemy.Moving_Enemies;
 import entities.enemy.PatrollingEnemies;
-import entities.Character;
-
-import java.util.ArrayList;
 
 /**
- * A class for determining the Game Logic
+ * Contains all of the game logic for Characters, Enemies, Rewards, and Punishments, and how they interact with the Board.
  */
 public class GameLogic {
 
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public GameLogic() {};
+
     /**
-     * This function checks and allows the enemies to move
-     *
-     * @param enemies the List of enemies in the game
-     * @param player the playable character
-     * @param gameboard the active game board
-     * @param canEnemyMove array list containing if the enemies can move
-     * @param TILE_SIZE the tile size
-     * @return the Tile Size
+     * This function checks and allows the enemies to move.
+     * @param enemies   ArrayList of all the enemies in the game.
+     * @param player    The Character object in the game.
+     * @param gameboard The Board object in the game.
+     * @param canEnemyMove  Boolean ArrayList of which enemies in <code>enemies</code> can move or not.
+     * @param TILE_SIZE The length of 1 coordinate on the screen in pixels.
+     * @return  <code>TILE_SIZE</code>.
      */
     public float moveEnemies(ArrayList<Enemies> enemies, Character player, Board gameboard, ArrayList<Boolean> canEnemyMove, int TILE_SIZE){
         for(int i = 0; i < enemies.size(); i++) {
@@ -41,11 +43,10 @@ public class GameLogic {
     }
 
     /**
-     * Checks if the player and an enemy occupy same cell
-     *
-     * @param player the playable character
-     * @param enemies the list of enemies
-     * @return returns a boolean depending on if player got hit
+     * Checks if the player and an enemy occupy the same cell.
+     * @param player    The Character object in the game.
+     * @param enemies   ArrayList of all the enemies in the game.
+     * @return  true if the player and any enemy collide; otherwise false.
      */
     public boolean checkPlayerCollision(Character player, ArrayList<Enemies> enemies){
         int playerX = player.getX();
@@ -63,11 +64,10 @@ public class GameLogic {
     }
 
     /**
-     * Checks to see if the player has reached the end
-     *
-     * @param player the playable character
-     * @param gameboard the active gameboard
-     * @return a boolean if player is exiting maze of not
+     * Checks to see if the player has reached the end of the game and has collected all of the regular rewards.
+     * @param player    The Character object in the game.
+     * @param gameboard The Board object in the game.
+     * @return  true if the player successfully exits the maze; otherwise false.
      */
     public boolean checkIfExitingMaze(Character player, Board gameboard) {
         int playerX = player.getX();
@@ -78,13 +78,14 @@ public class GameLogic {
         return false;
     }
 
+    
     /**
      * Check if the player as reached a reward. <br>
      * If there is a reward, the reward will be collected and the score added to player score. <br>
      * The reward is removed from board after. <br>
-     * @param player the playable character
-     * @param gameboard the active game board
-     * @param time the current time
+     * @param player    The Character object in the game.
+     * @param gameboard the Board object in the game.
+     * @param time  The time in the game.
      */
     public void checkReward(Character player, Board gameboard, float time) {
         int playerX = player.getX();
@@ -97,9 +98,8 @@ public class GameLogic {
 
     /**
      * Checks if the player's score is less than zero.
-     *
-     * @param player the playable character
-     * @return a boolean if the score is postive or negative
+     * @param player    The Character object in the game.
+     * @return  True if score below 0; otherwise false.
      */
     public boolean checkScore(Character player) {
         if(player.getScore() < 0) {
@@ -112,9 +112,9 @@ public class GameLogic {
      * Check if the player reached a punishment. <br>
      * If there is a punishment, the punishment will be given to the player. <br>
      * The punishment is removed after.<br>
-     * @param player the playable character
-     * @param gameboard the active game board
-     * @param time the current time
+     * @param player    The Character object in the game.
+     * @param gameboard the Board object in the game.
+     * @param time  The time in the game.
      */
     public void checkPunishment(Character player, Board gameboard, float time) {
         int playerX = player.getX();

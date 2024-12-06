@@ -11,12 +11,20 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+/**
+ * Unit test for the Block class.
+ */
 public class BlockTest {
-
 
     private SpriteBatch mockBatch;
     private TextureRegion mockTextureRegion;
 
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public BlockTest() {};
+
+    /**
+     * Setup done at the beginning of each test.
+     */
     @BeforeEach
     public void setup(){
         mockTextureRegion = mock(TextureRegion.class);
@@ -25,7 +33,7 @@ public class BlockTest {
 
     // Test block features
     /**
-     * Test barrier block enter method.
+     * Test BarrierBlock's enter method.
      */
     @Test
     void barrierBlockEnterTest(){
@@ -37,7 +45,7 @@ public class BlockTest {
     }
 
     /**
-     * Test room block enter method.
+     * Test RoomBlock's enter method.
      */
     @Test
     void roomBlockEnterTest(){
@@ -49,7 +57,7 @@ public class BlockTest {
     }
 
     /**
-     * Test wall enter method.
+     * Test Wall's enter method.
      */
     @Test
     void wallEnterTest(){
@@ -61,7 +69,7 @@ public class BlockTest {
     }
 
     /**
-     * Test block position getter.
+     * Test Block's position getter.
      */
     @Test
     void blockPositionTest(){
@@ -78,6 +86,9 @@ public class BlockTest {
 
     }
 
+    /**
+     * Test Block's draw method.
+     */
     @Test
     void drawBlockTest(){
         Block b = new RoomBlock(0,1, mockTextureRegion);

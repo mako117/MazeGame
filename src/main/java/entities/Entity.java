@@ -8,7 +8,7 @@ import board.Board;
 import directions.Direction;
 
 /**
- * The public parent class for entities
+ * The Entity class represents moving objects that interact with other objects in various ways.
  */
 public class Entity {
     private int x;
@@ -16,26 +16,26 @@ public class Entity {
     private Direction facing = Direction.None;
     private TextureRegion entityTexture;
 
+
     /**
-     * Creates an Entity and initializes its x and y coordinates, score, speed, and number of rewardsCollected
-     *
-     * @param playerTexture the texture for the entity
-     * @param startX the starting x position for the entity
-     * @param startY the starting y position for the entity
-     * @param startFacing the starting direction facing for the entity
+     * Creates an Entity and initializes its starting <code>x</code> and <code>y</code> coordinates, and the starting direction it is facing.
+     * @param entityTexture Input for <code>entityTexture</code>.
+     * @param startX    Input for <code>x</code>.
+     * @param startY    Input for <code>y</code>.
+     * @param startFacing   Input for <code>facing</code>.
      */
-    public Entity(TextureRegion playerTexture, int startX, int startY, Direction startFacing) {
+    public Entity(TextureRegion entityTexture, int startX, int startY, Direction startFacing) {
         setX(startX);
         setY(startY);
         setFacing(startFacing);
-        setTextureRegion(playerTexture);
+        setTextureRegion(entityTexture);
     }
 
     /**
      * Moves the Entity one cell north, east, south, or west if there is nothing in their way.
      * @param input The keyboard input indicating which direction the player wants the character to go.
      * @param gameBoard A reference to the game board.
-     * @return Whether the movement was successful.
+     * @return True or false for if the movement was successful.
      */
     public boolean direction(char input, Board gameBoard) {
         // System.out.println(x + " " + y);
@@ -65,38 +65,37 @@ public class Entity {
     }
 
     /**
-     * Returns the x-coordinate of the Entity's position as an integer.
-     * @return  the x coordinate
+     * Returns the <code>x</code>-coordinate of the Entity's position as an integer.
+     * @return  <code>x</code>.
      */
     public int getX() {
         return this.x;
     }
     /**
-     * Returns the y-coordinate of the Entity's position as an integer.
-     * @return the y coordinate
+     * Returns the <code>y</code>-coordinate of the Entity's position as an integer.
+     * @return <code>y</code>.
      */
     public int getY() {
         return this.y;
     }
     /**
      * Returns the direction in which the Entity is facing.
-     * @return  the direction facing.
+     * @return  <code>facing</code>.
      */
     public Direction getFacing() {
 		return this.facing;
     }
-
     /**
-     * Returns the texture of the entity
-     * @return the texture of the entity
+     * Returns the texture of the entity.
+     * @return  <code>entityTexture</code>.
      */
     public TextureRegion getTexture() {
         return this.entityTexture;
     }
 
     /**
-     * Sets the x-coordinate of the Entity's position as an integer.
-     * @param xCoord Possible new value for x.
+     * Sets the <code>x</code>-coordinate of the Entity's position as an integer.
+     * @param xCoord Possible new value for <code>x</code>.
      */
     protected void setX(int xCoord) {
         if(xCoord >= 0) {
@@ -104,8 +103,8 @@ public class Entity {
         }
     }
     /**
-     * Sets the y-coordinate of the Entity's position as an integer.
-     * @param yCoord Possible new value for y.
+     * Sets the <code>y</code>-coordinate of the Entity's position as an integer.
+     * @param yCoord Possible new value for <code>y</code>.
      */
     protected void setY(int yCoord) {
         if(yCoord >= 0) {
@@ -114,21 +113,21 @@ public class Entity {
     }
     /**
      * Sets the direction in which the Entity is facing as a Direction.
-     * @param d Possible new value for facing.
+     * @param d Possible new value for <code>facing</code>.
      */
     protected void setFacing(Direction d) {
         this.facing = d;
     }
     /**
      * Sets the texture that represents the Entity in the UI.
-     * @param textureInput  Possible new value for entityTexture.
+     * @param textureInput  Possible new value for <code>entityTexture</code>.
      */
     protected void setTextureRegion(TextureRegion textureInput) {
         this.entityTexture = textureInput;
     }
 
     /**
-     * Checks if the block the entity wants to move to is endterable, and updates the entity's position and direction accordingly.
+     * Checks if the block the entity wants to move to is enterable, and updates the entity's position and direction accordingly.
      * @param increment The amount the entity wants to increase its position on one of the axis by; if they want to decrease their position, this number is negative.
      * @param movingOnX Indicates whether the entity wants to move along the X axis; if not, then they want to move along the Y axis.
      * @param gameBoard The Board object on which the entity is moving.
@@ -144,11 +143,11 @@ public class Entity {
     }
 
     /**
-     *
-     * @param increment how much the entity is moving
-     * @param movingOnX determines if moving on x-axis or y-axis
-     * @param gameBoard the board
-     * @return the block the entity moved to
+     * Get the block which the entity wants to try to enter.
+     * @param increment The amount the entity wants to increase its position on one of the axis by; if they want to decrease their position, this number is negative.
+     * @param movingOnX Indicates whether the entity wants to move along the X axis; if not, then they want to move along the Y axis.
+     * @param gameBoard The Board object on which the entity is moving.
+     * @return  The Block which the entity wants to try to enter.
      */
     private Block getTargetBlock(int increment, boolean movingOnX, Board gameBoard) {
         if (movingOnX) {
@@ -161,9 +160,9 @@ public class Entity {
     }
 
     /**
-     *
-     * @param increment how much the entity will move
-     * @param movingOnX used to check if moving on x-axis or y-axis
+     * Updates the entity's position variables.
+     * @param increment The amount the entity wants to increase its position on one of the axis by; if they want to decrease their position, this number is negative.
+     * @param movingOnX Indicates whether the entity wants to move along the X axis; if not, then they want to move along the Y axis.
      */
     private void updatePosition(int increment, boolean movingOnX){
         if(movingOnX){

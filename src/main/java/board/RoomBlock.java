@@ -3,8 +3,7 @@ package board;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * The board.RoomBlock class creates room blocks for the maze
- * Rooms have sides that can be Walls or Doors
+ * The board.RoomBlock class creates room blocks for the maze.
  */
 public class RoomBlock extends Block {
     /**
@@ -20,14 +19,13 @@ public class RoomBlock extends Block {
     /**
      * Creates a Room with a unique room number and a set position
      * 
-     * @param x_pos The x position of the block.
-     * @param y_pos The y position of the block.
+     * @param x_pos The <code>x</code> position of the block.
+     * @param y_pos The <code>y</code> position of the block.
      * @param texture The texture of the block.
      */
     public RoomBlock( int x_pos, int y_pos, TextureRegion texture) {
         super(x_pos, y_pos, texture);
         _roomBlockNr = _roomBlockCnt++;
-//        System.out.println("Creating Room #" + _roomBlockNr + " with x position " + x_pos + " and y position " + y_pos);
     }
 
     @Override

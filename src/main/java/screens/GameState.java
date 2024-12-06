@@ -1,11 +1,11 @@
 package screens;
 
 /**
- * The possible states of the game
+ * Represents what "state" the game is at.
  */
 public enum GameState {
     /**
-     * The different possible states that the game can be
+     * The different Possible States
      */
     MainMenu,Game,DirectGame,Pause,Help,EndMenu
 }

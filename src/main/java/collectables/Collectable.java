@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * The public Collectable parent class for Collectables
+ * The Collectable class represents stationary objects which can be collected to various effects.
  */
 public class Collectable {
     private int x;
@@ -23,10 +23,10 @@ public class Collectable {
 	
 	/**
 	 * This method use x, y, score to set the collectable.
-	 * @param x The collectibles x position
-	 * @param y The collectibles y position
-	 * @param s the collectibles score
-	 * @param inputTexture the collectibles texture
+	 * @param x	The <code>x</code>-coordinate of the collectable.
+	 * @param y	The <code>y</code>-coordinate of the collectable.
+	 * @param s	The <code>score</code> value of the collectable.
+	 * @param inputTexture	Input for <code>collectableTexture</code>.
 	 */
 	public Collectable(int x, int y, int s, TextureRegion inputTexture) {
 		this.setX(x);
@@ -36,53 +36,53 @@ public class Collectable {
 	}
 
 	/**
-	 * This method get the x position for the collectable.
-	 * @return x
+	 * This method gets the <code>x</code> position for the collectable.
+	 * @return The <code>x</code>-coordinate of the collectable.
 	 */
 	public int getX() {
 		return x;
 	}
 	/**
-	 * This method get the y position for the collectable.
-	 * @return y
+	 * This method gets the <code>y</code> position for the collectable.
+	 * @return The <code>y</code>-coordinate of the collectable.
 	 */
 	public int getY() {
 		return y;
 	}
 	/**
-	 * This method get the score for the collectable.
-	 * @return score
+	 * This method gets the <code>score</code> for the collectable.
+	 * @return The <code>score</code> value of the collectable.
 	 */
 	public int getCollectableScore() {
 		return score;
 	}
 
 	/**
-	 * This method draw the collectable in game.
-	 * @param batch the batch for drawing the collectable
-	 * @param tilesize the tile size of the collectable
+	 * This method draws the collectable on the screen.
+	 * @param batch	The SpriteBatch object from the screen class that is rendering everything.
+	 * @param tilesize	How many pixels each coordinate difference takes up on the screen.
 	 */
 	public void draw(Batch batch, int tilesize) {
         batch.draw(collectableTexture, tilesize*this.getX(),  tilesize*this.getY(), tilesize, tilesize);
     }
 	
 	/**
-     * Sets the collectable's x-coordinate.
-     * @param inputX    Input for x.
+     * Sets the collectable's <code>x</code>-coordinate.
+     * @param inputX    Input for <code>x</code>.
      */
     protected void setX(int inputX) {
         this.x = inputX;
     }
     /**
-     * Sets the collectable's y-coordinate.
-     * @param inputY    Input for y.
+     * Sets the collectable's <code>y</code>-coordinate.
+     * @param inputY    Input for <code>y</code>.
      */
     protected void setY(int inputY) {
         this.y = inputY;
     }
 	/**
-	 * This method set the score for the collectable.
-	 * @param s the score set for the collectable
+	 * This method sets the <code>score</code> for the collectable.
+	 * @param s Input for <code>score</code>.
 	 */
 	protected void setScore(int s) {
 		if(s >= 0) {
@@ -90,8 +90,8 @@ public class Collectable {
 		}
 	}
 	/**
-	 * This method set the texture for the collectable.
-	 * @param inputTexture the texture for the collectable
+	 * This method sets the texture for the collectable.
+	 * @param inputTexture	Input for <code>collectableTexture</code>.
 	 */
 	protected void setTextureRegion(TextureRegion inputTexture) {
 		this.collectableTexture = inputTexture;

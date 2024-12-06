@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.Screen;
 
 /**
- * The public game class MazeGame
+ * Manages the screens and therefore the game.
  */
 public class MazeGame extends Game {
 
@@ -39,8 +39,8 @@ public class MazeGame extends Game {
     private boolean winOrLose;
 
     /**
-     * Used to create a new Maze Game
-     * @param status the current Game state of the game
+     * MazeGame constructor.
+     * @param status    Input for <code>this.status</code>.
      */
     public MazeGame(GameState status){
         gameState  = status;
@@ -48,9 +48,9 @@ public class MazeGame extends Game {
     }
 
     /**
-     * Used to create a new game based on the condition
-     * @param status the current Game state of the game
-     * @param condition determines if win or lose
+     * MazeGame constructor that can open the win or lose screens from within EndScreen.
+     * @param status    Input for <code>this.status</code>.
+     * @param condition Input for <code>winOrLose</code>.
      */
     public MazeGame(GameState status, boolean condition){
         gameState  = status;
@@ -58,7 +58,7 @@ public class MazeGame extends Game {
     }
 
     /**
-     * Creates many of the Textures, camera, and gamestates
+     * Instantiates various objects used across all of the screens, sets the current screen depending on <code>this.status</code> and <code>winOrLose</code>.
      */
     @Override
     public void create() {
@@ -96,23 +96,17 @@ public class MazeGame extends Game {
     }
 
     /**
-     * Used to exit the application
+     * Exits the game.
      */
     public void exitGame(){
         Gdx.app.exit();
     }
 
-    /**
-     * Used to render objects
-     */
     @Override
     public void render() {
         super.render();
     }
 
-    /**
-     * Used to dispose
-     */
     @Override
     public void dispose() {
         super.dispose();
@@ -122,23 +116,23 @@ public class MazeGame extends Game {
     }
 
     /**
-     * Gets the current screen
-     * @return the current screen
+     * Gets the current screen.
+     * @return  The current Screen object.
      */
     protected Screen getCurrentScreen() {
         return super.getScreen();
     }
 
     /**
-     * gets the current game state
-     * @return the current game state
+     * Gets the MazeGame's status.
+     * @return  <code>this.gameState</code>.
      */
     public GameState getStatus() {
         return this.gameState;
     }
 
     /**
-     * Resets the current camera
+     * Resets the camera's position and zoom.
      */
     public void resetCamera() {
     	camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -148,10 +142,10 @@ public class MazeGame extends Game {
     }
 
     /**
-     * Sets the camera given the x-position y-position and the zoom level
-     * @param x the desired x position
-     * @param y the desired y position
-     * @param zoom the desired zoom level.
+     * Sets the camera's position and zoom.
+     * @param x Input for <code>camera.position.x</code>.
+     * @param y Input for <code>camera.position.y</code>.
+     * @param zoom  Input for <code>camera.zoom</code>.
      */
     public void setCamera(float x, float y, float zoom) {
     	camera.position.x = x;

@@ -1,6 +1,8 @@
 package entities;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,6 +15,9 @@ import entities.Character;
 import board.Board;
 import board.Block;
 
+/**
+ * Unit test for the Character class.
+ */
 public class CharacterTest {
 
     private Character character;
@@ -160,7 +165,10 @@ public class CharacterTest {
         assertEquals(10, character.getScore());
 
     }
-    
+
+    /**
+     * Test to draw the Character facing Direction.none.
+     */
     @Test
     public void testDrawNull() {
         character.setX(2);
@@ -260,4 +268,7 @@ public class CharacterTest {
         // Verify that batch.draw() was called without offset
         verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize* character.getX())), eq((float)(tileSize* character.getY())), eq((float)(tileSize)), eq((float) (tileSize)));
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public CharacterTest() {};
 }

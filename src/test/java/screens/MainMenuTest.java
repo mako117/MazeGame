@@ -22,8 +22,15 @@ import org.junit.rules.ExpectedException;
 import screens.*;
 import screens.MazeGame;
 
+/**
+ * "Unit" test for the MainMenuScreen class.
+ */
 public class MainMenuTest extends AbstractTestWithHeadlessGdxContext {
     TestGame mainMenu;
+
+    /**
+     * Test if MainMenuScreen runs.
+     */
     @Test
     public void MainMenuScreenIntegrationTest() {
         Runnable r = () -> {
@@ -37,5 +44,8 @@ public class MainMenuTest extends AbstractTestWithHeadlessGdxContext {
         // only buttons and no key input, so nothing to test except that it is an MainMenuScreen object
         assertEquals(true, (mainMenu.getCurrentScreen() instanceof MainMenuScreen));
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public MainMenuTest() {};
 
 }

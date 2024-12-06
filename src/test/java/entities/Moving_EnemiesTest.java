@@ -20,6 +20,9 @@ import org.mockito.Mock;
 import board.Board;
 import board.Block;
 
+/**
+ * Unit test for the Moving_Enemies class.
+ */
 public class Moving_EnemiesTest {
 
     private Board mockBoard;
@@ -78,7 +81,7 @@ public class Moving_EnemiesTest {
     }
 
     /**
-     * moveYDistance < moveXDistance, yDistance < 0, xDistance < 0
+     * moveYDistance is less than moveXDistance, yDistance is less than 0, and xDistance is less than 0.
      */
     @Test
     public void wantsToMoveUpElseRightTest() {
@@ -100,7 +103,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move up and to the right, with up being of greater priority.
-     * moveYDistance < moveXDistance, yDistance < 0, xDistance > 0
+     * moveYDistance is less than moveXDistance, yDistance is less than 0, and xDistance is greater than 0.
      */
     @Test
     public void wantsToMoveUpElseLeftTest() {
@@ -122,7 +125,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move up.
-     * moveYDistance < moveXDistance, yDistance < 0, xDistance = 0
+     * moveYDistance is less than moveXDistance, yDistance is less than 0, and xDistance = 0.
      */
     @Test
     public void wantsToMoveUpElseIdleTest() {
@@ -138,7 +141,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move down and to the right, with down taking priority.
-     * moveYDistance < moveXDistance, xDistance < 0, yDistance > 0
+     * moveYDistance is less than moveXDistance, xDistance is less than 0, and yDistance is greater than 0.
      */
     @Test
     public void wantsToMoveDownElseRightTest() {
@@ -160,7 +163,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move down and left, with down taking priority.
-     * moveYDistance < moveXDistance, yDistance > 0, xDistance > 0
+     * moveYDistance is less than moveXDistance, yDistance is greater than 0, and xDistance is greater than 0.
      */
     @Test
     public void wantsToMoveDownElseLeftTest() {
@@ -182,7 +185,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move down.
-     * moveYDistance < moveXDistance, yDistance > 0, xDistance = 0
+     * moveYDistance is less than moveXDistance, yDistance is greater than 0, and xDistance = 0.
      */
     @Test
     public void wantsToMoveDownElseIdleTest() {
@@ -198,7 +201,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move right and up, with right taking priority.
-     * moveYDistance > moveXDistance, yDistance < 0, xDistance < 0
+     * moveYDistance is greater than moveXDistance, yDistance is less than 0, and xDistance is less than 0.
      */
     @Test
     public void wantsToMoveRightElseUpTest() {
@@ -220,7 +223,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move right and down, with right taking priority.
-     * moveYDistance > moveXDistance, yDistance > 0, xDistance < 0
+     * moveYDistance is greater than moveXDistance, yDistance is greater than 0, and xDistance is less than 0.
      */
     @Test
     public void wantsToMoveRightElseDownTest() {
@@ -242,7 +245,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move right.
-     * moveYDistance > moveXDistance, yDistance = 0, xDistance < 0
+     * moveYDistance is greater than moveXDistance, yDistance = 0, and xDistance is less than 0.
      */
     @Test
     public void wantsToMoveRightElseIdleTest() {
@@ -258,7 +261,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move left and up, with left taking priority.
-     * moveYDistance > moveXDistance, yDistance < 0, xDistance > 0
+     * moveYDistance is greater than moveXDistance, yDistance is less than 0, and xDistance is greater than 0.
      */
     @Test
     public void wantsToMoveLeftElseUpTest() {
@@ -282,7 +285,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move left and down, with left taking priority.
-     * moveYDistance > moveXDistance, xDistance > 0, yDistance > 0
+     * moveYDistance is greater than moveXDistance, xDistance is greater than 0, and yDistance is greater than 0.
      */
     @Test
     public void wantsToMoveLeftElseDownTest() {
@@ -304,7 +307,7 @@ public class Moving_EnemiesTest {
 
     /**
      * Wants to move left.
-     * moveYDistance > moveXDistance, xDistance > 0, yDistance = 0
+     * moveYDistance is greater than moveXDistance, xDistance is greater than 0, and yDistance = 0.
      */
     @Test
     public void wantsToMoveLeftElseIdleTest() {
@@ -318,76 +321,59 @@ public class Moving_EnemiesTest {
         testIdle();
     }
 
-    // @Test
-    // public void greaterXDistanceTest(){
-    //     when(mockPlayer.getX()).thenReturn(3);
-    //     when(mockPlayer.getY()).thenReturn(5);
-
-    //     char result = movingEnemy.find_player(mockPlayer, mockBoard);
-    //     movingEnemy.direction(result,mockBoard);
-    //     assertEquals('W', result);
-    // }
-
-    // @Test
-    // public void checkFindPlayerCalculations() {
-    //     // moveYDistance < moveXDistance, xDistance < 0, yDistance > 0
-    //     when(mockPlayer.getX()).thenReturn(7);
-    //     when(mockPlayer.getY()).thenReturn(2);
-    //     int xDistance = movingEnemy.getX() - mockPlayer.getX();
-    //     int yDistance = movingEnemy.getY() - mockPlayer.getY();
-    //     double [] resultArray = findPlayerCalculations(xDistance, yDistance);
-    //     double moveXDistance = resultArray[0];
-    //     double moveYDistance = resultArray[1];
-    //     assertEquals(true, xDistance < 0);
-    //     assertEquals(true, yDistance > 0);
-    //     assertEquals(true, moveYDistance < moveXDistance);
-    // }
-
     //*** Utility functions ***//
+
+    /**
+     * Utility function for testing the enemy trying to move up.
+     */
     private void testUp() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         assertEquals('W', result);
 
         movingEnemy.direction(result,mockBoard);
-        // checkPosition(result, 3, 3);
 
         movingEnemy.direction('S',mockBoard); // reset position
-        // checkPosition(result, 3, 4);
         when(upBlock.enter()).thenReturn(false); // block off up
     }
+    /**
+     * Utility function for testing the enemy trying to move down.
+     */
     private void testDown() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         assertEquals('S', result);
 
         movingEnemy.direction(result,mockBoard);
-        // checkPosition(result, 3, 3);
 
         movingEnemy.direction('W',mockBoard); // reset position
-        // checkPosition(result, 3, 2);
         when(downBlock.enter()).thenReturn(false); // block off down
     }
+    /**
+     * Utility function for testing the enemy trying to move right.
+     */
     private void testRight() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         assertEquals('D', result);
 
         movingEnemy.direction(result,mockBoard);
-        // checkPosition(result, 3, 3);
 
         movingEnemy.direction('A',mockBoard); // reset position
-        // checkPosition(result, 4, 3);
         when(rightBlock.enter()).thenReturn(false); // block off right
     }
+    /**
+     * Utility function for testing the enemy trying to move left.
+     */
     private void testLeft() {
         char result = movingEnemy.find_player(mockPlayer, mockBoard);
         assertEquals('A', result);
 
         movingEnemy.direction(result,mockBoard);
-        // checkPosition(result, 3, 3);
 
         movingEnemy.direction('D',mockBoard); // reset position
-        // checkPosition(result, 2, 3);
         when(leftBlock.enter()).thenReturn(false); // block off left
     }
+    /**
+     * Utility function for testing the enemy not trying to move anywhere.
+     */
     private void testIdle() {
         char result;
 
@@ -395,60 +381,8 @@ public class Moving_EnemiesTest {
         assertEquals('I', result);
 
         movingEnemy.direction(result, mockBoard);
-        // checkPosition(result, 3, 3);
-    }
-    private void checkPosition(char input, int startX, int startY) {
-        switch(input) {
-            case 'W':
-                System.out.println();
-                assertEquals(startX, movingEnemy.getX());
-                assertEquals(startY+1, movingEnemy.getY());
-            break;
-
-            case 'A':
-                assertEquals(startX-1, movingEnemy.getX());
-                assertEquals(startY, movingEnemy.getY());
-            break;
-
-            case 'S':
-                assertEquals(startX, movingEnemy.getX());
-                assertEquals(startY-1, movingEnemy.getY());
-            break;
-
-            case 'D':
-                assertEquals(startX+1, movingEnemy.getX());
-                assertEquals(startY, movingEnemy.getY());
-            break;
-
-            case 'I':
-                assertEquals(startX, movingEnemy.getX());
-                assertEquals(startY, movingEnemy.getY());
-            break;
-        }
     }
 
-    private double[] findPlayerCalculations(int xDistance, int yDistance) {
-        double POSITIVE_INFINITY = 1.0 / 0.0;
-        double moveXDistance;
-        double moveYDistance;
-        if(xDistance < 0) {
-            moveXDistance = Math.sqrt( Math.pow(xDistance + 1, 2) + Math.pow(yDistance, 2) );
-        } else if (xDistance > 0) {
-            moveXDistance = Math.sqrt( Math.pow(xDistance - 1, 2) + Math.pow(yDistance, 2) );
-        } else {
-            moveXDistance = POSITIVE_INFINITY;
-        }
-        if(yDistance < 0) {
-            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance + 1, 2) );
-        } else if (yDistance > 0) {
-            moveYDistance = Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance - 1, 2) );
-        } else {
-            moveYDistance = POSITIVE_INFINITY;
-        }
-
-        // log.info("\nplayerX = " + mockPlayer.getX() + ", playerY = " + mockPlayer.getY() + "\nxDistance = " + xDistance + ", yDistance = " + yDistance + "\nmoveXDistance = " + moveXDistance +", moveYDistance = " + moveYDistance);
-
-        double [] array = {moveXDistance, moveYDistance};
-        return array;
-    }
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public Moving_EnemiesTest() {};
 }

@@ -14,7 +14,8 @@ public class Character extends Entity {
     private int score;
 
     /**
-     * Creates a entities.Character and initializes its x and y coordinates, score, speed, and number of rewardsCollected
+     * Create a Character, initializes <code>x</code> and <code>y</code> to 1, sets <code>facing</code> to Direction.None, and initializes its texture.
+     * @param playerTexture Input for <code>entityTexture</code>.
      */
     public Character(TextureRegion playerTexture) {
         super(playerTexture,1,1, Direction.None);
@@ -24,17 +25,17 @@ public class Character extends Entity {
     }
 
     /**
-     * Creates a entities.Character and initializes its x and y coordinates, score, speed, and number of rewardsCollected
-     *
-     * @param playerTexture the texture of the character
-     * @param startX the starting x position of the character
-     * @param startY the starting y position of the character
+     * Creates a character and initializes its <code>x</code> and <code>y</code> coordinates, and its texture.
+     * @param playerTexture Input for <code>entityTexture</code>.
+     * @param startX    Input for <code>x</code>.
+     * @param startY    Input for <code>y</code>.
      */
     public Character(TextureRegion playerTexture, int startX, int startY) {
         super(playerTexture,startX,startY,Direction.None);
         setSpeed(1);
         this.getTexture().setRegion(0 ,0, 32, 32);
     }
+
     /**
      * Moves the entities.Character one cell north, east, south, or west if there is nothing in their way.
      * @param input The keyboard input indicating which direction the player wants the character to go.
@@ -46,56 +47,55 @@ public class Character extends Entity {
     }
     
     /**
-     * Returns the entities.Character's speed as an integer.
-     * @return  the speed of the character
+     * Returns the entities.Character's <code>speed</code> as an integer.
+     * @return <code>speed</code>
      */
     public int getSpeed() {
         return this.speed;
     }
     /**
-     * Gets the entities.Character's score as an integer.
-     * @return  the score of the character.
+     * Gets the entities.Character's <code>score</code> as an integer.
+     * @return  <code>score</code>.
      */
     public int getScore() {
         return this.score;
     }
 
     /**
-     * Sets the entities.Character's speed as an integer.
-     * @param newSpeed Possible new speed.
+     * Sets the entities.Character's <code>speed</code> as an integer.
+     * @param newSpeed Possible new <code>speed</code>.
      */
     private void setSpeed(int newSpeed) {
         this.speed = newSpeed;
     }
     /**
-     * Sets the entities.Character's score as an integer.
-     * @param s Possible new score.
+     * Sets the entities.Character's <code>score</code> as an integer.
+     * @param s Possible new <code>score</code>.
      */
     public void setScore(int s) {
         this.score = s;
     }
 
     /**
-     * Attempts to increase the entities.Character's score.
-     * @param s Amount to increase the score by.
+     * Attempts to increase the entities.Character's <code>score</code>.
+     * @param s Amount to increase the <code>score</code> by.
      */
     public void add_score(int s) {
         this.setScore(this.getScore() + s);
     }
     /**
-     * Attempts to decrease the entities.Character's score.
-     * @param s Amount to decrease the score by.
+     * Attempts to decrease the entities.Character's <code>score</code>.
+     * @param s Amount to decrease the <code>score</code> by.
      */
     public void minus_score(int s) {
         this.setScore(this.getScore() - s);
     }
 
     /**
-     *
      * Draw the character.
-     * @param batch the batch to draw the character
-     * @param tileSize the size of the tile
-     * @param offset the offset of the character
+     * @param batch The spritebatch.
+     * @param tileSize The tile size.
+     * @param offset The image offset.
      */
     public void draw(Batch batch, int tileSize, float offset) {
 

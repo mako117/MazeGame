@@ -24,6 +24,9 @@ import entities.Character;
 import board.BarrierBlock;
 import board.Block;
 
+/**
+ * Integration test for interactions between the GameLogic and Enemies classes.
+ */
 public class EnemiesMoveTest {
 	
 	private GameLogic logic = new GameLogic();
@@ -32,7 +35,7 @@ public class EnemiesMoveTest {
 	private int tile_size = 0;
 	
 	/**
-	 * Test will two type enemies will move or not when have wall or roomblock
+	 * Test whether different enemy types will or will not move into a wall or a roomblock.
 	 */
 	@Test
 	void EnemiesDirectionTest() {
@@ -118,6 +121,8 @@ public class EnemiesMoveTest {
 		assertTrue(Emove.get(6));
 		assertTrue(Emove.get(7));
 		
-		
 	}
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public EnemiesMoveTest() {};
 }

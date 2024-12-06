@@ -1,6 +1,8 @@
 package entities;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,6 +15,10 @@ import org.mockito.Mock;
 import entities.enemy.Enemies;
 import board.Board;
 import board.Block;
+
+/**
+ * Unit test for the Enemies class.
+ */
 
 public class EnemiesTest {
 
@@ -153,7 +159,7 @@ public class EnemiesTest {
     }
 
     /**
-     *
+     * Test what happens when the enemy is out of bounds.
      */
     @Test
     public void entityOutOfBoundsTest() {
@@ -168,6 +174,9 @@ public class EnemiesTest {
         assertEquals(0, enemy.getY());
     }
 
+    /**
+     * Test drawing the entity facing Direction.None.
+     */
     @Test
     public void testDrawNone() {
 
@@ -269,5 +278,8 @@ public class EnemiesTest {
         // Verify that batch.draw() was called without offset
         verify(mockBatch).draw(eq(mockTextureRegion),eq((float)(tileSize* enemy.getX())), eq((float)(tileSize* enemy.getY())), eq((float)(tileSize)), eq((float) (tileSize)));
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public EnemiesTest() {};
 
 }

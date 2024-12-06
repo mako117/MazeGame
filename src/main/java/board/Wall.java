@@ -3,11 +3,11 @@ package board;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * The board.Wall class is used to create a wall and its interactions
+ * The board.Wall class is used to create a wall and its interactions.
  */
 public class Wall extends Block {
     /**
-     * Creates a wall and assigns the wall a unique number
+     * Creates a wall and assigns the wall a unique number.
      */
     public Wall() {
     	super();
@@ -17,8 +17,8 @@ public class Wall extends Block {
 
     /**
      * Create a wall at the given coordinates.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The <code>x</code> coordinate.
+     * @param y The <code>y</code> coordinate.
      * @param textureRegion The texture.
      */
     public Wall(int x, int y, TextureRegion textureRegion){

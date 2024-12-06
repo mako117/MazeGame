@@ -17,8 +17,8 @@ import entities.Entity;
 
     /**
      * Create a new enemy at the given initial location. <br>
-     * @param initial_x The x position.
-     * @param initial_y The y position.
+     * @param initial_x The <code>x</code> position.
+     * @param initial_y The <code>y</code> position.
      * @param texture The texture.
      */
     public Enemies(int initial_x, int initial_y, TextureRegion texture) {

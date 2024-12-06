@@ -15,13 +15,16 @@ import board.BarrierBlock;
 import entities.Character;
 import board.Board;
 
+/**
+ * Integration test between the Character and Block classes.
+ */
 public class CharacterCollisionBlockTest {
 	private TextureRegion tex = mock(TextureRegion.class);
 	private Board mockboard = mock(Board.class);
 	
 	//Wall
 	/**
-	 * Test when character move up have a wall
+	 * Test what happens when a character moves up into a wall.
 	 */
 	@Test
 	void moveupwithwall() {
@@ -37,7 +40,7 @@ public class CharacterCollisionBlockTest {
 	}
 	
 	/**
-	 * Test when character move left have a wall
+	 * Test what happens when a character moves left into a wall.
 	 */
 	@Test
 	void moveleftwithwall() {
@@ -53,7 +56,7 @@ public class CharacterCollisionBlockTest {
 	}
 
 	/**
-	 * Test when character move right have a wall
+	 * Test what happens when a character moves right into a wall.
 	 */
 	@Test
 	void moverightwithwall() {
@@ -69,7 +72,7 @@ public class CharacterCollisionBlockTest {
 	}
 	
 	/**
-	 * Test when character move down have a wall
+	 * Test what happens when a character moves down into a wall.
 	 */
 	@Test
 	void movedownwithwall() {
@@ -86,7 +89,7 @@ public class CharacterCollisionBlockTest {
 	
 	//RoomBlock
 	/**
-	 * Test when character move up have a roomblock
+	 * Test what happens when character moves up into a roomblock.
 	 */
 	@Test
 	void moveupwithroomblock() {
@@ -102,7 +105,7 @@ public class CharacterCollisionBlockTest {
 	}
 	
 	/**
-	 * Test when character move left have a roomblock
+	 * Test what happens when character moves left into a roomblock.
 	 */
 	@Test
 	void moveleftwithroomblock() {
@@ -118,7 +121,7 @@ public class CharacterCollisionBlockTest {
 	}
 
 	/**
-	 * Test when character move right have a roomblock
+	 * Test what happens when character moves right into a roomblock.
 	 */
 	@Test
 	void moverightwithroomblock() {
@@ -134,7 +137,7 @@ public class CharacterCollisionBlockTest {
 	}
 	
 	/**
-	 * Test when character move down have a roomblock
+	 * Test what happens when character moves down into a roomblock.
 	 */
 	@Test
 	void movedownwithroomblock() {
@@ -151,7 +154,7 @@ public class CharacterCollisionBlockTest {
 	
 	//BarrierBlock
 	/**
-	 * Test when character move up have a BarrierBlock
+	 * Test what happens when character moves up into a BarrierBlock.
 	 */
 	@Test
 	void moveupwithBarrierBlock() {
@@ -167,7 +170,7 @@ public class CharacterCollisionBlockTest {
 	}
 	
 	/**
-	 * Test when character move left have a BarrierBlock
+	 * Test what happens when character moves left into a BarrierBlock.
 	 */
 	@Test
 	void moveleftwithBarrierBlock() {
@@ -183,7 +186,7 @@ public class CharacterCollisionBlockTest {
 	}
 
 	/**
-	 * Test when character move right have a BarrierBlock
+	 * Test what happens when character moves right into a BarrierBlock.
 	 */
 	@Test
 	void moverightwithBarrierBlock() {
@@ -199,7 +202,7 @@ public class CharacterCollisionBlockTest {
 	}
 	
 	/**
-	 * Test when character move down have a BarrierBlock
+	 * Test what happens when character moves down into a BarrierBlock.
 	 */
 	@Test
 	void movedownwithBarrierBlock() {
@@ -213,6 +216,9 @@ public class CharacterCollisionBlockTest {
 		assertEquals(1,c.getX());
 		assertEquals(1,c.getY());
 	}
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public CharacterCollisionBlockTest() {};
 }
 
 

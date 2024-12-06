@@ -15,6 +15,9 @@ import entities.enemy.Enemies;
 import board.Board;
 import board.Block;
 
+/**
+ * Unit test for the PatrollingEnemies class.
+ */
 public class PatrollingEnemiesTest {
 
     private PatrollingEnemies enemy;
@@ -24,7 +27,7 @@ public class PatrollingEnemiesTest {
     private TextureRegion mockTextureRegion;
 
     /**
-     * The setup to create the initial enemy and some mock classes
+     * The setup to create the initial enemy and some mock classes.
      */
     @BeforeEach
     public void setUp() {
@@ -38,7 +41,7 @@ public class PatrollingEnemiesTest {
     }
 
     /**
-     * Test to check the initial position of the enemy
+     * Test to check the initial position of the enemy.
      */
     @Test
     public void initialPositionTest() {
@@ -51,7 +54,7 @@ public class PatrollingEnemiesTest {
     }
 
     /**
-     * Test invalid min and max x and y
+     * Test invalid min and max x and y.
      */
     @Test
     public void invalidXYTest() {
@@ -59,7 +62,7 @@ public class PatrollingEnemiesTest {
     }
 
     /**
-     * Test Path Creation and Follow
+     * Test Path Creation and Following.
      */
     @Test
     public void createdPathYTest() {
@@ -79,7 +82,7 @@ public class PatrollingEnemiesTest {
 
     }
     /**
-     * Test Path Creation and Follow
+     * Test Path Creation and Following.
      */
     @Test
     public void createdPathXTest() {
@@ -102,7 +105,7 @@ public class PatrollingEnemiesTest {
     }
 
     /**
-     * Test Directional Block movement
+     * Test Directional Block movement.
      */
     @Test
     public void directionBlockTest() {
@@ -176,7 +179,10 @@ public class PatrollingEnemiesTest {
 
 
     }
-    
+
+    /**
+     * Test draw method when facing Direction.None.
+     */
     @Test
     void NoneDirectionTest() {
     	enemy = new PatrollingEnemies(2, 2, Direction.None, 0, 5, 0, 5, mockTextureRegion);
@@ -185,4 +191,6 @@ public class PatrollingEnemiesTest {
     	assertEquals(2, enemy.getY());
     }
 
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public PatrollingEnemiesTest() {};
 }

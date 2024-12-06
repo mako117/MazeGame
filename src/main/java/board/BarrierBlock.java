@@ -3,7 +3,7 @@ package board;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * The BarriersBlock class creates barrier blocks for the maze
+ * The BarriersBlock class creates barrier blocks for the maze.
  */
 public class BarrierBlock extends Block {
     private int _BarriersBlockNr;
@@ -20,16 +20,13 @@ public class BarrierBlock extends Block {
     /**
      * Creates new barrier block at the given coordinate.
      * 
-     * @param x_pos The x position of the barrier
-     * @param y_pos The y position of the barrier
-     * @param textureRegion The texture of the block
+     * @param x_pos The <code>x</code> position of the barrier.
+     * @param y_pos The <code>y</code> position of the barrier.
+     * @param textureRegion The texture of the block.
      */
     public BarrierBlock(int x_pos, int y_pos, TextureRegion  textureRegion) {
         super(x_pos, y_pos, textureRegion);
         _BarriersBlockNr = _BarriersBlockCnt++;
-
-//         For verification purposes
-//        System.out.println("Creating Room #" + _BarriersBlockNr + " with x position " + x_pos + " and y position " + y_pos);
     }
 
     /**
@@ -39,6 +36,5 @@ public class BarrierBlock extends Block {
     public boolean enter(){
         return false;
     }
-
 
 }

@@ -14,13 +14,16 @@ import board.Board;
 import entities.Character;
 import screens.GameLogic;
 
+/**
+ * Integration test for interactions between the Character and the Punishments classes.
+ */
 public class CollectPunishmentsTest {
 	private Board mockboard = mock(Board.class);
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
 	
 	/**
-	 * Test character collect regular punishment how score change
+	 * Test how a character's score changes when they collide with a regular punishment.
 	 */
 	@Test
 	void CharacterCollectRegularPunishment() {
@@ -34,7 +37,7 @@ public class CollectPunishmentsTest {
 	}
 	
 	/**
-	 * Test character collect bonus punishment how score change
+	 * Test how a character's score changes when they collide with a bonus punishment.
 	 */
 	@Test
 	void CharacterCollectBonusPunishment() {
@@ -48,7 +51,7 @@ public class CollectPunishmentsTest {
 	}
 	
 	/**
-	 * Test character collect two type punishment how score change
+	 * Test how a character's score changes when they collide with a regular and a bonus punishment at the same time.
 	 */
 	@Test
 	void CharacterCollectBothPunishments() {
@@ -60,4 +63,7 @@ public class CollectPunishmentsTest {
 		logic.checkPunishment(c, mockboard, 0);
 		assertEquals(-30, c.getScore());
 	}
+
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public CollectPunishmentsTest() {};
 }

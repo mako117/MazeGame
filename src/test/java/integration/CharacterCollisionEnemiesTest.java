@@ -17,13 +17,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import directions.Direction;
 
+/**
+ * Integration test for interactions between the Character and Enemies classes.
+ */
 public class CharacterCollisionEnemiesTest {
 
 	private TextureRegion tex = mock(TextureRegion.class);
 	private GameLogic logic = new GameLogic();
 	
 	/**
-	 * Test when character collision with moving enemies
+	 * Test what happens when character collides with a moving enemy.
 	 */
 	@Test
 	void CharacterCollisionwithMovingEnemies() {
@@ -46,7 +49,7 @@ public class CharacterCollisionEnemiesTest {
 	}
 	
 	/**
-	 * Test when character collision with patrolling enemies
+	 * Test what happens when character collides with a patrolling enemy.
 	 */
 	@Test
 	void CharacterCollisionwithPatrollingEnemies() {
@@ -71,4 +74,6 @@ public class CharacterCollisionEnemiesTest {
 		assertTrue(logic.checkPlayerCollision(c, enemies));
 	}
 
+	/** Empty default constructor to allow creation of Javadocs without errors. */
+    public CharacterCollisionEnemiesTest() {};
 }

@@ -3,19 +3,19 @@ package collectables.rewards;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * This class creates the regular reward in the game, extends Reward
+ * This standard Reward in the game; extends Reward.
  */
 public class Regular_Reward extends Reward {
 	
 	/**
-	 * This method used to create a regular reward with default position and score, and no texture
+	 * This method creates a regular reward with default position and score, but no texture.
 	 */
 	public Regular_Reward(){
 		super();
 	}
 	
 	/**
-	 * This method creates a regular reward with x, y, score, texture for regular reward
+	 * This method creates a regular reward with <code>x</code>, <code>y</code>, <code>score</code>, and <code>collectableTexture</code> for regular reward.
 	 * @param x	Possible value for the regular reward's x-coordinate.
 	 * @param y	Possible value for the regular reward's y-coordinate.
 	 * @param s	Possible value for the regular reward's score.
@@ -26,22 +26,22 @@ public class Regular_Reward extends Reward {
 	}
 
 	/**
-     * Sets the regular reward's x-coordinate.
-     * @param inputX    Input for x.
+     * Sets the regular reward's <code>x</code>-coordinate.
+     * @param inputX    Input for <code>x</code>.
      */
     protected void setX(int inputX) {
         super.setX(inputX);
     }
 	/**
-     * Sets the regular reward's y-coordinate.
-     * @param inputY    Input for y.
+     * Sets the regular reward's <code>y</code>-coordinate.
+     * @param inputY    Input for <code>y</code>.
      */
     protected void setY(int inputY) {
         super.setY(inputY);
     }
 	/**
-	 * This method set the score for reward.
-	 * @param s the score for the reward
+	 * This method set the <code>score</code> for reward.
+	 * @param s the score to be set
 	 */
 	protected void setScore(int s) {
 		super.setScore(s);

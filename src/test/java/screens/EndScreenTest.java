@@ -22,8 +22,15 @@ import org.junit.rules.ExpectedException;
 import screens.*;
 import screens.MazeGame;
 
+/**
+ * "Unit" test for the EndScreen class.
+ */
 public class EndScreenTest extends AbstractTestWithHeadlessGdxContext {
     TestGame endGame;
+
+    /**
+     * Tests if the screen is the right extension of screen.
+     */
     @Test
     public void EndScreenIntegrationTest() {
         Runnable r = () -> {
@@ -34,4 +41,7 @@ public class EndScreenTest extends AbstractTestWithHeadlessGdxContext {
         // only buttons and no key input, so nothing to test except that it is an EndScreen object
         assertEquals(true, (endGame.getCurrentScreen() instanceof EndScreen));
     }
+
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public EndScreenTest() {};
 }
