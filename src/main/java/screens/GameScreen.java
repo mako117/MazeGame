@@ -24,6 +24,9 @@ import entities.enemy.Enemies;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The screen for playing the game.
+ */
 public class GameScreen extends ScreenAdapter {
     final MazeGame game;
 
@@ -52,7 +55,10 @@ public class GameScreen extends ScreenAdapter {
     private Character player;
     private ArrayList<Enemies> enemies;
 
-
+    /**
+     * GameScreen constructor that passes in the current MazeGame object.
+     * @param game  The current MazeGame object.
+     */
     public GameScreen(final MazeGame game) {
         this.game = game;
         
@@ -134,36 +140,31 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * This function will handle the game logic
-     * This includes collision, moving enemies, checking/applying rewards/punishments
+     * This includes collision, moving enemies, and checking/applying rewards/punishments.
      */
     private void logic() {
         if(gameLogic.checkPlayerCollision(player, enemies)) {
             playerEnd(false);
         }
-        // checkPlayerCollision();
 
         if(gameLogic.checkIfExitingMaze(player, gameboard)) {
             playerEnd(true);
         }
-        // checkIfExitingMaze();
 
         if(gameLogic.checkScore(player)) {
             playerEnd(false);
         }
-        // checkScore();
 
         gameLogic.checkReward(player, gameboard, time);
-        // checkReward();
 
         gameLogic.checkPunishment(player, gameboard, time);
-        // checkPunishment();
 
         gameboard.genNewBonus(time);
     }
 
     /**
      * Sends the player to whichever screen depending on condition upon reaching the end.
-     * @param condition
+     * @param condition True if the player won; false if the player lost.
      */
     private void playerEnd(boolean condition) {
 
@@ -175,8 +176,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Used to render all aspects of GameScreen
-     *
-     * @param delta
+     * @param delta TODO: delta.
      */
     public void render(float delta) {
 
@@ -235,25 +235,15 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
-     * Moves camera focus point to player
+     * Moves camera focus point to player.
      */
     private void moveCameraToPlayer(){
         // update camera position
         if(playerMovingXDirection){
         	game.setCamera((player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2, (player.getY()*TILE_SIZE) + TILE_SIZE/2, 1.0f);
-            /*
-        	game.camera.position.x = (player.getX()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
-            game.camera.position.y = (player.getY()*TILE_SIZE) + TILE_SIZE/2;
-            */
         } else {
         	game.setCamera((player.getX()*TILE_SIZE) + TILE_SIZE/2, (player.getY()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2, 1.0f);
-        	/*
-            game.camera.position.x = (player.getX()*TILE_SIZE) + TILE_SIZE/2;
-            game.camera.position.y = (player.getY()*TILE_SIZE + playerMovementOffset) + TILE_SIZE/2;
-        	*/
         }
-        //camera.update();
-        //game.batch.setProjectionMatrix(camera.combined);
 
     }
 
@@ -265,7 +255,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Draws the player accounting for his movements to the game screen
-     * @param delta
+     * @param delta TODO: delta.
      */
     protected void renderPlayer(float delta) {
 //        System.out.println(playerMovementOffset);
@@ -285,8 +275,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Draws all the enemies to the Game Screen
-     *
-     * @param delta
+     * @param delta TODO: delta.
      */
     protected void renderEnemies(float delta){
         for (int i = 0; i < enemies.size(); i++){
@@ -329,26 +318,6 @@ public class GameScreen extends ScreenAdapter {
         readyScreen.dispose();
         gameMusic.dispose();
     }
-
-    // //*** Utility functions ***//
-    // public Button getPauseButton() {
-    //     return pauseScreen.pauseButton;
-    // }
-    // public Button getResumeButton() {
-    //     return pauseScreen.resumeButton;
-    // }
-    // public Button getHelpButton() {
-    //     return pauseScreen.helpButton;
-    // }
-    // public Button getRestartButton() {
-    //     return pauseScreen.restartButton;
-    // }
-    // public Button getExitButton() {
-    //     return pauseScreen.exitButton;
-    // }
-    // public float getFullScreenDuration() {
-    //     return readyScreen.fullscreenDuration;
-    // }
 
     /**
      * This class contains the pause screen.
@@ -456,6 +425,9 @@ public class GameScreen extends ScreenAdapter {
             }
         }
 
+        /**
+         * Renders the pause button.
+         */
         private void renderPauseButton(){
             pauseButton.setSize(Gdx.graphics.getWidth() /10 + 40,Gdx.graphics.getHeight()/10);
             pauseButton.setPosition(game.camera.position.x - (Gdx.graphics.getWidth())/2 + Gdx.graphics.getWidth() - pauseButton.getWidth(),game.camera.position.y - (Gdx.graphics.getHeight())/2 + Gdx.graphics.getHeight() - pauseButton.getHeight());

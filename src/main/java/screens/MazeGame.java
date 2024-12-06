@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.Screen;
 
-
+/**
+ * Manages the screens and therefore the game.
+ */
 public class MazeGame extends Game {
 
     public SpriteBatch batch;
@@ -36,16 +38,28 @@ public class MazeGame extends Game {
 
     private boolean winOrLose;
 
+    /**
+     * MazeGame constructor.
+     * @param status    Input for <code>this.status</code>.
+     */
     public MazeGame(GameState status){
         gameState  = status;
         winOrLose = false;
     }
 
+    /**
+     * MazeGame constructor that can open the win or lose screens from within EndScreen.
+     * @param status    Input for <code>this.status</code>.
+     * @param condition Input for <code>winOrLose</code>.
+     */
     public MazeGame(GameState status, boolean condition){
         gameState  = status;
         winOrLose = condition;
     }
 
+    /**
+     * Instantiates various objects used across all of the screens, sets the current screen depending on <code>this.status</code> and <code>winOrLose</code>.
+     */
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -81,6 +95,9 @@ public class MazeGame extends Game {
         }
     }
 
+    /**
+     * Exits the game.
+     */
     public void exitGame(){
         Gdx.app.exit();
     }
@@ -98,21 +115,38 @@ public class MazeGame extends Game {
         skin.dispose();
     }
 
+    /**
+     * Gets the current screen.
+     * @return  The current Screen object.
+     */
     protected Screen getCurrentScreen() {
         return super.getScreen();
     }
 
+    /**
+     * Gets the MazeGame's status.
+     * @return  <code>this.gameState</code>.
+     */
     public GameState getStatus() {
         return this.gameState;
     }
 
+    /**
+     * Resets the camera's position and zoom.
+     */
     public void resetCamera() {
     	camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     	camera.zoom = 1.0f;
     	camera.update();
         batch.setProjectionMatrix(camera.combined);
     }
-    
+
+    /**
+     * Sets the camera's position and zoom.
+     * @param x Input for <code>camera.position.x</code>.
+     * @param y Input for <code>camera.position.y</code>.
+     * @param zoom  Input for <code>camera.zoom</code>.
+     */
     public void setCamera(float x, float y, float zoom) {
     	camera.position.x = x;
     	camera.position.y = y;

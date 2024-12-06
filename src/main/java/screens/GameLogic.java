@@ -8,11 +8,13 @@ import entities.Character;
 
 import java.util.ArrayList;
 
-
+/**
+ * Contains all of the game logic for Characters, Enemies, Rewards, and Punishments, and how they interact with the Board.
+ */
 public class GameLogic {
 
     /**
-     * This function checks and allows the enemies to move
+     * This function checks and allows the enemies to move.
      */
     public float moveEnemies(ArrayList<Enemies> enemies, Character player, Board gameboard, ArrayList<Boolean> canEnemyMove, int TILE_SIZE){
         for(int i = 0; i < enemies.size(); i++) {
@@ -32,7 +34,7 @@ public class GameLogic {
     }
 
     /**
-     * Checks if the player and an enemy occupy same cell
+     * Checks if the player and an enemy occupy the same cell.
      */
     public boolean checkPlayerCollision(Character player, ArrayList<Enemies> enemies){
         int playerX = player.getX();
@@ -50,7 +52,7 @@ public class GameLogic {
     }
 
     /**
-     * Checks to see if the player has reached the end
+     * Checks to see if the player has reached the end of the game and has collected all of the regular rewards.
      */
     public boolean checkIfExitingMaze(Character player, Board gameboard) {
         int playerX = player.getX();
