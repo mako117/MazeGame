@@ -126,7 +126,7 @@ public class HelpScreen extends ScreenAdapter {
 
     /**
      * Render the objects to the window.
-     * @param delta TODO: delta.
+     * @param delta Time between the last frame and this frame (in seconds).
      */
     @Override
     public void render(float delta) {

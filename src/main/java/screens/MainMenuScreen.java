@@ -122,7 +122,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
     /**
      * Render the objects to the window.
-     * @param delta TODO: Delta.
+     * @param delta Time between the last frame and this frame (in seconds).
      */
     @Override
     public void render(float delta) {

@@ -176,7 +176,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Used to render all aspects of GameScreen
-     * @param delta TODO: delta.
+     * @param delta Time between the last frame and this frame (in seconds).
      */
     public void render(float delta) {
 
@@ -255,7 +255,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Draws the player accounting for his movements to the game screen
-     * @param delta TODO: delta.
+     * @param delta Time between the last frame and this frame (in seconds).
      */
     protected void renderPlayer(float delta) {
 //        System.out.println(playerMovementOffset);
@@ -275,7 +275,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Draws all the enemies to the Game Screen
-     * @param delta TODO: delta.
+     * @param delta Time between the last frame and this frame (in seconds).
      */
     protected void renderEnemies(float delta){
         for (int i = 0; i < enemies.size(); i++){

@@ -73,7 +73,7 @@ public class ReadyScreen extends ScreenAdapter {
 
     /**
      * This functions displays the entire map before commencing the game.
-     * @param delta TODO: delta.
+     * @param delta Time between the last frame and this frame (in seconds).
      */
     public void fullScreen(float delta, float time, int TILE_SIZE, Board gameboard, GameScreen nextScreen) {
         game.camera.position.x = Gdx.graphics.getWidth() / 2;
