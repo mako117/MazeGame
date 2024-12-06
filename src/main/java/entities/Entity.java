@@ -7,6 +7,9 @@ import board.Block;
 import board.Board;
 import directions.Direction;
 
+/**
+ * The Entity class represents moving objects that interact with other objects in various ways.
+ */
 public class Entity {
     private int x;
     private int y;
@@ -14,7 +17,7 @@ public class Entity {
     private TextureRegion entityTexture;
 
     /**
-     * Creates an Entity and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
+     * Creates an Entity and initializes its starting <code>x</code> and <code>y</code> coordinates, and the starting direction it is facing.
      */
     public Entity(TextureRegion playerTexture, int startX, int startY, Direction startFacing) {
         setX(startX);
@@ -27,7 +30,7 @@ public class Entity {
      * Moves the Entity one cell north, east, south, or west if there is nothing in their way.
      * @param input The keyboard input indicating which direction the player wants the character to go.
      * @param gameBoard A reference to the game board.
-     * @return Whether the movement was successful.
+     * @return True or false for if the movement was successful.
      */
     public boolean direction(char input, Board gameBoard) {
         // System.out.println(x + " " + y);
@@ -57,22 +60,22 @@ public class Entity {
     }
 
     /**
-     * Returns the x-coordinate of the Entity's position as an integer.
-     * @return  <x>
+     * Returns the <code>x</code>-coordinate of the Entity's position as an integer.
+     * @return  <code>x</code>.
      */
     public int getX() {
         return this.x;
     }
     /**
-     * Returns the y-coordinate of the Entity's position as an integer.
-     * @return <y>
+     * Returns the <code>y</code>-coordinate of the Entity's position as an integer.
+     * @return <code>y</code>.
      */
     public int getY() {
         return this.y;
     }
     /**
      * Returns the direction in which the Entity is facing.
-     * @return  <facing>.
+     * @return  <code>facing</code>.
      */
     public Direction getFacing() {
 		return this.facing;
@@ -82,8 +85,8 @@ public class Entity {
     }
 
     /**
-     * Sets the x-coordinate of the Entity's position as an integer.
-     * @param xCoord Possible new value for <x>.
+     * Sets the <code>x</code>-coordinate of the Entity's position as an integer.
+     * @param xCoord Possible new value for <code>x</code>.
      */
     protected void setX(int xCoord) {
         if(xCoord >= 0) {
@@ -91,8 +94,8 @@ public class Entity {
         }
     }
     /**
-     * Sets the y-coordinate of the Entity's position as an integer.
-     * @param yCoord Possible new value for <y>.
+     * Sets the <code>y</code>-coordinate of the Entity's position as an integer.
+     * @param yCoord Possible new value for <code>y</code>.
      */
     protected void setY(int yCoord) {
         if(yCoord >= 0) {
@@ -101,14 +104,14 @@ public class Entity {
     }
     /**
      * Sets the direction in which the Entity is facing as a Direction.
-     * @param d Possible new value for <facing>.
+     * @param d Possible new value for <code>facing</code>.
      */
     protected void setFacing(Direction d) {
         this.facing = d;
     }
     /**
      * Sets the texture that represents the Entity in the UI.
-     * @param textureInput  Possible new value for <entityTexture>.
+     * @param textureInput  Possible new value for <code>entityTexture</code>.
      */
     protected void setTextureRegion(TextureRegion textureInput) {
         this.entityTexture = textureInput;
@@ -130,6 +133,13 @@ public class Entity {
         return false;
     }
 
+    /**
+     * Get the block which the entity wants to try to enter.
+     * @param increment The amount the entity wants to increase its position on one of the axis by; if they want to decrease their position, this number is negative.
+     * @param movingOnX Indicates whether the entity wants to move along the X axis; if not, then they want to move along the Y axis.
+     * @param gameBoard The Board object on which the entity is moving.
+     * @return  The Block which the entity wants to try to enter.
+     */
     private Block getTargetBlock(int increment, boolean movingOnX, Board gameBoard) {
         if (movingOnX) {
             setFacing(increment > 0 ? Direction.Right : Direction.Left);
@@ -140,6 +150,11 @@ public class Entity {
         }
     }
 
+    /**
+     * Updates the entity's position variables.
+     * @param increment The amount the entity wants to increase its position on one of the axis by; if they want to decrease their position, this number is negative.
+     * @param movingOnX Indicates whether the entity wants to move along the X axis; if not, then they want to move along the Y axis.
+     */
     private void updatePosition(int increment, boolean movingOnX){
         if(movingOnX){
             setX(x + increment);

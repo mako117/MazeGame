@@ -501,8 +501,8 @@ public class Board {
         return -1;
     }
     /**
-     * Check if the given coordinates have a punishment
-     * Return the index the punishment is in, in the punishment array, otherwise -1.
+     * Check if the given coordinates have a punishment.
+     * Return the index of which cell of the punishment array that the punishment is in, otherwise return -1.
      * @param x the <code>x</code> coordinate
      * @param y the <code>y</code> coordinate
      * @return the index in the punishment array

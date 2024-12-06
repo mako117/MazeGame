@@ -14,7 +14,7 @@ public class Character extends Entity {
     private int score;
 
     /**
-     * Creates a entities.Character and initializes its <x> and <y> coordinates, <score>, <speed>, and number of <rewardsCollected>
+     * Creates a entities.Character and initializes its <code>x</code> and <code>y</code> coordinates, <code>score</code>, and <code>speed</code>.
      */
     public Character(TextureRegion playerTexture) {
         super(playerTexture,1,1, Direction.None);
@@ -38,56 +38,55 @@ public class Character extends Entity {
     }
     
     /**
-     * Returns the entities.Character's <speed> as an integer.
-     * @return <speed>
+     * Returns the entities.Character's <code>speed</code> as an integer.
+     * @return <code>speed</code>
      */
     public int getSpeed() {
         return this.speed;
     }
     /**
-     * Gets the entities.Character's <score> as an integer.
-     * @return  <score>.
+     * Gets the entities.Character's <code>score</code> as an integer.
+     * @return  <code>score</code>.
      */
     public int getScore() {
         return this.score;
     }
 
     /**
-     * Sets the entities.Character's speed as an integer.
-     * @param newSpeed Possible new <speed>.
+     * Sets the entities.Character's <code>speed</code> as an integer.
+     * @param newSpeed Possible new <code>speed</code>.
      */
     private void setSpeed(int newSpeed) {
         this.speed = newSpeed;
     }
     /**
-     * Sets the entities.Character's <score> as an integer.
-     * @param s Possible new <score>.
+     * Sets the entities.Character's <code>score</code> as an integer.
+     * @param s Possible new <code>score</code>.
      */
     public void setScore(int s) {
         this.score = s;
     }
 
     /**
-     * Attempts to increase the entities.Character's score.
-     * @param s Amount to increase the <score> by.
+     * Attempts to increase the entities.Character's <code>score</code>.
+     * @param s Amount to increase the <code>score</code> by.
      */
     public void add_score(int s) {
         this.setScore(this.getScore() + s);
     }
     /**
-     * Attempts to decrease the entities.Character's score.
-     * @param s Amount to decrease the <score> by.
+     * Attempts to decrease the entities.Character's <code>score</code>.
+     * @param s Amount to decrease the <code>score</code> by.
      */
     public void minus_score(int s) {
         this.setScore(this.getScore() - s);
     }
 
     /**
-     *
      * Draw the character.
-     * @param batch
-     * @param tileSize
-     * @param offset
+     * @param batch The spritebatch.
+     * @param tileSize The tile size.
+     * @param offset The image offset.
      */
     public void draw(Batch batch, int tileSize, float offset) {
 

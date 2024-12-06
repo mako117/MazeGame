@@ -43,8 +43,8 @@ public class Moving_Enemies extends Enemies {
 
     /**
      * Calculates the distance from the moving enemy to the character if the enemy moves along the x-axis and if it moves along the y-axis.
-     * @param xDistance The enemy's <x>-coordinate - the character's <x>-coordinate.
-     * @param yDistance The enemy's <y>-coordinate - the character's <y>-coordinate.
+     * @param xDistance The enemy's <code>x</code>-coordinate - the character's <code>x</code>-coordinate.
+     * @param yDistance The enemy's <code>y</code>-coordinate - the character's <code>y</code>-coordinate.
      * @return  A length 2 double array with the distance after moving along the x-axis stored first, and the y-axis distance stored second.
      */
     private double[] findPlayerCalculations(int xDistance, int yDistance) {
@@ -56,11 +56,11 @@ public class Moving_Enemies extends Enemies {
 
     /**
      * Calculates the distance from the moving enemy to the character
-     * @param xDistance The enemy's <x>-coordinate - the character's <x>-coordinate.
-     * @param yDistance The enemy's <y>-coordinate - the character's <y>-coordinate.
-     * @param moveX Determines if enemy moves aling x axis or y axis
+     * @param xDistance The enemy's <code>x</code>-coordinate - the character's <code>x</code>-coordinate.
+     * @param yDistance The enemy's <code>y</code>-coordinate - the character's <code>y</code>-coordinate.
+     * @param moveX Determines if enemy moves along x axis or y axis
      * @param increase Determines the direction of the movement
-     * @return The distance after simulating a movement
+     * @return The distance after simulating a movement.
      */
     private double calculateMovementDistance(int xDistance, int yDistance,boolean moveX, boolean increase ){
         int xDelta = moveX ? (increase ? 1 : -1) : 0;
@@ -78,10 +78,10 @@ public class Moving_Enemies extends Enemies {
      * If the enemy is lined up with the player on an axis, it will not move along that axis;
      * therefore once its x and y coordinates match those of the player, it will not move.
      * This code assumes it is impossible for the enemy to have been boxed in on all sides.
-     * @param xDistance The enemy's <x>-coordinate - the character's <x>-coordinate.
-     * @param yDistance The enemy's <y>-coordinate - the character's <y>-coordinate.
+     * @param xDistance The enemy's <code>x</code>-coordinate - the character's <code>x</code>-coordinate.
+     * @param yDistance The enemy's <code>y</code>-coordinate - the character's <code>y</code>-coordinate.
      * @param gameBoard The game board.
-     * @return  One of the input characters 'W', 'A', 'S', 'D', or 'I', corresponding to the directions
+     * @return  One of the input characters 'W', 'A', 'S', 'D', or 'I', corresponding to the directions 
      * North, West, South, East, and None.
      */
     private char wantsToMoveAlongX(int xDistance, int yDistance, Board gameBoard) {
@@ -143,8 +143,8 @@ public class Moving_Enemies extends Enemies {
      * If the enemy is lined up with the player on an axis, it will not move along that axis; 
      * therefore once its x and y coordinates match those of the player, it will not move.
      * This code assumes it is impossible for the enemy to have been boxed in on all sides.
-     * @param xDistance The enemy's <x>-coordinate - the character's <x>-coordinate.
-     * @param yDistance The enemy's <y>-coordinate - the character's <y>-coordinate.
+     * @param xDistance The enemy's <code>x</code>-coordinate - the character's <code>x</code>-coordinate.
+     * @param yDistance The enemy's <code>y</code>-coordinate - the character's <code>y</code>-coordinate.
      * @param gameBoard The game board.
      * @return  One of the input characters 'W', 'A', 'S', 'D', or 'I', corresponding to the directions
      * North, West, South, East, and None.

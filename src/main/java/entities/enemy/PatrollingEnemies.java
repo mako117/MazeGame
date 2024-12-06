@@ -17,13 +17,13 @@ public class PatrollingEnemies extends Enemies {
     /**
      * Create a new patrolling enemy at the given coordinates. <br>
      * The enemy will move within the given area.
-     * @param init_x The initial x position.
-     * @param init_y The initial y position.
+     * @param init_x The initial <code>x</code> position.
+     * @param init_y The initial <code>y</code> position.
      * @param d The direction that the enemy is moving.
-     * @param xMin The mininum x value.
-     * @param xMax The maximum x value.
-     * @param yMin The minimum y value.
-     * @param yMax The maximum y value.
+     * @param xMin The mininum <code>x</code> value.
+     * @param xMax The maximum <code>x</code> value.
+     * @param yMin The minimum <code>y</code> value.
+     * @param yMax The maximum <code>y</code> value.
      * @param texture The texture.
      */
     public PatrollingEnemies(int init_x, int init_y, Direction d, int xMin, int xMax, int yMin, int yMax, TextureRegion texture) {
