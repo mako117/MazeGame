@@ -64,14 +64,14 @@ public class Bonus_Reward extends Reward {
     }
 	/**
      * Sets the bonus reward's <code>y</code>-coordinate.
-     * @param inputX    Input for <code>y</code>.
+     * @param inputY    Input for <code>y</code>.
      */
     protected void setY(int inputY) {
         super.setY(inputY);
     }
 	/**
 	 * Sets the bonus reward's <code>score</code>.
-	 * @param s		Input for <code>score</score>.
+	 * @param s		Input for <code>score</code>.
 	 */
 	protected void setScore(int s) {
 		super.setScore(s);

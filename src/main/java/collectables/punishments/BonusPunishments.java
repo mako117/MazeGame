@@ -63,7 +63,7 @@ public class BonusPunishments extends Punishments{
     }
 	/**
      * Sets the bonus punishment's <code>y</code>-coordinate.
-     * @param inputX    Input for <code>y</code>.
+     * @param inputY    Input for <code>y</code>.
      */
     protected void setY(int inputY) {
         super.setY(inputY);

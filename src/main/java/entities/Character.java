@@ -14,7 +14,8 @@ public class Character extends Entity {
     private int score;
 
     /**
-     * Creates a entities.Character and initializes its <code>x</code> and <code>y</code> coordinates, <code>score</code>, and <code>speed</code>.
+     * Create a Character, initializes <code>x</code> and <code>y</code> to 1, sets <code>facing</code> to Direction.None, and initializes its texture.
+     * @param playerTexture Input for <code>entityTexture</code>.
      */
     public Character(TextureRegion playerTexture) {
         super(playerTexture,1,1, Direction.None);
@@ -22,11 +23,19 @@ public class Character extends Entity {
         setScore(0);
         this.getTexture().setRegion(0 ,0, 32, 32);
     }
+
+    /**
+     * Creates a character and initializes its <code>x</code> and <code>y</code> coordinates, and its texture.
+     * @param playerTexture Input for <code>entityTexture</code>.
+     * @param startX    Input for <code>x</code>.
+     * @param startY    Input for <code>y</code>.
+     */
     public Character(TextureRegion playerTexture, int startX, int startY) {
         super(playerTexture,startX,startY,Direction.None);
         setSpeed(1);
         this.getTexture().setRegion(0 ,0, 32, 32);
     }
+
     /**
      * Moves the entities.Character one cell north, east, south, or west if there is nothing in their way.
      * @param input The keyboard input indicating which direction the player wants the character to go.

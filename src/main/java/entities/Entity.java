@@ -16,14 +16,19 @@ public class Entity {
     private Direction facing = Direction.None;
     private TextureRegion entityTexture;
 
+
     /**
      * Creates an Entity and initializes its starting <code>x</code> and <code>y</code> coordinates, and the starting direction it is facing.
+     * @param entityTexture Input for <code>entityTexture</code>.
+     * @param startX    Input for <code>x</code>.
+     * @param startY    Input for <code>y</code>.
+     * @param startFacing   Input for <code>facing</code>.
      */
-    public Entity(TextureRegion playerTexture, int startX, int startY, Direction startFacing) {
+    public Entity(TextureRegion entityTexture, int startX, int startY, Direction startFacing) {
         setX(startX);
         setY(startY);
         setFacing(startFacing);
-        setTextureRegion(playerTexture);
+        setTextureRegion(entityTexture);
     }
 
     /**
@@ -80,6 +85,10 @@ public class Entity {
     public Direction getFacing() {
 		return this.facing;
     }
+    /**
+     * Returns the texture of the entity.
+     * @return  <code>entityTexture</code>.
+     */
     public TextureRegion getTexture() {
         return this.entityTexture;
     }

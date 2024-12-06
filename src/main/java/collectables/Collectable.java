@@ -26,6 +26,7 @@ public class Collectable {
 	 * @param x	The <code>x</code>-coordinate of the collectable.
 	 * @param y	The <code>y</code>-coordinate of the collectable.
 	 * @param s	The <code>score</code> value of the collectable.
+	 * @param inputTexture	Input for <code>collectableTexture</code>.
 	 */
 	public Collectable(int x, int y, int s, TextureRegion inputTexture) {
 		this.setX(x);
