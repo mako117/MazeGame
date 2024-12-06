@@ -13,6 +13,9 @@ import entities.enemy.PatrollingEnemies;
  */
 public class GameLogic {
 
+    /** Empty default constructor to allow creation of Javadocs without errors. */
+    public GameLogic() {};
+
     /**
      * This function checks and allows the enemies to move.
      * @param enemies   ArrayList of all the enemies in the game.
@@ -62,6 +65,9 @@ public class GameLogic {
 
     /**
      * Checks to see if the player has reached the end of the game and has collected all of the regular rewards.
+     * @param player    The Character object in the game.
+     * @param gameboard The Board object in the game.
+     * @return  true if the player successfully exits the maze; otherwise false.
      */
     public boolean checkIfExitingMaze(Character player, Board gameboard) {
         int playerX = player.getX();
@@ -72,10 +78,14 @@ public class GameLogic {
         return false;
     }
 
+    
     /**
      * Check if the player as reached a reward. <br>
      * If there is a reward, the reward will be collected and the score added to player score. <br>
      * The reward is removed from board after. <br>
+     * @param player    The Character object in the game.
+     * @param gameboard the Board object in the game.
+     * @param time  The time in the game.
      */
     public void checkReward(Character player, Board gameboard, float time) {
         int playerX = player.getX();
@@ -88,6 +98,8 @@ public class GameLogic {
 
     /**
      * Checks if the player's score is less than zero.
+     * @param player    The Character object in the game.
+     * @return  True if score below 0; otherwise false.
      */
     public boolean checkScore(Character player) {
         if(player.getScore() < 0) {
@@ -100,6 +112,9 @@ public class GameLogic {
      * Check if the player reached a punishment. <br>
      * If there is a punishment, the punishment will be given to the player. <br>
      * The punishment is removed after.<br>
+     * @param player    The Character object in the game.
+     * @param gameboard the Board object in the game.
+     * @param time  The time in the game.
      */
     public void checkPunishment(Character player, Board gameboard, float time) {
         int playerX = player.getX();
