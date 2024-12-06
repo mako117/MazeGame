@@ -1,4 +1,4 @@
-CMPT276F24_group18
+CMPT276F24_group18 <br/>
 To run our game, <br/>
 1. Have Maven installed
 2. Enter ```mvn clean package```
